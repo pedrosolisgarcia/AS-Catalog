@@ -11,13 +11,20 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var beforeLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var lastnameLabel: UILabel!
     @IBOutlet weak var lastnameField: UITextField!
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var phoneField: UITextField!
+    @IBOutlet weak var hometownLabel: UILabel!
     @IBOutlet weak var hometownField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
-    
+    @IBOutlet weak var afterLabel: UILabel!
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
