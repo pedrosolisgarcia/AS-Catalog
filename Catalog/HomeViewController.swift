@@ -11,8 +11,11 @@ import CoreData
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var beforeLabel: UILabel!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var polishButton: UIButton!
+    @IBOutlet weak var spanishButton: UIButton!
     
+    @IBOutlet weak var beforeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var lastnameLabel: UILabel!
@@ -23,11 +26,25 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var hometownLabel: UILabel!
     @IBOutlet weak var hometownField: UITextField!
+    @IBOutlet weak var weddingDateLabel: UILabel!
+    @IBOutlet weak var weddingDateField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
     @IBOutlet weak var afterLabel: UILabel!
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
+    
+    var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before seeing the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
+    var nameLang: [String] = ["Imię","",""]
+    var lastnameLang: [String] = ["Nazwisko","",""]
+    var emailLang: [String] = ["E-Mail","",""]
+    var phoneLang: [String] = ["Telefon","",""]
+    var hometownLang: [String] = ["Miasto","",""]
+    var weddingDateLang: [String] = ["Data Ślubu","",""]
+    var createProfileLang: [String] = ["","",""]
+    var afterLang: [String] = ["","",""]
+    var lowTextLang: [String] = ["","",""]
+    var catalogLang: [String] = ["","",""]
     
     var fields: [Bool] = [false,false,false,false,false]
     //var cart: cart = cart(name: "", lastname: "", email: "", phone: "", hometown: "")
