@@ -14,14 +14,16 @@ struct Cart {
     var email: String
     var phone: String
     var city: String
+    var weddingDate: String
     var dresses: [String]
     
-    init(name: String, lastname: String, email: String, phone: String, city: String, dresses: [String]){
+    init(name: String, lastname: String, email: String, phone: String, city: String, weddingDate: String,dresses: [String]){
         self.name = name
         self.lastname = lastname
         self.email = email
         self.phone = phone
         self.city = city
+        self.weddingDate = weddingDate
         self.dresses = dresses
     }
 }

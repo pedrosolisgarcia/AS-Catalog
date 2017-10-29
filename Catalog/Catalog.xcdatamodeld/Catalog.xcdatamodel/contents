@@ -7,8 +7,9 @@
         <attribute name="lastname" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weddingDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Cart" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Cart" positionX="-54" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

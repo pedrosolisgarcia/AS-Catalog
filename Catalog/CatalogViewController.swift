@@ -16,6 +16,9 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var viewButton: UIButton!
     @IBOutlet var selectButton: UIButton!
     
+    var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
+    var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
+    
     var dresses: [Dress] = [Dress(name: "Adelia", imgName: "adelia", isSelected: false),
                             Dress(name: "Adora", imgName: "Adora", isSelected: false),
                             Dress(name: "Adora z Trenem", imgName: "adora z trenem", isSelected: false),
@@ -47,6 +50,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     
     var zoomDress: Dress!
     var provCart: Cart!
+    var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
     let carouselSize = CGSize(width: 515, height: 850)
@@ -54,7 +58,11 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-        
+        if languageIndex != 0 {
+            
+            selectButton.setTitle(selectLang[languageIndex], for: .normal)
+        }
+        navigationItem.title = titleLang[languageIndex]
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
@@ -160,15 +168,18 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+        
         if segue.identifier == "selectDresses"{
             if let indexPath = collectionView.indexPathsForSelectedItems {
                 
                 let destinationController = segue.destination as! SelectionViewController
+                
+                destinationController.languageIndex = languageIndex
+                destinationController.provCart = provCart
+                
                 for index in indexPath {
                     destinationController.dresses.append(dresses[index.row])
                     destinationController.dressNames.append(dresses[index.row].name)
-                    destinationController.provCart = provCart
                 }
             }
         }

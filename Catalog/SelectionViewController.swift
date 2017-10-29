@@ -19,11 +19,22 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var dressNames = [String]()
     var cart: CartMO!
     var provCart: Cart!
+    var languageIndex: Int!
+    
+    var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
+    var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
+    var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         provCart.dresses = dressNames
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
+        if languageIndex != 0 {
+            
+            saveButton.setTitle(confirmLang[languageIndex], for: .normal)
+        }
+        navigationItem.title = titleLang[languageIndex]
+        backHomeScreen.title = homeLang[languageIndex]
         backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
     }
     
