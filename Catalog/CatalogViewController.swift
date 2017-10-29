@@ -103,7 +103,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            zoomImageView.dress = dresses[indexPath.row].imgName
+            zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
