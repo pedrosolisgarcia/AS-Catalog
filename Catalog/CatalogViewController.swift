@@ -68,7 +68,12 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         selectButton.alpha = 0.25
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        cache.cleanExpiredDiskCache()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
