@@ -29,7 +29,12 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         setupGestureRecognizer()
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        cache.cleanExpiredDiskCache()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
