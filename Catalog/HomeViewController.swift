@@ -93,6 +93,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        didReceiveMemoryWarning()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         
@@ -104,7 +105,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         hideKeyboard()
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        cache.cleanExpiredDiskCache()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true

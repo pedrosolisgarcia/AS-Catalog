@@ -50,7 +50,12 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        cache.clearMemoryCache()
+        cache.clearDiskCache()
+        cache.cleanExpiredDiskCache()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
