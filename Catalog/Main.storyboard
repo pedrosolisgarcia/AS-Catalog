@@ -246,7 +246,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Ślubu:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RP3-Zw-ip5" userLabel="WeddingDate">
-                                <rect key="frame" x="393" y="548" width="130" height="40"/>
+                                <rect key="frame" x="393" y="547" width="130" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="I3T-cZ-7Ml"/>
                                 </constraints>
@@ -255,7 +255,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="pDK-2d-WHA" userLabel="WeddingDateField">
-                                <rect key="frame" x="525" y="548" width="198" height="40"/>
+                                <rect key="frame" x="525" y="547" width="198" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -265,6 +265,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="n2S-qX-3Ne"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYt-oc-kvo" userLabel="WeddingDateSeparator">
                                 <rect key="frame" x="393" y="586" width="330" height="1"/>
@@ -366,7 +369,7 @@
                             <constraint firstItem="sQB-NP-5ka" firstAttribute="trailing" secondItem="zGv-N2-cJR" secondAttribute="trailing" id="O0B-EG-PwT"/>
                             <constraint firstItem="T1Q-0v-GBc" firstAttribute="centerX" secondItem="65J-uW-C7v" secondAttribute="centerX" id="Op4-Pg-IoY"/>
                             <constraint firstItem="zGv-N2-cJR" firstAttribute="trailing" secondItem="yKT-eO-5Ad" secondAttribute="trailing" id="Ovn-Js-qkT"/>
-                            <constraint firstItem="DYt-oc-kvo" firstAttribute="bottom" secondItem="pDK-2d-WHA" secondAttribute="bottom" constant="-1" id="P84-F2-qcQ"/>
+                            <constraint firstItem="DYt-oc-kvo" firstAttribute="bottom" secondItem="pDK-2d-WHA" secondAttribute="bottom" id="P84-F2-qcQ"/>
                             <constraint firstItem="4Sx-IC-JiV" firstAttribute="top" secondItem="zGv-N2-cJR" secondAttribute="top" id="PJd-0w-tzA"/>
                             <constraint firstItem="ngN-RU-2L0" firstAttribute="top" secondItem="sQB-NP-5ka" secondAttribute="bottom" constant="21" id="PQ0-Uf-mzP"/>
                             <constraint firstItem="Fy5-BL-Qu6" firstAttribute="top" secondItem="Twm-F7-cMT" secondAttribute="bottom" constant="24" id="RF4-eP-pxi"/>
@@ -375,7 +378,7 @@
                             <constraint firstItem="cbH-68-Wrl" firstAttribute="trailing" secondItem="sQB-NP-5ka" secondAttribute="trailing" id="UwS-YY-erN"/>
                             <constraint firstItem="phZ-7b-Eu5" firstAttribute="bottom" secondItem="5zj-Y3-nwl" secondAttribute="bottom" id="VNG-lx-Qkr"/>
                             <constraint firstItem="5zj-Y3-nwl" firstAttribute="trailing" secondItem="Xy7-0f-EAW" secondAttribute="trailing" id="X8s-sd-LAB"/>
-                            <constraint firstItem="DYt-oc-kvo" firstAttribute="bottom" secondItem="RP3-Zw-ip5" secondAttribute="bottom" constant="-1" id="XWs-q7-wkZ"/>
+                            <constraint firstItem="DYt-oc-kvo" firstAttribute="bottom" secondItem="RP3-Zw-ip5" secondAttribute="bottom" id="XWs-q7-wkZ"/>
                             <constraint firstItem="XMN-hQ-BNT" firstAttribute="width" secondItem="XMN-hQ-BNT" secondAttribute="height" multiplier="8:5" id="Xg0-7Q-Bnq"/>
                             <constraint firstItem="Y8W-17-NlJ" firstAttribute="top" secondItem="das-ZK-zHQ" secondAttribute="bottom" constant="1" id="YF6-SI-Esy"/>
                             <constraint firstAttribute="bottom" secondItem="phZ-7b-Eu5" secondAttribute="bottom" constant="515" id="Yqd-5p-aJh"/>
@@ -383,6 +386,7 @@
                             <constraint firstItem="Twm-F7-cMT" firstAttribute="trailing" secondItem="N81-dZ-99r" secondAttribute="trailing" id="Yrv-91-cug"/>
                             <constraint firstItem="N81-dZ-99r" firstAttribute="trailing" secondItem="46d-fs-kdV" secondAttribute="trailing" id="Zdx-ZU-oyg"/>
                             <constraint firstItem="vbD-1b-SLl" firstAttribute="bottom" secondItem="46d-fs-kdV" secondAttribute="bottom" id="Zra-c3-8VM"/>
+                            <constraint firstItem="DYt-oc-kvo" firstAttribute="centerY" secondItem="Twm-F7-cMT" secondAttribute="centerY" id="bDi-TE-c7T"/>
                             <constraint firstItem="eKf-0r-7SO" firstAttribute="leading" secondItem="5zj-Y3-nwl" secondAttribute="leading" id="cpG-c0-tkf"/>
                             <constraint firstItem="Yqp-eA-pmN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dH9-yP-85O"/>
                             <constraint firstItem="RP3-Zw-ip5" firstAttribute="leading" secondItem="eKf-0r-7SO" secondAttribute="leading" id="dIQ-yy-G5s"/>
@@ -418,7 +422,6 @@
                             <constraint firstItem="Xy7-0f-EAW" firstAttribute="leading" secondItem="eKf-0r-7SO" secondAttribute="trailing" constant="5" id="uKn-YU-MId"/>
                             <constraint firstItem="das-ZK-zHQ" firstAttribute="centerX" secondItem="Y8W-17-NlJ" secondAttribute="centerX" id="ufN-0p-G0e"/>
                             <constraint firstItem="vbD-1b-SLl" firstAttribute="top" secondItem="46d-fs-kdV" secondAttribute="top" id="v63-2T-gqH"/>
-                            <constraint firstItem="Fy5-BL-Qu6" firstAttribute="top" secondItem="DYt-oc-kvo" secondAttribute="bottom" constant="24" id="xHh-6W-ox0"/>
                             <constraint firstItem="vbD-1b-SLl" firstAttribute="top" secondItem="wb1-kD-p9f" secondAttribute="bottom" constant="36" id="z8v-zk-FS8"/>
                             <constraint firstItem="5zj-Y3-nwl" firstAttribute="centerY" secondItem="phZ-7b-Eu5" secondAttribute="centerY" id="znV-K8-UTr"/>
                             <constraint firstItem="l2f-BX-De5" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="zoW-hL-Vsb"/>
@@ -697,8 +700,76 @@ UFJaRUpEGsW5IERBTEVKA
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imię:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0k-Nh-dKg">
+                                <rect key="frame" x="30" y="35" width="315" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="315" id="GfH-aC-oMS"/>
+                                    <constraint firstAttribute="height" constant="40" id="qjv-8W-Vaw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pma-VQ-q3Y" userLabel="NameSeparator">
+                                <rect key="frame" x="30" y="74" width="315" height="1"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="FKJ-MD-Mwf"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEQ-yN-Pr5" userLabel="lastnameSeparator">
+                                <rect key="frame" x="393" y="74" width="325" height="1"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="NsZ-ry-2er"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nazwisko:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C7Z-sq-RVT">
+                                <rect key="frame" x="393" y="35" width="325" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0VS-rw-mQD"/>
+                                    <constraint firstAttribute="width" constant="325" id="sa7-PD-GS9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Miasto:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQg-lv-nGw">
+                                <rect key="frame" x="30" y="95" width="315" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5bP-LW-xR1"/>
+                                    <constraint firstAttribute="width" constant="315" id="g1p-i3-tEh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ph-B0-IXY" userLabel="lastnameSeparator">
+                                <rect key="frame" x="393" y="134" width="325" height="1"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="SKf-R0-nhN"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S2H-Mi-6fR" userLabel="NameSeparator">
+                                <rect key="frame" x="30" y="134" width="315" height="1"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="7b3-Wg-HRc"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Ślubu:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNg-KS-UfZ">
+                                <rect key="frame" x="393" y="95" width="325" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="chZ-Us-veo"/>
+                                    <constraint firstAttribute="width" constant="325" id="iwi-N7-hkU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LUG-rx-MdY">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="870"/>
+                                <rect key="frame" x="0.0" y="150" width="768" height="720"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -779,12 +850,32 @@ UFJaRUpEGsW5IERBTEVKA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="S2H-Mi-6fR" firstAttribute="trailing" secondItem="RQg-lv-nGw" secondAttribute="trailing" id="20X-Sb-lfP"/>
                             <constraint firstItem="LUG-rx-MdY" firstAttribute="leading" secondItem="Oqg-Ha-hnV" secondAttribute="leading" id="51S-ap-2T1"/>
-                            <constraint firstItem="LUG-rx-MdY" firstAttribute="top" secondItem="Oqg-Ha-hnV" secondAttribute="top" id="619-oe-GxO"/>
+                            <constraint firstItem="C7Z-sq-RVT" firstAttribute="centerY" secondItem="o0k-Nh-dKg" secondAttribute="centerY" id="Ejj-eX-g9S"/>
+                            <constraint firstItem="o0k-Nh-dKg" firstAttribute="leading" secondItem="Oqg-Ha-hnV" secondAttribute="leading" constant="30" id="Fb6-Fa-xMK"/>
                             <constraint firstItem="5AE-1P-tlz" firstAttribute="centerX" secondItem="Oqg-Ha-hnV" secondAttribute="centerX" id="Imz-cU-Uho"/>
+                            <constraint firstItem="RQg-lv-nGw" firstAttribute="leading" secondItem="o0k-Nh-dKg" secondAttribute="leading" id="KXq-Bd-c7B"/>
                             <constraint firstItem="nhG-cU-QFV" firstAttribute="top" secondItem="5AE-1P-tlz" secondAttribute="bottom" constant="15" id="Kh9-TL-PKF"/>
+                            <constraint firstItem="o0k-Nh-dKg" firstAttribute="top" secondItem="UzL-Ic-S26" secondAttribute="bottom" constant="15" id="KwI-8L-531"/>
+                            <constraint firstItem="xNg-KS-UfZ" firstAttribute="leading" secondItem="2Ph-B0-IXY" secondAttribute="leading" id="LvY-cD-gr1"/>
+                            <constraint firstItem="xNg-KS-UfZ" firstAttribute="centerY" secondItem="RQg-lv-nGw" secondAttribute="centerY" id="OgM-p3-BxA"/>
                             <constraint firstItem="5AE-1P-tlz" firstAttribute="top" secondItem="LUG-rx-MdY" secondAttribute="bottom" constant="15" id="P6G-2A-IOb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xNg-KS-UfZ" secondAttribute="trailing" constant="30" id="WgY-d7-6lk"/>
                             <constraint firstAttribute="trailing" secondItem="LUG-rx-MdY" secondAttribute="trailing" id="Y0F-3v-DMu"/>
+                            <constraint firstItem="Pma-VQ-q3Y" firstAttribute="bottom" secondItem="o0k-Nh-dKg" secondAttribute="bottom" id="ap5-iS-tpq"/>
+                            <constraint firstItem="LUG-rx-MdY" firstAttribute="top" secondItem="S2H-Mi-6fR" secondAttribute="bottom" constant="15" id="dvk-CK-XkZ"/>
+                            <constraint firstItem="2Ph-B0-IXY" firstAttribute="trailing" secondItem="xNg-KS-UfZ" secondAttribute="trailing" id="euz-wN-YSg"/>
+                            <constraint firstItem="S2H-Mi-6fR" firstAttribute="bottom" secondItem="RQg-lv-nGw" secondAttribute="bottom" id="fmk-tC-opW"/>
+                            <constraint firstItem="C7Z-sq-RVT" firstAttribute="leading" secondItem="EEQ-yN-Pr5" secondAttribute="leading" id="gjE-vA-5TT"/>
+                            <constraint firstItem="RQg-lv-nGw" firstAttribute="leading" secondItem="S2H-Mi-6fR" secondAttribute="leading" id="h3B-85-04b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C7Z-sq-RVT" secondAttribute="trailing" constant="30" id="h5m-Be-Gdi"/>
+                            <constraint firstItem="RQg-lv-nGw" firstAttribute="top" secondItem="Pma-VQ-q3Y" secondAttribute="bottom" constant="20" id="kx8-Sz-f8X"/>
+                            <constraint firstItem="EEQ-yN-Pr5" firstAttribute="bottom" secondItem="C7Z-sq-RVT" secondAttribute="bottom" id="ma7-IQ-vN2"/>
+                            <constraint firstItem="2Ph-B0-IXY" firstAttribute="bottom" secondItem="xNg-KS-UfZ" secondAttribute="bottom" id="oJQ-a0-yEu"/>
+                            <constraint firstItem="Pma-VQ-q3Y" firstAttribute="trailing" secondItem="o0k-Nh-dKg" secondAttribute="trailing" id="pEd-pQ-eZp"/>
+                            <constraint firstItem="EEQ-yN-Pr5" firstAttribute="trailing" secondItem="C7Z-sq-RVT" secondAttribute="trailing" id="pVd-SF-Vty"/>
+                            <constraint firstItem="o0k-Nh-dKg" firstAttribute="leading" secondItem="Pma-VQ-q3Y" secondAttribute="leading" id="pjY-Gv-2e8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="WYBRANE MODELE" id="AUR-aV-bxU">
@@ -796,8 +887,12 @@ UFJaRUpEGsW5IERBTEVKA
                     </navigationItem>
                     <connections>
                         <outlet property="backHomeScreen" destination="O7v-qR-mwF" id="V18-Zv-Ua7"/>
+                        <outlet property="hometownLabel" destination="RQg-lv-nGw" id="1LH-4D-9x6"/>
+                        <outlet property="lastnameLabel" destination="C7Z-sq-RVT" id="AFF-Jv-2UB"/>
+                        <outlet property="nameLabel" destination="o0k-Nh-dKg" id="q6J-R0-eLb"/>
                         <outlet property="saveButton" destination="5AE-1P-tlz" id="uYH-Vu-wVz"/>
                         <outlet property="tableView" destination="LUG-rx-MdY" id="oea-hy-BvW"/>
+                        <outlet property="weddingDateLabel" destination="xNg-KS-UfZ" id="a4A-QT-tVX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pQS-ks-aGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

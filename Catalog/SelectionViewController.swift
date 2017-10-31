@@ -11,6 +11,10 @@ import CoreData
 
 class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var lastnameLabel: UILabel!
+    @IBOutlet weak var hometownLabel: UILabel!
+    @IBOutlet weak var weddingDateLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var backHomeScreen: UIBarButtonItem!
@@ -21,14 +25,22 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var provCart: Cart!
     var languageIndex: Int!
     
-    var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
     var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
+    var nameLang: [String] = ["Imię:","Name:","Nombre:"]
+    var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
+    var hometownLang: [String] = ["Miasto:","City:","Ciudad:"]
+    var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
+    var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         provCart.dresses = dressNames
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
+        nameLabel.text = nameLang[languageIndex] + " " + provCart.name
+        lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.lastname
+        hometownLabel.text = hometownLang[languageIndex] + " " + provCart.city
+        weddingDateLabel.text = weddingDateLang[languageIndex] + " " + provCart.weddingDate
         if languageIndex != 0 {
             
             saveButton.setTitle(confirmLang[languageIndex], for: .normal)
@@ -83,6 +95,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             cart.email = provCart.email
             cart.phone = provCart.phone
             cart.city = provCart.city
+            cart.weddingDate = provCart.weddingDate
             cart.dresses = provCart.dresses as NSArray?
             
             appDelegate.saveContext()
