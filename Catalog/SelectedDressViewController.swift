@@ -24,7 +24,9 @@ class SelectedDressViewController: UIViewController {
         ImageView.image = UIImage(named: dressImage)
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     @IBAction func closeWindow(sender: UIButton) {
         self.removeAnimate()

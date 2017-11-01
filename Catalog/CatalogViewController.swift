@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate {
+class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var catalogView: UIBarButtonItem!
@@ -16,37 +17,44 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var viewButton: UIButton!
     @IBOutlet var selectButton: UIButton!
     
+    @IBOutlet var saveToDatabaseButton: UIBarButtonItem!
+    
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
-    var dresses: [Dress] = [Dress(name: "Adelia", imgName: "adelia", isSelected: false),
-                            Dress(name: "Adora", imgName: "Adora", isSelected: false),
-                            Dress(name: "Adora z Trenem", imgName: "adora z trenem", isSelected: false),
-                            Dress(name: "Alicia", imgName: "alicia", isSelected: false),
-                            Dress(name: "Aurora", imgName: "aurora", isSelected: false),
-                            Dress(name: "Aurora z Aplikacją", imgName: "aurora1", isSelected: false),
-                            Dress(name: "Bonita", imgName: "bonita", isSelected: false),
-                            Dress(name: "Bonita ze Spódnicą", imgName: "bonita3", isSelected: false),
-                            Dress(name: "Cassandra", imgName: "cassandra", isSelected: false),
-                            Dress(name: "Diamantina", imgName: "diamantina", isSelected: false),
-                            Dress(name: "Dulce", imgName: "dulce", isSelected: false),
-                            Dress(name: "Elodia", imgName: "elodia", isSelected: false),
-                            Dress(name: "Elsa", imgName: "elsa", isSelected: false),
-                            Dress(name: "Felicia", imgName: "felicia", isSelected: false),
-                            Dress(name: "Ivette", imgName: "ivette", isSelected: false),
-                            Dress(name: "Luna", imgName: "luna", isSelected: false),
-                            Dress(name: "Micaela", imgName: "Micaela", isSelected: false),
-                            Dress(name: "Monica", imgName: "monica", isSelected: false),
-                            Dress(name: "Monica z Peleryną",imgName:"Monica Aplication",isSelected:false),
-                            Dress(name: "Morena", imgName: "morena", isSelected: false),
-                            Dress(name: "Ofelia", imgName: "ofelia", isSelected: false),
-                            Dress(name: "Olimpia", imgName: "olimpia", isSelected: false),
-                            Dress(name: "Paloma", imgName: "paloma", isSelected: false),
-                            Dress(name: "Paola", imgName: "paola", isSelected: false),
-                            Dress(name: "Rebeca", imgName: "rebeca", isSelected: false),
-                            Dress(name: "Samantha", imgName: "Samantha", isSelected: false),
-                            Dress(name: "Samantha z Trenem", imgName: "Samantha 1", isSelected: false),
-                            Dress(name: "Susana", imgName: "susana", isSelected: false)]
+    //var fetchResultsController: NSFetchedResultsController<DressMO>!
+    
+    var dressesMO: [DressMO] = []
+    var dressMO: DressMO!
+    
+    var dresses: [Dress] = [Dress(name: "Adelia", image: "adelia"),
+                                Dress(name: "Adora", image: "Adora"),
+                                Dress(name: "Adora z Trenem", image: "adora z trenem"),
+                                Dress(name: "Alicia", image: "alicia"),
+                                Dress(name: "Aurora", image: "aurora"),
+                                Dress(name: "Aurora z Aplikacją", image: "aurora1"),
+                                Dress(name: "Bonita", image: "bonita"),
+                                Dress(name: "Bonita ze Spódnicą", image: "bonita3"),
+                                Dress(name: "Cassandra", image: "cassandra"),
+                                Dress(name: "Diamantina", image: "diamantina"),
+                                Dress(name: "Dulce", image: "dulce"),
+                                Dress(name: "Elodia", image: "elodia"),
+                                Dress(name: "Elsa", image: "elsa"),
+                                Dress(name: "Felicia", image: "felicia"),
+                                Dress(name: "Ivette", image: "ivette"),
+                                Dress(name: "Luna", image: "luna"),
+                                Dress(name: "Micaela", image: "Micaela"),
+                                Dress(name: "Monica", image: "monica"),
+                                Dress(name: "Monica z Peleryną",image:"Monica Aplication"),
+                                Dress(name: "Morena", image: "morena"),
+                                Dress(name: "Ofelia", image: "ofelia"),
+                                Dress(name: "Olimpia", image: "olimpia"),
+                                Dress(name: "Paloma", image: "paloma"),
+                                Dress(name: "Paola", image: "paola"),
+                                Dress(name: "Rebeca", image: "rebeca"),
+                                Dress(name: "Samantha", image: "Samantha"),
+                                Dress(name: "Samantha z Trenem", image: "Samantha 1"),
+                                Dress(name: "Susana", image: "susana")]
     
     var zoomDress: Dress!
     var provCart: Cart!
@@ -70,9 +78,6 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
-        cache.cleanExpiredDiskCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,13 +97,14 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         let dress = dresses[indexPath.row]
         
         // Configure the cell
-        cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
+        cell.dressLabel.font = UIFont(name : "TrajanPro-Regular", size: 22)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        cell.dressImageView.image = UIImage(named: dress.image)
+        //cell.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
         
         // In case the cell is selected
-        cell.selectedFlag.image = dress.isSelected ? UIImage(named: "tick") : nil
-        cell.dressLabel.backgroundColor = dress.isSelected ? UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 0.75) : UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.25)
+        /*cell.selectedFlag.image = dress.isSelected ? UIImage(named: "tick") : nil
+         cell.dressLabel.backgroundColor = dress.isSelected ? UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 0.75) : UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.25)*/
         
         
         return cell
@@ -108,7 +114,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
+            //zoomImageView.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
+            zoomImageView.dressImageView.image = UIImage(named: dresses[indexPath.row].image)
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
@@ -126,14 +133,14 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        dresses[indexPath.row].isSelected = true
+        //dresses[indexPath.row].isSelected = true
         selectButton.isEnabled = true
         selectButton.alpha = 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
-        dresses[indexPath.row].isSelected = false
+        //dresses[indexPath.row].isSelected = false
         if let indexPath = collectionView.indexPathsForSelectedItems {
             if indexPath.count <= 0 {
                 selectButton.isEnabled = false
@@ -172,6 +179,35 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
+    @IBAction func saveCatalogToDatabase(_ sender: UIButton) {
+        
+        for dress in dresses {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                dressMO = DressMO(context: appDelegate.persistentContainer.viewContext)
+                dressMO.name = dress.name
+                
+                let imageData = UIImagePNGRepresentation(UIImage(named: dress.image)!)
+                dressMO.image = NSData(data: imageData!)
+                appDelegate.saveContext()
+                
+                print(dressMO)
+            }
+        }
+    }
+    
+    @IBAction func deleteCatalogFromDatabase(_ sender: UIButton) {
+        
+        for dress in dressesMO {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                context.delete(dress)
+                appDelegate.saveContext()
+                
+                print(dressesMO)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "selectDresses"{
@@ -183,8 +219,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 destinationController.provCart = provCart
                 
                 for index in indexPath {
-                    destinationController.dresses.append(dresses[index.row])
-                    destinationController.dressNames.append(dresses[index.row].name)
+                    destinationController.dresses.append(dressesMO[index.row])
+                    destinationController.dressNames.append(dressesMO[index.row].name!)
                 }
             }
         }

@@ -19,7 +19,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var backHomeScreen: UIBarButtonItem!
     
-    var dresses = [Dress]()
+    var dresses = [DressMO]()
     var dressNames = [String]()
     var cart: CartMO!
     var provCart: Cart!
@@ -52,9 +52,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
-        cache.cleanExpiredDiskCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,14 +73,16 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        //cell.dressImageView.image = UIImage(named: dress.image)
+        cell.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-        popImageView.dressImage = dresses[indexPath.row].imgName
+        //popImageView.dressImage = dresses[indexPath.row].image
+        popImageView.ImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
         self.addChildViewController(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
