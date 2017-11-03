@@ -22,7 +22,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
-    //var fetchResultsController: NSFetchedResultsController<DressMO>!
+    var fetchResultController: NSFetchedResultsController<DressMO>!
     
     var dressesMO: [DressMO] = []
     var dressMO: DressMO!
@@ -74,6 +74,24 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
+        let fetchRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do{
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    dressesMO = fetchedObjects
+                    print(dressesMO)
+                }
+            }catch {
+                print(error)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,7 +103,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dresses.count
+        return dressesMO.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -94,13 +112,13 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
         cell.cellDelegate = self
         
-        let dress = dresses[indexPath.row]
+        let dress = dressesMO[indexPath.row]
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name : "TrajanPro-Regular", size: 22)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.image)
-        //cell.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
+        //cell.dressImageView.image = UIImage(named: dress.image)
+        cell.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
         
         // In case the cell is selected
         /*cell.selectedFlag.image = dress.isSelected ? UIImage(named: "tick") : nil
@@ -114,8 +132,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            //zoomImageView.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
-            zoomImageView.dressImageView.image = UIImage(named: dresses[indexPath.row].image)
+            zoomImageView.dressImageView.image = UIImage(data: self.dressesMO[indexPath.row].image as! Data)
+            //zoomImageView.dressImageView.image = UIImage(named: dresses[indexPath.row].image)
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
@@ -197,6 +215,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @IBAction func deleteCatalogFromDatabase(_ sender: UIButton) {
         
+        print("Delete Pressed")
         for dress in dressesMO {
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let context = appDelegate.persistentContainer.viewContext

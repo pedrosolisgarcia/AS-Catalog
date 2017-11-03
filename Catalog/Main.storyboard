@@ -663,11 +663,18 @@ UFJaRUpEGsW5IERBTEVKA
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="KATALOG" id="m6j-nB-FmK">
-                        <barButtonItem key="leftBarButtonItem" systemItem="save" id="08m-NH-hIS">
-                            <connections>
-                                <action selector="saveCatalogToDatabase:" destination="7ZT-9l-8NA" id="f1s-bq-3Cz"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="save" id="08m-NH-hIS">
+                                <connections>
+                                    <action selector="saveCatalogToDatabase:" destination="7ZT-9l-8NA" id="f1s-bq-3Cz"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="1M3-AA-z2i">
+                                <connections>
+                                    <action selector="deleteCatalogFromDatabase:" destination="7ZT-9l-8NA" id="gEF-15-tlN"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem image="carousel" id="V7k-cn-1ip">
                                 <connections>
