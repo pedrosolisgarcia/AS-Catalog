@@ -31,9 +31,6 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
-        cache.cleanExpiredDiskCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,7 +101,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }, completion:{(finished : Bool)  in
             if (finished)
             {
+                self.dressImageView.image = nil
                 self.view.removeFromSuperview()
+                self.dismiss(animated: false)
             }
         });
     }

@@ -10,9 +10,9 @@ import UIKit
 
 class SelectedDressViewController: UIViewController {
     
-    @IBOutlet var ImageView: UIImageView!
-    @IBOutlet var closeView: UIButton!
-    @IBOutlet var popImageView: UIView!
+    @IBOutlet weak var ImageView: UIImageView!
+    @IBOutlet weak var closeView: UIButton!
+    @IBOutlet weak var popImageView: UIView!
     
     var dressImage = ""
 
@@ -24,7 +24,9 @@ class SelectedDressViewController: UIViewController {
         ImageView.image = UIImage(named: dressImage)
     }
     
-    override func didReceiveMemoryWarning() {super.didReceiveMemoryWarning()}
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     @IBAction func closeWindow(sender: UIButton) {
         self.removeAnimate()
@@ -48,7 +50,9 @@ class SelectedDressViewController: UIViewController {
         }, completion:{(finished : Bool)  in
             if (finished)
             {
+                self.ImageView.image = nil
                 self.view.removeFromSuperview()
+                self.dismiss(animated: false)
             }
         });
     }

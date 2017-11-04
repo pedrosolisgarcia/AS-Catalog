@@ -15,13 +15,13 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var lastnameLabel: UILabel!
     @IBOutlet weak var hometownLabel: UILabel!
     @IBOutlet weak var weddingDateLabel: UILabel!
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var saveButton: UIButton!
-    @IBOutlet var backHomeScreen: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var backHomeScreen: UIBarButtonItem!
     
     var dresses = [Dress]()
     var dressNames = [String]()
-    var cart: CartMO!
+    weak var cart: CartMO!
     var provCart: Cart!
     var languageIndex: Int!
     
@@ -32,6 +32,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var hometownLang: [String] = ["Miasto:","City:","Ciudad:"]
     var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
+    var confirmationMessageLang: [[String]] = [["Gotowy","Dziękuję, proszę odesłać urządzenie osobie, która wzięła udział.","Dobra"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +53,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
-        cache.cleanExpiredDiskCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +89,14 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func clearAllVariables() {
+        cart = nil
+        provCart = nil
+        dresses.removeAll()
+        dressNames.removeAll()
+        tableView = nil
+    }
+    
     @IBAction func saveSelectionToCart(_ sender: UIButton) {
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -105,10 +111,22 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             
             appDelegate.saveContext()
             
+            let alertController = UIAlertController(title: confirmationMessageLang[languageIndex][0], message: confirmationMessageLang[languageIndex][1], preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: confirmationMessageLang[languageIndex][2], style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion:nil)
+            
             saveButton.isEnabled = false
             saveButton.alpha = 0.25
+            navigationItem.backBarButtonItem = nil
             backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
             backHomeScreen.isEnabled = true
         }
+    }
+    
+    @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
+        clearAllVariables()
+        self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
+        self.dismiss(animated: false)
     }
 }
