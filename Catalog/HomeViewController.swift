@@ -139,7 +139,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+<<<<<<< HEAD
         pickWeddingDate(self.weddingDateField)
+=======
+        
+        weddingDateField.inputView = weddingDatePicker
+>>>>>>> 92d5d97ec554e0a25a0220527baa6bc378563509
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -165,9 +170,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+<<<<<<< HEAD
         let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)])
         
         let month = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)])
+=======
+        let day = String(describing: numDay[pickerView.selectedRow(inComponent: 0)])
+        
+        let month = String(describing: numMonths[pickerView.selectedRow(inComponent: 1)])
+>>>>>>> 92d5d97ec554e0a25a0220527baa6bc378563509
         
         let year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
         

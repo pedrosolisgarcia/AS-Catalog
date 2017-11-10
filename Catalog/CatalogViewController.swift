@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate {
+class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var catalogView: UIBarButtonItem!
@@ -16,12 +17,12 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var viewButton: UIButton!
     @IBOutlet weak var selectButton: UIButton!
     
+    @IBOutlet var saveToDatabaseButton: UIBarButtonItem!
+    
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
     var dresses = [Dress]()
-    
-    //weak var zoomDress: Dress!
     var provCart: Cart!
     var languageIndex: Int!
     
@@ -70,6 +71,24 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
+        let fetchRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchResultController.delegate = self
+            
+            do{
+                try fetchResultController.performFetch()
+                if let fetchedObjects = fetchResultController.fetchedObjects {
+                    dressesMO = fetchedObjects
+                    print(dressesMO)
+                }
+            }catch {
+                print(error)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,7 +100,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dresses.count
+        return dressesMO.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,16 +109,21 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
         cell.cellDelegate = self
         
-        let dress = dresses[indexPath.row]
+        let dress = dressesMO[indexPath.row]
         
         // Configure the cell
-        cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
+        cell.dressLabel.font = UIFont(name : "TrajanPro-Regular", size: 22)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        //cell.dressImageView.image = UIImage(named: dress.image)
+        cell.dressImageView.image = UIImage(data: self.dresses[indexPath.row].image as! Data)
         
         // In case the cell is selected
+
         /*cell?.selectedFlag.image = dress.isSelected ? UIImage(named: "tick") : nil
         cell?.dressLabel.backgroundColor = dress.isSelected ? UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 0.75) : UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.25)*/
+
+        /*cell.selectedFlag.image = dress.isSelected ? UIImage(named: "tick") : nil
+         cell.dressLabel.backgroundColor = dress.isSelected ? UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 0.75) : UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.25)*/
         
         
         return cell
@@ -108,12 +132,13 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     func didPressZoomButton(_ sender: UIButton) {
         if let indexPath = getCurrentCellIndexPath(sender) {
             
-            weak var zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as? ImageViewController
-            zoomImageView?.dress = dresses[indexPath.row].imgName + "_full"
-            self.addChildViewController(zoomImageView!)
-            zoomImageView?.view.frame = self.view.frame
-            self.view.addSubview(zoomImageView!.view)
-            zoomImageView?.didMove(toParentViewController: self)
+            let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
+            zoomImageView.dressImageView.image = UIImage(data: self.dressesMO[indexPath.row].image as! Data)
+            //zoomImageView.dressImageView.image = UIImage(named: dresses[indexPath.row].image)
+            self.addChildViewController(zoomImageView)
+            zoomImageView.view.frame = self.view.frame
+            self.view.addSubview(zoomImageView.view)
+            zoomImageView.didMove(toParentViewController: self)
         }
     }
     
@@ -173,6 +198,36 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
+    @IBAction func saveCatalogToDatabase(_ sender: UIButton) {
+        
+        for dress in dresses {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                dressMO = DressMO(context: appDelegate.persistentContainer.viewContext)
+                dressMO.name = dress.name
+                
+                let imageData = UIImagePNGRepresentation(UIImage(named: dress.image)!)
+                dressMO.image = NSData(data: imageData!)
+                appDelegate.saveContext()
+                
+                print(dressMO)
+            }
+        }
+    }
+    
+    @IBAction func deleteCatalogFromDatabase(_ sender: UIButton) {
+        
+        print("Delete Pressed")
+        for dress in dressesMO {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                context.delete(dress)
+                appDelegate.saveContext()
+                
+                print(dressesMO)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "selectDresses"{
@@ -184,8 +239,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 destinationController.provCart = provCart
                 
                 for index in indexPath {
-                    destinationController.dresses.append(dresses[index.row])
-                    destinationController.dressNames.append(dresses[index.row].name)
+                    destinationController.dresses.append(dressesMO[index.row])
+                    destinationController.dressNames.append(dressesMO[index.row].name!)
                 }
                 self.dismiss(animated: false)
             }
