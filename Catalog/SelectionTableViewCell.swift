@@ -10,8 +10,8 @@ import UIKit
 
 class SelectionTableViewCell: UITableViewCell {
     
-    @IBOutlet var dressImageView: UIImageView!
-    @IBOutlet var dressLabel: UILabel!
+    @IBOutlet weak var dressImageView: UIImageView!
+    @IBOutlet weak var dressLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

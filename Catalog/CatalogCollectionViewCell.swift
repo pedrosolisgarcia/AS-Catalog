@@ -14,9 +14,9 @@ protocol CatalogCollectionViewCellDelegate: class {
 
 class CatalogCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var dressImageView: UIImageView!
-    @IBOutlet var dressLabel: UILabel!
-    @IBOutlet var selectedFlag: UIImageView!
+    @IBOutlet weak var dressImageView: UIImageView!
+    @IBOutlet weak var dressLabel: UILabel!
+    @IBOutlet weak var selectedFlag: UIImageView!
     weak var cellDelegate: CatalogCollectionViewCellDelegate?
     
     @IBAction func buttonPressed(_ sender: UIButton) {

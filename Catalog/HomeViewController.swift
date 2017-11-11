@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class HomeViewController: UIViewController, UITextFieldDelegate {
+class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var polishButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
@@ -34,7 +34,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
     
-    var weddingDatePicker: UIPicker!
+    var weddingDatePicker = UIPickerView()
     
     var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
     var nameLang: [String] = ["Imię:","Name:","Nombre:"]
@@ -42,10 +42,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var phoneLang = ["Telefon:","Telefon:","Teléfono:"]
     var hometownLang = ["Miasto:","City:","Ciudad:"]
     var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
-    var numDay = [01...31]
+    var numDay = [01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
     var monthsLang = [["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]]
-    var numMonths = [01...12]
-    var numYear = [2017...2030]
+    var numMonths = [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12]
+    var numYear = [2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
     var numberOfRows = [31,12,13]
     var doneLang: [String] = ["Gotowy","Done","Hecho"]
     var cancelLang: [String] = ["Anuluj","Cancel","Cancelar"]
@@ -53,11 +53,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     var warningMessageLang: [[String]] = [["Błąd","Wszystkie pola muszą być wypełnione, aby zobaczyć katalog.","Dobra"],["Error","All the fields must be filled to see the catalog.","Ok"],["Error","Todos los campos han de ser rellenados para poder ver el catálogo.","Vale"]]
     var lowTextLang: [String] = ["Możesz zobaczyć katalog.","Now you can watch the catalog.","Ya puedes ver el catálogo."]
     var catalogLang: [String] = ["OBEJRZYJ KATALOG","WATCH THE CATALOG","VISITA EL CATÁLOGO"]
-    var languageIndex = 0
+    var languageIndex: Int!
     
     var fields: [Bool] = [false,false,false,false,false]
-    //var cart: cart = cart(name: "", lastname: "", email: "", phone: "", hometown: "")
-    var provCart: Cart = Cart(name: "", lastname: "", email: "", phone: "", city: "", weddingDate: "", dresses: [""])
+    var provCart: Cart!
+    
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
+        resetHomeSettings()
+        resetHomeFields()
+    }
     
     @IBAction func selectLanguage(sender: UIButton) {
         
@@ -80,6 +84,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             spanishButton.isHighlighted = true
         }
         
+        applyLanguage()
+        
+    }
+    
+    func applyLanguage() {
+        
         beforeLabel.text = beforeLang[languageIndex]
         nameLabel.text = nameLang[languageIndex]
         lastnameLabel.text = lastnameLang[languageIndex]
@@ -89,27 +99,39 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
         createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
         lowText.text = lowTextLang[languageIndex]
         catalogButton.setTitle(catalogLang[languageIndex], for: .normal)
+        weddingDatePicker.reloadComponent(1)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        didReceiveMemoryWarning()
+        
+        weddingDatePicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-        
-        // Do any additional setup after loading the view.
+    
+        resetHomeSettings()
+        hideKeyboard()
+    }
+    
+    func resetHomeSettings() {
+        languageIndex = 0
+        applyLanguage()
         lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         catalogButton.isEnabled = false
         catalogButton.alpha = 0
-        
-        hideKeyboard()
+    }
+    func resetHomeFields() {
+        provCart = nil
+        nameField.text = nil
+        lastnameField.text = nil
+        emailField.text = nil
+        phoneField.text = nil
+        hometownField.text = nil
+        weddingDateField.text = nil
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        cache.clearMemoryCache()
-        cache.clearDiskCache()
-        cache.cleanExpiredDiskCache()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -117,7 +139,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        //self.pickWeddingDate(self.weddingDateField)
+        self.pickWeddingDate(self.weddingDateField)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -133,59 +155,54 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if component == 0 {
-            return numDay[row]
+            return String(describing: numDay[row])
         } else if component == 1 {
             return monthsLang[languageIndex][row]
         } else {
-            return numYear[row]
+            return String(describing: numYear[row])
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let day = numDay[pickerView.selectedRow(inComponent: 0)]
+        let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)] as CVarArg)
         
-        let month = numMonths[pickerView.selectedRow(inComponent: 1)]
+        let month = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)] as CVarArg)
         
-        let year = numYear[pickerView.selectedRow(inComponent: 2)]
+        let year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
         
-        pickerTextField.text = day + "/" + month + "/" + year
+        weddingDateField.text = day + "/" + month + "/" + year
     }
     
-    /*func pickWeddingDate(_ textField : UITextField){
+    func pickWeddingDate(_ textField : UITextField){
         
-            self.weddingDatePicker = UIDatePicker(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
-            self.weddingDatePicker.backgroundColor = UIColor.white
-            self.weddingDatePicker.accessibilityLanguage = "en"
-            self.weddingDatePicker.datePickerMode = UIDatePickerMode.date
-            textField.inputView = self.weddingDatePicker
-            
-            // ToolBar
-            let toolBar = UIToolbar()
-            toolBar.barStyle = .default
-            toolBar.isTranslucent = true
-            toolBar.tintColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-            toolBar.sizeToFit()
-            
-            // Adding Button ToolBar
-            let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.doneClick))
-            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-            let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.cancelClick))
-            toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-            toolBar.isUserInteractionEnabled = true
-            textField.inputAccessoryView = toolBar
+        self.weddingDatePicker.backgroundColor = UIColor.white
+        textField.inputView = self.weddingDatePicker
+        
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.backgroundColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
+        toolBar.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
     }
     
     func doneClick() {
-        let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateStyle = .medium
-        dateFormatter1.timeStyle = .none
-        weddingDateField.text = dateFormatter1.string(from: weddingDatePicker.date)
         weddingDateField.resignFirstResponder()
     }
     func cancelClick() {
+        weddingDateField.text = ""
         weddingDateField.resignFirstResponder()
-    }*/
+    }
     
     @IBAction func createProfile(sender: UIButton) {
         if nameField.text == "" || lastnameField.text == "" || emailField.text == "" || hometownField.text == "" || weddingDateField.text == "" {
@@ -194,12 +211,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate {
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
         } else {
-            provCart.name = nameField.text!
-            provCart.lastname = lastnameField.text!
-            provCart.email = emailField.text!
-            provCart.phone = phoneField.text!
-            provCart.city = hometownField.text!
-            provCart.weddingDate = weddingDateField.text!
+            provCart = Cart(name: nameField.text!, lastname: lastnameField.text!, email: emailField.text!, phone: phoneField.text!, city: hometownField.text!, weddingDate: weddingDateField.text!, dresses: [""])
             
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             catalogButton.isEnabled = true
