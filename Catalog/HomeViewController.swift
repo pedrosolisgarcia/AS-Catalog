@@ -205,11 +205,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     @IBAction func createProfile(sender: UIButton) {
-        if nameField.text == "" || lastnameField.text == "" || emailField.text == "" || hometownField.text == "" || weddingDateField.text == "" {
+        if nameField.text == "" || lastnameField.text == "" || emailField.text == "" || phoneField.text == "" || hometownField.text == "" || weddingDateField.text == "" {
             let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
             let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
+            resetHomeSettings()
         } else {
             provCart = Cart(name: nameField.text!, lastname: lastnameField.text!, email: emailField.text!, phone: phoneField.text!, city: hometownField.text!, weddingDate: weddingDateField.text!, dresses: [""])
             

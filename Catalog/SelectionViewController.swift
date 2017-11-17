@@ -15,6 +15,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var lastnameLabel: UILabel!
     @IBOutlet weak var hometownLabel: UILabel!
     @IBOutlet weak var weddingDateLabel: UILabel!
+    @IBOutlet weak var dressesLabel: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var backHomeScreen: UIBarButtonItem!
@@ -32,7 +33,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var hometownLang: [String] = ["Miasto:","City:","Ciudad:"]
     var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
-    var confirmationMessageLang: [[String]] = [["Gotowy","Dziękuję, proszę odesłać urządzenie osobie, która wzięła udział.","Dobra"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
+    var confirmationMessageLang: [[String]] = [["To wszystko","Dziękuję, proszę przekazać urządzenie pracownikowi salonu.","Gotowe"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
 
     
     override func viewDidLoad() {
@@ -50,6 +51,18 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.title = titleLang[languageIndex]
         backHomeScreen.title = homeLang[languageIndex]
         backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+        
+        let maskPathSave = UIBezierPath(roundedRect: saveButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+        
+        let maskLayerSave = CAShapeLayer()
+        maskLayerSave.path = maskPathSave.cgPath
+        saveButton.layer.mask = maskLayerSave
+        
+        let maskPathLabel = UIBezierPath(roundedRect: saveButton.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+        
+        let maskLayerLabel = CAShapeLayer()
+        maskLayerLabel.path = maskPathLabel.cgPath
+        dressesLabel.layer.mask = maskLayerLabel
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,8 +132,8 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             
             saveButton.isEnabled = false
             saveButton.alpha = 0.25
-            navigationItem.backBarButtonItem?.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-            navigationItem.backBarButtonItem?.isEnabled = false
+            navigationItem.backBarButtonItem!.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+            navigationItem.backBarButtonItem!.isEnabled = false
             backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
             backHomeScreen.isEnabled = true
         }
