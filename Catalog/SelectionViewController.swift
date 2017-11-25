@@ -21,9 +21,12 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var backHomeScreen: UIBarButtonItem!
     
     var dresses = [Dress]()
+    var selectedDresses = [Dress]()
     var dressNames = [String]()
-    weak var cart: CartMO!
     var provCart: Cart!
+    weak var cart: CartMO!
+    var dressesRecord = [DressMO]()
+    var cities = [CityMO]()
     var languageIndex: Int!
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
@@ -74,7 +77,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dresses.count
+        return selectedDresses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,7 +86,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! SelectionTableViewCell
         tableView.separatorColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-        let dress = dresses[indexPath.row]
+        let dress = selectedDresses[indexPath.row]
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
@@ -95,7 +98,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-        popImageView.dressImage = dresses[indexPath.row].imgName
+        popImageView.dressImage = selectedDresses[indexPath.row].imgName
         self.addChildViewController(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
@@ -107,7 +110,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         cart = nil
         provCart = nil
         dresses.removeAll()
+        selectedDresses.removeAll()
+        dressesRecord.removeAll()
         dressNames.removeAll()
+        cities.removeAll()
         tableView = nil
     }
     

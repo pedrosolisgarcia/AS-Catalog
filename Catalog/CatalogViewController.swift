@@ -34,35 +34,35 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
             selectButton.setTitle(selectLang[languageIndex], for: .normal)
         }
         dresses.removeAll()
-        //collectionView = nil
-        dresses = [Dress(name: "Adelia", imgName: "adelia"),
-                   Dress(name: "Adora", imgName: "Adora"),
-                   Dress(name: "Adora z Trenem", imgName: "adora z trenem"),
-                   Dress(name: "Alicia", imgName: "alicia"),
-                   Dress(name: "Aurora", imgName: "aurora"),
-                   Dress(name: "Aurora z Aplikacją", imgName: "aurora1"),
-                   Dress(name: "Bonita", imgName: "bonita"),
-                   Dress(name: "Bonita ze Spódnicą", imgName: "bonita3"),
-                   Dress(name: "Cassandra", imgName: "cassandra"),
-                   Dress(name: "Diamantina", imgName: "diamantina"),
-                   Dress(name: "Dulce", imgName: "dulce"),
-                   Dress(name: "Elodia", imgName: "elodia"),
-                   Dress(name: "Elsa", imgName: "elsa"),
-                   Dress(name: "Felicia", imgName: "felicia"),
-                   Dress(name: "Ivette", imgName: "ivette"),
-                   Dress(name: "Luna", imgName: "luna"),
-                   Dress(name: "Micaela", imgName: "Micaela"),
-                   Dress(name: "Monica", imgName: "monica"),
-                   Dress(name: "Monica z Peleryną",imgName: "Monica Aplication"),
-                   Dress(name: "Morena", imgName: "morena"),
-                   Dress(name: "Ofelia", imgName: "ofelia"),
-                   Dress(name: "Olimpia", imgName: "olimpia"),
-                   Dress(name: "Paloma", imgName: "paloma"),
-                   Dress(name: "Paola", imgName: "paola"),
-                   Dress(name: "Rebeca", imgName: "rebeca"),
-                   Dress(name: "Samantha", imgName: "Samantha"),
-                   Dress(name: "Samantha z Trenem", imgName: "Samantha 1"),
-                   Dress(name: "Susana", imgName: "susana")]
+        collectionView.reloadData()
+        dresses = [Dress(name: "Adelia", imgName: "adelia", isSelected: false),
+                   Dress(name: "Adora", imgName: "Adora", isSelected: false),
+                   Dress(name: "Adora z Trenem", imgName: "adora z trenem", isSelected: false),
+                   Dress(name: "Alicia", imgName: "alicia", isSelected: false),
+                   Dress(name: "Aurora", imgName: "aurora", isSelected: false),
+                   Dress(name: "Aurora z Aplikacją", imgName: "aurora1", isSelected: false),
+                   Dress(name: "Bonita", imgName: "bonita", isSelected: false),
+                   Dress(name: "Bonita ze Spódnicą", imgName: "bonita3", isSelected: false),
+                   Dress(name: "Cassandra", imgName: "cassandra", isSelected: false),
+                   Dress(name: "Diamantina", imgName: "diamantina", isSelected: false),
+                   Dress(name: "Dulce", imgName: "dulce", isSelected: false),
+                   Dress(name: "Elodia", imgName: "elodia", isSelected: false),
+                   Dress(name: "Elsa", imgName: "elsa", isSelected: false),
+                   Dress(name: "Felicia", imgName: "felicia", isSelected: false),
+                   Dress(name: "Ivette", imgName: "ivette", isSelected: false),
+                   Dress(name: "Luna", imgName: "luna", isSelected: false),
+                   Dress(name: "Micaela", imgName: "Micaela", isSelected: false),
+                   Dress(name: "Monica", imgName: "monica", isSelected: false),
+                   Dress(name: "Monica z Peleryną",imgName: "Monica Aplication", isSelected: false),
+                   Dress(name: "Morena", imgName: "morena", isSelected: false),
+                   Dress(name: "Ofelia", imgName: "ofelia", isSelected: false),
+                   Dress(name: "Olimpia", imgName: "olimpia", isSelected: false),
+                   Dress(name: "Paloma", imgName: "paloma", isSelected: false),
+                   Dress(name: "Paola", imgName: "paola", isSelected: false),
+                   Dress(name: "Rebeca", imgName: "rebeca", isSelected: false),
+                   Dress(name: "Samantha", imgName: "Samantha", isSelected: false),
+                   Dress(name: "Samantha z Trenem", imgName: "Samantha 1", isSelected: false),
+                   Dress(name: "Susana", imgName: "susana", isSelected: false)]
         
         navigationItem.title = titleLang[languageIndex]
         collectionView?.allowsMultipleSelection = true
@@ -119,13 +119,13 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        dresses[indexPath.row].isSelected = true
         selectButton.isEnabled = true
         selectButton.alpha = 1
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
+        dresses[indexPath.row].isSelected = false
         if let indexPath = collectionView.indexPathsForSelectedItems {
             if indexPath.count <= 0 {
                 selectButton.isEnabled = false
@@ -173,9 +173,11 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 
                 destinationController.languageIndex = languageIndex
                 destinationController.provCart = provCart
+                destinationController.dresses = dresses
+                
                 
                 for index in indexPath {
-                    destinationController.dresses.append(dresses[index.row])
+                    destinationController.selectedDresses.append(dresses[index.row])
                     destinationController.dressNames.append(dresses[index.row].name)
                 }
             }

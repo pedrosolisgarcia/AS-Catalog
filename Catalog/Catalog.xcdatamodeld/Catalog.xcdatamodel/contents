@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G1611" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B48" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Cart" representedClassName="CartMO" syncable="YES" codeGenerationType="class">
         <attribute name="city" attributeType="String" syncable="YES"/>
         <attribute name="dresses" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
@@ -9,7 +9,17 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weddingDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="City" representedClassName="CityMO" syncable="YES" codeGenerationType="class">
+        <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Dress" representedClassName="DressMO" syncable="YES" codeGenerationType="class">
+        <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Cart" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="Dress" positionX="-54" positionY="45" width="128" height="75"/>
+        <element name="City" positionX="-45" positionY="54" width="128" height="75"/>
     </elements>
 </model>
