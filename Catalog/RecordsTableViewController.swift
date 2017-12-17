@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class RecordsTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class RecordsViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     var records: [CartMO] = []
     var fetchResultController: NSFetchedResultsController<CartMO>!

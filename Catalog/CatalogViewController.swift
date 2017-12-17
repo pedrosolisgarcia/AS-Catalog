@@ -19,6 +19,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
+    var month = [String]()
     var dresses = [Dress]()
     var provCart: Cart!
     var languageIndex: Int!
@@ -68,6 +69,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
+        
+        print(month)
     }
     
     override func didReceiveMemoryWarning() {
@@ -174,6 +177,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 destinationController.languageIndex = languageIndex
                 destinationController.provCart = provCart
                 destinationController.dresses = dresses
+                destinationController.provMonth = self.month
                 
                 
                 for index in indexPath {

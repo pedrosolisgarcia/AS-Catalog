@@ -11,6 +11,7 @@ import CoreData
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    @IBOutlet weak var recordsButton: UIButton!
     @IBOutlet weak var polishButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
     @IBOutlet weak var spanishButton: UIButton!
@@ -57,6 +58,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     var fields: [Bool] = [false,false,false,false,false]
     var provCart: Cart!
+    var monthCal: String!
+    var year: String!
+    var month = [String]()
+    var fullMonth: String!
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
         resetHomeSettings()
@@ -102,6 +107,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         weddingDatePicker.reloadComponent(1)
     }
     
+    @IBAction func showRecords(sender: UIButton) {
+        self.performSegue(withIdentifier: "showRecords", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -128,6 +137,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         phoneField.text = nil
         hometownField.text = nil
         weddingDateField.text = nil
+        month.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -167,11 +177,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)] as CVarArg)
         
-        let month = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)] as CVarArg)
+        monthCal = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)] as CVarArg)
         
-        let year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
+        year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
         
-        weddingDateField.text = day + "/" + month + "/" + year
+        weddingDateField.text = day + "/" + monthCal + "/" + year
+        
+        fullMonth = monthsLang[1][pickerView.selectedRow(inComponent: 1)] + " " + String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
     }
     
     func pickWeddingDate(_ textField : UITextField){
@@ -217,6 +229,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             catalogButton.isEnabled = true
             catalogButton.alpha = 1
+            
+            month.append(monthCal + year)
+            month.append(fullMonth)
+            print(month)
         }
         dismissKeyboard()
     }
@@ -229,6 +245,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let destinationController = segue.destination as! CatalogViewController
             destinationController.languageIndex = languageIndex
             destinationController.provCart = provCart
+            destinationController.month = month
         }
     }
     

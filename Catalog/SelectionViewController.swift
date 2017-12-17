@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var lastnameLabel: UILabel!
@@ -20,14 +20,26 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var backHomeScreen: UIBarButtonItem!
     
+    var provMonth = [String]()
     var dresses = [Dress]()
     var selectedDresses = [Dress]()
     var dressNames = [String]()
     var provCart: Cart!
     weak var cart: CartMO!
+    weak var client: UserTestMO!
+    weak var city: CityMO!
+    weak var month: MonthMO!
+    weak var dressRecord: DressMO!
     var dressesRecord = [DressMO]()
     var cities = [CityMO]()
+    var months = [MonthMO]()
+    var clients = [UserTestMO]()
     var languageIndex: Int!
+    
+    var fetchCitiesController: NSFetchedResultsController<CityMO>!
+    var fetchDressesController: NSFetchedResultsController<DressMO>!
+    var fetchMonthsController: NSFetchedResultsController<MonthMO>!
+    var fetchClientsController: NSFetchedResultsController<UserTestMO>!
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
     var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
@@ -37,10 +49,15 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     var confirmationMessageLang: [[String]] = [["To wszystko","Dziękuję, proszę przekazać urządzenie pracownikowi salonu.","Gotowe"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(provCart.name)
+        print(provCart.lastname)
+        print(provCart.email)
+        print(provCart.phone)
+        print(provMonth)
         provCart.dresses = dressNames
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = nameLang[languageIndex] + " " + provCart.name
@@ -61,11 +78,115 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         maskLayerSave.path = maskPathSave.cgPath
         saveButton.layer.mask = maskLayerSave
         
-        let maskPathLabel = UIBezierPath(roundedRect: saveButton.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+        let maskPathLabel = UIBezierPath(roundedRect: dressesLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
         
         let maskLayerLabel = CAShapeLayer()
         maskLayerLabel.path = maskPathLabel.cgPath
         dressesLabel.layer.mask = maskLayerLabel
+        
+        //CoreData Fetching
+        fetchDresses()
+        fetchCities()
+        fetchMonths()
+        fetchUsers()
+    }
+    
+    func fetchUsers() {
+        print("Starting to fetch users...")
+        let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
+        let sortClientsDescriptor = NSSortDescriptor(key: "email", ascending: true)
+        fetchClientsRequest.sortDescriptors = [sortClientsDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchClientsController = NSFetchedResultsController(fetchRequest: fetchClientsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchClientsController.delegate = self
+            do {
+                try fetchClientsController.performFetch()
+                if let fetchedClients = fetchClientsController.fetchedObjects {
+                    clients = fetchedClients
+                    print("Users fetched!")
+                    //print(clients.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func fetchDresses() {
+        print("Starting to fetch dresses...")
+        let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
+        let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchDressesController = NSFetchedResultsController(fetchRequest: fetchDressesRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchDressesController.delegate = self
+            do {
+                try fetchDressesController.performFetch()
+                if let fetchedDresses = fetchDressesController.fetchedObjects {
+                    dressesRecord = fetchedDresses
+                    print("Dresses fetched!")
+                    for dress in dressesRecord {
+                        print(dress.name! + ": " + String(describing: dress.count))
+                    }
+                    print(dressesRecord.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func fetchCities() {
+        print("Starting to fetch cities...")
+        let fetchCitiesRequest: NSFetchRequest<CityMO> = CityMO.fetchRequest()
+        let sortCitiesDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchCitiesRequest.sortDescriptors = [sortCitiesDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchCitiesController = NSFetchedResultsController(fetchRequest: fetchCitiesRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchCitiesController.delegate = self
+            
+            do {
+                try fetchCitiesController.performFetch()
+                if let fetchedCities = fetchCitiesController.fetchedObjects {
+                    cities = fetchedCities
+                    print("Cities fetched!")
+                    //print(cities[0].name!)
+                    print(cities.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func fetchMonths() {
+        print("Starting to fetch months...")
+        let fetchMonthsRequest: NSFetchRequest<MonthMO> = MonthMO.fetchRequest()
+        let sortMonthsDescriptor = NSSortDescriptor(key: "index", ascending: true)
+        fetchMonthsRequest.sortDescriptors = [sortMonthsDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchMonthsController = NSFetchedResultsController(fetchRequest: fetchMonthsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchMonthsController.delegate = self
+            do {
+                try fetchMonthsController.performFetch()
+                if let fetchedMonths = fetchMonthsController.fetchedObjects {
+                    months = fetchedMonths
+                    print("Months fetched!")
+                    print(months[0].month!)
+                    print(months.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -120,16 +241,57 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func saveSelectionToCart(_ sender: UIButton) {
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            cart = CartMO(context: appDelegate.persistentContainer.viewContext)
+            /*cart = CartMO(context: appDelegate.persistentContainer.viewContext)
             cart.name = provCart.name
             cart.lastname = provCart.lastname
             cart.email = provCart.email
             cart.phone = provCart.phone
             cart.city = provCart.city
-            cart.weddingDate = provCart.weddingDate
+            //cart.weddingDate = provCart.weddingDate
             cart.dresses = provCart.dresses as NSArray?
+            appDelegate.saveContext()*/
             
+            client = UserTestMO(context: appDelegate.persistentContainer.viewContext)
+            client.fullName = provCart.name + " " + provCart.lastname
+            client.email = provCart.email
+            client.phone = provCart.phone
             appDelegate.saveContext()
+            
+            if let index = cities.index(where: {$0.name == provCart.city}) {
+                cities[index].count += 1
+                appDelegate.saveContext()
+            } else {
+                city = CityMO(context: appDelegate.persistentContainer.viewContext)
+                city.name = provCart.city
+                city.count = 0
+                appDelegate.saveContext()
+            }
+            
+            if let index = months.index(where: {$0.month == provMonth[1]}) {
+                months[index].count += 1
+                appDelegate.saveContext()
+            } else {
+                month = MonthMO(context: appDelegate.persistentContainer.viewContext)
+                month.index = Int32(provMonth[0])!
+                month.month = provMonth[1]
+                month.count = 0
+                appDelegate.saveContext()
+            }
+            /*for dress in dresses {
+             dressRecord = DressMO(context: appDelegate.persistentContainer.viewContext)
+             dressRecord.name = dress.name
+             dressRecord.count = 0
+             dressRecord.isSelected = false
+             dressesRecord.append(dressRecord)
+             appDelegate.saveContext()
+             }*/
+            
+            for (index, dress) in dresses.enumerated() {
+                if dress.isSelected {
+                    dressesRecord[index].count += 1
+                }
+                appDelegate.saveContext()
+            }
             
             let alertController = UIAlertController(title: confirmationMessageLang[languageIndex][0], message: confirmationMessageLang[languageIndex][1], preferredStyle: .alert)
             let alertAction = UIAlertAction(title: confirmationMessageLang[languageIndex][2], style: .default, handler: nil)

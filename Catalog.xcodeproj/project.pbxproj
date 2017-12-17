@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
-		51AB2D551FC7520B004335B4 /* RecordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D541FC7520B004335B4 /* RecordsTableViewController.swift */; };
+		51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D541FC7520B004335B4 /* RecordsViewController.swift */; };
 		51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */; };
 		51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9C1F8C03860093C897 /* HomeViewController.swift */; };
 		51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
-		51AB2D541FC7520B004335B4 /* RecordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewController.swift; sourceTree = "<group>"; };
+		51AB2D541FC7520B004335B4 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		51BE2F841F8C02EC0093C897 /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BE2F9C1F8C03860093C897 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				51BE2FA01F8C03860093C897 /* SelectionViewController.swift */,
 				51BE2FDB1F92C9120093C897 /* SelectionTableViewCell.swift */,
 				51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */,
-				51AB2D541FC7520B004335B4 /* RecordsTableViewController.swift */,
+				51AB2D541FC7520B004335B4 /* RecordsViewController.swift */,
 				51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */,
 				51BE2FA61F8C03C80093C897 /* Main.storyboard */,
 				51BE2FA81F8C03EC0093C897 /* Assets.xcassets */,
@@ -258,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */,
-				51AB2D551FC7520B004335B4 /* RecordsTableViewController.swift in Sources */,
+				51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */,
 				51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */,
 				51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
