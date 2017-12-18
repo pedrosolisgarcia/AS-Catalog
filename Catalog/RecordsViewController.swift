@@ -56,7 +56,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         print("Starting to fetch users...")
         //let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
         let fetchClientsRequest: NSFetchRequest<CartMO> = CartMO.fetchRequest()
-        let sortClientsDescriptor = NSSortDescriptor(key: "email", ascending: true)
+        let sortClientsDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchClientsRequest.sortDescriptors = [sortClientsDescriptor]
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -202,7 +202,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableView == tableViewClients {
-            return clients.count
+            return clients.count + 1
         }
         if tableView == tableViewCities {
             return cities.count
@@ -224,12 +224,21 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         
         if tableView == tableViewClients {
-            let client = clients[indexPath.row]
             
-            //cell.fullNameLabel.text = client.fullName
-            cell.fullNameLabel.text = client.name! + " " + client.lastname!
-            cell.emailLabel.text = client.email
-            cell.phoneLabel.text = client.phone
+            if indexPath.row < clients.count {
+                let client = clients[indexPath.row]
+                
+                //cell.fullNameLabel.text = client.fullName
+                cell.fullNameLabel.text = client.name! + " " + client.lastname!
+                cell.emailLabel.text = client.email?.lowercased()
+                cell.phoneLabel.text = client.phone
+            }
+            else {
+                cell.emailLabel.font = UIFont(name: "Roboto-Medium", size: 20)
+                cell.emailLabel.textColor = UIColor.lightGray
+                cell.emailLabel.textAlignment = .center
+                cell.emailLabel.text = "Number of Clients: " + String(describing: clients.count)
+            }
         }
         if tableView == tableViewCities {
             let city = cities[indexPath.row]

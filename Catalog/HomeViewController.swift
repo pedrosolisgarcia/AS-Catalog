@@ -224,7 +224,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             present(alertController, animated: true, completion:nil)
             resetHomeSettings()
         } else {
-            provCart = Cart(name: nameField.text!, lastname: lastnameField.text!, email: emailField.text!, phone: phoneField.text!, city: hometownField.text!, weddingDate: weddingDateField.text!, dresses: [""])
+            provCart = Cart(name: (nameField.text?.capitalized)!, lastname: lastnameField.text!, email: (emailField.text?.lowercased())!, phone: phoneField.text!, city: hometownField.text!, weddingDate: weddingDateField.text!, dresses: [""])
             
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             catalogButton.isEnabled = true
