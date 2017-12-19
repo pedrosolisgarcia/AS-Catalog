@@ -201,7 +201,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableView == tableViewClients {
+        /*if tableView == tableViewClients {
             return clients.count + 1
         }
         if tableView == tableViewCities {
@@ -215,18 +215,23 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else {
             return 1
+        }*/
+        if tableView == tableViewClients {
+            return clients.count + 1
+        } else {
+            return clients.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RecordTableViewCell
         
-        
+        let client = clients[indexPath.row]
         
         if tableView == tableViewClients {
             
             if indexPath.row < clients.count {
-                let client = clients[indexPath.row]
+                //let client = clients[indexPath.row]
                 
                 //cell.fullNameLabel.text = client.fullName
                 cell.fullNameLabel.text = client.name! + " " + client.lastname!
@@ -234,29 +239,29 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.phoneLabel.text = client.phone
             }
             else {
-                cell.emailLabel.font = UIFont(name: "Roboto-Medium", size: 20)
-                cell.emailLabel.textColor = UIColor.lightGray
-                cell.emailLabel.textAlignment = .center
-                cell.emailLabel.text = "Number of Clients: " + String(describing: clients.count)
+                cell.clientCount.text = "Total amount of clients: " + String(describing: clients.count)
             }
         }
         if tableView == tableViewCities {
-            let city = cities[indexPath.row]
+            /*let city = cities[indexPath.row]
             
             cell.cityLabel.text = city.name
-            cell.cityCount.text = String(describing: city.count)
+            cell.cityCount.text = String(describing: city.count)*/
+            cell.cityLabel.text = client.city
         }
         if tableView == tableViewMonths {
-            let month = months[indexPath.row]
+            /*let month = months[indexPath.row]
             
             cell.monthLabel.text = month.month
-            cell.monthCount.text = String(describing: month.count)
+            cell.monthCount.text = String(describing: month.count)*/
+            
         }
         if tableView == tableViewDresses {
-            let dress = dresses[indexPath.row]
+            /*let dress = dresses[indexPath.row]
             
             cell.dressLabel.text = dress.name
-            cell.dressCount.text = String(describing: dress.count)
+            cell.dressCount.text = String(describing: dress.count)*/
+            cell.dressLabel.text = client.dresses?.componentsJoined(by: ",")
         }
         
         return cell
@@ -391,8 +396,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @IBAction func exportButton(_ sender: UIButton) {
+        print("Preparing to exportDatabase...")
         exportDatabase()
-    }
+        print("Function exportDatabase called")    }
     
     func getContext () -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -402,24 +408,33 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     func exportDatabase() {
         
         if !tableViewClients.isHidden {
+            print("Current tab: Clients. Preparing to saveAndExport...")
             let exportClientsString = createExportClientsString()
             saveAndExport(exportString: exportClientsString)
+            print("Function exportToDatabase called")
         }
         if !tableViewCities.isHidden {
+            print("Current tab: Cities. Preparing to saveAndExport...")
             let exportCitiesString = createExportCitiesString()
             saveAndExport(exportString: exportCitiesString)
+            print("Function exportToDatabase called")
         }
         if !tableViewMonths.isHidden {
+            print("Current tab: Months. Preparing to saveAndExport...")
             let exportMonthsString = createExportMonthsString()
             saveAndExport(exportString: exportMonthsString)
+            print("Function exportToDatabase called")
         }
         if !tableViewDresses.isHidden {
+            print("Current tab: Dresses. Preparing to saveAndExport...")
             let exportDressesString = createExportDressesString()
             saveAndExport(exportString: exportDressesString)
+            print("Function exportToDatabase called")
         }
     }
     
     func saveAndExport(exportString: String) {
+        print("Preparing export file path...")
         let exportFilePath = NSTemporaryDirectory() + "record.csv"
         let exportFileURL = NSURL(fileURLWithPath: exportFilePath)
         FileManager.default.createFile(atPath: exportFilePath, contents: NSData() as Data, attributes: nil)

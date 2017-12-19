@@ -13,6 +13,7 @@ class RecordTableViewCell: UITableViewCell {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var clientCount: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var cityCount: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
