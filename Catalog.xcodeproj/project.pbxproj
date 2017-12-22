@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		512A1FB31FEC74D8005519D1 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512A1FB21FEC74D7005519D1 /* Functions.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
 		51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D541FC7520B004335B4 /* RecordsViewController.swift */; };
 		51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		512A1FB21FEC74D7005519D1 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		51AB2D541FC7520B004335B4 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				51BE2FD91F923C1C0093C897 /* Cart.swift */,
 				5187CA231FC6048200C215AF /* ButtonDesign.swift */,
 				51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */,
+				512A1FB21FEC74D7005519D1 /* Functions.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
+				512A1FB31FEC74D8005519D1 /* Functions.swift in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Cart.swift in Sources */,
 				51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */,

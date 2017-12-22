@@ -8,8 +8,14 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class RecordsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate {
+    
+    @IBOutlet weak var gatherClientsButton: UIBarButtonItem!
+    @IBOutlet weak var gatherCitiesButton: UIBarButtonItem!
+    @IBOutlet weak var gatherMonthsButton: UIBarButtonItem!
+    @IBOutlet weak var gatherDressesButton: UIBarButtonItem!
     
     @IBOutlet weak var tableViewClients: UITableView!
     @IBOutlet weak var tableViewCities: UITableView!
@@ -22,20 +28,26 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var recordSections: UISegmentedControl!
     
-    //var clients = [UserTestMO]()
-    var clients = [CartMO]()
+    var clients = [ClientMO]()
+    var oldClients = [CartMO]()
     var cities = [CityMO]()
     var months = [MonthMO]()
     var dresses = [DressMO]()
+    var clientsDresses = [String]()
     
+    //Temporary variable to fetch client records in tableView
+    weak var client: ClientMO!
+    
+    var fetchClientsController: NSFetchedResultsController<ClientMO>!
     var fetchCitiesController: NSFetchedResultsController<CityMO>!
     var fetchDressesController: NSFetchedResultsController<DressMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
-    //var fetchClientsController: NSFetchedResultsController<UserTestMO>!
-    var fetchClientsController: NSFetchedResultsController<CartMO>!
+    var fetchOldClientsController: NSFetchedResultsController<CartMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         tableViewClients.isHidden = false
         tableViewCities.isHidden = true
@@ -47,16 +59,30 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         viewDresses.isHidden = true
         
         fetchUsers()
+        //fetchOldUsersToExportInfo()
         fetchDresses()
         fetchCities()
         fetchMonths()
+        
+        hideGatherButtons()
+    }
+    
+    func hideGatherButtons() {
+        gatherClientsButton.isEnabled = false
+        gatherClientsButton.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        gatherCitiesButton.isEnabled = false
+        gatherCitiesButton.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        gatherMonthsButton.isEnabled = false
+        gatherMonthsButton.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        gatherDressesButton.isEnabled = false
+        gatherDressesButton.tintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
     func fetchUsers() {
-        print("Starting to fetch users...")
+    
         //let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
-        let fetchClientsRequest: NSFetchRequest<CartMO> = CartMO.fetchRequest()
-        let sortClientsDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let fetchClientsRequest: NSFetchRequest<ClientMO> = ClientMO.fetchRequest()
+        let sortClientsDescriptor = NSSortDescriptor(key: "fullName", ascending: true)
         fetchClientsRequest.sortDescriptors = [sortClientsDescriptor]
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -67,7 +93,30 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchClientsController.performFetch()
                 if let fetchedClients = fetchClientsController.fetchedObjects {
                     clients = fetchedClients
-                    print("Users fetched!")
+                
+                    //print(clients.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func fetchOldUsersToExportInfo() {
+    
+        //let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
+        let fetchOldClientsRequest: NSFetchRequest<CartMO> = CartMO.fetchRequest()
+        let sortClientsDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchOldClientsRequest.sortDescriptors = [sortClientsDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchOldClientsController = NSFetchedResultsController(fetchRequest: fetchOldClientsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchOldClientsController.delegate = self
+            do {
+                try fetchOldClientsController.performFetch()
+                if let fetchedOldClients = fetchOldClientsController.fetchedObjects {
+                    oldClients = fetchedOldClients
                     //print(clients.count)
                 }
             } catch {
@@ -77,7 +126,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func fetchDresses() {
-        print("Starting to fetch dresses...")
+
         let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
         let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
@@ -90,7 +139,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchDressesController.performFetch()
                 if let fetchedDresses = fetchDressesController.fetchedObjects {
                     dresses = fetchedDresses
-                    print("Dresses fetched!")
+                    
                     for dress in dresses {
                         print(dress.name! + ": " + String(describing: dress.count))
                     }
@@ -103,7 +152,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func fetchCities() {
-        print("Starting to fetch cities...")
+        
         let fetchCitiesRequest: NSFetchRequest<CityMO> = CityMO.fetchRequest()
         let sortCitiesDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchCitiesRequest.sortDescriptors = [sortCitiesDescriptor]
@@ -117,8 +166,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchCitiesController.performFetch()
                 if let fetchedCities = fetchCitiesController.fetchedObjects {
                     cities = fetchedCities
-                    print("Cities fetched!")
-                    //print(cities[0].name!)
+                    
                     print(cities.count)
                 }
             } catch {
@@ -128,7 +176,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func fetchMonths() {
-        print("Starting to fetch months...")
+        
         let fetchMonthsRequest: NSFetchRequest<MonthMO> = MonthMO.fetchRequest()
         let sortMonthsDescriptor = NSSortDescriptor(key: "index", ascending: true)
         fetchMonthsRequest.sortDescriptors = [sortMonthsDescriptor]
@@ -141,8 +189,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchMonthsController.performFetch()
                 if let fetchedMonths = fetchMonthsController.fetchedObjects {
                     months = fetchedMonths
-                    print("Months fetched!")
-                    print(months[0].month!)
+                    
                     print(months.count)
                 }
             } catch {
@@ -201,7 +248,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        /*if tableView == tableViewClients {
+        if tableView == tableViewClients {
             return clients.count + 1
         }
         if tableView == tableViewCities {
@@ -215,53 +262,54 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else {
             return 1
-        }*/
-        if tableView == tableViewClients {
-            return clients.count + 1
-        } else {
-            return clients.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RecordTableViewCell
         
-        let client = clients[indexPath.row]
+        if indexPath.row < clients.count {
+            client = clients[indexPath.row]
+        }
         
         if tableView == tableViewClients {
             
             if indexPath.row < clients.count {
                 //let client = clients[indexPath.row]
                 
-                //cell.fullNameLabel.text = client.fullName
-                cell.fullNameLabel.text = client.name! + " " + client.lastname!
+                cell.fullNameLabel.text = client.fullName
+                //cell.fullNameLabel.text = client.name! + " " + client.lastname!
                 cell.emailLabel.text = client.email?.lowercased()
                 cell.phoneLabel.text = client.phone
+                cell.clientCount.text = ""
             }
             else {
+                cell.fullNameLabel.text = ""
+                cell.emailLabel.text = ""
+                cell.phoneLabel.text = ""
                 cell.clientCount.text = "Total amount of clients: " + String(describing: clients.count)
             }
         }
         if tableView == tableViewCities {
-            /*let city = cities[indexPath.row]
+            let city = cities[indexPath.row]
             
             cell.cityLabel.text = city.name
-            cell.cityCount.text = String(describing: city.count)*/
-            cell.cityLabel.text = client.city
+            cell.cityCount.text = String(describing: city.count)
+            //cell.cityLabel.text = client.city
         }
         if tableView == tableViewMonths {
-            /*let month = months[indexPath.row]
-            
-            cell.monthLabel.text = month.month
-            cell.monthCount.text = String(describing: month.count)*/
-            
+            //let month = months[indexPath.row]
+            //let month = oldClients[indexPath.row]
+            //cell.monthLabel.text = month.month
+            //cell.monthCount.text = String(describing: month.count)
+            //cell.monthLabel.text = month.weddingDate
         }
         if tableView == tableViewDresses {
-            /*let dress = dresses[indexPath.row]
+            let dress = dresses[indexPath.row]
             
             cell.dressLabel.text = dress.name
-            cell.dressCount.text = String(describing: dress.count)*/
-            cell.dressLabel.text = client.dresses?.componentsJoined(by: ",")
+            cell.dressCount.text = String(describing: dress.count)
+            //  cell.dressLabel.text = client.dresses?.componentsJoined(by: ", ")
         }
         
         return cell
@@ -271,7 +319,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         if tableView == tableViewClients {
             if editingStyle == .delete {
-                // Delete the row from the data source
+                
                 clients.remove(at: indexPath.row)
             }
             
@@ -279,29 +327,18 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         if tableView == tableViewCities {
             if editingStyle == .delete {
-                // Delete the row from the data source
+                
                 cities.remove(at: indexPath.row)
             }
-            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         if tableView == tableViewMonths {
             if editingStyle == .delete {
-                // Delete the row from the data source
+                
                 months.remove(at: indexPath.row)
             }
-            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        if tableView == tableViewDresses {
-            if editingStyle == .delete {
-                // Delete the row from the data source
-                dresses.remove(at: indexPath.row)
-            }
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-        
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -323,15 +360,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                     let monthToDelete = self.fetchMonthsController.object(at: indexPath)
                     context.delete(monthToDelete)
                 }
-                if tableView == self.tableViewDresses {
-                    let dressToDelete = self.fetchDressesController.object(at: indexPath)
-                    context.delete(dressToDelete)
-                }
                 appDelegate.saveContext()
             }
-            
         })
-        
         deleteAction.backgroundColor = UIColor(red: 202.0/255.0, green: 202.0/255.0, blue: 203.0/255.0, alpha: 1.0)
         
         return [deleteAction]
@@ -342,6 +373,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
         tableViewClients.beginUpdates()
         tableViewCities.beginUpdates()
         tableViewMonths.beginUpdates()
@@ -356,32 +388,29 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 tableViewClients.insertRows(at: [newIndexPath], with: .fade)
                 tableViewCities.insertRows(at: [newIndexPath], with: .fade)
                 tableViewMonths.insertRows(at: [newIndexPath], with: .fade)
-                tableViewDresses.insertRows(at: [newIndexPath], with: .fade)
             }
         case .delete:
             if let indexPath = indexPath {
                 tableViewClients.deleteRows(at: [indexPath], with: .fade)
                 tableViewCities.deleteRows(at: [indexPath], with: .fade)
                 tableViewMonths.deleteRows(at: [indexPath], with: .fade)
-                tableViewDresses.deleteRows(at: [indexPath], with: .fade)
             }
         case .update:
             if let indexPath = indexPath {
                 tableViewClients.reloadRows(at: [indexPath], with: .fade)
                 tableViewCities.reloadRows(at: [indexPath], with: .fade)
                 tableViewMonths.reloadRows(at: [indexPath], with: .fade)
-                tableViewDresses.reloadRows(at: [indexPath], with: .fade)
             }
         default:
             tableViewClients.reloadData()
             tableViewCities.reloadData()
             tableViewMonths.reloadData()
-            tableViewDresses.reloadData()
         }
         
         if let fetchedObjects = controller.fetchedObjects {
             //clients = fetchedObjects as! [UserTestMO]
-            clients = fetchedObjects as! [CartMO]
+            //clients = fetchedObjects as! [CartMO]
+            clients = fetchedObjects as! [ClientMO]
             cities = fetchedObjects as! [CityMO]
             months = fetchedObjects as! [MonthMO]
             dresses = fetchedObjects as! [DressMO]
@@ -395,152 +424,175 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         tableViewDresses.endUpdates()
     }
     
-    @IBAction func exportButton(_ sender: UIButton) {
-        print("Preparing to exportDatabase...")
-        exportDatabase()
-        print("Function exportDatabase called")    }
+    @IBAction func gatherDresses(_ sender: UIBarButtonItem) {
+        
+        for client in oldClients {
+            for dress in client.dresses! {
+                clientsDresses.append(dress as! String)
+            }
+        }
+        print(clientsDresses.count)
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            
+            for dress in dresses {
+                let countDress = clientsDresses.filter{$0 == dress.name}.count
+                print(dress.name! + ": " + String(describing: countDress))
+                dress.count = Int32(countDress)
+                appDelegate.saveContext()
+            }
+        }
+    }
+    @IBAction func gatherClients(_ sender: UIBarButtonItem) {
+     
+        for client in oldClients {
+     
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+     
+                let clientToAdd = ClientMO(context: appDelegate.persistentContainer.viewContext)
+                clientToAdd.fullName = client.name! + " " + client.lastname!
+                clientToAdd.email = client.email
+                clientToAdd.phone = client.phone
+                print(clientToAdd)
+                appDelegate.saveContext()
+            }
+        }
+     }
+    @IBAction func gatherCities(_ sender: UIBarButtonItem) {
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            for city in cities {
+                let context = appDelegate.persistentContainer.viewContext
+                context.delete(city)
+                appDelegate.saveContext()
+            }
+        }
+        var oldCities = [String]()
+        for client in oldClients {
+            oldCities.append(client.city!)
+        }
+        var counts: [String: Int] = [:]
+        oldCities.forEach { counts[$0, default: 0] += 1 }
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            
+            for count in counts {
+                let newCity = CityMO(context: appDelegate.persistentContainer.viewContext)
+                newCity.name = count.key
+                newCity.count = Int32(count.value)
+                print(newCity)
+                cities.append(newCity)
+                appDelegate.saveContext()
+            }
+        }
+    }
     
-    func getContext () -> NSManagedObjectContext {
+    @IBAction func exportButton(_ sender: UIBarButtonItem) {
+    
+        let emailViewController = saveAndExportByMail()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(emailViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        // Dismiss the mail compose view controller.
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func saveAndExportByMail() -> MFMailComposeViewController {
+        
+        let emailController = MFMailComposeViewController()
+        let dataClients = createExportClientsString()
+        let dataCities = createExportCitiesString()
+        let dataMonths = createExportMonthsString()
+        let dataDresses = createExportDressesString()
+        
+        emailController.mailComposeDelegate = self
+        emailController.setSubject("Extracted data from iPad App")
+        emailController.setMessageBody("", isHTML: false)
+        
+        emailController.addAttachmentData(dataClients, mimeType: "text/csv", fileName: "Clients.csv")
+        emailController.addAttachmentData(dataCities, mimeType: "text/csv", fileName: "Cities.csv")
+        emailController.addAttachmentData(dataMonths, mimeType: "text/csv", fileName: "Months.csv")
+        emailController.addAttachmentData(dataDresses, mimeType: "text/csv", fileName: "Dresses.csv")
+        
+        return emailController
+    }
+    
+    /*func getContext () -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
-    }
+    }*/
     
-    func exportDatabase() {
-        
-        if !tableViewClients.isHidden {
-            print("Current tab: Clients. Preparing to saveAndExport...")
-            let exportClientsString = createExportClientsString()
-            saveAndExport(exportString: exportClientsString)
-            print("Function exportToDatabase called")
-        }
-        if !tableViewCities.isHidden {
-            print("Current tab: Cities. Preparing to saveAndExport...")
-            let exportCitiesString = createExportCitiesString()
-            saveAndExport(exportString: exportCitiesString)
-            print("Function exportToDatabase called")
-        }
-        if !tableViewMonths.isHidden {
-            print("Current tab: Months. Preparing to saveAndExport...")
-            let exportMonthsString = createExportMonthsString()
-            saveAndExport(exportString: exportMonthsString)
-            print("Function exportToDatabase called")
-        }
-        if !tableViewDresses.isHidden {
-            print("Current tab: Dresses. Preparing to saveAndExport...")
-            let exportDressesString = createExportDressesString()
-            saveAndExport(exportString: exportDressesString)
-            print("Function exportToDatabase called")
-        }
-    }
-    
-    func saveAndExport(exportString: String) {
-        print("Preparing export file path...")
-        let exportFilePath = NSTemporaryDirectory() + "record.csv"
-        let exportFileURL = NSURL(fileURLWithPath: exportFilePath)
-        FileManager.default.createFile(atPath: exportFilePath, contents: NSData() as Data, attributes: nil)
-        //var fileHandleError: NSError? = nil
-        var fileHandle: FileHandle? = nil
-        do {
-            fileHandle = try FileHandle(forWritingTo: exportFileURL as URL)
-        } catch {
-            print("Error with fileHandle")
-        }
-        
-        if fileHandle != nil {
-            fileHandle!.seekToEndOfFile()
-            let csvData = exportString.data(using: String.Encoding.utf8, allowLossyConversion: false)
-            fileHandle!.write(csvData!)
-            
-            fileHandle!.closeFile()
-            
-            let firstActivityItem = NSURL(fileURLWithPath: exportFilePath)
-            let activityViewController : UIActivityViewController = UIActivityViewController(
-                activityItems: [firstActivityItem], applicationActivities: nil)
-            
-            activityViewController.excludedActivityTypes = [
-                UIActivityType.assignToContact,
-                UIActivityType.saveToCameraRoll,
-                UIActivityType.postToFlickr,
-                UIActivityType.postToVimeo,
-                UIActivityType.postToTencentWeibo
-            ]
-            
-            self.present(activityViewController, animated: true, completion: nil)
-        }
-    }
-    
-    func createExportClientsString() -> String {
+    func createExportClientsString() -> Data {
         
         var fullNameVar: String!
         var emailVar: String!
-        var phoneVar: String?
-        
+        var phoneVar: String!
         var export: String = NSLocalizedString("Name and Lastname, Email, Phone\n", comment: "")
+        
         for client in clients {
             
-            //fullNameVar = client.fullName
-            fullNameVar = client.name! + " " + client.lastname!
+            fullNameVar = client.fullName
             emailVar = client.email
             phoneVar = client.phone
-            
-            export += "\(fullNameVar),\(emailVar!),\(String(describing: phoneVar)) \n"
-            
+            export += "\(fullNameVar!),\(emailVar!),\(phoneVar!) \n"
         }
-        print("These are the clients the app will export:\n \(export)")
-        return export
+        let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        return convertingExportToNSData!
     }
     
-    func createExportCitiesString() -> String {
+    func createExportCitiesString() -> Data {
         
         var cityVar: String!
-        var cityCountVar: Int32?
-        
+        var cityCountVar: Int32!
         var export: String = NSLocalizedString("City, Amount\n", comment: "")
+        
         for city in cities {
             
             cityVar = city.name
             cityCountVar = city.count
-            
-            export += "\(cityVar),\(String(describing: cityCountVar)) \n"
-            
+            export += "\(cityVar!),\(String(describing: cityCountVar!)) \n"
         }
-        print("These are the cities the app will export:\n \(export)")
-        return export
+        let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        return convertingExportToNSData!
     }
     
-    func createExportMonthsString() -> String {
+    func createExportMonthsString() -> Data {
         
         var monthVar: String!
         var monthCountVar: Int32?
+        var export: String = NSLocalizedString("Month, Month Amount\n", comment: "")
         
-        var export: String = NSLocalizedString("Month, Amount\n", comment: "")
         for month in months {
             
             monthVar = month.month
             monthCountVar = month.count
-            
-            export += "\(monthVar),\(String(describing: monthCountVar)) \n"
-            
+            export += "\(monthVar!),\(String(describing: monthCountVar!)) \n"
         }
-        print("These are the months the app will export:\n \(export)")
-        return export
+        let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        return convertingExportToNSData!
     }
     
-    func createExportDressesString() -> String {
+    func createExportDressesString() -> Data {
         
         var dressVar: String!
         var dressCountVar: Int32?
+        var export: String = NSLocalizedString("Dress, Dress Amount\n", comment: "")
         
-        var export: String = NSLocalizedString("Dress, Amount\n", comment: "")
         for dress in dresses {
             
             dressVar = dress.name
             dressCountVar = dress.count
-            
-            export += "\(dressVar),\(String(describing: dressCountVar)) \n"
-            
+            export += "\(dressVar!),\(String(describing: dressCountVar!)) \n"
         }
-        print("These are the dresses the app will export:\n \(export)")
-        return export
+        let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        return convertingExportToNSData!
     }
 }

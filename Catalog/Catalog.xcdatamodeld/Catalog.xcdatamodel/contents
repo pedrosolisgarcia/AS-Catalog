@@ -7,6 +7,7 @@
         <attribute name="lastname" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weddingDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="City" representedClassName="CityMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -19,6 +20,7 @@
     </entity>
     <entity name="Dress" representedClassName="DressMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imgName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
@@ -33,10 +35,10 @@
         <attribute name="phone" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Cart" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="Cart" positionX="-54" positionY="-9" width="128" height="150"/>
         <element name="City" positionX="-45" positionY="54" width="128" height="75"/>
         <element name="Client" positionX="-36" positionY="45" width="128" height="90"/>
-        <element name="Dress" positionX="-54" positionY="45" width="128" height="90"/>
+        <element name="Dress" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Month" positionX="-27" positionY="63" width="128" height="90"/>
         <element name="UserTest" positionX="-36" positionY="54" width="128" height="90"/>
     </elements>

@@ -21,23 +21,24 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var backHomeScreen: UIBarButtonItem!
     
     var provMonth = [String]()
-    var dresses = [Dress]()
-    var selectedDresses = [Dress]()
+    //var dresses = [Dress]()
+    var dresses = [DressMO]()
+    var selectedDresses = [DressMO]()
     var dressNames = [String]()
     var provCart: Cart!
     weak var cart: CartMO!
-    weak var client: UserTestMO!
+    weak var client: ClientMO!
     weak var city: CityMO!
     weak var month: MonthMO!
     weak var dressRecord: DressMO!
-    var dressesRecord = [DressMO]()
+    //var dressesRecord = [DressMO]()
     var cities = [CityMO]()
     var months = [MonthMO]()
     var clients = [UserTestMO]()
     var languageIndex: Int!
     
     var fetchCitiesController: NSFetchedResultsController<CityMO>!
-    var fetchDressesController: NSFetchedResultsController<DressMO>!
+    //var fetchDressesController: NSFetchedResultsController<DressMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     var fetchClientsController: NSFetchedResultsController<UserTestMO>!
     
@@ -85,36 +86,16 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         dressesLabel.layer.mask = maskLayerLabel
         
         //CoreData Fetching
-        fetchDresses()
+        //fetchDresses()
         fetchCities()
         fetchMonths()
-        fetchUsers()
-    }
-    
-    func fetchUsers() {
-        print("Starting to fetch users...")
-        let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
-        let sortClientsDescriptor = NSSortDescriptor(key: "email", ascending: true)
-        fetchClientsRequest.sortDescriptors = [sortClientsDescriptor]
         
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchClientsController = NSFetchedResultsController(fetchRequest: fetchClientsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchClientsController.delegate = self
-            do {
-                try fetchClientsController.performFetch()
-                if let fetchedClients = fetchClientsController.fetchedObjects {
-                    clients = fetchedClients
-                    print("Users fetched!")
-                    //print(clients.count)
-                }
-            } catch {
-                print(error)
-            }
+        for dress in dresses {
+            print(dress.imgName! + ": " + String(describing: dress.count))
         }
     }
     
-    func fetchDresses() {
+    /*func fetchDresses() {
         print("Starting to fetch dresses...")
         let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
         let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -138,7 +119,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 print(error)
             }
         }
-    }
+    }*/
     
     func fetchCities() {
         print("Starting to fetch cities...")
@@ -207,19 +188,19 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! SelectionTableViewCell
         tableView.separatorColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-        let dress = selectedDresses[indexPath.row]
+        let dress = dresses[indexPath.row]
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        cell.dressImageView.image = UIImage(named: dress.imgName!)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-        popImageView.dressImage = selectedDresses[indexPath.row].imgName
+        popImageView.dressImage = selectedDresses[indexPath.row].imgName!
         self.addChildViewController(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
@@ -232,7 +213,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         provCart = nil
         dresses.removeAll()
         selectedDresses.removeAll()
-        dressesRecord.removeAll()
         dressNames.removeAll()
         cities.removeAll()
         tableView = nil
@@ -241,17 +221,8 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func saveSelectionToCart(_ sender: UIButton) {
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            /*cart = CartMO(context: appDelegate.persistentContainer.viewContext)
-            cart.name = provCart.name
-            cart.lastname = provCart.lastname
-            cart.email = provCart.email
-            cart.phone = provCart.phone
-            cart.city = provCart.city
-            //cart.weddingDate = provCart.weddingDate
-            cart.dresses = provCart.dresses as NSArray?
-            appDelegate.saveContext()*/
             
-            client = UserTestMO(context: appDelegate.persistentContainer.viewContext)
+            client = ClientMO(context: appDelegate.persistentContainer.viewContext)
             client.fullName = provCart.name + " " + provCart.lastname
             client.email = provCart.email
             client.phone = provCart.phone
@@ -263,7 +234,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             } else {
                 city = CityMO(context: appDelegate.persistentContainer.viewContext)
                 city.name = provCart.city
-                city.count = 0
+                city.count = 1
                 appDelegate.saveContext()
             }
             
@@ -274,7 +245,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 month = MonthMO(context: appDelegate.persistentContainer.viewContext)
                 month.index = Int32(provMonth[0])!
                 month.month = provMonth[1]
-                month.count = 0
+                month.count = 1
                 appDelegate.saveContext()
             }
             /*for dress in dresses {
@@ -286,11 +257,13 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
              appDelegate.saveContext()
              }*/
             
-            for (index, dress) in dresses.enumerated() {
+            for dress in dresses {
                 if dress.isSelected {
-                    dressesRecord[index].count += 1
+                    
+                    dress.count += 1
+                    dress.isSelected = false
+                    appDelegate.saveContext()
                 }
-                appDelegate.saveContext()
             }
             
             let alertController = UIAlertController(title: confirmationMessageLang[languageIndex][0], message: confirmationMessageLang[languageIndex][1], preferredStyle: .alert)

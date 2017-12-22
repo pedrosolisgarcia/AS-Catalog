@@ -345,7 +345,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Możesz zobaczyć katalog." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yqp-eA-pmN">
-                                <rect key="frame" x="35" y="697" width="698" height="22.5"/>
+                                <rect key="frame" x="35" y="697" width="698" height="25.5"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1124,18 +1124,43 @@ UFJaRUpEGsW5IERBTEVKA
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="RECORDS" id="tjF-zy-NrM">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="e5c-kG-Hf1">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <segue destination="Nz3-qz-K96" kind="unwind" unwindAction="unwindToHomeScreenWithSegue:" id="TI1-YB-jiP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Cz9-84-0wo">
-                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <connections>
-                                                <action selector="exportButton:" destination="sOb-mq-XE5" id="CGk-UO-hH8"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <leftBarButtonItems>
+                                            <barButtonItem systemItem="done" id="e5c-kG-Hf1">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <segue destination="Nz3-qz-K96" kind="unwind" unwindAction="unwindToHomeScreenWithSegue:" id="TI1-YB-jiP"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Clients" id="uaQ-Wh-mYZ">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="gatherClients:" destination="sOb-mq-XE5" id="yMt-WT-v0w"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Cities" id="m1V-UC-6sf">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="gatherCities:" destination="sOb-mq-XE5" id="CSg-Wz-IBu"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </leftBarButtonItems>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="action" id="Cz9-84-0wo">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="exportButton:" destination="sOb-mq-XE5" id="CGk-UO-hH8"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Dresses" id="jUV-rF-HBv">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="gatherDresses:" destination="sOb-mq-XE5" id="qxL-si-EsD"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Dresses" id="xZg-MW-iT9" userLabel="Months">
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1567,6 +1592,10 @@ UFJaRUpEGsW5IERBTEVKA
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gatherCitiesButton" destination="m1V-UC-6sf" id="Ahs-DP-IWU"/>
+                        <outlet property="gatherClientsButton" destination="uaQ-Wh-mYZ" id="k9z-Fs-jvL"/>
+                        <outlet property="gatherDressesButton" destination="jUV-rF-HBv" id="iiT-KQ-nIF"/>
+                        <outlet property="gatherMonthsButton" destination="xZg-MW-iT9" id="S7W-oC-Uty"/>
                         <outlet property="recordSections" destination="lRo-VN-fRt" id="sR6-AB-7AW"/>
                         <outlet property="tableViewCities" destination="wyO-1u-Ud2" id="iye-N5-Mim"/>
                         <outlet property="tableViewClients" destination="uij-XT-R1k" id="y1f-Bu-UfY"/>

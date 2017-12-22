@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate {
+class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var catalogView: UIBarButtonItem!
@@ -20,12 +21,17 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
     var month = [String]()
-    var dresses = [Dress]()
+    //var dresses = [Dress]()
+    var dressesRecord = [DressMO]()
+    var dresses = [DressMO]()
     var provCart: Cart!
+    //weak var dress: DressMO!
     var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
     let carouselSize = CGSize(width: 515, height: 850)
+    
+    var fetchDressesController: NSFetchedResultsController<DressMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,43 +40,99 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
             
             selectButton.setTitle(selectLang[languageIndex], for: .normal)
         }
-        dresses.removeAll()
-        collectionView.reloadData()
-        dresses = [Dress(name: "Adelia", imgName: "adelia", isSelected: false),
-                   Dress(name: "Adora", imgName: "Adora", isSelected: false),
-                   Dress(name: "Adora z Trenem", imgName: "adora z trenem", isSelected: false),
-                   Dress(name: "Alicia", imgName: "alicia", isSelected: false),
-                   Dress(name: "Aurora", imgName: "aurora", isSelected: false),
-                   Dress(name: "Aurora z Aplikacją", imgName: "aurora1", isSelected: false),
-                   Dress(name: "Bonita", imgName: "bonita", isSelected: false),
-                   Dress(name: "Bonita ze Spódnicą", imgName: "bonita3", isSelected: false),
-                   Dress(name: "Cassandra", imgName: "cassandra", isSelected: false),
-                   Dress(name: "Diamantina", imgName: "diamantina", isSelected: false),
-                   Dress(name: "Dulce", imgName: "dulce", isSelected: false),
-                   Dress(name: "Elodia", imgName: "elodia", isSelected: false),
-                   Dress(name: "Elsa", imgName: "elsa", isSelected: false),
-                   Dress(name: "Felicia", imgName: "felicia", isSelected: false),
-                   Dress(name: "Ivette", imgName: "ivette", isSelected: false),
-                   Dress(name: "Luna", imgName: "luna", isSelected: false),
-                   Dress(name: "Micaela", imgName: "Micaela", isSelected: false),
-                   Dress(name: "Monica", imgName: "monica", isSelected: false),
-                   Dress(name: "Monica z Peleryną",imgName: "Monica Aplication", isSelected: false),
-                   Dress(name: "Morena", imgName: "morena", isSelected: false),
-                   Dress(name: "Ofelia", imgName: "ofelia", isSelected: false),
-                   Dress(name: "Olimpia", imgName: "olimpia", isSelected: false),
-                   Dress(name: "Paloma", imgName: "paloma", isSelected: false),
-                   Dress(name: "Paola", imgName: "paola", isSelected: false),
-                   Dress(name: "Rebeca", imgName: "rebeca", isSelected: false),
-                   Dress(name: "Samantha", imgName: "Samantha", isSelected: false),
-                   Dress(name: "Samantha z Trenem", imgName: "Samantha 1", isSelected: false),
-                   Dress(name: "Susana", imgName: "susana", isSelected: false)]
+        /*dresses.removeAll()
+         collectionView.reloadData()
+         dresses = [Dress(name: "Adelia", imgName: "adelia", isSelected: false),
+         Dress(name: "Adora", imgName: "Adora", isSelected: false),
+         Dress(name: "Adora z Trenem", imgName: "adora z trenem", isSelected: false),
+         Dress(name: "Alicia", imgName: "alicia", isSelected: false),
+         Dress(name: "Aurora", imgName: "aurora", isSelected: false),
+         Dress(name: "Aurora z Aplikacją", imgName: "aurora1", isSelected: false),
+         Dress(name: "Bonita", imgName: "bonita", isSelected: false),
+         Dress(name: "Bonita ze Spódnicą", imgName: "bonita3", isSelected: false),
+         Dress(name: "Cassandra", imgName: "cassandra", isSelected: false),
+         Dress(name: "Diamantina", imgName: "diamantina", isSelected: false),
+         Dress(name: "Dulce", imgName: "dulce", isSelected: false),
+         Dress(name: "Elodia", imgName: "elodia", isSelected: false),
+         Dress(name: "Elsa", imgName: "elsa", isSelected: false),
+         Dress(name: "Felicia", imgName: "felicia", isSelected: false),
+         Dress(name: "Ivette", imgName: "ivette", isSelected: false),
+         Dress(name: "Luna", imgName: "luna", isSelected: false),
+         Dress(name: "Micaela", imgName: "Micaela", isSelected: false),
+         Dress(name: "Monica", imgName: "monica", isSelected: false),
+         Dress(name: "Monica z Peleryną",imgName: "Monica Aplication", isSelected: false),
+         Dress(name: "Morena", imgName: "morena", isSelected: false),
+         Dress(name: "Ofelia", imgName: "ofelia", isSelected: false),
+         Dress(name: "Olimpia", imgName: "olimpia", isSelected: false),
+         Dress(name: "Paloma", imgName: "paloma", isSelected: false),
+         Dress(name: "Paola", imgName: "paola", isSelected: false),
+         Dress(name: "Rebeca", imgName: "rebeca", isSelected: false),
+         Dress(name: "Samantha", imgName: "Samantha", isSelected: false),
+         Dress(name: "Samantha z Trenem", imgName: "Samantha 1", isSelected: false),
+         Dress(name: "Susana", imgName: "susana", isSelected: false)]*/
         
         navigationItem.title = titleLang[languageIndex]
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
         
-        print(month)
+        fetchDresses()
+        //resetDressesCount()
+    }
+    
+    func fetchDresses() {
+        
+        let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
+        let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchDressesController = NSFetchedResultsController(fetchRequest: fetchDressesRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchDressesController.delegate = self
+            do {
+                try fetchDressesController.performFetch()
+                if let fetchedDresses = fetchDressesController.fetchedObjects {
+                    dresses = fetchedDresses
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    /*func removeDresses() {
+        
+        for dress in dressesRecord {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let context = appDelegate.persistentContainer.viewContext
+                
+                context.delete(dress)
+                appDelegate.saveContext()
+            }
+        }
+    }*/
+    /*func refillDresses() {
+        for dressRecord in dressesRecord {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                dressRecord = DressMO(context: appDelegate.persistentContainer.viewContext)
+                dressRecord.name = dress.name
+                dressRecord.imgName = dress.imgName
+                dressRecord.count = 0
+                dressRecord.isSelected = false
+                dressesRecord.append(dressRecord)
+                appDelegate.saveContext()
+            }
+        }
+    }*/
+    
+    func resetDressesCount() {
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            for dress in dresses {
+                dress.count = 0
+                appDelegate.saveContext()
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,7 +158,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        cell.dressImageView.image = UIImage(named: dress.imgName!)
         
         return cell
     }
@@ -105,7 +167,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
+            zoomImageView.dress = dresses[indexPath.row].imgName! + "_full"
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
@@ -170,8 +232,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "selectDresses"{
+            
             if let indexPath = collectionView.indexPathsForSelectedItems {
-                
                 let destinationController = segue.destination as! SelectionViewController
                 
                 destinationController.languageIndex = languageIndex
@@ -179,12 +241,18 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 destinationController.dresses = dresses
                 destinationController.provMonth = self.month
                 
-                
                 for index in indexPath {
                     destinationController.selectedDresses.append(dresses[index.row])
-                    destinationController.dressNames.append(dresses[index.row].name)
+                }
+                for dress in dresses {
+                    
+                    if dress.isSelected {
+                        print(dress.name!)
+                    }
                 }
             }
         }
     }
 }
+
+
