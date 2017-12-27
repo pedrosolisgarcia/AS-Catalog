@@ -107,8 +107,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         weddingDatePicker.reloadComponent(1)
     }
     
-    @IBAction func showRecords(sender: UIButton) {
-        self.performSegue(withIdentifier: "showRecords", sender: self)
+    @IBAction func showPassword(sender: UIButton) {
+        
+        let popPasswordView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PasswordView") as! PasswordViewController
+        self.addChildViewController(popPasswordView)
+        popPasswordView.view.frame = self.view.frame
+        self.view.addSubview(popPasswordView.view)
+        popPasswordView.didMove(toParentViewController: self)
     }
     
     override func viewDidLoad() {
