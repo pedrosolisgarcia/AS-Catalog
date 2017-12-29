@@ -15,14 +15,14 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
     @IBOutlet weak var enterRecords: UIButton!
     
     var passwords = [PasswordMO]()
-    var password: PasswordMO!
     
     var fetchPasswordController: NSFetchedResultsController<PasswordMO>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.removeFromSuperview()
+        //self.view.removeFromSuperview()
+        fetchPassword()
         self.showAnimate()
     }
 
@@ -44,7 +44,6 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
                 try fetchPasswordController.performFetch()
                 if let fetchedPassword = fetchPasswordController.fetchedObjects {
                     passwords = fetchedPassword
-                    password = passwords[0]
                 }
             } catch {
                 print(error)
@@ -59,14 +58,17 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     @IBAction func checkPassword(sender: UIButton) {
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+        /*if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
             let pass = PasswordMO(context: appDelegate.persistentContainer.viewContext)
-            pass.password = passwords[0].password
-        }
+            pass.password = "555555"
+            print(pass.password)
+            appDelegate.saveContext()
+        }*/
         
-        if passwordField.text == password.password {
+        if passwordField.text == passwords[0].password {
             self.performSegue(withIdentifier: "showRecords", sender: self)
+            self.view.removeFromSuperview()
         }
         else {
             let alertController = UIAlertController(title: "Wrong password", message: "The password introduced is incorrect. Please try again.", preferredStyle: .alert)
@@ -74,6 +76,15 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
         }
+    }
+    
+    @IBAction func changePassword(sender: UIButton) {
+        
+        let popChangePasswordView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "changePasswordView") as! ChangePasswordViewController
+        self.addChildViewController(popChangePasswordView)
+        popChangePasswordView.view.frame = self.view.frame
+        self.view.addSubview(popChangePasswordView.view)
+        popChangePasswordView.didMove(toParentViewController: self)
     }
     
     func showAnimate()

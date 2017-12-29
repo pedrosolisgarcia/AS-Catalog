@@ -64,6 +64,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var fullMonth: String!
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
+        if self.view.subviews.count > 1 {
+            //self.view.removeFromSuperview()
+        }
         resetHomeSettings()
         resetHomeFields()
     }

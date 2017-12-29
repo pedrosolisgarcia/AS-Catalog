@@ -17,12 +17,13 @@ class ChangePasswordViewController: UIViewController, NSFetchedResultsController
     @IBOutlet weak var confirmPasswordButton: UIButton!
     
     var passwords = [PasswordMO]()
-    var password: PasswordMO!
     
     var fetchPasswordController: NSFetchedResultsController<PasswordMO>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showAnimate()
+        fetchPassword()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +44,6 @@ class ChangePasswordViewController: UIViewController, NSFetchedResultsController
                 try fetchPasswordController.performFetch()
                 if let fetchedPassword = fetchPasswordController.fetchedObjects {
                     passwords = fetchedPassword
-                    password = passwords[0]
                 }
             } catch {
                 print(error)
@@ -51,9 +51,13 @@ class ChangePasswordViewController: UIViewController, NSFetchedResultsController
         }
     }
     
+    @IBAction func closeWindow(sender: UIButton) {
+        self.removeAnimate()
+    }
+    
     @IBAction func confirmPassword(sender: UIButton) {
         
-        if oldPasswordField.text == password.password {
+        if oldPasswordField.text == passwords[0].password {
             
             if newPasswordField.text == repeatNewPasswordField.text {
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -80,5 +84,29 @@ class ChangePasswordViewController: UIViewController, NSFetchedResultsController
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
         }
+    }
+    
+    func showAnimate()
+    {
+        view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        view.alpha = 0.0;
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.alpha = 1.0
+            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        });
+    }
+    
+    func removeAnimate()
+    {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            self.view.alpha = 0.0;
+        }, completion:{(finished : Bool)  in
+            if (finished)
+            {
+                self.view.removeFromSuperview()
+                self.dismiss(animated: false)
+            }
+        });
     }
 }
