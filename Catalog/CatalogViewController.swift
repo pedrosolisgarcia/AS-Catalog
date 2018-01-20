@@ -149,7 +149,6 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
         cell.cellDelegate = self
         
@@ -254,5 +253,3 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
 }
-
-

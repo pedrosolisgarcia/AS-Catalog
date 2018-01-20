@@ -15,11 +15,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var zoomOutButton: UIButton!
     var dress = ""
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         self.view.removeFromSuperview()
         self.showAnimate()
         zoomInView.delegate = self
@@ -66,16 +64,13 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
 
             let touchPoint = recognizer.location(in: view)
             let scrollViewSize = zoomInView.bounds.size
-            
             let width = scrollViewSize.width / zoomInView.maximumZoomScale
             let height = scrollViewSize.height / zoomInView.maximumZoomScale
             let x = touchPoint.x - (width/2.0)
             let y = touchPoint.y - (height/2.0)
-            
             let rect = CGRect(x:x,y:y,width:width,height:height)
             zoomInView.zoom(to: rect, animated: true)
         }
-        
     }
     
     @IBAction func zoomOut(sender: UIButton) {
@@ -83,8 +78,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    func showAnimate()
-    {
+    func showAnimate() {
         view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         view.alpha = 0.0;
         UIView.animate(withDuration: 0.25, animations: {
@@ -93,14 +87,12 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         });
     }
     
-    func removeAnimate()
-    {
+    func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
         }, completion:{(finished : Bool)  in
-            if (finished)
-            {
+            if (finished) {
                 self.dressImageView.image = nil
                 self.view.removeFromSuperview()
                 self.dismiss(animated: false)

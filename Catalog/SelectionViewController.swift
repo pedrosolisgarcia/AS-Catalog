@@ -33,11 +33,13 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     weak var dressRecord: DressMO!
     //var dressesRecord = [DressMO]()
     var cities = [CityMO]()
+    var regions = [RegionMO]()
     var months = [MonthMO]()
     var clients = [UserTestMO]()
     var languageIndex: Int!
     
     var fetchCitiesController: NSFetchedResultsController<CityMO>!
+    var fetchRegionsController: NSFetchedResultsController<RegionMO>!
     //var fetchDressesController: NSFetchedResultsController<DressMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     var fetchClientsController: NSFetchedResultsController<UserTestMO>!
@@ -46,19 +48,21 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
     var nameLang: [String] = ["Imię:","Name:","Nombre:"]
     var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
-    var hometownLang: [String] = ["Miasto:","City:","Ciudad:"]
+    var hometownLang: [String] = ["Województwo:","Region:","Región:"]
     var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     var confirmationMessageLang: [[String]] = [["To wszystko","Dziękuję, proszę przekazać urządzenie pracownikowi salonu.","Gotowe"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
-    
+    var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
+    var regionVisits = [118, 1, 8, 4, 4, 10, 7, 8, 0, 0, 1, 3, 0, 0, 20, 2]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(provCart.name)
+        
+        /*print(provCart.name)
         print(provCart.lastname)
         print(provCart.email)
         print(provCart.phone)
-        print(provMonth)
+        print(provMonth)*/
         provCart.dresses = dressNames
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = nameLang[languageIndex] + " " + provCart.name
@@ -87,12 +91,9 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         
         //CoreData Fetching
         //fetchDresses()
-        fetchCities()
+        fetchRegions()
+        //fetchCities()
         fetchMonths()
-        
-        for dress in dresses {
-            print(dress.imgName! + ": " + String(describing: dress.count))
-        }
     }
     
     /*func fetchDresses() {
@@ -121,7 +122,49 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }*/
     
-    func fetchCities() {
+    func fetchRegions() {
+        
+        /*for regionName in regionNames {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                let region = RegionMO(context: appDelegate.persistentContainer.viewContext)
+                region.name = regionName
+                region.count = 0
+                regions.append(region)
+                print(region.name!)
+                appDelegate.saveContext()
+            }
+        }*/
+        
+        let fetchRegionsRequest: NSFetchRequest<RegionMO> = RegionMO.fetchRequest()
+        let sortRegionsDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRegionsRequest.sortDescriptors = [sortRegionsDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchRegionsController = NSFetchedResultsController(fetchRequest: fetchRegionsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchRegionsController.delegate = self
+            
+            do {
+                try fetchRegionsController.performFetch()
+                if let fetchedRegions = fetchRegionsController.fetchedObjects {
+                    regions = fetchedRegions
+                    
+                    //print(regions.count)
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        /*for (index, region) in regions.enumerated() {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                region.count = Int32(regionVisits[index])
+                appDelegate.saveContext()
+            }
+        }*/
+    }
+    
+    /*func fetchCities() {
         print("Starting to fetch cities...")
         let fetchCitiesRequest: NSFetchRequest<CityMO> = CityMO.fetchRequest()
         let sortCitiesDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -144,10 +187,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 print(error)
             }
         }
-    }
+    }*/
     
     func fetchMonths() {
-        print("Starting to fetch months...")
+        //print("Starting to fetch months...")
         let fetchMonthsRequest: NSFetchRequest<MonthMO> = MonthMO.fetchRequest()
         let sortMonthsDescriptor = NSSortDescriptor(key: "index", ascending: true)
         fetchMonthsRequest.sortDescriptors = [sortMonthsDescriptor]
@@ -160,9 +203,9 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 try fetchMonthsController.performFetch()
                 if let fetchedMonths = fetchMonthsController.fetchedObjects {
                     months = fetchedMonths
-                    print("Months fetched!")
+                    /*print("Months fetched!")
                     print(months[0].month!)
-                    print(months.count)
+                    print(months.count)*/
                 }
             } catch {
                 print(error)
@@ -228,13 +271,17 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             client.phone = provCart.phone
             appDelegate.saveContext()
             
-            if let index = cities.index(where: {$0.name == provCart.city}) {
+            /*if let index = cities.index(where: {$0.name == provCart.city}) {
                 cities[index].count += 1
                 appDelegate.saveContext()
             } else {
                 city = CityMO(context: appDelegate.persistentContainer.viewContext)
                 city.name = provCart.city
                 city.count = 1
+                appDelegate.saveContext()
+            }*/
+            if let index = regions.index(where: {$0.name == provCart.city}) {
+                regions[index].count += 1
                 appDelegate.saveContext()
             }
             

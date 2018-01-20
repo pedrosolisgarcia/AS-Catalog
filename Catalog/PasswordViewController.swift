@@ -58,6 +58,7 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     @IBAction func checkPassword(sender: UIButton) {
+        
         /*if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
             let pass = PasswordMO(context: appDelegate.persistentContainer.viewContext)
@@ -87,8 +88,8 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
         popChangePasswordView.didMove(toParentViewController: self)
     }
     
-    func showAnimate()
-    {
+    func showAnimate() {
+        
         view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         view.alpha = 0.0;
         UIView.animate(withDuration: 0.25, animations: {
@@ -97,18 +98,16 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
         });
     }
     
-    func removeAnimate()
-    {
+    func removeAnimate() {
+        
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
         }, completion:{(finished : Bool)  in
-            if (finished)
-            {
+            if (finished) {
                 self.view.removeFromSuperview()
                 self.dismiss(animated: false)
             }
         });
     }
-
 }

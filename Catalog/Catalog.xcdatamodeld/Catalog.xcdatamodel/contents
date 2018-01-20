@@ -32,6 +32,10 @@
     <entity name="Password" representedClassName="PasswordMO" syncable="YES" codeGenerationType="class">
         <attribute name="password" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Region" representedClassName="RegionMO" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="UserTest" representedClassName="UserTestMO" syncable="YES" codeGenerationType="class">
         <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="fullName" attributeType="String" syncable="YES"/>
@@ -45,5 +49,6 @@
         <element name="Month" positionX="-27" positionY="63" width="128" height="90"/>
         <element name="UserTest" positionX="-36" positionY="54" width="128" height="90"/>
         <element name="Password" positionX="-36" positionY="54" width="128" height="60"/>
+        <element name="Region" positionX="-27" positionY="63" width="128" height="75"/>
     </elements>
 </model>

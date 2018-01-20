@@ -31,6 +31,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     var clients = [ClientMO]()
     var oldClients = [CartMO]()
     var cities = [CityMO]()
+    var regions = [RegionMO]()
     var months = [MonthMO]()
     var dresses = [DressMO]()
     var clientsDresses = [String]()
@@ -40,14 +41,13 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var fetchClientsController: NSFetchedResultsController<ClientMO>!
     var fetchCitiesController: NSFetchedResultsController<CityMO>!
+    var fetchRegionsController: NSFetchedResultsController<RegionMO>!
     var fetchDressesController: NSFetchedResultsController<DressMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     var fetchOldClientsController: NSFetchedResultsController<CartMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         tableViewClients.isHidden = false
         tableViewCities.isHidden = true
@@ -62,6 +62,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         //fetchOldUsersToExportInfo()
         fetchDresses()
         fetchCities()
+        fetchRegions()
         fetchMonths()
         
         hideGatherButtons()
@@ -140,10 +141,34 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 if let fetchedDresses = fetchDressesController.fetchedObjects {
                     dresses = fetchedDresses
                     
-                    for dress in dresses {
+                    /*for dress in dresses {
                         print(dress.name! + ": " + String(describing: dress.count))
                     }
-                    print(dresses.count)
+                    print(dresses.count)*/
+                }
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    func fetchRegions() {
+        
+        let fetchRegionsRequest: NSFetchRequest<RegionMO> = RegionMO.fetchRequest()
+        let sortRegionsDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRegionsRequest.sortDescriptors = [sortRegionsDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchRegionsController = NSFetchedResultsController(fetchRequest: fetchRegionsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchRegionsController.delegate = self
+            
+            do {
+                try fetchRegionsController.performFetch()
+                if let fetchedRegions = fetchRegionsController.fetchedObjects {
+                    regions = fetchedRegions
+                    
+                    //print(regions.count)
                 }
             } catch {
                 print(error)
@@ -166,8 +191,10 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchCitiesController.performFetch()
                 if let fetchedCities = fetchCitiesController.fetchedObjects {
                     cities = fetchedCities
-                    
-                    print(cities.count)
+                    /*for city in cities {
+                        print(city.name! + ": " + String(describing: city.count))
+                    }
+                    print(cities.count)*/
                 }
             } catch {
                 print(error)
@@ -190,7 +217,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 if let fetchedMonths = fetchMonthsController.fetchedObjects {
                     months = fetchedMonths
                     
-                    print(months.count)
+                    //print(months.count)
                 }
             } catch {
                 print(error)
@@ -243,7 +270,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -252,10 +278,12 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             return clients.count + 1
         }
         if tableView == tableViewCities {
-            return cities.count
+            //return cities.count
+            return regions.count
         }
         if tableView == tableViewMonths {
-            return months.count
+            //return months.count
+            return 0
         }
         if tableView == tableViewDresses {
             return dresses.count
@@ -291,7 +319,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
         if tableView == tableViewCities {
-            let city = cities[indexPath.row]
+            //let city = cities[indexPath.row]
+            let city = regions[indexPath.row]
             
             cell.cityLabel.text = city.name
             cell.cityCount.text = String(describing: city.count)
@@ -311,7 +340,6 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.dressCount.text = String(describing: dress.count)
             //  cell.dressLabel.text = client.dresses?.componentsJoined(by: ", ")
         }
-        
         return cell
     }
     
@@ -325,13 +353,13 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-        if tableView == tableViewCities {
+        /*if tableView == tableViewCities {
             if editingStyle == .delete {
                 
                 cities.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        }*/
         if tableView == tableViewMonths {
             if editingStyle == .delete {
                 
@@ -352,10 +380,10 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                     let clientToDelete = self.fetchClientsController.object(at: indexPath)
                     context.delete(clientToDelete)
                 }
-                if tableView == self.tableViewCities {
+                /*if tableView == self.tableViewCities {
                     let cityToDelete = self.fetchCitiesController.object(at: indexPath)
                     context.delete(cityToDelete)
-                }
+                }*/
                 if tableView == self.tableViewMonths {
                     let monthToDelete = self.fetchMonthsController.object(at: indexPath)
                     context.delete(monthToDelete)
@@ -386,24 +414,24 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         case .insert:
             if let newIndexPath = newIndexPath {
                 tableViewClients.insertRows(at: [newIndexPath], with: .fade)
-                tableViewCities.insertRows(at: [newIndexPath], with: .fade)
+                //tableViewCities.insertRows(at: [newIndexPath], with: .fade)
                 tableViewMonths.insertRows(at: [newIndexPath], with: .fade)
             }
         case .delete:
             if let indexPath = indexPath {
                 tableViewClients.deleteRows(at: [indexPath], with: .fade)
-                tableViewCities.deleteRows(at: [indexPath], with: .fade)
+                //tableViewCities.deleteRows(at: [indexPath], with: .fade)
                 tableViewMonths.deleteRows(at: [indexPath], with: .fade)
             }
         case .update:
             if let indexPath = indexPath {
                 tableViewClients.reloadRows(at: [indexPath], with: .fade)
-                tableViewCities.reloadRows(at: [indexPath], with: .fade)
+                //tableViewCities.reloadRows(at: [indexPath], with: .fade)
                 tableViewMonths.reloadRows(at: [indexPath], with: .fade)
             }
         default:
             tableViewClients.reloadData()
-            tableViewCities.reloadData()
+            //tableViewCities.reloadData()
             tableViewMonths.reloadData()
         }
         
@@ -419,7 +447,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableViewClients.endUpdates()
-        tableViewCities.endUpdates()
+        //tableViewCities.endUpdates()
         tableViewMonths.endUpdates()
         tableViewDresses.endUpdates()
     }
@@ -505,7 +533,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let emailController = MFMailComposeViewController()
         let dataClients = createExportClientsString()
-        let dataCities = createExportCitiesString()
+        //let dataCities = createExportCitiesString()
+        let dataRegions = createExportRegionsString()
         let dataMonths = createExportMonthsString()
         let dataDresses = createExportDressesString()
         
@@ -514,7 +543,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         emailController.setMessageBody("", isHTML: false)
         
         emailController.addAttachmentData(dataClients, mimeType: "text/csv", fileName: "Clients.csv")
-        emailController.addAttachmentData(dataCities, mimeType: "text/csv", fileName: "Cities.csv")
+        //emailController.addAttachmentData(dataCities, mimeType: "text/csv", fileName: "Cities.csv")
+        emailController.addAttachmentData(dataRegions, mimeType: "text/csv", fileName: "Regions.csv")
         emailController.addAttachmentData(dataMonths, mimeType: "text/csv", fileName: "Months.csv")
         emailController.addAttachmentData(dataDresses, mimeType: "text/csv", fileName: "Dresses.csv")
         
@@ -539,6 +569,22 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             emailVar = client.email
             phoneVar = client.phone
             export += "\(fullNameVar!),\(emailVar!),\(phoneVar!) \n"
+        }
+        let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        return convertingExportToNSData!
+    }
+    func createExportRegionsString() -> Data {
+        
+        var cityVar: String!
+        var cityCountVar: Int32!
+        var export: String = NSLocalizedString("Region, Amount\n", comment: "")
+        
+        for city in regions {
+            
+            cityVar = city.name
+            cityCountVar = city.count
+            export += "\(cityVar!),\(String(describing: cityCountVar!)) \n"
         }
         let convertingExportToNSData = export.data(using: String.Encoding.utf8, allowLossyConversion: false)
         

@@ -207,6 +207,7 @@
 					51BE2F831F8C02EC0093C897 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YMP4M2YLRU;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};

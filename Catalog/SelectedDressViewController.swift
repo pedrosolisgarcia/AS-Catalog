@@ -32,8 +32,7 @@ class SelectedDressViewController: UIViewController {
         self.removeAnimate()
     }
     
-    func showAnimate()
-    {
+    func showAnimate() {
         view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         view.alpha = 0.0;
         UIView.animate(withDuration: 0.25, animations: {
@@ -42,8 +41,7 @@ class SelectedDressViewController: UIViewController {
         });
     }
     
-    func removeAnimate()
-    {
+    func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
