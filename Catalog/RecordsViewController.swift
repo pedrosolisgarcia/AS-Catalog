@@ -65,7 +65,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchRegions()
         fetchMonths()
         
-        hideGatherButtons()
+        //hideGatherButtons()
     }
     
     func hideGatherButtons() {
@@ -143,6 +143,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                     
                     /*for dress in dresses {
                         print(dress.name! + ": " + String(describing: dress.count))
+                        print(dress.imgName! + " " + String(dress.isSelected))
                     }
                     print(dresses.count)*/
                 }
@@ -282,8 +283,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             return regions.count
         }
         if tableView == tableViewMonths {
-            //return months.count
-            return 0
+            return months.count
+            //return 0
         }
         if tableView == tableViewDresses {
             return dresses.count
@@ -327,10 +328,10 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             //cell.cityLabel.text = client.city
         }
         if tableView == tableViewMonths {
-            //let month = months[indexPath.row]
+            let month = months[indexPath.row]
             //let month = oldClients[indexPath.row]
-            //cell.monthLabel.text = month.month
-            //cell.monthCount.text = String(describing: month.count)
+            cell.monthLabel.text = month.month
+            cell.monthCount.text = String(describing: month.count)
             //cell.monthLabel.text = month.weddingDate
         }
         if tableView == tableViewDresses {
@@ -397,7 +398,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        //return true
+        return false
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -561,7 +563,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         var fullNameVar: String!
         var emailVar: String!
         var phoneVar: String!
-        var export: String = NSLocalizedString("Name and Lastname, Email, Phone\n", comment: "")
+        var export: String = NSLocalizedString("Name and Lastname,Email,Phone\n", comment: "")
         
         for client in clients {
             
@@ -578,7 +580,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var cityVar: String!
         var cityCountVar: Int32!
-        var export: String = NSLocalizedString("Region, Amount\n", comment: "")
+        var export: String = NSLocalizedString("Region,Amount\n", comment: "")
         
         for city in regions {
             
@@ -595,7 +597,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var cityVar: String!
         var cityCountVar: Int32!
-        var export: String = NSLocalizedString("City, Amount\n", comment: "")
+        var export: String = NSLocalizedString("City,Amount\n", comment: "")
         
         for city in cities {
             
@@ -612,7 +614,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var monthVar: String!
         var monthCountVar: Int32?
-        var export: String = NSLocalizedString("Month, Month Amount\n", comment: "")
+        var export: String = NSLocalizedString("Month,Month Amount\n", comment: "")
         
         for month in months {
             
@@ -629,7 +631,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var dressVar: String!
         var dressCountVar: Int32?
-        var export: String = NSLocalizedString("Dress, Dress Amount\n", comment: "")
+        var export: String = NSLocalizedString("Dress,Dress Amount\n", comment: "")
         
         for dress in dresses {
             

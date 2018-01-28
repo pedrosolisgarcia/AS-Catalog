@@ -63,7 +63,7 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
             
             let pass = PasswordMO(context: appDelegate.persistentContainer.viewContext)
             pass.password = "555555"
-            print(pass.password)
+            //print(pass.password)
             appDelegate.saveContext()
         }*/
         

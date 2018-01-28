@@ -231,7 +231,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! SelectionTableViewCell
         tableView.separatorColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-        let dress = dresses[indexPath.row]
+        let dress = selectedDresses[indexPath.row]
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
