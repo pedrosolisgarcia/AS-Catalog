@@ -1692,7 +1692,7 @@ UFJaRUpEGsW5IERBTEVKA
                                 </constraints>
                                 <segments>
                                     <segment title="Clients"/>
-                                    <segment title="Cities"/>
+                                    <segment title="Regions"/>
                                     <segment title="Months"/>
                                     <segment title="Dresses"/>
                                 </segments>
@@ -1846,7 +1846,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     <constraint firstItem="oBU-ih-bsx" firstAttribute="leading" secondItem="2Qm-jl-zg1" secondAttribute="leading" constant="15" id="hmn-nc-Al8"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wyO-1u-Ud2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wyO-1u-Ud2">
                                 <rect key="frame" x="0.0" y="140" width="768" height="884"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1898,7 +1898,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     <outlet property="delegate" destination="sOb-mq-XE5" id="6Dy-QK-E70"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-Kj-Un4" userLabel="Table View Months">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NkM-Kj-Un4" userLabel="Table View Months">
                                 <rect key="frame" x="0.0" y="140" width="768" height="884"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1950,7 +1950,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     <outlet property="delegate" destination="sOb-mq-XE5" id="HJy-p6-6Qn"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZc-8n-SWf" userLabel="Table View Dresses">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EZc-8n-SWf" userLabel="Table View Dresses">
                                 <rect key="frame" x="0.0" y="140" width="768" height="884"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -2002,7 +2002,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     <outlet property="delegate" destination="sOb-mq-XE5" id="XQF-8E-NuE"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="uij-XT-R1k">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="uij-XT-R1k">
                                 <rect key="frame" x="0.0" y="140" width="768" height="884"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>

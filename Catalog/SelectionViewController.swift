@@ -53,7 +53,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var confirmLang: [String] = ["","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     var confirmationMessageLang: [[String]] = [["To wszystko","Dziękuję, proszę przekazać urządzenie pracownikowi salonu.","Gotowe"],["Ready","Thank you, please give back the device to the person who attended you.","Ok"],["Listo","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
-    var regionVisits = [118, 1, 8, 4, 4, 10, 7, 8, 0, 0, 1, 3, 0, 0, 20, 2]
+    var regionVisits = [176, 1, 3, 6, 5, 16, 8, 3, 0, 1, 1, 20, 2, 8, 9, 0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,16 +124,16 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     func fetchRegions() {
         
-        /*for regionName in regionNames {
+        for (index, regionName) in regionNames.enumerated() {
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let region = RegionMO(context: appDelegate.persistentContainer.viewContext)
                 region.name = regionName
-                region.count = 0
+                region.count = Int32(regionVisits[index])
                 regions.append(region)
                 print(region.name!)
                 appDelegate.saveContext()
             }
-        }*/
+        }
         
         let fetchRegionsRequest: NSFetchRequest<RegionMO> = RegionMO.fetchRequest()
         let sortRegionsDescriptor = NSSortDescriptor(key: "name", ascending: true)

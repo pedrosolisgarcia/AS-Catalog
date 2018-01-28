@@ -29,7 +29,11 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var recordSections: UISegmentedControl!
     
     var clients = [ClientMO]()
+    var clientsNames = [String]()
+    var clientsWithoutRepeated = [ClientMO]()
+    var clientsWithoutRepeatedNames = [String]()
     var oldClients = [CartMO]()
+    //var oldClients = [UserTestMO]()
     var cities = [CityMO]()
     var regions = [RegionMO]()
     var months = [MonthMO]()
@@ -45,6 +49,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     var fetchDressesController: NSFetchedResultsController<DressMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     var fetchOldClientsController: NSFetchedResultsController<CartMO>!
+    //var fetchOldClientsController: NSFetchedResultsController<UserTestMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +70,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
         fetchRegions()
         fetchMonths()
         
-        //hideGatherButtons()
+        hideGatherButtons()
     }
     
     func hideGatherButtons() {
@@ -105,8 +110,9 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func fetchOldUsersToExportInfo() {
     
-        //let fetchClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
+        //let fetchOldClientsRequest: NSFetchRequest<UserTestMO> = UserTestMO.fetchRequest()
         let fetchOldClientsRequest: NSFetchRequest<CartMO> = CartMO.fetchRequest()
+        //let sortClientsDescriptor = NSSortDescriptor(key: "fullName", ascending: true)
         let sortClientsDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchOldClientsRequest.sortDescriptors = [sortClientsDescriptor]
         
@@ -118,7 +124,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 try fetchOldClientsController.performFetch()
                 if let fetchedOldClients = fetchOldClientsController.fetchedObjects {
                     oldClients = fetchedOldClients
-                    //print(clients.count)
+                    //print(oldClients.count)
                 }
             } catch {
                 print(error)
@@ -360,14 +366,14 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 cities.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }*/
+        }
         if tableView == tableViewMonths {
             if editingStyle == .delete {
                 
                 months.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
+        }*/
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -384,11 +390,11 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 /*if tableView == self.tableViewCities {
                     let cityToDelete = self.fetchCitiesController.object(at: indexPath)
                     context.delete(cityToDelete)
-                }*/
+                }
                 if tableView == self.tableViewMonths {
                     let monthToDelete = self.fetchMonthsController.object(at: indexPath)
                     context.delete(monthToDelete)
-                }
+                }*/
                 appDelegate.saveContext()
             }
         })
@@ -398,8 +404,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        //return true
-        return false
+        return true
+        //return false
     }
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -456,7 +462,13 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func gatherDresses(_ sender: UIBarButtonItem) {
         
-        for client in oldClients {
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            for month in months {
+                month.count += 1
+                appDelegate.saveContext()
+            }
+        }
+        /*for client in oldClients {
             for dress in client.dresses! {
                 clientsDresses.append(dress as! String)
             }
@@ -468,39 +480,59 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             for dress in dresses {
                 let countDress = clientsDresses.filter{$0 == dress.name}.count
                 print(dress.name! + ": " + String(describing: countDress))
-                dress.count = Int32(countDress)
+                dress.count += Int32(countDress)
                 appDelegate.saveContext()
             }
-        }
+        }*/
     }
     @IBAction func gatherClients(_ sender: UIBarButtonItem) {
      
-        for client in oldClients {
+        /*for client in oldClients {
      
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
      
                 let clientToAdd = ClientMO(context: appDelegate.persistentContainer.viewContext)
                 clientToAdd.fullName = client.name! + " " + client.lastname!
+                //clientToAdd.fullName = client.fullName
                 clientToAdd.email = client.email
                 clientToAdd.phone = client.phone
-                print(clientToAdd)
+                //print(clientToAdd)
                 appDelegate.saveContext()
             }
+        }*/
+        for client in clients {
+            clientsNames.append(client.fullName!)
         }
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            for (index, client) in clientsNames.enumerated() {
+                if !clientsWithoutRepeatedNames.contains(client) {
+                    clientsWithoutRepeatedNames.append(client)
+                    print("Not in the array. " + clients[index].fullName! + " added.")
+                } else {
+                    print(clients[index].fullName! + " will be removed. Duplicate.")
+                    
+                    let context = appDelegate.persistentContainer.viewContext
+                    context.delete(clients[index])
+                    appDelegate.saveContext()
+                }
+                
+            }
+        }
+        print(clientsWithoutRepeated.count)
      }
     @IBAction func gatherCities(_ sender: UIBarButtonItem) {
         
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+        /*if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             for city in cities {
                 let context = appDelegate.persistentContainer.viewContext
                 context.delete(city)
                 appDelegate.saveContext()
             }
-        }
+        }*/
         var oldCities = [String]()
-        for client in oldClients {
-            oldCities.append(client.city!)
-        }
+//        for client in oldClients {
+//            oldCities.append(client.city!)
+//        }
         var counts: [String: Int] = [:]
         oldCities.forEach { counts[$0, default: 0] += 1 }
         
@@ -510,7 +542,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 let newCity = CityMO(context: appDelegate.persistentContainer.viewContext)
                 newCity.name = count.key
                 newCity.count = Int32(count.value)
-                print(newCity)
+                //print(newCity)
                 cities.append(newCity)
                 appDelegate.saveContext()
             }
