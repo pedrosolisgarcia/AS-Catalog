@@ -124,7 +124,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     func fetchRegions() {
         
-        for (index, regionName) in regionNames.enumerated() {
+        /*for (index, regionName) in regionNames.enumerated() {
             if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                 let region = RegionMO(context: appDelegate.persistentContainer.viewContext)
                 region.name = regionName
@@ -133,7 +133,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 print(region.name!)
                 appDelegate.saveContext()
             }
-        }
+        }*/
         
         let fetchRegionsRequest: NSFetchRequest<RegionMO> = RegionMO.fetchRequest()
         let sortRegionsDescriptor = NSSortDescriptor(key: "name", ascending: true)

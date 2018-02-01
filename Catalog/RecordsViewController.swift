@@ -423,24 +423,24 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
             if let newIndexPath = newIndexPath {
                 tableViewClients.insertRows(at: [newIndexPath], with: .fade)
                 //tableViewCities.insertRows(at: [newIndexPath], with: .fade)
-                tableViewMonths.insertRows(at: [newIndexPath], with: .fade)
+                //tableViewMonths.insertRows(at: [newIndexPath], with: .fade)
             }
         case .delete:
             if let indexPath = indexPath {
                 tableViewClients.deleteRows(at: [indexPath], with: .fade)
                 //tableViewCities.deleteRows(at: [indexPath], with: .fade)
-                tableViewMonths.deleteRows(at: [indexPath], with: .fade)
+                //tableViewMonths.deleteRows(at: [indexPath], with: .fade)
             }
         case .update:
             if let indexPath = indexPath {
                 tableViewClients.reloadRows(at: [indexPath], with: .fade)
                 //tableViewCities.reloadRows(at: [indexPath], with: .fade)
-                tableViewMonths.reloadRows(at: [indexPath], with: .fade)
+                //tableViewMonths.reloadRows(at: [indexPath], with: .fade)
             }
         default:
             tableViewClients.reloadData()
             //tableViewCities.reloadData()
-            tableViewMonths.reloadData()
+            //tableViewMonths.reloadData()
         }
         
         if let fetchedObjects = controller.fetchedObjects {
@@ -456,8 +456,8 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableViewClients.endUpdates()
         //tableViewCities.endUpdates()
-        tableViewMonths.endUpdates()
-        tableViewDresses.endUpdates()
+        //tableViewMonths.endUpdates()
+        //tableViewDresses.endUpdates()
     }
     
     @IBAction func gatherDresses(_ sender: UIBarButtonItem) {
@@ -529,7 +529,7 @@ class RecordsViewController: UIViewController, UITableViewDataSource, UITableVie
                 appDelegate.saveContext()
             }
         }*/
-        var oldCities = [String]()
+        let oldCities = [String]()
 //        for client in oldClients {
 //            oldCities.append(client.city!)
 //        }

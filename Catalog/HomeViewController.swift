@@ -45,6 +45,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var numDay = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
     var monthsLang = [["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]]
+    var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
     var numMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var numYear = [2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
@@ -56,6 +57,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var lowTextLang: [String] = ["Możesz zobaczyć katalog.","Now you can watch the catalog.","Ya puedes ver el catálogo."]
     var catalogLang: [String] = ["OBEJRZYJ KATALOG","WATCH THE CATALOG","VISITA EL CATÁLOGO"]
     var languageIndex: Int!
+    static var selectedCountry = ""
+    
+    
     
     var fields: [Bool] = [false,false,false,false,false]
     var provCart: Cart!
@@ -65,8 +69,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var fullMonth: String!
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
-        resetHomeSettings()
-        resetHomeFields()
+        if segue.identifier == "unwindToHomeScreen" {
+            resetHomeSettings()
+            resetHomeFields()
+        }
+        if segue.identifier == "unwindToPolishRegion" {
+            
+            self.pickregion(self.regionField)
+        }
     }
     
     @IBAction func selectLanguage(sender: UIButton) {
@@ -176,7 +186,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numRows = 0
         if pickerView == regionPicker {
-            numRows = regionNames.count
+            numRows = regionNames.count + 1
         }
         if pickerView == weddingDatePicker {
             numRows = numberOfRows[component]
@@ -186,7 +196,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == regionPicker {
-            return regionNames[row]
+            if row == regionNames.count {
+                return otherCountry[languageIndex]
+            } else {
+                return regionNames[row]
+            }
         }
         else { //pickerView == weddingDatePicker
             if component == 0 {
@@ -201,7 +215,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == regionPicker {
-            regionField.text = regionNames[row]
+            if row == regionNames.count {
+                regionField.text = otherCountry[languageIndex]
+            } else {
+                regionField.text = regionNames[row]
+            }
         }
         if pickerView == weddingDatePicker {
             let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)] as CVarArg)
@@ -216,7 +234,26 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-    func pickregion(_ textField : UITextField){
+    func showCountryView() {
+        
+        self.isEditing = false
+        let popCountryView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CountrySelectorView") as! SelectCountryViewController
+        popCountryView.languageIndex = self.languageIndex
+        self.addChildViewController(popCountryView)
+        popCountryView.view.frame = self.view.frame
+        popCountryView.delegate = self
+        if !(self.view.gestureRecognizers?.isEmpty)! {
+            self.view.gestureRecognizers?.removeLast()
+        }
+        self.view.addSubview(popCountryView.view)
+        popCountryView.didMove(toParentViewController: self)
+    }
+    
+    func setCountryField(country: String) {
+        regionField.text = country
+    }
+    
+     func pickregion(_ textField : UITextField){
         
         self.regionPicker.backgroundColor = UIColor.white
         textField.inputView = self.regionPicker
@@ -273,6 +310,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func cancelDate() {
         weddingDateField.text = ""
         weddingDateField.resignFirstResponder()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == regionField {
+            if textField.text == otherCountry[languageIndex] {
+                showCountryView()
+            }
+        }
     }
     
     @IBAction func createProfile(sender: UIButton) {
