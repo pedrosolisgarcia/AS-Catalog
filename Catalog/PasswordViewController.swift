@@ -21,7 +21,6 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.view.removeFromSuperview()
         fetchPassword()
         self.showAnimate()
     }
@@ -49,6 +48,15 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
                 print(error)
             }
         }
+        if passwords.isEmpty {
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                
+                let pass = PasswordMO(context: appDelegate.persistentContainer.viewContext)
+                pass.password = "555555"
+                passwords.append(pass)
+                appDelegate.saveContext()
+            }
+        }
     }
     
     @IBAction func unwindToPassword(segue:UIStoryboardSegue){}
@@ -58,14 +66,6 @@ class PasswordViewController: UIViewController, NSFetchedResultsControllerDelega
     }
     
     @IBAction func checkPassword(sender: UIButton) {
-        
-        /*if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            
-            let pass = PasswordMO(context: appDelegate.persistentContainer.viewContext)
-            pass.password = "555555"
-            //print(pass.password)
-            appDelegate.saveContext()
-        }*/
         
         if passwordField.text == passwords[0].password {
             self.performSegue(withIdentifier: "showRecords", sender: self)

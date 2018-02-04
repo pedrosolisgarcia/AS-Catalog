@@ -126,6 +126,9 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                 print(error)
             }
         }
+        for  monthh in months {
+            print(String(monthh.index) + " - " + monthh.month!)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -205,6 +208,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             
             if let index = months.index(where: {$0.month == provMonth[1]}) {
                 months[index].count += 1
+                months[index].index = Int32(provMonth[0])!
                 appDelegate.saveContext()
             } else {
                 month = MonthMO(context: appDelegate.persistentContainer.viewContext)

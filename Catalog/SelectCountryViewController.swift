@@ -35,11 +35,11 @@ class SelectCountryViewController: UIViewController, UITableViewDataSource, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.delegate = self
         self.isEditing = false
         tableView.allowsSelection = true
         tableView.allowsSelectionDuringEditing = true
-        // Do any additional setup after loading the view.
         self.showAnimate()
         headerLabel.text = headerLang[languageIndex]
         cancelButton.setTitle(cancelLang[languageIndex], for: .normal)
@@ -79,7 +79,6 @@ class SelectCountryViewController: UIViewController, UITableViewDataSource, UITa
         tableView.separatorColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
         let country = countries[languageIndex][indexPath.row]
         
-        // Configure the cell
         cell.countryLabel.text = country
         
         return cell

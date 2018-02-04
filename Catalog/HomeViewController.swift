@@ -42,13 +42,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
     var phoneLang = ["Telefon:","Telefon:","Teléfono:"]
     var regionLang = ["Województwo:","Region:","Región:"]
-    var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
-    var numDay = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-    var monthsLang = [["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]]
     var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
+    var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
+    var numDay = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
     var numMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    var numYear = [2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+    var numYear = [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+    var monthsLang = [["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]]
     var numberOfRows = [31,12,13]
     var doneLang: [String] = ["Gotowy","Done","Hecho"]
     var cancelLang: [String] = ["Anuluj","Cancel","Cancelar"]
@@ -74,7 +74,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             resetHomeFields()
         }
         if segue.identifier == "unwindToPolishRegion" {
-            
             self.pickregion(self.regionField)
         }
     }
@@ -151,7 +150,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         emailField.text = nil
         phoneField.text = nil
         regionField.text = nil
+        regionPicker.reloadAllComponents()
         weddingDateField.text = nil
+        weddingDatePicker.reloadAllComponents()
         month.removeAll()
     }
     
@@ -202,7 +203,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 return regionNames[row]
             }
         }
-        else { //pickerView == weddingDatePicker
+        else {
             if component == 0 {
                 return String(describing: numDay[row])
             } else if component == 1 {
@@ -257,6 +258,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         self.regionPicker.backgroundColor = UIColor.white
         textField.inputView = self.regionPicker
+        textField.text = self.regionNames[self.regionPicker.selectedRow(inComponent: 0)]
         
         // ToolBar
         let toolBar = UIToolbar()
@@ -278,7 +280,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickWeddingDate(_ textField : UITextField){
         
         self.weddingDatePicker.backgroundColor = UIColor.white
+        monthCal = String(format: "%02ld", numMonths[weddingDatePicker.selectedRow(inComponent: 1)] as CVarArg)
+        year = String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
+        fullMonth = monthsLang[1][weddingDatePicker.selectedRow(inComponent: 1)] + " " + String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
         textField.inputView = self.weddingDatePicker
+        textField.text = String(format: "%02ld", numDay[weddingDatePicker.selectedRow(inComponent: 0)] as CVarArg)
+            + "/" + monthCal + "/" + year
+        
         
         // ToolBar
         let toolBar = UIToolbar()
@@ -334,18 +342,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             catalogButton.isEnabled = true
             catalogButton.alpha = 1
             
-            month.append(monthCal + year)
+            month.append(year + monthCal)
             month.append(fullMonth)
-            print(month)
         }
         dismissKeyboard()
     }
     
-    //Prepare data from the selected exercise to be shown in the detail view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
+        
         if segue.identifier == "showCatalog"{
-            
             let destinationController = segue.destination as! CatalogViewController
             destinationController.languageIndex = languageIndex
             destinationController.provCart = provCart
@@ -353,10 +358,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-    
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
-    func dismissKeyboard() { view.endEditing(true) }
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

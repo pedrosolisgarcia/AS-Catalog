@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B402020F06D0083E69E /* SelectCountryViewController.swift */; };
 		510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */; };
-		512A1FB31FEC74D8005519D1 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512A1FB21FEC74D7005519D1 /* Functions.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
+		514D47C420277E5500DD59EA /* InitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* InitialData.swift */; };
 		5167C4971FF4276A00B3F650 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4961FF4276900B3F650 /* PasswordViewController.swift */; };
 		5167C4991FF427F000B3F650 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
@@ -54,8 +54,8 @@
 /* Begin PBXFileReference section */
 		510E2B402020F06D0083E69E /* SelectCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryViewController.swift; sourceTree = "<group>"; };
 		510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryTableViewCell.swift; sourceTree = "<group>"; };
-		512A1FB21FEC74D7005519D1 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
+		514D47C320277E5500DD59EA /* InitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialData.swift; sourceTree = "<group>"; };
 		5167C4961FF4276900B3F650 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 				51BE2FD91F923C1C0093C897 /* Cart.swift */,
 				5187CA231FC6048200C215AF /* ButtonDesign.swift */,
 				51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */,
-				512A1FB21FEC74D7005519D1 /* Functions.swift */,
+				514D47C320277E5500DD59EA /* InitialData.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -283,11 +283,11 @@
 				51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
 				5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */,
+				514D47C420277E5500DD59EA /* InitialData.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */,
 				510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */,
 				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
-				512A1FB31FEC74D8005519D1 /* Functions.swift in Sources */,
 				5167C4971FF4276A00B3F650 /* PasswordViewController.swift in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Cart.swift in Sources */,
