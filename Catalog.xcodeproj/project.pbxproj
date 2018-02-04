@@ -10,6 +10,7 @@
 		510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B402020F06D0083E69E /* SelectCountryViewController.swift */; };
 		510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */; };
 		512A1FB31FEC74D8005519D1 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512A1FB21FEC74D7005519D1 /* Functions.swift */; };
+		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
 		5167C4971FF4276A00B3F650 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4961FF4276900B3F650 /* PasswordViewController.swift */; };
 		5167C4991FF427F000B3F650 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
@@ -54,6 +55,7 @@
 		510E2B402020F06D0083E69E /* SelectCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryViewController.swift; sourceTree = "<group>"; };
 		510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryTableViewCell.swift; sourceTree = "<group>"; };
 		512A1FB21FEC74D7005519D1 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		5167C4961FF4276900B3F650 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				51BE2FA01F8C03860093C897 /* SelectionViewController.swift */,
 				51BE2FDB1F92C9120093C897 /* SelectionTableViewCell.swift */,
 				51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */,
+				514D47C120270E0600DD59EA /* CompleteViewController.swift */,
 				51AB2D541FC7520B004335B4 /* RecordsViewController.swift */,
 				51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */,
 				5167C4961FF4276900B3F650 /* PasswordViewController.swift */,
@@ -276,6 +279,7 @@
 				51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */,
 				51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */,
 				51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */,
+				514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */,
 				51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
 				5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */,

@@ -46,8 +46,20 @@ class SelectCountryViewController: UIViewController, UITableViewDataSource, UITa
         otherLabel.text = otherLang[languageIndex]
         countryLabel.text = countryLang[languageIndex]
         confirmButton.setTitle(confirmLang[languageIndex], for: .normal)
-//        confirmButton.isEnabled = false
-//        confirmButton.alpha = 0.5
+        confirmButton.isEnabled = false
+        confirmButton.alpha = 0.5
+        
+        let maskPathSave = UIBezierPath(roundedRect: confirmButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+        
+        let maskLayerSave = CAShapeLayer()
+        maskLayerSave.path = maskPathSave.cgPath
+        confirmButton.layer.mask = maskLayerSave
+        
+        let maskPathLabel = UIBezierPath(roundedRect: headerLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+        
+        let maskLayerLabel = CAShapeLayer()
+        maskLayerLabel.path = maskPathLabel.cgPath
+        headerLabel.layer.mask = maskLayerLabel
     }
 
     override func didReceiveMemoryWarning() {
