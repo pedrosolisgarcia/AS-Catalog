@@ -29,13 +29,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     weak var client: ClientMO!
     weak var region: RegionMO!
     weak var month: MonthMO!
-    weak var dressRecord: DressMO!
     var regions = [RegionMO]()
     var months = [MonthMO]()
-    var clients = [ClientMO]()
     var languageIndex: Int!
     
-    var fetchClientsController: NSFetchedResultsController<ClientMO>!
     var fetchRegionsController: NSFetchedResultsController<RegionMO>!
     var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     
@@ -51,7 +48,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        provCart.dresses = dressNames
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = nameLang[languageIndex] + " " + provCart.name
         lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.lastname
