@@ -258,7 +258,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         self.regionPicker.backgroundColor = UIColor.white
         textField.inputView = self.regionPicker
-        textField.text = self.regionNames[self.regionPicker.selectedRow(inComponent: 0)]
+        //textField.text = self.regionNames[self.regionPicker.selectedRow(inComponent: 0)]
         
         // ToolBar
         let toolBar = UIToolbar()
