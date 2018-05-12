@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Cart" representedClassName="CartMO" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CartMO" representedClassName="CartMO" syncable="YES" codeGenerationType="class">
         <attribute name="city" attributeType="String" syncable="YES"/>
         <attribute name="dresses" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
@@ -9,46 +9,46 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weddingDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="City" representedClassName="CityMO" syncable="YES" codeGenerationType="class">
+    <entity name="CityMO" representedClassName="CityMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Client" representedClassName="ClientMO" syncable="YES" codeGenerationType="class">
+    <entity name="ClientMO" representedClassName="ClientMO" syncable="YES" codeGenerationType="class">
         <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="fullName" attributeType="String" syncable="YES"/>
         <attribute name="phone" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Dress" representedClassName="DressMO" syncable="YES" codeGenerationType="class">
+    <entity name="DressMO" representedClassName="DressMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imgName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Month" representedClassName="MonthMO" syncable="YES" codeGenerationType="class">
+    <entity name="MonthMO" representedClassName="MonthMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="month" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Password" representedClassName="PasswordMO" syncable="YES" codeGenerationType="class">
+    <entity name="PasswordMO" representedClassName="PasswordMO" syncable="YES" codeGenerationType="class">
         <attribute name="password" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Region" representedClassName="RegionMO" syncable="YES" codeGenerationType="class">
+    <entity name="RegionMO" representedClassName="RegionMO" syncable="YES" codeGenerationType="class">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="UserTest" representedClassName="UserTestMO" syncable="YES" codeGenerationType="class">
+    <entity name="UserTestMO" representedClassName="UserTestMO" syncable="YES" codeGenerationType="class">
         <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="fullName" attributeType="String" syncable="YES"/>
         <attribute name="phone" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Cart" positionX="-54" positionY="-9" width="128" height="150"/>
-        <element name="City" positionX="-45" positionY="54" width="128" height="75"/>
-        <element name="Client" positionX="-36" positionY="45" width="128" height="90"/>
-        <element name="Dress" positionX="-54" positionY="45" width="128" height="105"/>
-        <element name="Month" positionX="-27" positionY="63" width="128" height="90"/>
-        <element name="UserTest" positionX="-36" positionY="54" width="128" height="90"/>
-        <element name="Password" positionX="-36" positionY="54" width="128" height="60"/>
-        <element name="Region" positionX="-27" positionY="63" width="128" height="75"/>
+        <element name="CartMO" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="CityMO" positionX="-45" positionY="54" width="128" height="75"/>
+        <element name="ClientMO" positionX="-36" positionY="45" width="128" height="90"/>
+        <element name="DressMO" positionX="-54" positionY="45" width="128" height="105"/>
+        <element name="MonthMO" positionX="-27" positionY="63" width="128" height="90"/>
+        <element name="PasswordMO" positionX="-36" positionY="54" width="128" height="60"/>
+        <element name="RegionMO" positionX="-27" positionY="63" width="128" height="75"/>
+        <element name="UserTestMO" positionX="-36" positionY="54" width="128" height="90"/>
     </elements>
 </model>
