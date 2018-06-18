@@ -18,18 +18,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var beforeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var nameWarning: UILabel!
     @IBOutlet weak var lastnameLabel: UILabel!
     @IBOutlet weak var lastnameField: UITextField!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var phoneLabel: UILabel!
-    @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var regionField: UITextField!
     @IBOutlet weak var weddingDateLabel: UILabel!
     @IBOutlet weak var weddingDateField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
-    
+
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
@@ -40,7 +37,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
     var nameLang: [String] = ["Imię:","Name:","Nombre:"]
     var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
-    var phoneLang = ["Telefon:","Telefon:","Teléfono:"]
     var regionLang = ["Województwo:","Region:","Región:"]
     var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
@@ -106,7 +102,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         beforeLabel.text = beforeLang[languageIndex]
         nameLabel.text = nameLang[languageIndex]
         lastnameLabel.text = lastnameLang[languageIndex]
-        phoneLabel.text = phoneLang[languageIndex]
         regionLabel.text = regionLang[languageIndex]
         weddingDateLabel.text = weddingDateLang[languageIndex]
         createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
@@ -142,13 +137,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         catalogButton.isEnabled = false
         catalogButton.alpha = 0
+        nameWarning.isHidden = true
     }
     func resetHomeFields() {
         provCart = nil
         nameField.text = nil
         lastnameField.text = nil
-        emailField.text = nil
-        phoneField.text = nil
         regionField.text = nil
         regionPicker.reloadAllComponents()
         weddingDateField.text = nil
@@ -170,6 +164,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
         if textField == weddingDateField {
             self.pickWeddingDate(self.weddingDateField)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if textField == nameField {
+            textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ? (nameWarning.isHidden = false) : (nameWarning.isHidden = true)
+            
         }
     }
     
@@ -329,14 +330,24 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     @IBAction func createProfile(sender: UIButton) {
-        if nameField.text == "" || lastnameField.text == "" || emailField.text == "" || phoneField.text == "" || regionField.text == "" || weddingDateField.text == "" {
+        if (
+                nameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                lastnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                regionField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                weddingDateField.text == ""
+            ) {
             let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
             let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
             resetHomeSettings()
         } else {
-            provCart = Cart(name: (nameField.text?.capitalized)!, lastname: lastnameField.text!, email: (emailField.text?.lowercased())!, phone: phoneField.text!, city: regionField.text!, weddingDate: weddingDateField.text!, dresses: [""])
+            provCart = Cart(
+                name: (nameField.text?.capitalized)!,
+                lastname: lastnameField.text!.trimmingCharacters(in: .whitespacesAndNewlines),
+                city: regionField.text!.trimmingCharacters(in: .whitespacesAndNewlines),
+                weddingDate: weddingDateField.text!, dresses: [""]
+            )
             
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             catalogButton.isEnabled = true

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCountryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectCountryViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
