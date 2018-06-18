@@ -10,20 +10,16 @@ import Foundation
 
 struct Cart {
     var name: String
-    var lastname: String
-    var email: String
-    var phone: String
-    var city: String
-    var weddingDate: String
-    var dresses: [String]
+    var surname: String
+    var region: String
+    var dateOfWedding: String
+    var dressesNames: [String]
     
-    init(name: String, lastname: String, email: String, phone: String, city: String, weddingDate: String,dresses: [String]){
+    init(name: String, surname: String, region: String, dateOfWedding: String, dressesNames: [String]){
         self.name = name
-        self.lastname = lastname
-        self.email = email
-        self.phone = phone
-        self.city = city
-        self.weddingDate = weddingDate
-        self.dresses = dresses
+        self.surname = surname
+        self.region = region
+        self.dateOfWedding = dateOfWedding
+        self.dressesNames = dressesNames
     }
 }

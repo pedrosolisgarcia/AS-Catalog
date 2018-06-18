@@ -11,7 +11,6 @@ import CoreData
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, NSFetchedResultsControllerDelegate {
     
-    @IBOutlet weak var recordsButton: UIButton!
     @IBOutlet weak var polishButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
     @IBOutlet weak var spanishButton: UIButton!
@@ -19,12 +18,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var nameWarning: UILabel!
-    @IBOutlet weak var lastnameLabel: UILabel!
-    @IBOutlet weak var lastnameField: UITextField!
+    @IBOutlet weak var surnameLabel: UILabel!
+    @IBOutlet weak var surnameField: UITextField!
     @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var regionField: UITextField!
-    @IBOutlet weak var weddingDateLabel: UILabel!
-    @IBOutlet weak var weddingDateField: UITextField!
+    @IBOutlet weak var dateOfWeddingLabel: UILabel!
+    @IBOutlet weak var dateOfWeddingField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
 
     @IBOutlet weak var lowSeparator: UIView!
@@ -32,15 +31,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var catalogButton: UIButton!
     
     var regionPicker = UIPickerView()
-    var weddingDatePicker = UIPickerView()
+    var dateOfWeddingPicker = UIPickerView()
     
     var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
     var nameLang: [String] = ["Imię:","Name:","Nombre:"]
-    var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
+    var surnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
     var regionLang = ["Województwo:","Region:","Región:"]
     var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
-    var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
+    var dateOfWeddingLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var numDay = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
     var numMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     var numYear = [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
@@ -101,29 +100,20 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         beforeLabel.text = beforeLang[languageIndex]
         nameLabel.text = nameLang[languageIndex]
-        lastnameLabel.text = lastnameLang[languageIndex]
+        surnameLabel.text = surnameLang[languageIndex]
         regionLabel.text = regionLang[languageIndex]
-        weddingDateLabel.text = weddingDateLang[languageIndex]
+        dateOfWeddingLabel.text = dateOfWeddingLang[languageIndex]
         createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
         lowText.text = lowTextLang[languageIndex]
         catalogButton.setTitle(catalogLang[languageIndex], for: .normal)
-        weddingDatePicker.reloadComponent(1)
-    }
-    
-    @IBAction func showPassword(sender: UIButton) {
-        
-        let popPasswordView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PasswordView") as! PasswordViewController
-        self.addChildViewController(popPasswordView)
-        popPasswordView.view.frame = self.view.frame
-        self.view.addSubview(popPasswordView.view)
-        popPasswordView.didMove(toParentViewController: self)
+        dateOfWeddingPicker.reloadComponent(1)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         regionPicker.delegate = self
-        weddingDatePicker.delegate = self
+        dateOfWeddingPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
     
@@ -142,11 +132,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func resetHomeFields() {
         provCart = nil
         nameField.text = nil
-        lastnameField.text = nil
+        surnameField.text = nil
         regionField.text = nil
         regionPicker.reloadAllComponents()
-        weddingDateField.text = nil
-        weddingDatePicker.reloadAllComponents()
+        dateOfWeddingField.text = nil
+        dateOfWeddingPicker.reloadAllComponents()
         month.removeAll()
     }
     
@@ -162,8 +152,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if textField == regionField {
             self.pickregion(self.regionField)
         }
-        if textField == weddingDateField {
-            self.pickWeddingDate(self.weddingDateField)
+        if textField == dateOfWeddingField {
+            self.pickdateOfWedding(self.dateOfWeddingField)
         }
     }
     
@@ -179,7 +169,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if pickerView == regionPicker {
             numComponents = 1
         }
-        if pickerView == weddingDatePicker {
+        if pickerView == dateOfWeddingPicker {
             numComponents = 3
         }
         return numComponents
@@ -190,7 +180,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if pickerView == regionPicker {
             numRows = regionNames.count + 1
         }
-        if pickerView == weddingDatePicker {
+        if pickerView == dateOfWeddingPicker {
             numRows = numberOfRows[component]
         }
         return numRows
@@ -223,14 +213,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 regionField.text = regionNames[row]
             }
         }
-        if pickerView == weddingDatePicker {
+        if pickerView == dateOfWeddingPicker {
             let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)] as CVarArg)
             
             monthCal = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)] as CVarArg)
             
             year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
             
-            weddingDateField.text = day + "/" + monthCal + "/" + year
+            dateOfWeddingField.text = day + "/" + monthCal + "/" + year
             
             fullMonth = monthsLang[1][pickerView.selectedRow(inComponent: 1)] + " " + String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
         }
@@ -278,14 +268,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         textField.inputAccessoryView = toolBar
     }
     
-    func pickWeddingDate(_ textField : UITextField){
+    func pickdateOfWedding(_ textField : UITextField){
         
-        self.weddingDatePicker.backgroundColor = UIColor.white
-        monthCal = String(format: "%02ld", numMonths[weddingDatePicker.selectedRow(inComponent: 1)] as CVarArg)
-        year = String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
-        fullMonth = monthsLang[1][weddingDatePicker.selectedRow(inComponent: 1)] + " " + String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
-        textField.inputView = self.weddingDatePicker
-        textField.text = String(format: "%02ld", numDay[weddingDatePicker.selectedRow(inComponent: 0)] as CVarArg)
+        self.dateOfWeddingPicker.backgroundColor = UIColor.white
+        monthCal = String(format: "%02ld", numMonths[dateOfWeddingPicker.selectedRow(inComponent: 1)] as CVarArg)
+        year = String(describing: numYear[dateOfWeddingPicker.selectedRow(inComponent: 2)])
+        fullMonth = monthsLang[1][dateOfWeddingPicker.selectedRow(inComponent: 1)] + " " + String(describing: numYear[dateOfWeddingPicker.selectedRow(inComponent: 2)])
+        textField.inputView = self.dateOfWeddingPicker
+        textField.text = String(format: "%02ld", numDay[dateOfWeddingPicker.selectedRow(inComponent: 0)] as CVarArg)
             + "/" + monthCal + "/" + year
         
         
@@ -314,11 +304,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         regionField.resignFirstResponder()
     }
     func doneDate() {
-        weddingDateField.resignFirstResponder()
+        dateOfWeddingField.resignFirstResponder()
     }
     func cancelDate() {
-        weddingDateField.text = ""
-        weddingDateField.resignFirstResponder()
+        dateOfWeddingField.text = ""
+        dateOfWeddingField.resignFirstResponder()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -332,9 +322,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBAction func createProfile(sender: UIButton) {
         if (
                 nameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                lastnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+                surnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                 regionField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                weddingDateField.text == ""
+                dateOfWeddingField.text == ""
             ) {
             let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
             let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
@@ -344,9 +334,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         } else {
             provCart = Cart(
                 name: (nameField.text?.capitalized)!,
-                lastname: lastnameField.text!.trimmingCharacters(in: .whitespacesAndNewlines),
-                city: regionField.text!.trimmingCharacters(in: .whitespacesAndNewlines),
-                weddingDate: weddingDateField.text!, dresses: [""]
+                surname: (surnameField.text?.capitalized)!,
+                region: regionField.text!,
+                dateOfWedding: dateOfWeddingField.text!,
+                dressesNames: [""]
             )
             
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
@@ -365,7 +356,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let destinationController = segue.destination as! CatalogViewController
             destinationController.languageIndex = languageIndex
             destinationController.provCart = provCart
-            destinationController.month = month
         }
     }
     

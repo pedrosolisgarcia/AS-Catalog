@@ -19,16 +19,12 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
-    var month = [String]()
-    var dresses = [DressMO]()
+    var dresses = [Dress]()
     var provCart: Cart!
-    var dressRecord: DressMO!
     var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
     let carouselSize = CGSize(width: 515, height: 850)
-    
-    var fetchDressesController: NSFetchedResultsController<DressMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,43 +39,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
         
-        fetchDresses()
-    }
-    
-    func fetchDresses() {
-        
-        let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
-        let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchDressesController = NSFetchedResultsController(fetchRequest: fetchDressesRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchDressesController.delegate = self
-            do {
-                try fetchDressesController.performFetch()
-                if let fetchedDresses = fetchDressesController.fetchedObjects {
-                    dresses = fetchedDresses
-                }
-            } catch {
-                print(error)
-            }
-        }
-        
-        if dresses.isEmpty {
-            let dressesLocal = InitialData.getDresses()
-            for dress in dressesLocal {
-                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                    dressRecord = DressMO(context: appDelegate.persistentContainer.viewContext)
-                    dressRecord.name = dress.name
-                    dressRecord.imgName = dress.imgName
-                    dressRecord.count = 0
-                    dressRecord.isSelected = false
-                    dresses.append(dressRecord)
-                    appDelegate.saveContext()
-                }
-            }
-        }
+        self.dresses = InitialData.getDresses()
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,7 +64,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName!)
+        cell.dressImageView.image = UIImage(named: dress.imgName)
         
         return cell
     }
@@ -113,7 +73,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            zoomImageView.dress = dresses[indexPath.row].imgName! + "_full"
+            zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
@@ -181,19 +141,12 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 let destinationController = segue.destination as! SelectionViewController
                 
                 destinationController.languageIndex = languageIndex
-                destinationController.provCart = provCart
-                destinationController.dresses = dresses
-                destinationController.provMonth = self.month
                 
                 for index in indexPath {
                     destinationController.selectedDresses.append(dresses[index.row])
+                    provCart.dressesNames.append(dresses[index.row].name)
                 }
-                for dress in dresses {
-                    
-                    if dress.isSelected {
-                        print(dress.name!)
-                    }
-                }
+                destinationController.provCart = provCart
             }
         }
     }

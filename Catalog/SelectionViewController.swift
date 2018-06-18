@@ -21,20 +21,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var backHomeScreen: UIBarButtonItem!
     @IBOutlet weak var stackSelection: UIStackView!
     
-    var provMonth = [String]()
-    var dresses = [DressMO]()
-    var selectedDresses = [DressMO]()
-    var dressNames = [String]()
+    var selectedDresses = [Dress]()
     var provCart: Cart!
-    weak var client: ClientMO!
-    weak var region: RegionMO!
-    weak var month: MonthMO!
-    var regions = [RegionMO]()
-    var months = [MonthMO]()
+    weak var cart: CartMO!
     var languageIndex: Int!
-    
-    var fetchRegionsController: NSFetchedResultsController<RegionMO>!
-    var fetchMonthsController: NSFetchedResultsController<MonthMO>!
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
     var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
@@ -50,9 +40,9 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = nameLang[languageIndex] + " " + provCart.name
-        lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.lastname
-        hometownLabel.text = hometownLang[languageIndex] + " " + provCart.city
-        weddingDateLabel.text = weddingDateLang[languageIndex] + " " + provCart.weddingDate
+        lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.surname
+        hometownLabel.text = hometownLang[languageIndex] + " " + provCart.region
+        weddingDateLabel.text = weddingDateLang[languageIndex] + " " + provCart.dateOfWedding
         saveButton.setTitle(confirmLang[languageIndex], for: .normal)
         navigationItem.title = titleLang[languageIndex]
         backHomeScreen.title = homeLang[languageIndex]
@@ -69,66 +59,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let maskLayerLabel = CAShapeLayer()
         maskLayerLabel.path = maskPathLabel.cgPath
         dressesLabel.layer.mask = maskLayerLabel
-        
-        fetchRegions()
-        fetchMonths()
-    }
-    
-    func fetchRegions() {
-
-        let fetchRegionsRequest: NSFetchRequest<RegionMO> = RegionMO.fetchRequest()
-        let sortRegionsDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRegionsRequest.sortDescriptors = [sortRegionsDescriptor]
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchRegionsController = NSFetchedResultsController(fetchRequest: fetchRegionsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchRegionsController.delegate = self
-            
-            do {
-                try fetchRegionsController.performFetch()
-                if let fetchedRegions = fetchRegionsController.fetchedObjects {
-                    regions = fetchedRegions
-                }
-            } catch {
-                print(error)
-            }
-        }
-
-        if regions.isEmpty {
-            for regionName in regionNames {
-                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                    let region = RegionMO(context: appDelegate.persistentContainer.viewContext)
-                    region.name = regionName
-                    region.count = 0
-                    regions.append(region)
-                    appDelegate.saveContext()
-                }
-            }
-        }
-    }
-    
-    func fetchMonths() {
-        let fetchMonthsRequest: NSFetchRequest<MonthMO> = MonthMO.fetchRequest()
-        let sortMonthsDescriptor = NSSortDescriptor(key: "index", ascending: true)
-        fetchMonthsRequest.sortDescriptors = [sortMonthsDescriptor]
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            let context = appDelegate.persistentContainer.viewContext
-            fetchMonthsController = NSFetchedResultsController(fetchRequest: fetchMonthsRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-            fetchMonthsController.delegate = self
-            do {
-                try fetchMonthsController.performFetch()
-                if let fetchedMonths = fetchMonthsController.fetchedObjects {
-                    months = fetchedMonths
-                }
-            } catch {
-                print(error)
-            }
-        }
-        for  monthh in months {
-            print(String(monthh.index) + " - " + monthh.month!)
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -152,14 +82,14 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
 
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
         cell.dressLabel.text = dress.name
-        cell.dressImageView.image = UIImage(named: dress.imgName!)
+        cell.dressImageView.image = UIImage(named: dress.imgName)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-        popImageView.dressImage = selectedDresses[indexPath.row].imgName!
+        popImageView.dressImage = selectedDresses[indexPath.row].imgName
         self.addChildViewController(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
@@ -169,10 +99,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     func clearAllVariables() {
         provCart = nil
-        dresses.removeAll()
         selectedDresses.removeAll()
-        dressNames.removeAll()
-        regions.removeAll()
         tableView = nil
     }
     
@@ -190,41 +117,14 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
-            client = ClientMO(context: appDelegate.persistentContainer.viewContext)
-            client.fullName = provCart.name + " " + provCart.lastname
-            client.email = provCart.email
-            client.phone = provCart.phone
+            cart = CartMO(context: appDelegate.persistentContainer.viewContext)
+            cart.name = provCart.name
+            cart.surname = provCart.surname
+            cart.region = provCart.region
+            cart.dateOfWedding = provCart.dateOfWedding
+            cart.dressesNames = (provCart.dressesNames as NSArray).componentsJoined(by: ",")
             appDelegate.saveContext()
-
-            if let index = regions.index(where: {$0.name == provCart.city}) {
-                regions[index].count += 1
-                appDelegate.saveContext()
-            } else {
-                region = RegionMO(context: appDelegate.persistentContainer.viewContext)
-                region.name = provCart.city
-                region.count = 1
-                appDelegate.saveContext()
-            }
             
-            if let index = months.index(where: {$0.month == provMonth[1]}) {
-                months[index].count += 1
-                months[index].index = Int32(provMonth[0])!
-                appDelegate.saveContext()
-            } else {
-                month = MonthMO(context: appDelegate.persistentContainer.viewContext)
-                month.index = Int32(provMonth[0])!
-                month.month = provMonth[1]
-                month.count = 1
-                appDelegate.saveContext()
-            }
-            
-            for dress in dresses {
-                if dress.isSelected {
-                    dress.count += 1
-                    dress.isSelected = false
-                    appDelegate.saveContext()
-                }
-            }
             showCompleteView()
             
             saveButton.isEnabled = false

@@ -11,11 +11,7 @@
 		510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
 		514D47C420277E5500DD59EA /* InitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* InitialData.swift */; };
-		5167C4971FF4276A00B3F650 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4961FF4276900B3F650 /* PasswordViewController.swift */; };
-		5167C4991FF427F000B3F650 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
-		51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D541FC7520B004335B4 /* RecordsViewController.swift */; };
-		51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */; };
 		51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9C1F8C03860093C897 /* HomeViewController.swift */; };
 		51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */; };
 		51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9E1F8C03860093C897 /* CatalogCollectionViewCell.swift */; };
@@ -56,11 +52,7 @@
 		510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryTableViewCell.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		514D47C320277E5500DD59EA /* InitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialData.swift; sourceTree = "<group>"; };
-		5167C4961FF4276900B3F650 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
-		5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
-		51AB2D541FC7520B004335B4 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
-		51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		51BE2F841F8C02EC0093C897 /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BE2F9C1F8C03860093C897 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
@@ -139,10 +131,6 @@
 				51BE2FDB1F92C9120093C897 /* SelectionTableViewCell.swift */,
 				51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */,
 				514D47C120270E0600DD59EA /* CompleteViewController.swift */,
-				51AB2D541FC7520B004335B4 /* RecordsViewController.swift */,
-				51AB2D561FC7598E004335B4 /* RecordTableViewCell.swift */,
-				5167C4961FF4276900B3F650 /* PasswordViewController.swift */,
-				5167C4981FF427F000B3F650 /* ChangePasswordViewController.swift */,
 				51BE2FA61F8C03C80093C897 /* Main.storyboard */,
 				51BE2FA81F8C03EC0093C897 /* Assets.xcassets */,
 				51BE2FC21F8C046B0093C897 /* AppDelegate.swift */,
@@ -277,8 +265,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */,
-				51AB2D551FC7520B004335B4 /* RecordsViewController.swift in Sources */,
-				51AB2D571FC7598E004335B4 /* RecordTableViewCell.swift in Sources */,
 				514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */,
 				51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
@@ -288,10 +274,8 @@
 				510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */,
 				510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */,
 				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
-				5167C4971FF4276A00B3F650 /* PasswordViewController.swift in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Cart.swift in Sources */,
-				5167C4991FF427F000B3F650 /* ChangePasswordViewController.swift in Sources */,
 				51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */,
 				51BE2FA51F8C03860093C897 /* SelectionViewController.swift in Sources */,
 				51BE2FDC1F92C9120093C897 /* SelectionTableViewCell.swift in Sources */,
