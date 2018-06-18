@@ -1,11 +1,3 @@
-//
-//  SelectCountryViewController.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 30/01/2018.
-//  Copyright © 2018 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 class SelectCountryViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {

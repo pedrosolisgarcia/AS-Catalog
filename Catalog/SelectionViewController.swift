@@ -1,11 +1,3 @@
-//
-//  SelectionViewController.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 08/10/17.
-//  Copyright © 2017 AppCoda. All rights reserved.
-//
-
 import UIKit
 import CoreData
 

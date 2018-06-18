@@ -1,11 +1,3 @@
-//
-//  CompleteViewController.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 04/02/2018.
-//  Copyright © 2018 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 class CompleteViewController: UIViewController {

@@ -1,11 +1,3 @@
-//
-//  ImageViewController.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 06/10/17.
-//  Copyright © 2017 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 class ImageViewController: UIViewController, UIScrollViewDelegate {
