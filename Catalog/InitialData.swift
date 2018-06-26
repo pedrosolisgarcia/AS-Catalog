@@ -2,7 +2,6 @@ import Foundation
 
 class InitialData {
     
-    
     static func getDresses()-> [Dress] {
         let dressesLocal = [
             Dress(name: "Adelia", imgName: "adelia", isSelected: false),

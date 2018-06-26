@@ -46,9 +46,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var languageIndex: Int!
     static var selectedCountry = ""
     
-    
-    
-    var fields: [Bool] = [false,false,false,false,false]
     var provCart: Cart!
     var monthCal: String!
     var year: String!
@@ -103,25 +100,40 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        languageIndex = 0
         regionPicker.delegate = self
         dateOfWeddingPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
     
+        /*
+         if (thereIsInternet()) {
+            let Customer[] = thereAreCustomersInCoreData()
+            for customer in Customer {
+                if (sendToAPIIsSuccessfull()) {
+                    removeCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
+                }
+            }
+         }
+         */
+        if Reachability.isConnectedToNetwork() {
+            CoreDataManager.fetchCustomersFromCoreData(delegate: self)
+            //APIConnector.sendToAPIIfSuccessful()
+        }
+        
         resetHomeSettings()
         hideKeyboard()
     }
     
     func resetHomeSettings() {
-        languageIndex = 0
-        applyLanguage()
         lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         catalogButton.isEnabled = false
         catalogButton.alpha = 0
         nameWarning.isHidden = true
     }
     func resetHomeFields() {
+        languageIndex = 0
+        applyLanguage()
         provCart = nil
         nameField.text = nil
         surnameField.text = nil
@@ -312,18 +324,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     @IBAction func createProfile(sender: UIButton) {
-        if (
-                nameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                surnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                regionField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-                dateOfWeddingField.text == ""
-            ) {
-            let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
-            alertController.addAction(alertAction)
-            present(alertController, animated: true, completion:nil)
-            resetHomeSettings()
-        } else {
+        if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
             provCart = Cart(
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
@@ -338,6 +339,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             
             month.append(year + monthCal)
             month.append(fullMonth)
+        } else {
+            let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion:nil)
+            resetHomeSettings()
         }
         dismissKeyboard()
     }

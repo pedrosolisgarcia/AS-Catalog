@@ -15,7 +15,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     var selectedDresses = [Dress]()
     var provCart: Cart!
-    weak var cart: CartMO!
     var languageIndex: Int!
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
@@ -26,6 +25,8 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
     var confirmLang: [String] = ["POTWIERDŹ WYBÓR","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
     var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +72,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
             as! SelectionTableViewCell
         let dress = selectedDresses[indexPath.row]
-
+        
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
         cell.dressLabel.text = dress.name
         cell.dressImageView.image = UIImage(named: dress.imgName)
@@ -109,28 +110,33 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
-            cart = CartMO(context: appDelegate.persistentContainer.viewContext)
-            cart.name = provCart.name
-            cart.surname = provCart.surname
-            cart.region = provCart.region
-            cart.dateOfWedding = provCart.dateOfWedding
-            cart.dressesNames = (provCart.dressesNames as NSArray).componentsJoined(by: ",")
+            if Reachability.isConnectedToNetwork() {
+                /*if (!sendToAPIIsSuccessfull()) {
+                 saveCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
+                 }*/
+            } else {
+                CoreDataManager.saveCustomerInCoreData(provCart: provCart, viewContext: appDelegate.persistentContainer.viewContext)
+            }
+            
             appDelegate.saveContext()
-            
             showCompleteView()
-            
-            saveButton.isEnabled = false
-            saveButton.alpha = 0.25
-            navigationItem.backBarButtonItem!.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-            navigationItem.backBarButtonItem!.isEnabled = false
-            backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
-            backHomeScreen.isEnabled = true
+            sendCustomerBackToHomeScreen()
         }
     }
     
     @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
+        
         clearAllVariables()
         self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
         self.dismiss(animated: false)
+    }
+    
+    private func sendCustomerBackToHomeScreen() {
+        saveButton.isEnabled = false
+        saveButton.alpha = 0.25
+        navigationItem.backBarButtonItem!.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+        navigationItem.backBarButtonItem!.isEnabled = false
+        backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+        backHomeScreen.isEnabled = true
     }
 }
