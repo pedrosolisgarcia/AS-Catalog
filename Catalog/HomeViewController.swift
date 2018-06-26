@@ -17,7 +17,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var dateOfWeddingLabel: UILabel!
     @IBOutlet weak var dateOfWeddingField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
-
+    
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var languageIndex: Int!
     static var selectedCountry = ""
     
-    var provCart: Cart!
+    var provCart: Customer!
     var monthCal: String!
     var year: String!
     var month = [String]()
@@ -105,20 +105,34 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-    
+        
         /*
          if (thereIsInternet()) {
-            let Customer[] = thereAreCustomersInCoreData()
-            for customer in Customer {
-                if (sendToAPIIsSuccessfull()) {
-                    removeCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
-                }
-            }
+         let Customer[] = thereAreCustomersInCoreData()
+         for customer in Customer {
+         if (sendToAPIIsSuccessfull()) {
+         removeCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
+         }
+         }
          }
          */
-        if Reachability.isConnectedToNetwork() {
-            CoreDataManager.fetchCustomersFromCoreData(delegate: self)
-            //APIConnector.sendToAPIIfSuccessful()
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            if Reachability.isConnectedToNetwork() {
+                
+                var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
+                for customerMO in customersMO.enumerated() {
+                    
+                    customersMO.remove(at: customerMO.offset)
+                    let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
+                    APIConnector.sendCostumerToAPI(customer: customer) { (error) in
+                        if let error = error {
+                            fatalError(error.localizedDescription)
+                        }
+                        CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
+                        appDelegate.saveContext()
+                    }
+                }
+            }
         }
         
         resetHomeSettings()
@@ -249,7 +263,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         regionField.text = country
     }
     
-     func pickregion(_ textField : UITextField){
+    func pickregion(_ textField : UITextField){
         
         self.regionPicker.backgroundColor = UIColor.white
         textField.inputView = self.regionPicker
@@ -325,12 +339,13 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func createProfile(sender: UIButton) {
         if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
-            provCart = Cart(
+            provCart = Customer(
+                shopId: "",
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
                 region: regionField.text!,
                 dateOfWedding: dateOfWeddingField.text!,
-                dressesNames: [""]
+                dressesNames: ""
             )
             
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)

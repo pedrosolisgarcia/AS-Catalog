@@ -12,7 +12,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
     var dresses = [Dress]()
-    var provCart: Cart!
+    var provCart: Customer!
     var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
@@ -133,11 +133,14 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 let destinationController = segue.destination as! SelectionViewController
                 
                 destinationController.languageIndex = languageIndex
+                var dressesNames = [String]()
                 
                 for index in indexPath {
                     destinationController.selectedDresses.append(dresses[index.row])
-                    provCart.dressesNames.append(dresses[index.row].name)
+                    dressesNames.append(dresses[index.row].name)
                 }
+                provCart.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
+                print(provCart.dressesNames)
                 destinationController.provCart = provCart
             }
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CartMO" representedClassName="CartMO" syncable="YES" codeGenerationType="class">
+    <entity name="CustomerMO" representedClassName="CustomerMO" syncable="YES" codeGenerationType="class">
         <attribute name="dateOfWedding" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dressesNames" optional="YES" attributeType="String" customClassName="NSArray" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -8,6 +8,6 @@
         <attribute name="surname" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CartMO" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="CustomerMO" positionX="-54" positionY="-9" width="128" height="120"/>
     </elements>
 </model>

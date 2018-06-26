@@ -14,7 +14,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var stackSelection: UIStackView!
     
     var selectedDresses = [Dress]()
-    var provCart: Cart!
+    var provCart: Customer!
     var languageIndex: Int!
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
@@ -111,14 +111,16 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
             if Reachability.isConnectedToNetwork() {
-                /*if (!sendToAPIIsSuccessfull()) {
-                 saveCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
-                 }*/
+                APIConnector.sendCostumerToAPI(customer: provCart) { (error) in
+                    if let error = error {
+                        fatalError(error.localizedDescription)
+                    }
+                }
             } else {
-                CoreDataManager.saveCustomerInCoreData(provCart: provCart, viewContext: appDelegate.persistentContainer.viewContext)
+                CoreDataManager.saveCustomerInCoreData(customer: provCart, viewContext: appDelegate.persistentContainer.viewContext)
+                appDelegate.saveContext()
             }
             
-            appDelegate.saveContext()
             showCompleteView()
             sendCustomerBackToHomeScreen()
         }

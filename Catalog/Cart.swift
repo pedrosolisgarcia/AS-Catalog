@@ -1,13 +1,15 @@
 import Foundation
 
-struct Cart {
-    var name: String
-    var surname: String
-    var region: String
-    var dateOfWedding: String
-    var dressesNames: [String]
+struct Customer: Codable {
+    let shopId: String
+    let name: String
+    let surname: String
+    let region: String
+    let dateOfWedding: String
+    var dressesNames: String
     
-    init(name: String, surname: String, region: String, dateOfWedding: String, dressesNames: [String]){
+    init(shopId: String, name: String, surname: String, region: String, dateOfWedding: String, dressesNames: String){
+        self.shopId = shopId
         self.name = name
         self.surname = surname
         self.region = region

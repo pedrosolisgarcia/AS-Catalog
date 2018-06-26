@@ -4,10 +4,10 @@ import CoreData
 
 public class CoreDataManager {
     
-    class func fetchCustomersFromCoreData(delegate: NSFetchedResultsControllerDelegate) {
-        var fetchDataController: NSFetchedResultsController<CartMO>!
-        var carts = [CartMO]()
-        let fetchDressesRequest: NSFetchRequest<CartMO> = CartMO.fetchRequest()
+    class func fetchCustomersFromCoreData(delegate: NSFetchedResultsControllerDelegate) -> [CustomerMO] {
+        var fetchDataController: NSFetchedResultsController<CustomerMO>!
+        var customers = [CustomerMO]()
+        let fetchDressesRequest: NSFetchRequest<CustomerMO> = CustomerMO.fetchRequest()
         let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
@@ -17,25 +17,26 @@ public class CoreDataManager {
             do {
                 try fetchDataController.performFetch()
                 if let fetchedData = fetchDataController.fetchedObjects {
-                    carts = fetchedData
+                    customers = fetchedData
                 }
             } catch {
                 print(error)
             }
         }
         
-        for cart in carts {
-            print(cart.name! + " " + cart.surname!)
-            print(" " + cart.region! + " " + cart.dateOfWedding!)
+        for customer in customers {
+            print(customer.name! + " " + customer.surname!)
+            print(" " + customer.region! + " " + customer.dateOfWedding!)
         }
+        return customers
     }
     
-    class func saveCustomerInCoreData(provCart: Cart, viewContext: NSManagedObjectContext) {
-        let cart = CartMO(context: viewContext)
-        cart.name = provCart.name
-        cart.surname = provCart.surname
-        cart.region = provCart.region
-        cart.dateOfWedding = provCart.dateOfWedding
-        cart.dressesNames = (provCart.dressesNames as NSArray).componentsJoined(by: ",")
+    class func saveCustomerInCoreData(customer: Customer, viewContext: NSManagedObjectContext) {
+        let costumerMO = CustomerMO(context: viewContext)
+        costumerMO.name = customer.name
+        costumerMO.surname = customer.surname
+        costumerMO.region = customer.region
+        costumerMO.dateOfWedding = customer.dateOfWedding
+        costumerMO.dressesNames = customer.dressesNames
     }
 }
