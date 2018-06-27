@@ -105,17 +105,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-        
-        /*
-         if (thereIsInternet()) {
-         let Customer[] = thereAreCustomersInCoreData()
-         for customer in Customer {
-         if (sendToAPIIsSuccessfull()) {
-         removeCustomerInCoreData(viewContext: appDelegate.persistentContainer.viewContext)
-         }
-         }
-         }
-         */
+
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             if Reachability.isConnectedToNetwork() {
                 
@@ -123,11 +113,14 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 for customerMO in customersMO.enumerated() {
                     
                     customersMO.remove(at: customerMO.offset)
+                    //TODO(): remove from coreData
+                    appDelegate.saveContext()
                     let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
                     APIConnector.sendCostumerToAPI(customer: customer) { (error) in
                         if let error = error {
                             fatalError(error.localizedDescription)
                         }
+                        print("error in HOME VIEW CONTROLLER")
                         CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
                         appDelegate.saveContext()
                     }

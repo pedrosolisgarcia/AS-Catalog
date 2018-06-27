@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B402020F06D0083E69E /* SelectCountryViewController.swift */; };
 		510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */; };
-		5114A80F20DD796A00224D05 /* CatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A80E20DD796A00224D05 /* CatalogTests.swift */; };
 		5114A81720DD79D400224D05 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81620DD79D400224D05 /* Validator.swift */; };
 		5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81820DD7C4300224D05 /* ValidatorTests.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
@@ -68,7 +67,6 @@
 		510E2B402020F06D0083E69E /* SelectCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryViewController.swift; sourceTree = "<group>"; };
 		510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryTableViewCell.swift; sourceTree = "<group>"; };
 		5114A80C20DD796A00224D05 /* CatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5114A80E20DD796A00224D05 /* CatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTests.swift; sourceTree = "<group>"; };
 		5114A81020DD796A00224D05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5114A81620DD79D400224D05 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		5114A81820DD7C4300224D05 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 		5114A80D20DD796A00224D05 /* CatalogTests */ = {
 			isa = PBXGroup;
 			children = (
-				5114A80E20DD796A00224D05 /* CatalogTests.swift */,
 				5114A81020DD796A00224D05 /* Info.plist */,
 				5114A81820DD7C4300224D05 /* ValidatorTests.swift */,
 			);
@@ -410,7 +407,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */,
-				5114A80F20DD796A00224D05 /* CatalogTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

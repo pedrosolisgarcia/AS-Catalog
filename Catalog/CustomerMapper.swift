@@ -10,8 +10,4 @@ class CustomerMapper {
                  dateOfWedding: customerMO.dateOfWedding!,
                  dressesNames: customerMO.dressesNames!)
     }
-    
-    static func mapCustomerToCustomerMO(customer: Customer) -> CustomerMO {
-        return CustomerMO(entity: <#T##NSEntityDescription#>, insertInto: <#T##NSManagedObjectContext?#>)
-    }
 }

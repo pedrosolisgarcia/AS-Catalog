@@ -115,8 +115,12 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
                     if let error = error {
                         fatalError(error.localizedDescription)
                     }
+                    print("error in SELECTION VIEW CONTROLLER")
+                    CoreDataManager.saveCustomerInCoreData(customer: self.provCart, viewContext: appDelegate.persistentContainer.viewContext)
+                    appDelegate.saveContext()
                 }
             } else {
+                print("NO INTERNET - Saving in Core Data")
                 CoreDataManager.saveCustomerInCoreData(customer: provCart, viewContext: appDelegate.persistentContainer.viewContext)
                 appDelegate.saveContext()
             }
