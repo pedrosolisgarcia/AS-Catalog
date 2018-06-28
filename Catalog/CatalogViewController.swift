@@ -31,7 +31,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
         
-        self.dresses = InitialData.getDresses()
+        self.dresses = LocalData.getDresses()
     }
     
     override func didReceiveMemoryWarning() {

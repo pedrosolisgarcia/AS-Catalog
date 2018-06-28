@@ -130,12 +130,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-        if textField == nameField {
-            textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ? (nameWarning.isHidden = false) : (nameWarning.isHidden = true)
-            
-        }
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+//        if textField == nameField {
+//            textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ? (nameWarning.isHidden = false) : (nameWarning.isHidden = true)
+//
+//        }
+//    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         var numComponents = 0

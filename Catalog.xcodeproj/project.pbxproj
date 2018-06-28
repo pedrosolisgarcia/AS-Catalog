@@ -12,7 +12,7 @@
 		5114A81720DD79D400224D05 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81620DD79D400224D05 /* Validator.swift */; };
 		5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81820DD7C4300224D05 /* ValidatorTests.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
-		514D47C420277E5500DD59EA /* InitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* InitialData.swift */; };
+		514D47C420277E5500DD59EA /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* LocalData.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
 		51985E1120E2B2120019FBE1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1020E2B2120019FBE1 /* Reachability.swift */; };
 		51985E1320E2B3DC0019FBE1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */; };
@@ -72,7 +72,7 @@
 		5114A81820DD7C4300224D05 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		5114A81E20DD81B800224D05 /* tusmuertos.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tusmuertos.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
-		514D47C320277E5500DD59EA /* InitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialData.swift; sourceTree = "<group>"; };
+		514D47C320277E5500DD59EA /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		51985E1020E2B2120019FBE1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 				5114A81620DD79D400224D05 /* Validator.swift */,
 				51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */,
 				51985E1420E2B8450019FBE1 /* APIConnector.swift */,
-				514D47C320277E5500DD59EA /* InitialData.swift */,
+				514D47C320277E5500DD59EA /* LocalData.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -427,7 +427,7 @@
 				51985E1320E2B3DC0019FBE1 /* CoreDataManager.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
 				5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */,
-				514D47C420277E5500DD59EA /* InitialData.swift in Sources */,
+				514D47C420277E5500DD59EA /* LocalData.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */,
 				510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */,

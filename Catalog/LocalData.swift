@@ -1,6 +1,6 @@
 import Foundation
 
-class InitialData {
+public class LocalData {
     
     static func getDresses()-> [Dress] {
         let dressesLocal = [
