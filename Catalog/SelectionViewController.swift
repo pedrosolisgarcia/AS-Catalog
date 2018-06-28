@@ -111,11 +111,11 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
             
             if Reachability.isConnectedToNetwork() {
-                APIConnector.sendCostumerToAPI(customer: provCart) { (error) in
+                APIConnector.sendCostumerToAPI(customer: provCart) { (data, resp, error) in
                     if let error = error {
                         fatalError(error.localizedDescription)
                     }
-                    print("error in SELECTION VIEW CONTROLLER")
+                    print("error in BackEnd - Saving in Core Data")
                     CoreDataManager.saveCustomerInCoreData(customer: self.provCart, viewContext: appDelegate.persistentContainer.viewContext)
                     appDelegate.saveContext()
                 }

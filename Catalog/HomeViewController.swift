@@ -54,6 +54,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
         if segue.identifier == "unwindToHomeScreen" {
+            sendPendingCostumersToAPIIfConnected()
             resetHomeSettings()
             resetHomeFields()
         }
@@ -98,6 +99,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.reloadComponent(1)
     }
     
+    //TODO: to put core data logic ALSO in unwindToHomeScreen
     override func viewDidLoad() {
         super.viewDidLoad()
         languageIndex = 0
@@ -105,50 +107,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-            if Reachability.isConnectedToNetwork() {
-                
-                var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
-                for customerMO in customersMO.enumerated() {
-                    
-                    customersMO.remove(at: customerMO.offset)
-                    //TODO(): remove from coreData
-                    appDelegate.saveContext()
-                    let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
-                    APIConnector.sendCostumerToAPI(customer: customer) { (error) in
-                        if let error = error {
-                            fatalError(error.localizedDescription)
-                        }
-                        print("error in HOME VIEW CONTROLLER")
-                        CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
-                        appDelegate.saveContext()
-                    }
-                }
-            }
-        }
         
+        sendPendingCostumersToAPIIfConnected()
         resetHomeSettings()
         hideKeyboard()
-    }
-    
-    func resetHomeSettings() {
-        lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-        catalogButton.isEnabled = false
-        catalogButton.alpha = 0
-        nameWarning.isHidden = true
-    }
-    func resetHomeFields() {
-        languageIndex = 0
-        applyLanguage()
-        provCart = nil
-        nameField.text = nil
-        surnameField.text = nil
-        regionField.text = nil
-        regionPicker.reloadAllComponents()
-        dateOfWeddingField.text = nil
-        dateOfWeddingPicker.reloadAllComponents()
-        month.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -260,7 +222,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         self.regionPicker.backgroundColor = UIColor.white
         textField.inputView = self.regionPicker
-        //textField.text = self.regionNames[self.regionPicker.selectedRow(inComponent: 0)]
         
         // ToolBar
         let toolBar = UIToolbar()
@@ -333,7 +294,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBAction func createProfile(sender: UIButton) {
         if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
             provCart = Customer(
-                shopId: "",
+                // TODO: Set ID of shoping taken by UserDefault
+                shopId: "WRO-ID",
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
                 region: regionField.text!,
@@ -372,5 +334,54 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func sendPendingCostumersToAPIIfConnected() {
+        
+        if Reachability.isConnectedToNetwork() {
+            
+            var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
+            for customerMO in customersMO.enumerated() {
+                
+                let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
+                APIConnector.sendCostumerToAPI(customer: customer) { (data, resp, error) in
+                    if let error = error {
+                        fatalError(error.localizedDescription)
+                    }
+                    print("error en SELECTION VIEW CONTROLLER")
+                    if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                        CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
+                        appDelegate.saveContext()
+                    }
+                }
+                
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    let context = appDelegate.persistentContainer.viewContext
+                    context.delete(customerMO.element)
+                    appDelegate.saveContext()
+                }
+                customersMO.removeFirst()
+            }
+        }
+    }
+    
+    private func resetHomeSettings() {
+        lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        catalogButton.isEnabled = false
+        catalogButton.alpha = 0
+        nameWarning.isHidden = true
+    }
+    
+    private func resetHomeFields() {
+        languageIndex = 0
+        applyLanguage()
+        provCart = nil
+        nameField.text = nil
+        surnameField.text = nil
+        regionField.text = nil
+        regionPicker.reloadAllComponents()
+        dateOfWeddingField.text = nil
+        dateOfWeddingPicker.reloadAllComponents()
+        month.removeAll()
     }
 }

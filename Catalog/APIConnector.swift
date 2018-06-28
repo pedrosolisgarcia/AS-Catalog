@@ -2,15 +2,15 @@ import Foundation
 
 public class APIConnector {
     
-    class func sendCostumerToAPI(customer: Customer, completion:((Error?) -> Void)?) {
+    class func sendCostumerToAPI(customer: Customer, completion:((Data?, URLResponse?, Error?) -> Void)?) {
         
         var urlComponents = URLComponents()
         
-        // https://o4kskwft70.execute-api.eu-west-3.amazonaws.com/test/api
+        // https://o4kskwft70.execute-api.eu-west-3.amazonaws.com/test/customers
         
         urlComponents.scheme = "https"
         urlComponents.host = "o4kskwft70.execute-api.eu-west-3.amazonaws.com"
-        urlComponents.path = "/test/api"
+        urlComponents.path = "/test/customers"
         guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
         
         // Specify this request as being a POST method
@@ -30,7 +30,7 @@ public class APIConnector {
             request.httpBody = jsonData
             print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
         } catch {
-            completion?(error)
+            completion?(nil, nil, error)
         }
         
         // Create and run a URLSession data task with our JSON encoded POST request
@@ -38,13 +38,20 @@ public class APIConnector {
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) { (responseData, response, responseError) in
             guard responseError == nil else {
-                completion?(responseError!)
+                completion?(nil, nil, responseError!)
+                return
+            }
+            
+            guard (response as! HTTPURLResponse).statusCode == 200 else {
+                let status = (response as! HTTPURLResponse).statusCode
+                print("HTTP STATUS CODE ERROR:", status)
+                completion?(nil, nil, status as? Error)
                 return
             }
             
             // APIs usually respond with the data you just sent in your POST request
             if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("response: ", utf8Representation)
+                print("SUCCESSFUL: ", utf8Representation)
             } else {
                 print("no readable data received in response")
             }

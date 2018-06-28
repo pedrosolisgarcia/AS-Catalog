@@ -23,11 +23,6 @@ public class CoreDataManager {
                 print(error)
             }
         }
-        
-        for customer in customers {
-            print(customer.name! + " " + customer.surname!)
-            print(" " + customer.region! + " " + customer.dateOfWedding!)
-        }
         return customers
     }
     

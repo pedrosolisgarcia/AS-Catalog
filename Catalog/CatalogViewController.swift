@@ -140,7 +140,6 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                     dressesNames.append(dresses[index.row].name)
                 }
                 provCart.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
-                print(provCart.dressesNames)
                 destinationController.provCart = provCart
             }
         }
