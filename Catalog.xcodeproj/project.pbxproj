@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B402020F06D0083E69E /* SelectCountryViewController.swift */; };
-		510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */; };
 		5114A81720DD79D400224D05 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81620DD79D400224D05 /* Validator.swift */; };
 		5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81820DD7C4300224D05 /* ValidatorTests.swift */; };
+		514BDD1920F1583600F8F28E /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1820F1583600F8F28E /* CountryCollectionViewCell.swift */; };
+		514BDD1D20F159D800F8F28E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1C20F159D800F8F28E /* Country.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
 		514D47C420277E5500DD59EA /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* LocalData.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
@@ -65,12 +66,13 @@
 
 /* Begin PBXFileReference section */
 		510E2B402020F06D0083E69E /* SelectCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryViewController.swift; sourceTree = "<group>"; };
-		510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCountryTableViewCell.swift; sourceTree = "<group>"; };
 		5114A80C20DD796A00224D05 /* CatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5114A81020DD796A00224D05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5114A81620DD79D400224D05 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		5114A81820DD7C4300224D05 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		5114A81E20DD81B800224D05 /* tusmuertos.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tusmuertos.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		514BDD1820F1583600F8F28E /* CountryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCollectionViewCell.swift; sourceTree = "<group>"; };
+		514BDD1C20F159D800F8F28E /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		514D47C320277E5500DD59EA /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 		5114A82620DD96CF00224D05 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				514BDD1C20F159D800F8F28E /* Country.swift */,
 				51BE2FC41F8C047A0093C897 /* Dress.swift */,
 				51BE2FD91F923C1C0093C897 /* Customer.swift */,
 				51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */,
@@ -198,8 +201,8 @@
 				5114A82620DD96CF00224D05 /* model */,
 				51BE2FAE1F8C04360093C897 /* font */,
 				51BE2F9C1F8C03860093C897 /* HomeViewController.swift */,
+				514BDD1820F1583600F8F28E /* CountryCollectionViewCell.swift */,
 				510E2B402020F06D0083E69E /* SelectCountryViewController.swift */,
-				510E2B42202110080083E69E /* SelectCountryTableViewCell.swift */,
 				51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */,
 				51BE2F9E1F8C03860093C897 /* CatalogCollectionViewCell.swift */,
 				51BE2F9F1F8C03860093C897 /* ImageViewController.swift */,
@@ -430,7 +433,6 @@
 				514D47C420277E5500DD59EA /* LocalData.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */,
-				510E2B43202110080083E69E /* SelectCountryTableViewCell.swift in Sources */,
 				51985E1520E2B8450019FBE1 /* APIConnector.swift in Sources */,
 				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
@@ -440,8 +442,10 @@
 				51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */,
 				51985E1120E2B2120019FBE1 /* Reachability.swift in Sources */,
 				51BE2FA51F8C03860093C897 /* SelectionViewController.swift in Sources */,
+				514BDD1D20F159D800F8F28E /* Country.swift in Sources */,
 				51BE2FDC1F92C9120093C897 /* SelectionTableViewCell.swift in Sources */,
 				51BE2FC51F8C047A0093C897 /* Dress.swift in Sources */,
+				514BDD1920F1583600F8F28E /* CountryCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

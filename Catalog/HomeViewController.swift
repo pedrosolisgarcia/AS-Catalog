@@ -25,6 +25,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var regionPicker = UIPickerView()
     var dateOfWeddingPicker = UIDatePicker()
     let toolBar = UIToolbar()
+    var countrySelected = false
+    var country: Country!
     
     var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
     var nameLang: [String] = ["Imię:","Name:","Nombre:"]
@@ -142,6 +144,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 regionField.text = otherCountry[languageIndex]
             } else {
                 regionField.text = regionNames[row]
+                countrySelected = false
             }
         }
     }
@@ -161,17 +164,41 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         popCountryView.didMove(toParentViewController: self)
     }
     
-    func setCountryField(country: String) {
-        regionField.text = country
+    func setCountryField(country: Country) {
+        regionField.text = country.name[languageIndex]
+        countrySelected = true
+        self.country = country
     }
     
     func showRegionPicker(){
         
         self.regionPicker.backgroundColor = UIColor.white
+        regionPicker.selectRow(0, inComponent: 0, animated: false)
         regionField.inputView = self.regionPicker
+        regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)]
         
-        formatToolBar()
+        regionPicker.target(forAction: #selector(regionPickerChanged), withSender: self)
+        
+        formatToolBar(tag: "region")
         regionField.inputAccessoryView = toolBar
+    }
+    
+    func regionPickerChanged() {
+        regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)]
+    }
+    
+    func showDateOfWeddingPicker() {
+        
+        dateOfWeddingPicker.datePickerMode = .date
+        dateOfWeddingPicker.locale = Locale(identifier: dateLocal[languageIndex])
+        dateOfWeddingPicker.backgroundColor = .white
+        dateOfWeddingPicker.minimumDate = Date()
+        
+        dateOfWeddingField.inputView = dateOfWeddingPicker
+        dateOfWeddingPicker.addTarget(self, action: #selector(dateOfWeddingPickerChanged(sender:)), for: .valueChanged)
+        
+        formatToolBar(tag: "date")
+        dateOfWeddingField.inputAccessoryView = toolBar
     }
     
     func dateOfWeddingPickerChanged(sender: UIDatePicker) {
@@ -180,20 +207,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingField.text = dateFormatter.string(from: sender.date)
     }
     
-    func showDateOfWeddingPicker() {
-        
-        dateOfWeddingPicker.datePickerMode = .date
-        dateOfWeddingPicker.locale = Locale(identifier: dateLocal[languageIndex])
-        dateOfWeddingPicker.backgroundColor = .white
-        
-        dateOfWeddingField.inputView = dateOfWeddingPicker
-        dateOfWeddingPicker.addTarget(self, action: #selector(dateOfWeddingPickerChanged(sender:)), for: .valueChanged)
-        
-        formatToolBar()
-        dateOfWeddingField.inputAccessoryView = toolBar
-    }
-    
-    private func formatToolBar() {
+    private func formatToolBar(tag: String) {
         
         toolBar.barStyle = .default
         toolBar.isOpaque = true
@@ -201,9 +215,16 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         toolBar.tintColor = .white
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.doneDate))
+        let doneRegionSelector = #selector(HomeViewController.doneRegion)
+        let cancelRegionSelector = #selector(HomeViewController.cancelRegion)
+        let doneDateSelector = #selector(HomeViewController.doneDate)
+        let cancelDateSelector = #selector(HomeViewController.cancelDate)
+        
+        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action:
+            tag == "date" ? doneDateSelector : doneRegionSelector)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.cancelDate))
+        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action:
+            tag == "date" ? cancelDateSelector : cancelRegionSelector)
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
         
@@ -239,7 +260,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 shopId: "WRO-ID",
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
-                region: regionField.text!,
+                region: countrySelected ? country.name[1] : regionField.text!,
                 dateOfWedding: dateOfWeddingField.text!,
                 dressesNames: ""
             )
@@ -247,9 +268,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             catalogButton.isEnabled = true
             catalogButton.alpha = 1
-            
-            month.append(year + monthCal)
-            month.append(fullMonth)
         } else {
             let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
             let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
@@ -312,7 +330,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         nameLabel.text = nameLang[languageIndex]
         surnameLabel.text = surnameLang[languageIndex]
         regionLabel.text = regionLang[languageIndex]
-        formatToolBar()
+        regionPicker.selectRow(0, inComponent: 0, animated: false)
+        formatToolBar(tag: "region")
         dateOfWeddingLabel.text = dateOfWeddingLang[languageIndex]
         dateOfWeddingPicker.locale = Locale(identifier: dateLocal[languageIndex])
         createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
