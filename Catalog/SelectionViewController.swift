@@ -142,7 +142,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         saveButton.alpha = 0.25
         navigationItem.backBarButtonItem!.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
         navigationItem.backBarButtonItem!.isEnabled = false
-        backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 1)
+        backHomeScreen.tintColor = .white
         backHomeScreen.isEnabled = true
     }
 }
