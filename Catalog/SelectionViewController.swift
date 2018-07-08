@@ -16,6 +16,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var selectedDresses = [Dress]()
     var provCart: Customer!
     var languageIndex: Int!
+    var region = [String]()
     
     var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
     var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
@@ -34,7 +35,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = nameLang[languageIndex] + " " + provCart.name
         lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.surname
-        hometownLabel.text = hometownLang[languageIndex] + " " + provCart.region
+        hometownLabel.text = hometownLang[languageIndex] + " " + region[languageIndex]
         weddingDateLabel.text = weddingDateLang[languageIndex] + " " + provCart.dateOfWedding
         saveButton.setTitle(confirmLang[languageIndex], for: .normal)
         navigationItem.title = titleLang[languageIndex]
@@ -74,7 +75,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         let dress = selectedDresses[indexPath.row]
         
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
-        cell.dressLabel.text = dress.name
+        cell.dressLabel.text = dress.name.count > 1 ? dress.name[languageIndex] : dress.name[0]
         cell.dressImageView.image = UIImage(named: dress.imgName)
         
         return cell

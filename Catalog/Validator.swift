@@ -14,7 +14,7 @@ class Validator {
     }
     
     static func validateCustomerName(name: String) -> Bool {
-        let RegEx: String = "\\A\\w{3,25}(\\s+\\w{3,25})?"
+        let RegEx: String = "\\A\\w{1,25}(\\s+\\w{1,25})?"
         let Test = NSPredicate(format: "SELF MATCHES %@", RegEx)
         return Test.evaluate(with:name)
     }

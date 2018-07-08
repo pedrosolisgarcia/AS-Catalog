@@ -11,8 +11,9 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
     var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
     
-    var dresses = [Dress]()
+    var dresses = LocalData.getDresses()
     var provCart: Customer!
+    var region = [String]()
     var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
@@ -30,8 +31,6 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
-        
-        self.dresses = LocalData.getDresses()
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,7 +54,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
-        cell.dressLabel.text = dress.name
+        cell.dressLabel.text = dress.name.count > 1 ? dress.name[languageIndex] : dress.name[0]
         cell.dressImageView.image = UIImage(named: dress.imgName)
         
         return cell
@@ -137,10 +136,11 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 
                 for index in indexPath {
                     destinationController.selectedDresses.append(dresses[index.row])
-                    dressesNames.append(dresses[index.row].name)
+                    dressesNames.append(dresses[index.row].name[0])
                 }
                 provCart.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
                 destinationController.provCart = provCart
+                destinationController.region = region
             }
         }
     }

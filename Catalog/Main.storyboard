@@ -163,7 +163,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="11M-v8-VP7" userLabel="NameField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="11M-v8-VP7" userLabel="NameField">
                                 <rect key="frame" x="148" y="431" width="225" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.85882352941176465" blue="0.85490196078431369" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -171,7 +171,7 @@
                                     <constraint firstAttribute="width" constant="225" id="nw0-bU-6ol"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="name"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="VHl-4z-KWU"/>
@@ -201,7 +201,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zGv-N2-cJR" userLabel="SurnameField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zGv-N2-cJR" userLabel="SurnameField">
                                 <rect key="frame" x="537" y="432" width="210" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -209,7 +209,7 @@
                                     <constraint firstAttribute="width" constant="210" id="y0f-C9-p9P"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="family-name"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="jOo-gR-WlD"/>
@@ -222,24 +222,24 @@
                                     <constraint firstAttribute="height" constant="1" id="LRg-z9-mtd"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Województwo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ia8-5C-haY" userLabel="Hometown:">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Województwo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia8-5C-haY" userLabel="Hometown:">
                                 <rect key="frame" x="20" y="508" width="130" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="xcq-HI-UVA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="N81-dZ-99r" userLabel="HometownField">
-                                <rect key="frame" x="150" y="508" width="223" height="40"/>
+                                <rect key="frame" x="154" y="508" width="219" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="X6L-dp-hVp"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="address-level2"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="kyf-Z9-LNx"/>
@@ -261,7 +261,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pDK-2d-WHA" userLabel="WeddingDateField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pDK-2d-WHA" userLabel="WeddingDateField">
                                 <rect key="frame" x="537" y="509" width="210" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,7 +270,7 @@
                                     <constraint firstAttribute="height" constant="40" id="vDa-jf-IL6"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="n2S-qX-3Ne"/>
@@ -361,7 +361,7 @@
                             <constraint firstItem="Yqp-eA-pmN" firstAttribute="top" secondItem="65J-uW-C7v" secondAttribute="bottom" constant="10" id="M90-ag-B0A"/>
                             <constraint firstItem="65J-uW-C7v" firstAttribute="top" secondItem="Fy5-BL-Qu6" secondAttribute="bottom" constant="25" id="MBw-K2-dm1"/>
                             <constraint firstItem="G67-JG-zNw" firstAttribute="top" secondItem="yKT-eO-5Ad" secondAttribute="top" id="MOt-Hv-By7"/>
-                            <constraint firstItem="N81-dZ-99r" firstAttribute="leading" secondItem="Ia8-5C-haY" secondAttribute="trailing" id="MQX-3o-m4u"/>
+                            <constraint firstItem="N81-dZ-99r" firstAttribute="leading" secondItem="Ia8-5C-haY" secondAttribute="trailing" constant="4" id="MQX-3o-m4u"/>
                             <constraint firstItem="11M-v8-VP7" firstAttribute="leading" secondItem="ngN-RU-2L0" secondAttribute="trailing" constant="8" symbolic="YES" id="MjO-KW-fh9"/>
                             <constraint firstItem="l2f-BX-De5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="15" id="MsG-sQ-gWk"/>
                             <constraint firstItem="sQB-NP-5ka" firstAttribute="trailing" secondItem="zGv-N2-cJR" secondAttribute="trailing" id="O0B-EG-PwT"/>
@@ -496,8 +496,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="225" height="54"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juj-fE-aGE">
-                                                            <rect key="frame" x="81" y="0.0" width="143" height="54"/>
+                                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="juj-fE-aGE">
+                                                            <rect key="frame" x="87" y="0.0" width="132" height="54"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -513,11 +513,11 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="htz-Hz-0HK" firstAttribute="top" secondItem="gL3-vd-nJx" secondAttribute="top" id="09u-Fo-uUT"/>
-                                                    <constraint firstAttribute="trailing" secondItem="juj-fE-aGE" secondAttribute="trailing" id="MBa-Ab-fNH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="juj-fE-aGE" secondAttribute="trailing" constant="6" id="MBa-Ab-fNH"/>
                                                     <constraint firstItem="htz-Hz-0HK" firstAttribute="leading" secondItem="gL3-vd-nJx" secondAttribute="leading" id="MGz-Sr-q1F"/>
                                                     <constraint firstItem="juj-fE-aGE" firstAttribute="top" secondItem="gL3-vd-nJx" secondAttribute="top" id="WKq-he-1Vz"/>
                                                     <constraint firstAttribute="bottom" secondItem="htz-Hz-0HK" secondAttribute="bottom" id="eAL-lM-LFB"/>
-                                                    <constraint firstItem="juj-fE-aGE" firstAttribute="leading" secondItem="htz-Hz-0HK" secondAttribute="trailing" id="l7g-VR-Bb7"/>
+                                                    <constraint firstItem="juj-fE-aGE" firstAttribute="leading" secondItem="htz-Hz-0HK" secondAttribute="trailing" constant="6" id="l7g-VR-Bb7"/>
                                                     <constraint firstAttribute="bottom" secondItem="juj-fE-aGE" secondAttribute="bottom" id="xCB-4o-opM"/>
                                                 </constraints>
                                                 <connections>
@@ -710,7 +710,7 @@ UFJaRUpEGsW5IERBTEVKA
                                                     <rect key="frame" x="0.0" y="0.0" width="246" height="420"/>
                                                     <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="0.61791487068965523" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dress Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wqo-iJ-ulO">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dress Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wqo-iJ-ulO">
                                                     <rect key="frame" x="0.0" y="380" width="246" height="40"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -866,7 +866,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     <constraint firstAttribute="height" constant="1" id="NsZ-ry-2er"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Miasto:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQg-lv-nGw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Miasto:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQg-lv-nGw">
                                 <rect key="frame" x="20" y="139" width="315" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5bP-LW-xR1"/>
@@ -924,7 +924,7 @@ UFJaRUpEGsW5IERBTEVKA
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="175" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LUG-rx-MdY">
                                         <rect key="frame" x="0.0" y="41" width="728" height="630"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="120" minY="0.0" maxX="0.0" maxY="0.0"/>
