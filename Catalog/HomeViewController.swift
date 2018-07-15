@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var regionField: UITextField!
     @IBOutlet weak var dateOfWeddingLabel: UILabel!
     @IBOutlet weak var dateOfWeddingField: UITextField!
+    @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var createProfileButton: UIButton!
     
     @IBOutlet weak var lowSeparator: UIView!
@@ -29,21 +30,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var countrySelected = false
     var country: Country!
     var regionSelected = [String]()
-    
-    var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
-    var nameLang: [String] = ["Imię:","Name:","Nombre:"]
-    var surnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
-    var regionLang = ["Województwo:","Region:","Región:"]
-    var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
+
     var regionNames = LocalData.getRegions()
-    var dateOfWeddingLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
-    let dateLocal = ["pl","en","es"]
-    var doneLang: [String] = ["Gotowy","Done","Hecho"]
-    var cancelLang: [String] = ["Anuluj","Cancel","Cancelar"]
-    var createProfileLang: [String] = ["UTWÓRZ PROFIL","CREATE PROFILE","CREAR PERFIL"]
-    var warningMessageLang: [[String]] = [["Błąd","Wszystkie pola muszą być wypełnione, aby zobaczyć katalog.","Dobra"],["Error","All the fields must be filled to see the catalog.","Ok"],["Error","Todos los campos han de ser rellenados para poder ver el catálogo.","Vale"]]
-    var lowTextLang: [String] = ["Możesz zobaczyć katalog.","Now you can watch the catalog.","Ya puedes ver el catálogo."]
-    var catalogLang: [String] = ["OBEJRZYJ KATALOG","WATCH THE CATALOG","VISITA EL CATÁLOGO"]
     var languageIndex: Int!
     static var selectedCountry = ""
     
@@ -119,13 +107,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-//        if textField == nameField {
-//            textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ? (nameWarning.isHidden = false) : (nameWarning.isHidden = true)
-//
-//        }
-//    }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -136,7 +117,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if row == regionNames.count {
-            return otherCountry[languageIndex]
+            return LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex]
         } else {
             return regionNames[row][languageIndex]
         }
@@ -145,7 +126,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == regionPicker {
             if row == regionNames.count {
-                regionField.text = otherCountry[languageIndex]
+                regionField.text = LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex]
             } else {
                 regionField.text = regionNames[row][languageIndex]
                 regionSelected = regionNames[row]
@@ -195,7 +176,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func showDateOfWeddingPicker() {
         
         dateOfWeddingPicker.datePickerMode = .date
-        dateOfWeddingPicker.locale = Locale(identifier: dateLocal[languageIndex])
+        dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
         dateOfWeddingPicker.backgroundColor = .white
         dateOfWeddingPicker.minimumDate = Date()
         
@@ -225,10 +206,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         let doneDateSelector = #selector(HomeViewController.doneDate)
         let cancelDateSelector = #selector(HomeViewController.cancelDate)
         
-        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action:
+        let doneButton = UIBarButtonItem(title: LocalData.getLocalizationLabels(forElement: "doneButton")[languageIndex], style: .plain, target: self, action:
             pickerId == "dateOfWeddingPicker" ? doneDateSelector : doneRegionSelector)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action:
+        let cancelButton = UIBarButtonItem(title: LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], style: .plain, target: self, action:
             pickerId == "dateOfWeddingPicker" ? cancelDateSelector : cancelRegionSelector)
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
@@ -251,7 +232,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == regionField {
-            if textField.text == otherCountry[languageIndex] {
+            if textField.text == LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex] {
                 showCountryView()
             }
         }
@@ -268,18 +249,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 dateOfWedding: dateOfWeddingField.text!,
                 dressesNames: ""
             )
-            
-            lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            catalogButton.isEnabled = true
-            catalogButton.alpha = 1
         } else {
-            let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
+            let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage")[languageIndex], preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
             resetHomeSettings()
         }
         dismissKeyboard()
+        self.performSegue(withIdentifier: "showCatalog", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -331,23 +309,21 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     private func applyLanguage() {
         
-        beforeLabel.text = beforeLang[languageIndex]
-        nameLabel.text = nameLang[languageIndex]
-        surnameLabel.text = surnameLang[languageIndex]
-        regionLabel.text = regionLang[languageIndex]
+        beforeLabel.text = LocalData.getLocalizationLabels(forElement: "beforeLabel")[languageIndex]
+        nameLabel.text = LocalData.getLocalizationLabels(forElement: "nameLabel")[languageIndex]
+        surnameLabel.text = LocalData.getLocalizationLabels(forElement: "surnameLabel")[languageIndex]
+        regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex]
         regionPicker.selectRow(0, inComponent: 0, animated: false)
         formatToolBar()
-        dateOfWeddingLabel.text = dateOfWeddingLang[languageIndex]
-        dateOfWeddingPicker.locale = Locale(identifier: dateLocal[languageIndex])
-        createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
-        lowText.text = lowTextLang[languageIndex]
-        catalogButton.setTitle(catalogLang[languageIndex], for: .normal)
+        dateOfWeddingLabel.text = LocalData.getLocalizationLabels(forElement: "dateOfWeddingLabel")[languageIndex]
+        dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
+        infoLabel.text = LocalData.getLocalizationLabels(forElement: "infoLabel")[languageIndex]
+        createProfileButton.setTitle(LocalData.getLocalizationLabels(forElement: "createProfileButton")[languageIndex], for: .normal)
+        lowText.text = LocalData.getLocalizationLabels(forElement: "lowText")[languageIndex]
+        catalogButton.setTitle(LocalData.getLocalizationLabels(forElement: "catalogButton")[languageIndex], for: .normal)
     }
     
     private func resetHomeSettings() {
-        lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-        catalogButton.isEnabled = false
-        catalogButton.alpha = 0
         nameWarning.isHidden = true
     }
     

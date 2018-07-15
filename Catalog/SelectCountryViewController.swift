@@ -10,11 +10,6 @@ class SelectCountryViewController: UIViewController, UICollectionViewDataSource,
     var languageIndex: Int!
     
     var selectedCountry: Country!
-    var headerLang = ["KRAJ POCHODZENIA","COUNTRY SELECTION","SELECCIÓN DE PAÍS"]
-    var cancelLang = ["Anuluj","Cancel","Cancelar"]
-    var confirmLang = ["Zrobione","Confirm","Hecho"]
-    var otherLang = ["Inne","Other","Otro"]
-    var countryLang = ["Kraj:","Country:","País:"]
     var countries = [Country]()
     weak var delegate: HomeViewController!
     
@@ -26,9 +21,9 @@ class SelectCountryViewController: UIViewController, UICollectionViewDataSource,
         collectionView.allowsSelection = true
         collectionView.allowsMultipleSelection = false
         self.showAnimate()
-        headerLabel.text = headerLang[languageIndex]
-        cancelButton.setTitle(cancelLang[languageIndex], for: .normal)
-        confirmButton.setTitle(confirmLang[languageIndex], for: .normal)
+        headerLabel.text = LocalData.getLocalizationLabels(forElement: "headerLabel")[languageIndex]
+        cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
+        confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
         confirmButton.isEnabled = false
         confirmButton.alpha = 0.5
         
@@ -91,7 +86,7 @@ class SelectCountryViewController: UIViewController, UICollectionViewDataSource,
         }, completion:{(finished : Bool)  in
             if (finished) {
                 if sender == self.confirmButton {
-                    self.delegate.regionLabel.text = self.countryLang[self.languageIndex]
+                    self.delegate.regionLabel.text = LocalData.getLocalizationLabels(forElement: "countryLabel")[self.languageIndex]
                     self.delegate.setCountryField(country: self.selectedCountry)
                 }
                 if sender == self.cancelButton {

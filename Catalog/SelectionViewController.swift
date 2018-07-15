@@ -4,9 +4,9 @@ import CoreData
 class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var lastnameLabel: UILabel!
-    @IBOutlet weak var hometownLabel: UILabel!
-    @IBOutlet weak var weddingDateLabel: UILabel!
+    @IBOutlet weak var surnameLabel: UILabel!
+    @IBOutlet weak var regionLabel: UILabel!
+    @IBOutlet weak var dateOfWeddingLabel: UILabel!
     @IBOutlet weak var dressesLabel: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
@@ -18,28 +18,18 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     var languageIndex: Int!
     var region = [String]()
     
-    var titleLang: [String] = ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
-    var homeLang: [String] = ["POWRÓT","HOME","INICIO"]
-    var nameLang: [String] = ["Imię:","Name:","Nombre:"]
-    var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
-    var hometownLang: [String] = ["Województwo:","Region:","Región:"]
-    var weddingDateLang: [String] = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
-    var confirmLang: [String] = ["POTWIERDŹ WYBÓR","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
-    var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-        nameLabel.text = nameLang[languageIndex] + " " + provCart.name
-        lastnameLabel.text = lastnameLang[languageIndex] + " " + provCart.surname
-        hometownLabel.text = hometownLang[languageIndex] + " " + region[languageIndex]
-        weddingDateLabel.text = weddingDateLang[languageIndex] + " " + provCart.dateOfWedding
-        saveButton.setTitle(confirmLang[languageIndex], for: .normal)
-        navigationItem.title = titleLang[languageIndex]
-        backHomeScreen.title = homeLang[languageIndex]
+        nameLabel.text = LocalData.getLocalizationLabels(forElement: "nameLabel")[languageIndex] + " " + provCart.name
+        surnameLabel.text = LocalData.getLocalizationLabels(forElement: "surnameLabel")[languageIndex] + " " + provCart.surname
+        regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex] + " " + region[languageIndex]
+        dateOfWeddingLabel.text = LocalData.getLocalizationLabels(forElement: "dateOfWeddingLabel")[languageIndex] + " " + provCart.dateOfWedding
+        saveButton.setTitle(LocalData.getLocalizationLabels(forElement: "saveButton")[languageIndex], for: .normal)
+        navigationItem.title = LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex]
+        dressesLabel.setTitle(LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex], for: .normal)
+        backHomeScreen.title = LocalData.getLocalizationLabels(forElement: "backHomeScreen")[languageIndex]
         backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
         
         let maskPathSave = UIBezierPath(roundedRect: saveButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))

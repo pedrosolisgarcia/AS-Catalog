@@ -13,7 +13,7 @@ public class LocalData {
             Dress(name: ["Aurora z Aplikacją","Aurora with Application","Aurora con Aplique"],
                   imgName: "aurora1", isSelected: false),
             Dress(name: ["Bonita"], imgName: "bonita", isSelected: false),
-            Dress(name: ["Bonita ze Spódnicą","Bonita with Skirt","Bonita con Falsa"],
+            Dress(name: ["Bonita ze Spódnicą","Bonita with Skirt","Bonita con Falda"],
                   imgName: "bonita3", isSelected: false),
             Dress(name: ["Cassandra"], imgName: "cassandra", isSelected: false),
             Dress(name: ["Diamantina"], imgName: "diamantina", isSelected: false),
@@ -117,5 +117,61 @@ public class LocalData {
             ["zachodniopomorskie","zachodniopomorskie","zachodniopomorskie"]
         ]
         return regionNames
+    }
+    
+    static func getLocalizationLabels(forElement: String) -> [String] {
+        
+        switch forElement {
+        case "otherCountry":
+            return ["Nie jestem z Polski...", "I am not from Poland...", "No soy de Polonia..."]
+        case "dateLocal":
+            return ["pl","en","es"]
+        case "catalogTitle":
+            return ["KATALOG","CATALOG","CATÁLOGO"]
+        case "selectionTitle":
+            return ["WYBRANE MODELE","SELECTED MODELS","MODELOS SELECCIONADOS"]
+        case "beforeLabel":
+            return ["Informacja o kliencie*:","Customer information*:","Información del cliente*:"]
+        case "nameLabel":
+            return ["Imię:","Name:","Nombre:"]
+        case "surnameLabel":
+            return ["Nazwisko:","Lastname:","Apellidos:"]
+        case "regionLabel":
+            return ["Województwo:","Region:","Región:"]
+        case "countryLabel":
+            return ["Kraj:","Country:","País:"]
+        case "dateOfWeddingLabel":
+            return ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
+        case "headerLabel":
+            return ["KRAJ POCHODZENIA","COUNTRY SELECTION","SELECCIÓN DE PAÍS"]
+        case "infoLabel":
+            return ["*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.","*Due to statistical purposes, we would appreciate to know where our customers are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.","*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias."]
+        case "lowText":
+            return ["Albo możesz zobaczyć katalog:","Or you can consult the catalog:","O puedes ver el catálogo:"]
+        case "warningTitle":
+            return ["Błąd","Error","Error"]
+        case "warningMessage":
+            return ["Aby utworzyć profil, wypełnij pola dotyczące województwa oraz daty ślubu.","Region and Wedding Date fields must be filled to create a profile.","La región y la fecha de boda han de ser rellenados para poder crear un perfil."]
+        case "warningButton":
+            return ["Dobra","Ok","Vale"]
+        case "doneButton":
+            return ["Gotowy","Done","Hecho"]
+        case "cancelButton":
+            return ["Anuluj","Cancel","Cancelar"]
+        case "confirmButton":
+            return ["Zrobione","Confirm","Hecho"]
+        case "createProfileButton":
+            return ["UTWÓRZ PROFIL I OBEJRZYJ KATALOG","CREATE PROFILE AND VISIT THE CATALOG","CREAR PERFIL Y VER EL CATÁLOGO"]
+        case "catalogButton":
+            return ["OBEJRZYJ KATALOG","VISIT THE CATALOG","VISITA EL CATÁLOGO"]
+        case "selectButton":
+            return ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
+        case "saveButton":
+            return ["POTWIERDŹ WYBÓR","CONFIRM SELECTION","CONFIRMAR SELECCIÓN"]
+        case "backHomeScreen":
+            return ["POWRÓT","HOME","INICIO"]
+        default:
+            return [""]
+        }
     }
 }

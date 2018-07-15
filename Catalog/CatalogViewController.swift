@@ -8,9 +8,6 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var carouselView: UIBarButtonItem!
     @IBOutlet weak var selectButton: UIButton!
     
-    var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
-    var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
-    
     var dresses = LocalData.getDresses()
     var provCart: Customer!
     var region = [String]()
@@ -24,10 +21,10 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         if languageIndex != 0 {
-            selectButton.setTitle(selectLang[languageIndex], for: .normal)
+            selectButton.setTitle(LocalData.getLocalizationLabels(forElement: "selectButton")[languageIndex], for: .normal)
         }
         
-        navigationItem.title = titleLang[languageIndex]
+        navigationItem.title = LocalData.getLocalizationLabels(forElement: "catalogTitle")[languageIndex]
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
