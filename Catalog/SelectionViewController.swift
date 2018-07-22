@@ -24,7 +24,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         nameLabel.text = LocalData.getLocalizationLabels(forElement: "nameLabel")[languageIndex] + " " + provCart.name
         surnameLabel.text = LocalData.getLocalizationLabels(forElement: "surnameLabel")[languageIndex] + " " + provCart.surname
-        regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex] + " " + region[languageIndex]
+        regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex] + " " + (!region.isEmpty ? region[languageIndex] : "")
         dateOfWeddingLabel.text = LocalData.getLocalizationLabels(forElement: "dateOfWeddingLabel")[languageIndex] + " " + provCart.dateOfWedding
         saveButton.setTitle(LocalData.getLocalizationLabels(forElement: "saveButton")[languageIndex], for: .normal)
         navigationItem.title = LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex]

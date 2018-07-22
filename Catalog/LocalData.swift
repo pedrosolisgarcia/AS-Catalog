@@ -171,7 +171,7 @@ public class LocalData {
         case "backHomeScreen":
             return ["POWRÓT","HOME","INICIO"]
         default:
-            return [""]
+            return ["Błąd","Error","Error"]
         }
     }
 }

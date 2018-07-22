@@ -263,6 +263,16 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showCatalog"{
+            if provCart == nil {
+                provCart = Customer(
+                    // TODO: Set ID of shoping taken by UserDefault
+                    shopId: "WRO-ID",
+                    name: "",
+                    surname: "",
+                    region: "",
+                    dateOfWedding: "",
+                    dressesNames: "")
+            }
             let destinationController = segue.destination as! CatalogViewController
             destinationController.languageIndex = languageIndex
             destinationController.provCart = provCart
