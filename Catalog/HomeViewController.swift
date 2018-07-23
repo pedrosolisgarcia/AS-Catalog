@@ -162,7 +162,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         regionPicker.selectRow(0, inComponent: 0, animated: false)
         regionField.inputView = self.regionPicker
         regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)][languageIndex]
-        
+        regionSelected = regionNames[regionPicker.selectedRow(inComponent: 0)]
         regionPicker.target(forAction: #selector(regionPickerChanged), withSender: self)
         
         formatToolBar()
