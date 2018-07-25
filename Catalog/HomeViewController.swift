@@ -345,7 +345,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         surnameField.text = nil
         regionField.text = nil
         regionPicker.reloadAllComponents()
+        dateOfWeddingPicker.setDate(Date(), animated: false)
         dateOfWeddingField.text = nil
         month.removeAll()
+        polishButton.alpha = 1
+        englishButton.alpha = 0.5
+        spanishButton.alpha = 0.5
     }
 }
