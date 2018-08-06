@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var catalogButton: UIButton!
     
-    let appVersion = "1.13"
+    let appVersion = "1.2"
     
     var pickerId = "regionPicker"
     var regionPicker = UIPickerView()
@@ -76,6 +76,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
+            showShopIdView()
+        }
+        
         languageIndex = 0
         regionPicker.delegate = self
         
@@ -92,6 +97,20 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    @IBAction func pressToShowShopIdView(sender: UIButton) {
+        self.showShopIdView()
+    }
+    
+    func showShopIdView() {
+        
+        let popShopIdView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "shopIdView") as! ShopIDViewController
+        popShopIdView.languageIndex = self.languageIndex
+        self.addChildViewController(popShopIdView)
+        popShopIdView.view.frame = self.view.frame
+        self.view.addSubview(popShopIdView.view)
+        popShopIdView.didMove(toParentViewController: self)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -240,7 +259,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 // TODO: Set ID of shoping taken by UserDefault
                 appVersion: self.appVersion,
                 dateOfVisit: formatDate(date: Date()),
-                shopId: "WRO-ID",
+                shopId: ShopIdManager.retrieveIPadShopId()!,
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
                 region: countrySelected ? country.name[1] : regionSelected[1],
@@ -265,11 +284,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                     // TODO: Set ID of shoping taken by UserDefault
                     appVersion: self.appVersion,
                     dateOfVisit: formatDate(date: Date()),
-                    shopId: "WRO-ID",
-                    name: "",
-                    surname: "",
-                    region: "",
-                    dateOfWedding: "",
+                    shopId: ShopIdManager.retrieveIPadShopId()!,
+                    name: (nameField.text?.capitalized)!,
+                    surname: (surnameField.text?.capitalized)!,
+                    region: regionField.text!,
+                    dateOfWedding: dateOfWeddingField.text!,
                     dressesNames: "")
             }
             let destinationController = segue.destination as! CatalogViewController

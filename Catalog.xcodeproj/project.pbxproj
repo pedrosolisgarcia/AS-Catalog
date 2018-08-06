@@ -52,6 +52,8 @@
 		51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */; };
 		51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */; };
 		51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */; };
+		51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73602118ADEB00A22F21 /* ShopIdManager.swift */; };
+		51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73622118B2A200A22F21 /* ShopIDViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedDressViewController.swift; sourceTree = "<group>"; };
 		51BE2FE01F9391D90093C897 /* Catalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Catalog.xcdatamodel; sourceTree = "<group>"; };
 		51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMapper.swift; sourceTree = "<group>"; };
+		51DD73602118ADEB00A22F21 /* ShopIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIdManager.swift; sourceTree = "<group>"; };
+		51DD73622118B2A200A22F21 /* ShopIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIDViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 				51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */,
 				51985E1420E2B8450019FBE1 /* APIConnector.swift */,
 				514D47C320277E5500DD59EA /* LocalData.swift */,
+				51DD73602118ADEB00A22F21 /* ShopIdManager.swift */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				5114A82720DD96D900224D05 /* utils */,
 				5114A82620DD96CF00224D05 /* model */,
 				51BE2FAE1F8C04360093C897 /* font */,
+				51DD73622118B2A200A22F21 /* ShopIDViewController.swift */,
 				51BE2F9C1F8C03860093C897 /* HomeViewController.swift */,
 				514BDD1820F1583600F8F28E /* CountryCollectionViewCell.swift */,
 				510E2B402020F06D0083E69E /* SelectCountryViewController.swift */,
@@ -433,7 +439,9 @@
 				514D47C420277E5500DD59EA /* LocalData.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */,
+				51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */,
 				51985E1520E2B8450019FBE1 /* APIConnector.swift in Sources */,
+				51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */,
 				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Customer.swift in Sources */,
