@@ -27,11 +27,14 @@ public class CoreDataManager {
     }
     
     class func saveCustomerInCoreData(customer: Customer, viewContext: NSManagedObjectContext) {
-        let costumerMO = CustomerMO(context: viewContext)
-        costumerMO.name = customer.name
-        costumerMO.surname = customer.surname
-        costumerMO.region = customer.region
-        costumerMO.dateOfWedding = customer.dateOfWedding
-        costumerMO.dressesNames = customer.dressesNames
+        let customerMO = CustomerMO(context: viewContext)
+        customerMO.appVersion = customer.appVersion
+        customerMO.dateOfVisit = customer.dateOfVisit
+        customerMO.shopId = customer.shopId
+        customerMO.name = customer.name
+        customerMO.surname = customer.surname
+        customerMO.region = customer.region
+        customerMO.dateOfWedding = customer.dateOfWedding
+        customerMO.dressesNames = customer.dressesNames
     }
 }

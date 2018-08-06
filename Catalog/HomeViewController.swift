@@ -9,7 +9,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var beforeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var nameWarning: UILabel!
     @IBOutlet weak var surnameLabel: UILabel!
     @IBOutlet weak var surnameField: UITextField!
     @IBOutlet weak var regionLabel: UILabel!
@@ -20,8 +19,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var createProfileButton: UIButton!
     
     @IBOutlet weak var lowSeparator: UIView!
-    @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
+    
+    let appVersion = "1.13"
     
     var pickerId = "regionPicker"
     var regionPicker = UIPickerView()
@@ -44,7 +44,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
         if segue.identifier == "unwindToHomeScreen" {
             sendPendingCostumersToAPIIfConnected()
-            resetHomeSettings()
             resetHomeFields()
         }
         if segue.identifier == "unwindToPolishRegion" {
@@ -84,7 +83,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         selectLanguage(sender: polishButton)
         sendPendingCostumersToAPIIfConnected()
-        resetHomeSettings()
         hideKeyboard()
     }
     
@@ -188,9 +186,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     func dateOfWeddingPickerChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        dateOfWeddingField.text = dateFormatter.string(from: sender.date)
+        dateOfWeddingField.text = formatDate(date: sender.date)
     }
     
     private func formatToolBar() {
@@ -242,6 +238,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
             provCart = Customer(
                 // TODO: Set ID of shoping taken by UserDefault
+                appVersion: self.appVersion,
+                dateOfVisit: formatDate(date: Date()),
                 shopId: "WRO-ID",
                 name: (nameField.text?.capitalized)!,
                 surname: (surnameField.text?.capitalized)!,
@@ -254,7 +252,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
-            resetHomeSettings()
         }
         dismissKeyboard()
         self.performSegue(withIdentifier: "showCatalog", sender: self)
@@ -266,6 +263,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             if provCart == nil {
                 provCart = Customer(
                     // TODO: Set ID of shoping taken by UserDefault
+                    appVersion: self.appVersion,
+                    dateOfVisit: formatDate(date: Date()),
                     shopId: "WRO-ID",
                     name: "",
                     surname: "",
@@ -329,12 +328,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
         infoLabel.text = LocalData.getLocalizationLabels(forElement: "infoLabel")[languageIndex]
         createProfileButton.setTitle(LocalData.getLocalizationLabels(forElement: "createProfileButton")[languageIndex], for: .normal)
-        lowText.text = LocalData.getLocalizationLabels(forElement: "lowText")[languageIndex]
-        catalogButton.setTitle(LocalData.getLocalizationLabels(forElement: "catalogButton")[languageIndex], for: .normal)
-    }
-    
-    private func resetHomeSettings() {
-        nameWarning.isHidden = true
+        catalogButton.setTitle(LocalData.getLocalizationLabels(forElement: "catalogButton")[languageIndex].uppercased(), for: .normal)
     }
     
     private func resetHomeFields() {
@@ -348,8 +342,15 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingPicker.setDate(Date(), animated: false)
         dateOfWeddingField.text = nil
         month.removeAll()
+        regionSelected.removeAll()
         polishButton.alpha = 1
         englishButton.alpha = 0.5
         spanishButton.alpha = 0.5
+    }
+    
+    private func formatDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: date)
     }
 }

@@ -1,6 +1,8 @@
 import Foundation
 
 struct Customer: Codable {
+    let appVersion: String
+    let dateOfVisit: String
     let shopId: String
     let name: String
     let surname: String
@@ -8,7 +10,9 @@ struct Customer: Codable {
     let dateOfWedding: String
     var dressesNames: String
     
-    init(shopId: String, name: String, surname: String, region: String, dateOfWedding: String, dressesNames: String){
+    init(appVersion: String, dateOfVisit: String, shopId: String, name: String, surname: String, region: String, dateOfWedding: String, dressesNames: String){
+        self.appVersion = appVersion
+        self.dateOfVisit = dateOfVisit
         self.shopId = shopId
         self.name = name
         self.surname = surname

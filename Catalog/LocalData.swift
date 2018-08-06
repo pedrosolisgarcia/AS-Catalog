@@ -146,8 +146,6 @@ public class LocalData {
             return ["KRAJ POCHODZENIA","COUNTRY SELECTION","SELECCIÓN DE PAÍS"]
         case "infoLabel":
             return ["*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.","*Due to statistical purposes, we would appreciate to know where our customers are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.","*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias."]
-        case "lowText":
-            return ["Albo możesz zobaczyć katalog:","Or you can consult the catalog:","O puedes ver el catálogo:"]
         case "warningTitle":
             return ["Błąd","Error","Error"]
         case "warningMessage":
@@ -163,7 +161,7 @@ public class LocalData {
         case "createProfileButton":
             return ["UTWÓRZ PROFIL I OBEJRZYJ KATALOG","CREATE PROFILE AND VISIT THE CATALOG","CREAR PERFIL Y VER EL CATÁLOGO"]
         case "catalogButton":
-            return ["OBEJRZYJ KATALOG","VISIT THE CATALOG","VISITA EL CATÁLOGO"]
+            return ["Albo możesz zobaczyć katalog","Or you can consult the catalog","O puedes ver el catálogo"]
         case "selectButton":
             return ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
         case "saveButton":
