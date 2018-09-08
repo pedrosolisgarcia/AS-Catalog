@@ -117,7 +117,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             }
             
             showCompleteView()
-            sendCustomerBackToHomeScreen()
+            setViewAsCompleted()
         }
     }
     
@@ -128,11 +128,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         self.dismiss(animated: false)
     }
     
-    private func sendCustomerBackToHomeScreen() {
+    private func setViewAsCompleted() {
         saveButton.isEnabled = false
         saveButton.alpha = 0.25
-        navigationItem.backBarButtonItem!.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
-        navigationItem.backBarButtonItem!.isEnabled = false
+        self.navigationItem.hidesBackButton = true
         backHomeScreen.tintColor = .white
         backHomeScreen.isEnabled = true
     }
