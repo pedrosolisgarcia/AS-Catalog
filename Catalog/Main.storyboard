@@ -415,7 +415,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1Q-0v-GBc" customClass="ButtonDesign" customModule="Catalog" customModuleProvider="target">
-                                <rect key="frame" x="160" y="934" width="448" height="50"/>
+                                <rect key="frame" x="180" y="934" width="408" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="efa-l9-Zed"/>
                                 </constraints>
@@ -473,7 +473,7 @@
                             <constraint firstItem="Y8W-17-NlJ" firstAttribute="centerX" secondItem="cbH-68-Wrl" secondAttribute="centerX" id="BSo-ez-4PR"/>
                             <constraint firstItem="l2f-BX-De5" firstAttribute="height" secondItem="onI-ra-QdJ" secondAttribute="height" id="BiN-CW-0Wu"/>
                             <constraint firstItem="Fy5-BL-Qu6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="De8-Jw-naY"/>
-                            <constraint firstItem="T1Q-0v-GBc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="140" id="Fkg-eR-JBB"/>
+                            <constraint firstItem="T1Q-0v-GBc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="160" id="Fkg-eR-JBB"/>
                             <constraint firstItem="wb1-kD-p9f" firstAttribute="top" secondItem="11M-v8-VP7" secondAttribute="bottom" id="G3s-13-gaY"/>
                             <constraint firstItem="4Sx-IC-JiV" firstAttribute="bottom" secondItem="zGv-N2-cJR" secondAttribute="bottom" id="H5Z-af-SGG"/>
                             <constraint firstItem="onI-ra-QdJ" firstAttribute="centerY" secondItem="l2f-BX-De5" secondAttribute="centerY" id="IIh-9X-Ul9"/>

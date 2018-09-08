@@ -144,6 +144,8 @@ public class LocalData {
             return ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
         case "headerLabel":
             return ["KRAJ POCHODZENIA","COUNTRY SELECTION","SELECCIÓN DE PAÍS"]
+        case "headerLabel_ID_Identified":
+            return ["PROFIL: ","PROFILE: ","PERFIL: "]
         case "headerLabel_ID":
             return ["PODAJ KOD","TYPE THE CODE","TECLEE EL CÓDIGO"]
         case "infoLabel":
@@ -165,7 +167,7 @@ public class LocalData {
         case "createProfileButton":
             return ["UTWÓRZ PROFIL I OBEJRZYJ KATALOG","CREATE PROFILE AND VISIT THE CATALOG","CREAR PERFIL Y VER EL CATÁLOGO"]
         case "catalogButton":
-            return ["Albo możesz zobaczyć katalog","Or you can consult the catalog","O puedes ver el catálogo"]
+            return ["Możesz zobaczyć katalog","You can consult the catalog","Puedes ver el catálogo"]
         case "selectButton":
             return ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
         case "saveButton":

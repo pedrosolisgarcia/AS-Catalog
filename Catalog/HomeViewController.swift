@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var lowSeparator: UIView!
     @IBOutlet weak var catalogButton: UIButton!
     
-    let appVersion = "1.2"
+    let appVersion = "1.22"
     
     var pickerId = "regionPicker"
     var regionPicker = UIPickerView()
@@ -76,12 +76,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        languageIndex = 0
         
         if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
             showShopIdView()
         }
         
-        languageIndex = 0
         regionPicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
