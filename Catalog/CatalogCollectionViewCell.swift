@@ -1,11 +1,3 @@
-//
-//  CatalogCollectionViewCell.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 26/09/17.
-//  Copyright © 2017 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 protocol CatalogCollectionViewCellDelegate: class {

@@ -1,51 +1,29 @@
-//
-//  SelectCountryViewController.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 30/01/2018.
-//  Copyright © 2018 AppCoda. All rights reserved.
-//
-
 import UIKit
 
-class SelectCountryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SelectCountryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var otherLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var countryField: UITextField!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var confirmButton: UIButton!
     
     var languageIndex: Int!
     
-    var selectedCountry = ""
-    var headerLang = ["KRAJ POCHODZENIA","COUNTRY SELECTION","SELECCIÓN DE PAÍS"]
-    var cancelLang = ["Anuluj","Cancel","Cancelar"]
-    var confirmLang = ["Zrobione","Confirm","Hecho"]
-    var otherLang = ["Inne","Other","Otro"]
-    var countryLang = ["Kraj:","Country:","País:"]
-    var countries = [
-        ["Niemcy", "Anglia", "Czechy", "Rosja", "Ukraina"],
-        ["Germany", "England", "Czech Republic", "Russia", "Ukraine"],
-        ["Alemania", "Inglaterra", "República Checa", "Rusia", "Ukrania"]]
+    var selectedCountry: Country!
+    var countries = [Country]()
     weak var delegate: HomeViewController!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
         self.isEditing = false
-        tableView.allowsSelection = true
-        tableView.allowsSelectionDuringEditing = true
+        collectionView.allowsSelection = true
+        collectionView.allowsMultipleSelection = false
         self.showAnimate()
-        headerLabel.text = headerLang[languageIndex]
-        cancelButton.setTitle(cancelLang[languageIndex], for: .normal)
-        otherLabel.text = otherLang[languageIndex]
-        countryLabel.text = countryLang[languageIndex]
-        confirmButton.setTitle(confirmLang[languageIndex], for: .normal)
+        headerLabel.text = LocalData.getLocalizationLabels(forElement: "headerLabel")[languageIndex]
+        cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
+        confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
         confirmButton.isEnabled = false
         confirmButton.alpha = 0.5
         
@@ -60,56 +38,34 @@ class SelectCountryViewController: UIViewController, UITableViewDataSource, UITa
         let maskLayerLabel = CAShapeLayer()
         maskLayerLabel.path = maskPathLabel.cgPath
         headerLabel.layer.mask = maskLayerLabel
+        
+        countries = LocalData.getCountries()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countries[0].count
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return countries.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cellIdentifier = "Cell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-            as! SelectCountryTableViewCell
-        tableView.separatorColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-        let country = countries[languageIndex][indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CountryCollectionViewCell
         
-        cell.countryLabel.text = country
+        let country = countries[indexPath.row]
+        
+        cell.countryLabel.text = country.name[languageIndex]
+        cell.countryFlag.image = UIImage(named: country.imgName)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCountry = countries[languageIndex][indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCountry = countries[indexPath.row]
         confirmButton.isEnabled = true
         confirmButton.alpha = 1
-        countryField.text = ""
-        print(selectedCountry)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if (textField.text?.count)! < 3 {
-            confirmButton.isEnabled = false
-            confirmButton.alpha = 0.5
-        } else {
-            confirmButton.isEnabled = true
-            confirmButton.alpha = 1
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if (textField.text?.count)! < 3 {
-            confirmButton.isEnabled = false
-            confirmButton.alpha = 0.5
-        } else {
-            confirmButton.isEnabled = true
-            confirmButton.alpha = 1
-        }
     }
     
     func showAnimate() {
@@ -130,14 +86,11 @@ class SelectCountryViewController: UIViewController, UITableViewDataSource, UITa
         }, completion:{(finished : Bool)  in
             if (finished) {
                 if sender == self.confirmButton {
-                    if self.selectedCountry == "" {
-                        self.selectedCountry = self.countryField.text!
-                    }
-                    self.delegate.regionLabel.text = self.countryLang[self.languageIndex]
+                    self.delegate.regionLabel.text = LocalData.getLocalizationLabels(forElement: "countryLabel")[self.languageIndex]
                     self.delegate.setCountryField(country: self.selectedCountry)
                 }
                 if sender == self.cancelButton {
-                    self.delegate.setCountryField(country: "")
+                    self.delegate.setCountryField(country: Country(name:["","",""],imgName:""))
                 }
                 if (self.delegate.view.gestureRecognizers?.isEmpty)! {
                     self.delegate.hideKeyboard()

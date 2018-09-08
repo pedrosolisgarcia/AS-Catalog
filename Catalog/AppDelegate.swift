@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  ASCatalog
-//
-//  Created by Pedro Solís García on 20/09/17.
-//  Copyright © 2017 AppCoda. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
