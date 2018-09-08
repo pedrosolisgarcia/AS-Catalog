@@ -3,7 +3,7 @@ import Foundation
 public class ShopIdManager {
     
     static func validShopIds() -> [String] {
-        return ["WRO-ID", "KRK-ID", "WAW-ID", "TST-ID"]
+        return ["WRO-ID", "KRAK-ID", "WAR-ID", "TEST-ID"]
     }
     
     class func isThereAnyShopIdRegisteredAlready() -> Bool {
@@ -20,5 +20,4 @@ public class ShopIdManager {
         print("Value to be used: " + UserDefaults.standard.string(forKey: "SHOP-ID")!)
         return UserDefaults.standard.string(forKey: "SHOP-ID")
     }
-    
 }

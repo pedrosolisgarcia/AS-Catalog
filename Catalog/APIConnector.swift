@@ -10,6 +10,7 @@ public class APIConnector {
         
         urlComponents.scheme = "https"
         urlComponents.host = "o4kskwft70.execute-api.eu-west-3.amazonaws.com"
+//        urlComponents.path = "/test/custom"
         urlComponents.path = "/test/customers"
         guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
         

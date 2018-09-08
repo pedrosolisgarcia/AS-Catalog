@@ -20,8 +20,9 @@ class ShopIDViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        headerLabel.text = LocalData.getLocalizationLabels(forElement: "headerLabel_ID")[languageIndex]
+        headerLabel.text = ShopIdManager.isThereAnyShopIdRegisteredAlready() ?
+            LocalData.getLocalizationLabels(forElement: "headerLabel_ID_Identified")[languageIndex] + ShopIdManager.retrieveIPadShopId()! :
+            LocalData.getLocalizationLabels(forElement: "headerLabel_ID")[languageIndex]
         cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
         confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
         
