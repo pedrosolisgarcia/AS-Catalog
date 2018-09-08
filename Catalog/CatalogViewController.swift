@@ -1,3 +1,11 @@
+//
+//  CatalogViewController.swift
+//  Catalog
+//
+//  Created by Pedro Solís García on 26/09/17.
+//  Copyright © 2017 AppCoda. All rights reserved.
+//
+
 import UIKit
 import CoreData
 
@@ -8,26 +16,70 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var carouselView: UIBarButtonItem!
     @IBOutlet weak var selectButton: UIButton!
     
-    var dresses = LocalData.getDresses()
-    var provCart: Customer!
-    var region = [String]()
+    var selectLang: [String] = ["","CONTINUE WITH SELECTION","CONTINUAR CON LA SELECCIÓN"]
+    var titleLang: [String] = ["KATALOG","CATALOG","CATÁLOGO"]
+    
+    var month = [String]()
+    var dresses = [DressMO]()
+    var provCart: Cart!
+    var dressRecord: DressMO!
     var languageIndex: Int!
     
     let catalogSize = CGSize(width: 246, height: 420)
     let carouselSize = CGSize(width: 515, height: 850)
+    
+    var fetchDressesController: NSFetchedResultsController<DressMO>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
         if languageIndex != 0 {
-            selectButton.setTitle(LocalData.getLocalizationLabels(forElement: "selectButton")[languageIndex], for: .normal)
+            selectButton.setTitle(selectLang[languageIndex], for: .normal)
         }
         
-        navigationItem.title = LocalData.getLocalizationLabels(forElement: "catalogTitle")[languageIndex]
+        navigationItem.title = titleLang[languageIndex]
         collectionView?.allowsMultipleSelection = true
         selectButton.isEnabled = false
         selectButton.alpha = 0.25
+        
+        fetchDresses()
+    }
+    
+    func fetchDresses() {
+        
+        let fetchDressesRequest: NSFetchRequest<DressMO> = DressMO.fetchRequest()
+        let sortDressesDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchDressesRequest.sortDescriptors = [sortDressesDescriptor]
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+            let context = appDelegate.persistentContainer.viewContext
+            fetchDressesController = NSFetchedResultsController(fetchRequest: fetchDressesRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            fetchDressesController.delegate = self
+            do {
+                try fetchDressesController.performFetch()
+                if let fetchedDresses = fetchDressesController.fetchedObjects {
+                    dresses = fetchedDresses
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        if dresses.isEmpty {
+            let dressesLocal = InitialData.getDresses()
+            for dress in dressesLocal {
+                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                    dressRecord = DressMO(context: appDelegate.persistentContainer.viewContext)
+                    dressRecord.name = dress.name
+                    dressRecord.imgName = dress.imgName
+                    dressRecord.count = 0
+                    dressRecord.isSelected = false
+                    dresses.append(dressRecord)
+                    appDelegate.saveContext()
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,8 +103,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         
         // Configure the cell
         cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
-        cell.dressLabel.text = dress.name.count > 1 ? dress.name[languageIndex] : dress.name[0]
-        cell.dressImageView.image = UIImage(named: dress.imgName)
+        cell.dressLabel.text = dress.name
+        cell.dressImageView.image = UIImage(named: dress.imgName!)
         
         return cell
     }
@@ -61,7 +113,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         if let indexPath = getCurrentCellIndexPath(sender) {
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-            zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
+            zoomImageView.dress = dresses[indexPath.row].imgName! + "_full"
             self.addChildViewController(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
@@ -129,15 +181,19 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 let destinationController = segue.destination as! SelectionViewController
                 
                 destinationController.languageIndex = languageIndex
-                var dressesNames = [String]()
+                destinationController.provCart = provCart
+                destinationController.dresses = dresses
+                destinationController.provMonth = self.month
                 
                 for index in indexPath {
                     destinationController.selectedDresses.append(dresses[index.row])
-                    dressesNames.append(dresses[index.row].name[0])
                 }
-                provCart.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
-                destinationController.provCart = provCart
-                destinationController.region = region
+                for dress in dresses {
+                    
+                    if dress.isSelected {
+                        print(dress.name!)
+                    }
+                }
             }
         }
     }
