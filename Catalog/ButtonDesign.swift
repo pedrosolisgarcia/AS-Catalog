@@ -1,3 +1,11 @@
+//
+//  ButtonDesign.swift
+//  Catalog
+//
+//  Created by Pedro Solís García on 22/11/2017.
+//  Copyright © 2017 AppCoda. All rights reserved.
+//
+
 import UIKit
 
 @IBDesignable class ButtonDesign: UIButton {

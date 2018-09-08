@@ -1,41 +1,68 @@
+//
+//  HomeViewController.swift
+//  Catalog
+//
+//  Created by Pedro Solís García on 29/09/17.
+//  Copyright © 2017 AppCoda. All rights reserved.
+//
+
 import UIKit
 import CoreData
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, NSFetchedResultsControllerDelegate {
     
+    @IBOutlet weak var recordsButton: UIButton!
     @IBOutlet weak var polishButton: UIButton!
     @IBOutlet weak var englishButton: UIButton!
     @IBOutlet weak var spanishButton: UIButton!
     @IBOutlet weak var beforeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var surnameLabel: UILabel!
-    @IBOutlet weak var surnameField: UITextField!
+    @IBOutlet weak var lastnameLabel: UILabel!
+    @IBOutlet weak var lastnameField: UITextField!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var regionLabel: UILabel!
     @IBOutlet weak var regionField: UITextField!
-    @IBOutlet weak var dateOfWeddingLabel: UILabel!
-    @IBOutlet weak var dateOfWeddingField: UITextField!
-    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var weddingDateLabel: UILabel!
+    @IBOutlet weak var weddingDateField: UITextField!
     @IBOutlet weak var createProfileButton: UIButton!
     
     @IBOutlet weak var lowSeparator: UIView!
+    @IBOutlet weak var lowText: UILabel!
     @IBOutlet weak var catalogButton: UIButton!
     
-    let appVersion = "1.2"
-    
-    var pickerId = "regionPicker"
     var regionPicker = UIPickerView()
-    var dateOfWeddingPicker = UIDatePicker()
-    let toolBar = UIToolbar()
-    var countrySelected = false
-    var country: Country!
-    var regionSelected = [String]()
-
-    var regionNames = LocalData.getRegions()
+    var weddingDatePicker = UIPickerView()
+    
+    var beforeLang: [String] = ["Przed obejrzeniem katalogu, proszę o identyfikację:","Before watching the catalog, please identify yourself:","Antes de ver el catalogo, por favor identifícate:"]
+    var nameLang: [String] = ["Imię:","Name:","Nombre:"]
+    var lastnameLang: [String] = ["Nazwisko:","Lastname:","Apellidos:"]
+    var phoneLang = ["Telefon:","Telefon:","Teléfono:"]
+    var regionLang = ["Województwo:","Region:","Región:"]
+    var otherCountry = ["Nie jestem z Polski..", "I am not from Poland..", "No soy de Polonia.."]
+    var regionNames = ["dolnośląskie", "kujawsko-pomorskie", "lubelskie", "lubuskie", "łódzkie", "małopolskie", "mazowieckie", "opolskie", "podkarpackie", "podlaskie", "pomorskie", "śląskie", "świętokrzyskie", "warmińsko-mazurskie", "wielkopolskie", "zachodniopomorskie"]
+    var weddingDateLang = ["Data Ślubu:","Wedd. Date:","Fecha Boda:"]
+    var numDay = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+    var numMonths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    var numYear = [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+    var monthsLang = [["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"], ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]]
+    var numberOfRows = [31,12,13]
+    var doneLang: [String] = ["Gotowy","Done","Hecho"]
+    var cancelLang: [String] = ["Anuluj","Cancel","Cancelar"]
+    var createProfileLang: [String] = ["UTWÓRZ PROFIL","CREATE PROFILE","CREAR PERFIL"]
+    var warningMessageLang: [[String]] = [["Błąd","Wszystkie pola muszą być wypełnione, aby zobaczyć katalog.","Dobra"],["Error","All the fields must be filled to see the catalog.","Ok"],["Error","Todos los campos han de ser rellenados para poder ver el catálogo.","Vale"]]
+    var lowTextLang: [String] = ["Możesz zobaczyć katalog.","Now you can watch the catalog.","Ya puedes ver el catálogo."]
+    var catalogLang: [String] = ["OBEJRZYJ KATALOG","WATCH THE CATALOG","VISITA EL CATÁLOGO"]
     var languageIndex: Int!
     static var selectedCountry = ""
     
-    var provCart: Customer!
+    
+    
+    var fields: [Bool] = [false,false,false,false,false]
+    var provCart: Cart!
     var monthCal: String!
     var year: String!
     var month = [String]()
@@ -43,11 +70,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
         if segue.identifier == "unwindToHomeScreen" {
-            sendPendingCostumersToAPIIfConnected()
+            resetHomeSettings()
             resetHomeFields()
         }
         if segue.identifier == "unwindToPolishRegion" {
-            self.showRegionPicker()
+            self.pickregion(self.regionField)
         }
     }
     
@@ -55,40 +82,78 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         if sender == polishButton  {
             languageIndex = 0
-            polishButton.alpha = 1
-            englishButton.alpha = 0.5
-            spanishButton.alpha = 0.5
+            polishButton.isHighlighted = true
+            englishButton.isHighlighted = false
+            spanishButton.isHighlighted = false
         }
         if sender == englishButton {
             languageIndex = 1
-            polishButton.alpha = 0.5
-            englishButton.alpha = 1
-            spanishButton.alpha = 0.5
+            polishButton.isHighlighted = false
+            englishButton.isHighlighted = true
+            spanishButton.isHighlighted = false
         }
         if sender == spanishButton {
             languageIndex = 2
-            polishButton.alpha = 0.5
-            englishButton.alpha = 0.5
-            spanishButton.alpha = 1
+            polishButton.isHighlighted = false
+            englishButton.isHighlighted = false
+            spanishButton.isHighlighted = true
         }
         applyLanguage()
+    }
+    
+    func applyLanguage() {
+        
+        beforeLabel.text = beforeLang[languageIndex]
+        nameLabel.text = nameLang[languageIndex]
+        lastnameLabel.text = lastnameLang[languageIndex]
+        phoneLabel.text = phoneLang[languageIndex]
+        regionLabel.text = regionLang[languageIndex]
+        weddingDateLabel.text = weddingDateLang[languageIndex]
+        createProfileButton.setTitle(createProfileLang[languageIndex], for: .normal)
+        lowText.text = lowTextLang[languageIndex]
+        catalogButton.setTitle(catalogLang[languageIndex], for: .normal)
+        weddingDatePicker.reloadComponent(1)
+    }
+    
+    @IBAction func showPassword(sender: UIButton) {
+        
+        let popPasswordView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PasswordView") as! PasswordViewController
+        self.addChildViewController(popPasswordView)
+        popPasswordView.view.frame = self.view.frame
+        self.view.addSubview(popPasswordView.view)
+        popPasswordView.didMove(toParentViewController: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
-            showShopIdView()
-        }
-        
-        languageIndex = 0
         regionPicker.delegate = self
+        weddingDatePicker.delegate = self
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-        
-        selectLanguage(sender: polishButton)
-        sendPendingCostumersToAPIIfConnected()
+    
+        resetHomeSettings()
         hideKeyboard()
+    }
+    
+    func resetHomeSettings() {
+        languageIndex = 0
+        applyLanguage()
+        lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+        catalogButton.isEnabled = false
+        catalogButton.alpha = 0
+    }
+    func resetHomeFields() {
+        provCart = nil
+        nameField.text = nil
+        lastnameField.text = nil
+        emailField.text = nil
+        phoneField.text = nil
+        regionField.text = nil
+        regionPicker.reloadAllComponents()
+        weddingDateField.text = nil
+        weddingDatePicker.reloadAllComponents()
+        month.removeAll()
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,56 +164,74 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    @IBAction func pressToShowShopIdView(sender: UIButton) {
-        self.showShopIdView()
-    }
-    
-    func showShopIdView() {
-        
-        let popShopIdView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "shopIdView") as! ShopIDViewController
-        popShopIdView.languageIndex = self.languageIndex
-        self.addChildViewController(popShopIdView)
-        popShopIdView.view.frame = self.view.frame
-        self.view.addSubview(popShopIdView.view)
-        popShopIdView.didMove(toParentViewController: self)
-    }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == regionField {
-            pickerId = "regionPicker"
-            self.showRegionPicker()
+            self.pickregion(self.regionField)
         }
-        if textField == dateOfWeddingField {
-            pickerId = "dateOfWeddingPicker"
-            self.showDateOfWeddingPicker()
+        if textField == weddingDateField {
+            self.pickWeddingDate(self.weddingDateField)
         }
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        var numComponents = 0
+        if pickerView == regionPicker {
+            numComponents = 1
+        }
+        if pickerView == weddingDatePicker {
+            numComponents = 3
+        }
+        return numComponents
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return regionNames.count + 1
+        var numRows = 0
+        if pickerView == regionPicker {
+            numRows = regionNames.count + 1
+        }
+        if pickerView == weddingDatePicker {
+            numRows = numberOfRows[component]
+        }
+        return numRows
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row == regionNames.count {
-            return LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex]
-        } else {
-            return regionNames[row][languageIndex]
+        if pickerView == regionPicker {
+            if row == regionNames.count {
+                return otherCountry[languageIndex]
+            } else {
+                return regionNames[row]
+            }
+        }
+        else {
+            if component == 0 {
+                return String(describing: numDay[row])
+            } else if component == 1 {
+                return monthsLang[languageIndex][row]
+            } else {
+                return String(describing: numYear[row])
+            }
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == regionPicker {
             if row == regionNames.count {
-                regionField.text = LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex]
+                regionField.text = otherCountry[languageIndex]
             } else {
-                regionField.text = regionNames[row][languageIndex]
-                regionSelected = regionNames[row]
-                countrySelected = false
+                regionField.text = regionNames[row]
             }
+        }
+        if pickerView == weddingDatePicker {
+            let day = String(format: "%02ld", numDay[pickerView.selectedRow(inComponent: 0)] as CVarArg)
+            
+            monthCal = String(format: "%02ld", numMonths[pickerView.selectedRow(inComponent: 1)] as CVarArg)
+            
+            year = String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
+            
+            weddingDateField.text = day + "/" + monthCal + "/" + year
+            
+            fullMonth = monthsLang[1][pickerView.selectedRow(inComponent: 1)] + " " + String(describing: numYear[pickerView.selectedRow(inComponent: 2)])
         }
     }
     
@@ -167,67 +250,59 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         popCountryView.didMove(toParentViewController: self)
     }
     
-    func setCountryField(country: Country) {
-        regionField.text = country.name[languageIndex]
-        countrySelected = true
-        self.country = country
+    func setCountryField(country: String) {
+        regionField.text = country
     }
     
-    func showRegionPicker(){
+     func pickregion(_ textField : UITextField){
         
         self.regionPicker.backgroundColor = UIColor.white
-        regionPicker.selectRow(0, inComponent: 0, animated: false)
-        regionField.inputView = self.regionPicker
-        regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)][languageIndex]
-        regionSelected = regionNames[regionPicker.selectedRow(inComponent: 0)]
-        regionPicker.target(forAction: #selector(regionPickerChanged), withSender: self)
+        textField.inputView = self.regionPicker
+        //textField.text = self.regionNames[self.regionPicker.selectedRow(inComponent: 0)]
         
-        formatToolBar()
-        regionField.inputAccessoryView = toolBar
-    }
-    
-    func regionPickerChanged() {
-        regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)][languageIndex]
-    }
-    
-    func showDateOfWeddingPicker() {
-        
-        dateOfWeddingPicker.datePickerMode = .date
-        dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
-        dateOfWeddingPicker.backgroundColor = .white
-        dateOfWeddingPicker.minimumDate = Date()
-        
-        dateOfWeddingField.inputView = dateOfWeddingPicker
-        dateOfWeddingPicker.addTarget(self, action: #selector(dateOfWeddingPickerChanged(sender:)), for: .valueChanged)
-        
-        formatToolBar()
-        dateOfWeddingField.inputAccessoryView = toolBar
-    }
-    
-    func dateOfWeddingPickerChanged(sender: UIDatePicker) {
-        dateOfWeddingField.text = formatDate(date: sender.date)
-    }
-    
-    private func formatToolBar() {
-        
+        // ToolBar
+        let toolBar = UIToolbar()
         toolBar.barStyle = .default
-        toolBar.isOpaque = true
-        toolBar.barTintColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
-        toolBar.tintColor = .white
+        toolBar.isTranslucent = true
+        toolBar.backgroundColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
+        toolBar.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         toolBar.sizeToFit()
         
-        let doneRegionSelector = #selector(HomeViewController.doneRegion)
-        let cancelRegionSelector = #selector(HomeViewController.cancelRegion)
-        let doneDateSelector = #selector(HomeViewController.doneDate)
-        let cancelDateSelector = #selector(HomeViewController.cancelDate)
-        
-        let doneButton = UIBarButtonItem(title: LocalData.getLocalizationLabels(forElement: "doneButton")[languageIndex], style: .plain, target: self, action:
-            pickerId == "dateOfWeddingPicker" ? doneDateSelector : doneRegionSelector)
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.doneRegion))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], style: .plain, target: self, action:
-            pickerId == "dateOfWeddingPicker" ? cancelDateSelector : cancelRegionSelector)
+        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.cancelRegion))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+    }
+    
+    func pickWeddingDate(_ textField : UITextField){
+        
+        self.weddingDatePicker.backgroundColor = UIColor.white
+        monthCal = String(format: "%02ld", numMonths[weddingDatePicker.selectedRow(inComponent: 1)] as CVarArg)
+        year = String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
+        fullMonth = monthsLang[1][weddingDatePicker.selectedRow(inComponent: 1)] + " " + String(describing: numYear[weddingDatePicker.selectedRow(inComponent: 2)])
+        textField.inputView = self.weddingDatePicker
+        textField.text = String(format: "%02ld", numDay[weddingDatePicker.selectedRow(inComponent: 0)] as CVarArg)
+            + "/" + monthCal + "/" + year
+        
+        
+        // ToolBar
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.backgroundColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
+        toolBar.tintColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+        
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: doneLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.doneDate))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: cancelLang[languageIndex], style: .plain, target: self, action: #selector(HomeViewController.cancelDate))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
     }
     
     func doneRegion() {
@@ -238,63 +313,48 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         regionField.resignFirstResponder()
     }
     func doneDate() {
-        dateOfWeddingField.resignFirstResponder()
+        weddingDateField.resignFirstResponder()
     }
     func cancelDate() {
-        dateOfWeddingField.text = ""
-        dateOfWeddingField.resignFirstResponder()
+        weddingDateField.text = ""
+        weddingDateField.resignFirstResponder()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == regionField {
-            if textField.text == LocalData.getLocalizationLabels(forElement: "otherCountry")[languageIndex] {
+            if textField.text == otherCountry[languageIndex] {
                 showCountryView()
             }
         }
     }
     
     @IBAction func createProfile(sender: UIButton) {
-        if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
-            provCart = Customer(
-                // TODO: Set ID of shoping taken by UserDefault
-                appVersion: self.appVersion,
-                dateOfVisit: formatDate(date: Date()),
-                shopId: ShopIdManager.retrieveIPadShopId()!,
-                name: (nameField.text?.capitalized)!,
-                surname: (surnameField.text?.capitalized)!,
-                region: countrySelected ? country.name[1] : regionSelected[1],
-                dateOfWedding: dateOfWeddingField.text!,
-                dressesNames: ""
-            )
-        } else {
-            let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage")[languageIndex], preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
+        if nameField.text == "" || lastnameField.text == "" || emailField.text == "" || phoneField.text == "" || regionField.text == "" || weddingDateField.text == "" {
+            let alertController = UIAlertController(title: warningMessageLang[languageIndex][0], message: warningMessageLang[languageIndex][1], preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: warningMessageLang[languageIndex][2], style: .default, handler: nil)
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion:nil)
+            resetHomeSettings()
+        } else {
+            provCart = Cart(name: (nameField.text?.capitalized)!, lastname: lastnameField.text!, email: (emailField.text?.lowercased())!, phone: phoneField.text!, city: regionField.text!, weddingDate: weddingDateField.text!, dresses: [""])
+            
+            lowText.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            catalogButton.isEnabled = true
+            catalogButton.alpha = 1
+            
+            month.append(year + monthCal)
+            month.append(fullMonth)
         }
         dismissKeyboard()
-        self.performSegue(withIdentifier: "showCatalog", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "showCatalog"{
-            if provCart == nil {
-                provCart = Customer(
-                    // TODO: Set ID of shoping taken by UserDefault
-                    appVersion: self.appVersion,
-                    dateOfVisit: formatDate(date: Date()),
-                    shopId: ShopIdManager.retrieveIPadShopId()!,
-                    name: (nameField.text?.capitalized)!,
-                    surname: (surnameField.text?.capitalized)!,
-                    region: regionField.text!,
-                    dateOfWedding: dateOfWeddingField.text!,
-                    dressesNames: "")
-            }
             let destinationController = segue.destination as! CatalogViewController
             destinationController.languageIndex = languageIndex
             destinationController.provCart = provCart
-            destinationController.region = countrySelected ? country.name : regionSelected
+            destinationController.month = month
         }
     }
     
@@ -304,72 +364,5 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     func dismissKeyboard() {
         view.endEditing(true)
-    }
-    
-    private func sendPendingCostumersToAPIIfConnected() {
-        
-        if Reachability.isConnectedToNetwork() {
-            
-            var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
-            for customerMO in customersMO.enumerated() {
-                
-                let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
-                APIConnector.sendCostumerToAPI(customer: customer) { (data, resp, error) in
-                    if let error = error {
-                        fatalError(error.localizedDescription)
-                    }
-                    print("error en SELECTION VIEW CONTROLLER")
-                    if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                        CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
-                        appDelegate.saveContext()
-                    }
-                }
-                
-                if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                    let context = appDelegate.persistentContainer.viewContext
-                    context.delete(customerMO.element)
-                    appDelegate.saveContext()
-                }
-                customersMO.removeFirst()
-            }
-        }
-    }
-    
-    private func applyLanguage() {
-        
-        beforeLabel.text = LocalData.getLocalizationLabels(forElement: "beforeLabel")[languageIndex]
-        nameLabel.text = LocalData.getLocalizationLabels(forElement: "nameLabel")[languageIndex]
-        surnameLabel.text = LocalData.getLocalizationLabels(forElement: "surnameLabel")[languageIndex]
-        regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex]
-        regionPicker.selectRow(0, inComponent: 0, animated: false)
-        formatToolBar()
-        dateOfWeddingLabel.text = LocalData.getLocalizationLabels(forElement: "dateOfWeddingLabel")[languageIndex]
-        dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
-        infoLabel.text = LocalData.getLocalizationLabels(forElement: "infoLabel")[languageIndex]
-        createProfileButton.setTitle(LocalData.getLocalizationLabels(forElement: "createProfileButton")[languageIndex], for: .normal)
-        catalogButton.setTitle(LocalData.getLocalizationLabels(forElement: "catalogButton")[languageIndex].uppercased(), for: .normal)
-    }
-    
-    private func resetHomeFields() {
-        languageIndex = 0
-        applyLanguage()
-        provCart = nil
-        nameField.text = nil
-        surnameField.text = nil
-        regionField.text = nil
-        regionPicker.reloadAllComponents()
-        dateOfWeddingPicker.setDate(Date(), animated: false)
-        dateOfWeddingField.text = nil
-        month.removeAll()
-        regionSelected.removeAll()
-        polishButton.alpha = 1
-        englishButton.alpha = 0.5
-        spanishButton.alpha = 0.5
-    }
-    
-    private func formatDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.string(from: date)
     }
 }
