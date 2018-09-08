@@ -77,6 +77,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         self.addChildViewController(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
+        self.navigationController?.view.addSubview(popImageView.view)
         popImageView.didMove(toParentViewController: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -94,6 +95,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
         self.addChildViewController(popCompleteView)
         popCompleteView.view.frame = self.view.frame
         self.view.addSubview(popCompleteView.view)
+        self.navigationController?.view.addSubview(popCompleteView.view)
         popCompleteView.didMove(toParentViewController: self)
     }
     
