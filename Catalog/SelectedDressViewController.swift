@@ -1,6 +1,6 @@
 import UIKit
 
-class SelectedDressViewController: UIViewController {
+class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet weak var closeView: UIButton!
@@ -11,6 +11,11 @@ class SelectedDressViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(removeAnimate))
+        gestureRecognizer.cancelsTouchesInView = false
+        gestureRecognizer.delegate = self
+        view.addGestureRecognizer(gestureRecognizer)
+        
         self.view.removeFromSuperview()
         self.showAnimate()
         ImageView.image = UIImage(named: dressImage)
@@ -18,6 +23,10 @@ class SelectedDressViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return (touch.view === self.view)
     }
     
     @IBAction func closeWindow(sender: UIButton) {
