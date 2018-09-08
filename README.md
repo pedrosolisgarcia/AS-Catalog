@@ -4,7 +4,7 @@
 
 * This repository stores the updates performed over the iPad application Catalog for the Wedding Dresses firm Agnieszka Światły.
 
-* Version: 1.21
+* Version: 1.22
 
 ### How do I get set up? ###
 
