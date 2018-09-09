@@ -6,13 +6,12 @@ public class APIConnector {
         
         var urlComponents = URLComponents()
         
-        // https://o4kskwft70.execute-api.eu-west-3.amazonaws.com/test/customers
-        
         urlComponents.scheme = "https"
-        urlComponents.host = "o4kskwft70.execute-api.eu-west-3.amazonaws.com"
-//        urlComponents.path = "/test/custom"
-        urlComponents.path = "/test/customers"
-        guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
+        urlComponents.host = "8e08w9h4m5.execute-api.eu-west-1.amazonaws.com"
+        urlComponents.path = "/production/customers"
+        guard let url = urlComponents.url else {
+            fatalError("Could not create URL from components")
+        }
         
         // Specify this request as being a POST method
         var request = URLRequest(url: url)
@@ -37,7 +36,8 @@ public class APIConnector {
         // Create and run a URLSession data task with our JSON encoded POST request
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+        let task = session.dataTask(with: request) {
+            (responseData, response, responseError) in
             guard responseError == nil else {
                 completion?(nil, nil, responseError!)
                 return
