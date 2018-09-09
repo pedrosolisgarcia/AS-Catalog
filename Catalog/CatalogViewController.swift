@@ -9,7 +9,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet weak var selectButton: UIButton!
     
     var dresses = LocalData.getDresses()
-    var provCart: Customer!
+    var currentCustomer: Customer!
     var region = [String]()
     var languageIndex: Int!
     
@@ -135,8 +135,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                     destinationController.selectedDresses.append(dresses[index.row])
                     dressesNames.append(dresses[index.row].name[0])
                 }
-                provCart.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
-                destinationController.provCart = provCart
+                currentCustomer.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
+                destinationController.currentCustomer = currentCustomer
                 destinationController.region = region
             }
         }

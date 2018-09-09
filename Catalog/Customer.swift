@@ -6,7 +6,7 @@ struct Customer: Codable {
     let shopId: String
     let name: String
     let surname: String
-    let region: String
+    var region: String
     let dateOfWedding: String
     var dressesNames: String
     
