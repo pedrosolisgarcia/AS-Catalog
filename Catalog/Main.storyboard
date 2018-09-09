@@ -230,7 +230,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGNIESZKA ŚWIATŁY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-17-NlJ">
-                                <rect key="frame" x="277" y="268" width="214" height="18"/>
+                                <rect key="frame" x="277" y="268" width="214" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="214" id="Uf5-hz-9na"/>
                                 </constraints>
@@ -246,7 +246,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Przed obejrzeniem katalogu, proszę o identyfikację:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbH-68-Wrl">
-                                <rect key="frame" x="15" y="376" width="737" height="25"/>
+                                <rect key="frame" x="15" y="379" width="737" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="5Lh-7g-cLH"/>
                                 </constraints>
@@ -255,7 +255,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQB-NP-5ka" userLabel="BeforeSeparator">
-                                <rect key="frame" x="15" y="409" width="732" height="1"/>
+                                <rect key="frame" x="15" y="412" width="732" height="1"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="ONO-BC-wkU"/>
@@ -263,7 +263,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imię:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngN-RU-2L0">
-                                <rect key="frame" x="20" y="431" width="120" height="40"/>
+                                <rect key="frame" x="20" y="434" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="KSB-QE-Qzt"/>
                                     <constraint firstAttribute="width" constant="120" id="NRG-5b-FHt"/>
@@ -273,7 +273,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="11M-v8-VP7" userLabel="NameField">
-                                <rect key="frame" x="148" y="431" width="225" height="40"/>
+                                <rect key="frame" x="148" y="434" width="225" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549019602" green="0.85882352941176465" blue="0.85490196078431369" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -287,14 +287,14 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wb1-kD-p9f" userLabel="NameSeparator">
-                                <rect key="frame" x="20" y="471" width="353" height="1"/>
+                                <rect key="frame" x="20" y="474" width="353" height="1"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0JD-GN-t2s"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nazwisko:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Sx-IC-JiV">
-                                <rect key="frame" x="412" y="432" width="120" height="40"/>
+                                <rect key="frame" x="412" y="435" width="120" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="6zo-md-HZt"/>
                                     <constraint firstAttribute="height" constant="40" id="KtD-Cr-LtC"/>
@@ -304,7 +304,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="15" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zGv-N2-cJR" userLabel="SurnameField">
-                                <rect key="frame" x="537" y="432" width="210" height="40"/>
+                                <rect key="frame" x="537" y="435" width="210" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -318,14 +318,14 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yKT-eO-5Ad" userLabel="SurnameSeparator">
-                                <rect key="frame" x="412" y="472" width="335" height="1"/>
+                                <rect key="frame" x="412" y="475" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="LRg-z9-mtd"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Województwo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ia8-5C-haY" userLabel="Hometown:">
-                                <rect key="frame" x="20" y="508" width="130" height="40"/>
+                                <rect key="frame" x="20" y="511" width="130" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="xcq-HI-UVA"/>
                                 </constraints>
@@ -334,7 +334,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="N81-dZ-99r" userLabel="HometownField">
-                                <rect key="frame" x="154" y="508" width="219" height="40"/>
+                                <rect key="frame" x="154" y="511" width="219" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -348,14 +348,14 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Twm-F7-cMT" userLabel="HometownSeparator">
-                                <rect key="frame" x="20" y="548" width="353" height="1"/>
+                                <rect key="frame" x="20" y="551" width="353" height="1"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="q5A-dc-EQR"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Ślubu:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RP3-Zw-ip5" userLabel="WeddingDate">
-                                <rect key="frame" x="412" y="509" width="123" height="40"/>
+                                <rect key="frame" x="412" y="512" width="123" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="I3T-cZ-7Ml"/>
                                 </constraints>
@@ -364,7 +364,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pDK-2d-WHA" userLabel="WeddingDateField">
-                                <rect key="frame" x="537" y="509" width="210" height="40"/>
+                                <rect key="frame" x="537" y="512" width="210" height="40"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -379,14 +379,14 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYt-oc-kvo" userLabel="WeddingDateSeparator">
-                                <rect key="frame" x="412" y="548" width="335" height="1"/>
+                                <rect key="frame" x="412" y="551" width="335" height="1"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="x3G-Sl-DUs"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fy5-BL-Qu6">
-                                <rect key="frame" x="34" y="669" width="700" height="100"/>
+                                <rect key="frame" x="34" y="672" width="700" height="100"/>
                                 <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="700" id="ReY-nh-jW2"/>
@@ -440,7 +440,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Przed obejrzeniem katalogu, proszę o identyfikację:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kST-9w-BRt" userLabel="infoLabel">
-                                <rect key="frame" x="35" y="564" width="698" height="24"/>
+                                <rect key="frame" x="35" y="567" width="698" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
