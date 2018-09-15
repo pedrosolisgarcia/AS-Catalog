@@ -3,7 +3,7 @@ import Foundation
 public class ShopIdManager {
     
     static func validShopIds() -> [String] {
-        return ["WRO-ID", "KRAK-ID", "WAR-ID", "TEST-ID"]
+        return ["WRO-ID", "KRAK-ID", "WAR-ID", "RZSW-ID", "TEST-ID"]
     }
     
     class func isThereAnyShopIdRegisteredAlready() -> Bool {
