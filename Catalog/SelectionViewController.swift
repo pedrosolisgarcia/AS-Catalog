@@ -32,11 +32,11 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
             if Reachability.isConnectedToNetwork() {
                 APIConnector.sendCostumerToAPI(customer: self.getFinalCustomer()) { (data, resp, error) in
                     if let error = error {
-                        fatalError(error.localizedDescription)
+                        print(error.localizedDescription)
+                        print("error in BackEnd - Saving in Core Data")
+                        CoreDataManager.saveCustomerInCoreData(customer: self.getFinalCustomer(), viewContext: appDelegate.persistentContainer.viewContext)
+                        appDelegate.saveContext()
                     }
-                    print("error in BackEnd - Saving in Core Data")
-                    CoreDataManager.saveCustomerInCoreData(customer: self.getFinalCustomer(), viewContext: appDelegate.persistentContainer.viewContext)
-                    appDelegate.saveContext()
                 }
             } else {
                 print("NO INTERNET - Saving in Core Data")

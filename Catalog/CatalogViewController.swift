@@ -13,7 +13,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     var region = [String]()
     var languageIndex: Int!
     
-    let catalogSize = CGSize(width: 246, height: 420)
+    let catalogSize = CGSize(width: 246, height: 416)
     let carouselSize = CGSize(width: 515, height: 850)
     
     override func viewDidLoad() {
