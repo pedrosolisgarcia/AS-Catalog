@@ -3,7 +3,7 @@ import CoreData
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, NSFetchedResultsControllerDelegate {
     
-    let appVersion = "1.22"
+    let appVersion = "2.01"
     
     var pickerId = "regionPicker"
     var regionPicker = UIPickerView()
@@ -308,12 +308,12 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 APIConnector.sendCostumerToAPI(customer: customer) {
                     (data, resp, error) in
                     if let error = error {
-                        fatalError(error.localizedDescription)
-                    }
-                    print("error en SELECTION VIEW CONTROLLER")
-                    if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-                        CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
-                        appDelegate.saveContext()
+                        print(error.localizedDescription)
+                        print("error en SELECTION VIEW CONTROLLER")
+                        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+                            CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
+                            appDelegate.saveContext()
+                        }
                     }
                 }
                 
