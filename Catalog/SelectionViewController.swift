@@ -87,11 +87,11 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
         popImageView.dressImage = selectedDresses[indexPath.row].imgName
-        self.addChildViewController(popImageView)
+        self.addChild(popImageView)
         popImageView.view.frame = self.view.frame
         self.view.addSubview(popImageView.view)
         self.navigationController?.view.addSubview(popImageView.view)
-        popImageView.didMove(toParentViewController: self)
+        popImageView.didMove(toParent: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -144,10 +144,14 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     private func showCompleteView() {
         let popCompleteView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CompleteView") as! CompleteViewController
         popCompleteView.languageIndex = self.languageIndex
-        self.addChildViewController(popCompleteView)
+        self.addChild(popCompleteView)
         popCompleteView.view.frame = self.view.frame
         self.view.addSubview(popCompleteView.view)
         self.navigationController?.view.addSubview(popCompleteView.view)
-        popCompleteView.didMove(toParentViewController: self)
+        popCompleteView.didMove(toParent: self)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

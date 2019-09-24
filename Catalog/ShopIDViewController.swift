@@ -48,7 +48,7 @@ class ShopIDViewController: UIViewController {
     }
     
     func addBlurView() {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
         self.view.insertSubview(blurEffectView, belowSubview: shopIdView)
@@ -106,6 +106,10 @@ class ShopIDViewController: UIViewController {
             return (nil != ShopIdManager.saveShopIdInIPad(shopId: self.shopIdField.text!.uppercased()))
         }
         return false;
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
 }

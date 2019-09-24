@@ -165,7 +165,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         regionField.inputAccessoryView = toolBar
     }
     
-    func regionPickerChanged() {
+    @objc func regionPickerChanged() {
         regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)][languageIndex]
     }
     
@@ -189,7 +189,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         dateOfWeddingField.inputAccessoryView = toolBar
     }
     
-    func dateOfWeddingPickerChanged(sender: UIDatePicker) {
+    @objc func dateOfWeddingPickerChanged(sender: UIDatePicker) {
         dateOfWeddingField.text = formatDate(date: sender.date)
     }
     
@@ -215,17 +215,17 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         toolBar.isUserInteractionEnabled = true
     }
     
-    func doneRegion() {
+    @objc func doneRegion() {
         regionField.resignFirstResponder()
     }
-    func cancelRegion() {
+    @objc func cancelRegion() {
         regionField.text = ""
         regionField.resignFirstResponder()
     }
-    func doneDate() {
+    @objc func doneDate() {
         dateOfWeddingField.resignFirstResponder()
     }
-    func cancelDate() {
+    @objc func cancelDate() {
         dateOfWeddingField.text = ""
         dateOfWeddingField.resignFirstResponder()
     }
@@ -256,7 +256,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         view.addGestureRecognizer(tap)
     }
 
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
@@ -304,7 +304,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
             for customerMO in customersMO.enumerated() {
                 
-                let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element)
+                let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element )
                 APIConnector.sendCostumerToAPI(customer: customer) {
                     (data, resp, error) in
                     if let error = error {
@@ -312,15 +312,20 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                         print("error en SELECTION VIEW CONTROLLER")
                         if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                             CoreDataManager.saveCustomerInCoreData(customer: customer, viewContext: appDelegate.persistentContainer.viewContext)
-                            appDelegate.saveContext()
                         }
                     }
                 }
                 
                 if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
                     let context = appDelegate.persistentContainer.viewContext
-                    context.delete(customerMO.element)
-                    appDelegate.saveContext()
+                    context.delete(customerMO.element as NSManagedObject)
+
+                    do {
+                        try context.save()
+                        
+                    } catch let error as NSError {
+                        print(error)
+                    }
                 }
                 customersMO.removeFirst()
             }
@@ -350,22 +355,26 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         self.isEditing = false
         let popCountryView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CountrySelectorView") as! SelectCountryViewController
         popCountryView.languageIndex = self.languageIndex
-        self.addChildViewController(popCountryView)
+        self.addChild(popCountryView)
         popCountryView.view.frame = self.view.frame
         popCountryView.delegate = self
         if !(self.view.gestureRecognizers?.isEmpty)! {
             self.view.gestureRecognizers?.removeLast()
         }
         self.view.addSubview(popCountryView.view)
-        popCountryView.didMove(toParentViewController: self)
+        popCountryView.didMove(toParent: self)
     }
     
     private func showShopIdView() {
         let popShopIdView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "shopIdView") as! ShopIDViewController
         popShopIdView.languageIndex = self.languageIndex
-        self.addChildViewController(popShopIdView)
+        self.addChild(popShopIdView)
         popShopIdView.view.frame = self.view.frame
         self.view.addSubview(popShopIdView.view)
-        popShopIdView.didMove(toParentViewController: self)
+        popShopIdView.didMove(toParent: self)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

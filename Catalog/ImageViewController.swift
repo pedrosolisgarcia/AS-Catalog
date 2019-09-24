@@ -48,7 +48,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         zoomInView.addGestureRecognizer(doubleTap)
     }
     
-    func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+    @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) {
         
         if zoomInView.zoomScale > zoomInView.minimumZoomScale {
             zoomInView.setZoomScale(zoomInView.minimumZoomScale, animated: true)
@@ -90,5 +90,9 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
                 self.dismiss(animated: false)
             }
         });
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

@@ -62,10 +62,10 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
             
             let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
             zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
-            self.addChildViewController(zoomImageView)
+            self.addChild(zoomImageView)
             zoomImageView.view.frame = self.view.frame
             self.view.addSubview(zoomImageView.view)
-            zoomImageView.didMove(toParentViewController: self)
+            zoomImageView.didMove(toParent: self)
         }
     }
     
@@ -140,5 +140,9 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
                 destinationController.region = region
             }
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

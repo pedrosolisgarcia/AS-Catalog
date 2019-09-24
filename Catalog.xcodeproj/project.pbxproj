@@ -50,8 +50,8 @@
 		51BE2FDA1F923C1C0093C897 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FD91F923C1C0093C897 /* Customer.swift */; };
 		51BE2FDC1F92C9120093C897 /* SelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDB1F92C9120093C897 /* SelectionTableViewCell.swift */; };
 		51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */; };
-		51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */; };
 		51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */; };
+		51DA8047233683C1002236E1 /* Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51DA8045233683C0002236E1 /* Catalog.xcdatamodeld */; };
 		51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73602118ADEB00A22F21 /* ShopIdManager.swift */; };
 		51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73622118B2A200A22F21 /* ShopIDViewController.swift */; };
 		A3044524D3B780A937EA2949 /* Pods_Catalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02E639736786045FB22B222 /* Pods_Catalog.framework */; };
@@ -118,8 +118,8 @@
 		51BE2FD91F923C1C0093C897 /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		51BE2FDB1F92C9120093C897 /* SelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionTableViewCell.swift; sourceTree = "<group>"; };
 		51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedDressViewController.swift; sourceTree = "<group>"; };
-		51BE2FE01F9391D90093C897 /* Catalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Catalog.xcdatamodel; sourceTree = "<group>"; };
 		51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMapper.swift; sourceTree = "<group>"; };
+		51DA8046233683C0002236E1 /* Catalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Catalog.xcdatamodel; sourceTree = "<group>"; };
 		51DD73602118ADEB00A22F21 /* ShopIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIdManager.swift; sourceTree = "<group>"; };
 		51DD73622118B2A200A22F21 /* ShopIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIDViewController.swift; sourceTree = "<group>"; };
 		6F9EC149DBC97831112B7CDA /* Pods-Catalog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catalog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Catalog/Pods-Catalog.release.xcconfig"; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 				514BDD1C20F159D800F8F28E /* Country.swift */,
 				51BE2FC41F8C047A0093C897 /* Dress.swift */,
 				51BE2FD91F923C1C0093C897 /* Customer.swift */,
-				51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -182,6 +181,7 @@
 				51985E1020E2B2120019FBE1 /* Reachability.swift */,
 				5114A81620DD79D400224D05 /* Validator.swift */,
 				51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */,
+				51DA8045233683C0002236E1 /* Catalog.xcdatamodeld */,
 				51985E1420E2B8450019FBE1 /* APIConnector.swift */,
 				514D47C320277E5500DD59EA /* LocalData.swift */,
 				51DD73602118ADEB00A22F21 /* ShopIdManager.swift */,
@@ -360,7 +360,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1030;
 				ORGANIZATIONNAME = AppCoda;
 				TargetAttributes = {
 					5114A80B20DD796A00224D05 = {
@@ -384,11 +384,12 @@
 			};
 			buildConfigurationList = 51BE2F7F1F8C02EC0093C897 /* Build configuration list for PBXProject "Catalog" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				pl,
 			);
 			mainGroup = 51BE2F7B1F8C02EB0093C897;
 			productRefGroup = 51BE2F851F8C02EC0093C897 /* Products */;
@@ -579,7 +580,6 @@
 				51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */,
 				51985E1520E2B8450019FBE1 /* APIConnector.swift in Sources */,
 				51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */,
-				51BE2FE11F9391D90093C897 /* Catalog.xcdatamodeld in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Customer.swift in Sources */,
 				51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */,
@@ -591,6 +591,7 @@
 				51BE2FDC1F92C9120093C897 /* SelectionTableViewCell.swift in Sources */,
 				51BE2FC51F8C047A0093C897 /* Dress.swift in Sources */,
 				514BDD1920F1583600F8F28E /* CountryCollectionViewCell.swift in Sources */,
+				51DA8047233683C1002236E1 /* Catalog.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,6 +702,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -760,6 +762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -824,7 +827,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Catalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -843,7 +846,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appcoda.Catalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -889,12 +892,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		51BE2FDF1F9391D90093C897 /* Catalog.xcdatamodeld */ = {
+		51DA8045233683C0002236E1 /* Catalog.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				51BE2FE01F9391D90093C897 /* Catalog.xcdatamodel */,
+				51DA8046233683C0002236E1 /* Catalog.xcdatamodel */,
 			);
-			currentVersion = 51BE2FE01F9391D90093C897 /* Catalog.xcdatamodel */;
+			currentVersion = 51DA8046233683C0002236E1 /* Catalog.xcdatamodel */;
 			path = Catalog.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

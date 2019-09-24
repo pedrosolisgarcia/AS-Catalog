@@ -100,4 +100,8 @@ class SelectCountryViewController: UIViewController, UICollectionViewDataSource,
             }
         });
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }

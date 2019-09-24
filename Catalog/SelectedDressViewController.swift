@@ -42,7 +42,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
         });
     }
     
-    func removeAnimate() {
+    @objc func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             self.view.alpha = 0.0;
@@ -54,5 +54,9 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
                 self.dismiss(animated: false)
             }
         });
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
