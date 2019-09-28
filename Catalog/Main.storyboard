@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="anW-1T-L6P">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="anW-1T-L6P">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -54,7 +54,7 @@
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTK-C6-A8z">
-                                        <rect key="frame" x="345" y="8" width="47" height="30"/>
+                                        <rect key="frame" x="336" y="8" width="56" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="maD-Le-Y2v"/>
                                         </constraints>
@@ -782,7 +782,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Myg-5L-UQX">
                                 <rect key="frame" x="20" y="879" width="728" height="80"/>
-                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="0.49360552226027399" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="0.74672645246478875" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="p2s-eW-GPB"/>
                                 </constraints>
@@ -1370,7 +1370,7 @@ UFJaRUpEGsW5IERBTEVKA
         <image name="mosaic_sel" width="32" height="32"/>
         <image name="polishFlag" width="1024" height="640"/>
         <image name="spanishFlag" width="750" height="500"/>
-        <image name="zoom-in" width="120" height="120"/>
-        <image name="zoom-out" width="120" height="120"/>
+        <image name="zoom-in" width="150" height="150"/>
+        <image name="zoom-out" width="150" height="150"/>
     </resources>
 </document>

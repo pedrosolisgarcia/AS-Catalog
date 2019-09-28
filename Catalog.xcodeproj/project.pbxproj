@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		510E2B412020F06D0083E69E /* SelectCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510E2B402020F06D0083E69E /* SelectCountryViewController.swift */; };
 		5114A81720DD79D400224D05 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81620DD79D400224D05 /* Validator.swift */; };
-		5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81820DD7C4300224D05 /* ValidatorTests.swift */; };
 		514BDD1920F1583600F8F28E /* CountryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1820F1583600F8F28E /* CountryCollectionViewCell.swift */; };
 		514BDD1D20F159D800F8F28E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1C20F159D800F8F28E /* Country.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
@@ -553,7 +552,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5114A81920DD7C4300224D05 /* ValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
