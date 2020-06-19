@@ -17,7 +17,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
         view.addGestureRecognizer(gestureRecognizer)
         
         self.view.removeFromSuperview()
-        self.showAnimate()
+        self.showAnimated()
         ImageView.image = UIImage(named: dressImage)
     }
     
@@ -30,30 +30,11 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
     }
     
     @IBAction func closeWindow(sender: UIButton) {
-        self.removeAnimate()
-    }
-    
-    func showAnimate() {
-        view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        view.alpha = 0.0;
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        });
+        self.removeAnimated()
     }
     
     @objc func removeAnimate() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0;
-        }, completion:{(finished : Bool)  in
-            if (finished)
-            {
-                self.ImageView.image = nil
-                self.view.removeFromSuperview()
-                self.dismiss(animated: false)
-            }
-        });
+      self.removeAnimated()
     }
     
     override var prefersStatusBarHidden: Bool {

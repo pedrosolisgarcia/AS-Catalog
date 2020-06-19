@@ -11,7 +11,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
 
         self.view.removeFromSuperview()
-        self.showAnimate()
+        self.showAnimated()
         zoomInView.delegate = self
         dressImageView.image = UIImage(named: dress)
         zoomOutButton.isEnabled = true
@@ -66,30 +66,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func zoomOut(sender: UIButton) {
-        self.removeAnimate()
+        self.removeAnimated()
         self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    func showAnimate() {
-        view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        view.alpha = 0.0;
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        });
-    }
-    
-    func removeAnimate() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0;
-        }, completion:{(finished : Bool)  in
-            if (finished) {
-                self.dressImageView.image = nil
-                self.view.removeFromSuperview()
-                self.dismiss(animated: false)
-            }
-        });
     }
     
     override var prefersStatusBarHidden: Bool {

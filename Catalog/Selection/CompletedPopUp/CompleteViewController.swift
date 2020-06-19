@@ -29,7 +29,7 @@ class CompleteViewController: UIViewController {
         self.titleLabel.text = confirmationMessageLang[languageIndex][0]
         self.messageLabel.text = confirmationMessageLang[languageIndex][1]
         self.doneButton.setTitle(confirmationMessageLang[languageIndex][2], for: .normal)
-        self.showAnimate()
+        self.showAnimated()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,29 +38,7 @@ class CompleteViewController: UIViewController {
     }
     
     @IBAction func closeWindow(sender: UIButton) {
-        self.removeAnimate()
-    }
-    
-    func showAnimate() {
-        view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        view.alpha = 0.0;
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        });
-    }
-    
-    func removeAnimate() {
-        UIView.animate(withDuration: 0.25, animations: {
-            self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 0.0;
-        }, completion:{(finished : Bool)  in
-            if (finished)
-            {
-                self.view.removeFromSuperview()
-                self.dismiss(animated: false)
-            }
-        });
+        self.removeAnimated()
     }
     
     override var prefersStatusBarHidden: Bool {

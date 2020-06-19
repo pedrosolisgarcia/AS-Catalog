@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         } else {
             self.showDataInvalidWarningMessage()
         }
-        dismissKeyboard()
+        view.endEditing(true)
         self.performSegue(withIdentifier: "showCatalog", sender: self)
     }
     
@@ -102,7 +102,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         selectLanguage(sender: polishButton)
         sendPendingCostumersToAPIIfConnected()
-        hideKeyboard()
+      self.view.addDismissKeyboardListener()
     }
     
     override func didReceiveMemoryWarning() {
@@ -251,15 +251,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-    func hideKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     private func applyLanguage() {
         
         beforeLabel.text = LocalData.getLocalizationLabels(forElement: "beforeLabel")[languageIndex]
@@ -353,14 +344,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     private func showCountryView() {
         self.isEditing = false
-        let popCountryView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CountrySelectorView") as! SelectCountryViewController
+        let popCountryView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CountrySelectorView") as! CountrySelectorViewController
         popCountryView.languageIndex = self.languageIndex
         self.addChild(popCountryView)
         popCountryView.view.frame = self.view.frame
         popCountryView.delegate = self
-        if !(self.view.gestureRecognizers?.isEmpty)! {
-            self.view.gestureRecognizers?.removeLast()
-        }
         self.view.addSubview(popCountryView.view)
         popCountryView.didMove(toParent: self)
     }
