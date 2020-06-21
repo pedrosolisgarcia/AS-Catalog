@@ -6,6 +6,10 @@ public class ShopIdManager {
     return ["WRO-ID", "KRAK-ID", "WAR-ID", "RZSW-ID", "TEST-ID"]
   }
   
+  static func collectionIds() -> [String] {
+    return ["WRO-ID", "TEST-ID"]
+  }
+  
   class func isThereAnyShopIdRegisteredAlready() -> Bool {
     return UserDefaults.standard.object(forKey: "SHOP-ID") != nil
   }

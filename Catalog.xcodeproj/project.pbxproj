@@ -11,6 +11,7 @@
 		5114A81720DD79D400224D05 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114A81620DD79D400224D05 /* Validator.swift */; };
 		51361574249D23A8007E2364 /* UIViewController+DisplayAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */; };
 		51361576249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */; };
+		51361579249E5ABB007E2364 /* CollectionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */; };
 		514BDD1920F1583600F8F28E /* CountrySelectorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1820F1583600F8F28E /* CountrySelectorViewCell.swift */; };
 		514BDD1D20F159D800F8F28E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1C20F159D800F8F28E /* Country.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
@@ -18,7 +19,9 @@
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
 		51985E1120E2B2120019FBE1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1020E2B2120019FBE1 /* Reachability.swift */; };
 		51985E1320E2B3DC0019FBE1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */; };
-		51985E1520E2B8450019FBE1 /* APIConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1420E2B8450019FBE1 /* APIConnector.swift */; };
+		51985E1520E2B8450019FBE1 /* CostumerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1420E2B8450019FBE1 /* CostumerService.swift */; };
+		51A6D690249F854400EB2A5B /* CollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A6D68F249F854400EB2A5B /* CollectionService.swift */; };
+		51A6D692249F8F8900EB2A5B /* URLSession+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A6D691249F8F8900EB2A5B /* URLSession+Result.swift */; };
 		51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9C1F8C03860093C897 /* HomeViewController.swift */; };
 		51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */; };
 		51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2F9E1F8C03860093C897 /* CatalogCollectionViewCell.swift */; };
@@ -79,6 +82,7 @@
 		5114A81E20DD81B800224D05 /* tusmuertos.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tusmuertos.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+DisplayAnimated.swift"; sourceTree = "<group>"; };
 		51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+DismissKeyboard.swift"; sourceTree = "<group>"; };
+		51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCheckViewController.swift; sourceTree = "<group>"; };
 		514BDD1820F1583600F8F28E /* CountrySelectorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectorViewCell.swift; sourceTree = "<group>"; };
 		514BDD1C20F159D800F8F28E /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +90,9 @@
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		51985E1020E2B2120019FBE1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		51985E1420E2B8450019FBE1 /* APIConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConnector.swift; sourceTree = "<group>"; };
+		51985E1420E2B8450019FBE1 /* CostumerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumerService.swift; sourceTree = "<group>"; };
+		51A6D68F249F854400EB2A5B /* CollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionService.swift; sourceTree = "<group>"; };
+		51A6D691249F8F8900EB2A5B /* URLSession+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Result.swift"; sourceTree = "<group>"; };
 		51BE2F841F8C02EC0093C897 /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BE2F9C1F8C03860093C897 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		51BE2F9D1F8C03860093C897 /* CatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 		5114A82720DD96D900224D05 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				51A6D68E249F846500EB2A5B /* Services */,
 				51361572249D235F007E2364 /* Extensions */,
 				5136156C249D1280007E2364 /* Designs */,
 				51CC9AB520E2CB5A00B56B52 /* Mappers */,
@@ -190,7 +197,6 @@
 				5114A81620DD79D400224D05 /* Validator.swift */,
 				51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */,
 				51DA8045233683C0002236E1 /* Catalog.xcdatamodeld */,
-				51985E1420E2B8450019FBE1 /* APIConnector.swift */,
 				514D47C320277E5500DD59EA /* LocalData.swift */,
 				51DD73602118ADEB00A22F21 /* ShopIdManager.swift */,
 			);
@@ -200,6 +206,7 @@
 		51361569249D1153007E2364 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				51361577249E5A7A007E2364 /* CollectionCheck */,
 				5136156E249D15E1007E2364 /* ShopID */,
 				5136156D249D14EF007E2364 /* CountrySelector */,
 				51BE2F9C1F8C03860093C897 /* HomeViewController.swift */,
@@ -274,8 +281,26 @@
 			children = (
 				51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */,
 				51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */,
+				51A6D691249F8F8900EB2A5B /* URLSession+Result.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		51361577249E5A7A007E2364 /* CollectionCheck */ = {
+			isa = PBXGroup;
+			children = (
+				51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */,
+			);
+			path = CollectionCheck;
+			sourceTree = "<group>";
+		};
+		51A6D68E249F846500EB2A5B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				51985E1420E2B8450019FBE1 /* CostumerService.swift */,
+				51A6D68F249F854400EB2A5B /* CollectionService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		51BE2F7B1F8C02EB0093C897 = {
@@ -648,17 +673,20 @@
 				51BE2FA21F8C03860093C897 /* CatalogViewController.swift in Sources */,
 				514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */,
 				51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */,
+				51A6D690249F854400EB2A5B /* CollectionService.swift in Sources */,
 				51985E1320E2B3DC0019FBE1 /* CoreDataManager.swift in Sources */,
 				51361574249D23A8007E2364 /* UIViewController+DisplayAnimated.swift in Sources */,
 				51BE2FA31F8C03860093C897 /* CatalogCollectionViewCell.swift in Sources */,
 				5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */,
 				514D47C420277E5500DD59EA /* LocalData.swift in Sources */,
+				51361579249E5ABB007E2364 /* CollectionCheckViewController.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* CountrySelectorViewController.swift in Sources */,
 				51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */,
-				51985E1520E2B8450019FBE1 /* APIConnector.swift in Sources */,
+				51985E1520E2B8450019FBE1 /* CostumerService.swift in Sources */,
 				51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
+				51A6D692249F8F8900EB2A5B /* URLSession+Result.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Customer.swift in Sources */,
 				51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */,
 				5114A81720DD79D400224D05 /* Validator.swift in Sources */,

@@ -30,7 +30,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       
       if Reachability.isConnectedToNetwork() {
-        APIConnector.sendCostumerToAPI(customer: self.getFinalCustomer()) { (data, resp, error) in
+        CostumerService.sendCostumerToAPI(customer: self.getFinalCustomer()) { (data, resp, error) in
           if let error = error {
             print(error.localizedDescription)
             print("error in BackEnd - Saving in Core Data")

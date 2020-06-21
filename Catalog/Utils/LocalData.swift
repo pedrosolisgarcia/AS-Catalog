@@ -154,6 +154,14 @@ public class LocalData {
       return ["PROFIL: ","PROFILE: ","PERFIL: "]
     case "headerLabel_ID":
       return ["PODAJ KOD","TYPE THE CODE","TECLEE EL CÓDIGO"]
+    case "collectionCheckLabel":
+      return ["NOWA KOLEKCJA","NEW COLLECTION","NUEVA COLLECIÓN"]
+    case "collectionCheckTextTop":
+      return ["Dostępna jest nowa Kolekcja:","There is a new Collection available:","Hay una nueva coleccion disponible:"]
+    case "collectionCheckTextBottom":
+      return ["Pobierz nową wersję?","Download new version?","Descargar nueva coleccion?"]
+    case "collectionCheckButton":
+      return ["POBIERANIE","DOWNLOAD","DESCARGAR"]
     case "infoLabel":
       return ["*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.","*Due to statistical purposes, we would appreciate to know where our customers are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.","*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias."]
     case "warningTitle":

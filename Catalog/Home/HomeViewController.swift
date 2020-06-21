@@ -296,7 +296,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       for customerMO in customersMO.enumerated() {
         
         let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element )
-        APIConnector.sendCostumerToAPI(customer: customer) {
+        CostumerService.sendCostumerToAPI(customer: customer) {
           (data, resp, error) in
           if let error = error {
             print(error.localizedDescription)

@@ -26,6 +26,10 @@ class ShopIDViewController: UIViewController {
     cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
     confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
     
+    self.shopIdView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
+    self.shopIdView.layer.shadowColor = UIColor.gray.cgColor
+    self.shopIdView.layer.shadowOpacity = 0.75
+    
     if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
@@ -64,7 +68,11 @@ class ShopIDViewController: UIViewController {
     
     if (sender == self.confirmButton) {
       if self.tryToSaveShopId() {
-        self.removeAnimated()
+        if ShopIdManager.collectionIds().contains(self.shopIdField.text!.uppercased()) {
+          showCollectionCheckView()
+        } else {
+          self.removeAnimated()
+        }
       } else {
         let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage_ID")[languageIndex], preferredStyle: .alert)
         let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
@@ -84,6 +92,15 @@ class ShopIDViewController: UIViewController {
       return (nil != ShopIdManager.saveShopIdInIPad(shopId: self.shopIdField.text!.uppercased()))
     }
     return false;
+  }
+  
+  private func showCollectionCheckView() {
+    let popCollectionCheckView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "collectionCheck") as! CollectionCheckViewController
+    popCollectionCheckView.languageIndex = self.languageIndex
+    self.addChild(popCollectionCheckView)
+    popCollectionCheckView.view.frame = self.view.frame
+    self.view.addSubview(popCollectionCheckView.view)
+    popCollectionCheckView.didMove(toParent: self)
   }
   
   override var prefersStatusBarHidden: Bool {
