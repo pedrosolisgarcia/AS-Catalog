@@ -1,6 +1,6 @@
 import Foundation
 
-struct Dress {
+struct Dress: Codable {
   var name: [String] = [""]
   var imgName: String = ""
   var isSelected: Bool = false

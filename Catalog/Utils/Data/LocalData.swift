@@ -6,19 +6,19 @@ public class LocalData {
     let dresses = [
       Dress(name: ["Gardenia"], imgName: "Gardenia", isSelected: false),
       Dress(name: ["Gardenia z Trenem","Gardenia with Train","Gardenia con Tren"],
-          imgName: "Gardenia Z Trenem", isSelected: false),
+        imgName: "Gardenia Z Trenem", isSelected: false),
       Dress(name: ["Cristina"], imgName: "Cristina", isSelected: false),
       Dress(name: ["Penelope"], imgName: "Penelope", isSelected: false),
       Dress(name: ["Blanca"], imgName: "Blanca", isSelected: false),
       Dress(name: ["Blanca z Trenem","Blanca with Train","Blanca con Tren"],
-          imgName: "Blanca Z Trenem", isSelected: false),
+        imgName: "Blanca Z Trenem", isSelected: false),
       Dress(name: ["Carmen"], imgName: "Carmen", isSelected: false),
       Dress(name: ["Miranda"], imgName: "Miranda", isSelected: false),
       Dress(name: ["Amy"], imgName: "Amy", isSelected: false),
       Dress(name: ["Mia"], imgName: "Mia", isSelected: false),
       Dress(name: ["Donatella"], imgName: "Donatella", isSelected: false),
       Dress(name: ["Donatella z Trenem","Donatella with Train","Donatella con Tren"],
-          imgName: "Donatella Z Trenem", isSelected: false),
+        imgName: "Donatella Z Trenem", isSelected: false),
       Dress(name: ["Lolita"], imgName: "Lolita", isSelected: false),
       Dress(name: ["Ruby"], imgName: "Ruby", isSelected: false),
       Dress(name: ["Scarlett"], imgName: "Scarlett", isSelected: false),
@@ -29,16 +29,16 @@ public class LocalData {
       Dress(name: ["Zafira"], imgName: "Zafira", isSelected: false),
       Dress(name: ["Tiffany"], imgName: "Tiffany", isSelected: false),
       Dress(name: ["Tiffany z Trenem","Tiffany with Train","Tiffany con Tren"],
-          imgName: "Tiffany Z Trenem", isSelected: false),
+        imgName: "Tiffany Z Trenem", isSelected: false),
       Dress(name: ["Lilou"], imgName: "Lilou", isSelected: false),
       Dress(name: ["Lucy"], imgName: "Lucy", isSelected: false),
       Dress(name: ["Milagros"], imgName: "Milagros", isSelected: false),
       Dress(name: ["Cindy"], imgName: "Cindy", isSelected: false),
       Dress(name: ["Cindy z Peleryną","Cindy with Cape","Cindy con Capa"],
-          imgName: "Cindy Z Peleryna", isSelected: false),
+        imgName: "Cindy Z Peleryna", isSelected: false),
       Dress(name: ["Maxime"], imgName: "Maxime", isSelected: false),
       Dress(name: ["Maxime z Trenem","Maxime with Train","Maxime con Tren"],
-          imgName: "Maxime Z Trenem", isSelected: false),
+        imgName: "Maxime Z Trenem", isSelected: false),
       Dress(name: ["Esmeralda"], imgName: "Esmeralda", isSelected: false),
       Dress(name: ["Emma"], imgName: "Emma", isSelected: false),
       Dress(name: ["Arlette"], imgName: "Arlette", isSelected: false),
@@ -157,11 +157,11 @@ public class LocalData {
     case "collectionCheckLabel":
       return ["NOWA KOLEKCJA","NEW COLLECTION","NUEVA COLLECIÓN"]
     case "collectionCheckTextTop":
-      return ["Dostępna jest nowa Kolekcja:","There is a new Collection available:","Hay una nueva coleccion disponible:"]
+      return ["Nowa kolekcja jest dostępna:","There is a new collection available:","Hay una nueva coleccion disponible:"]
     case "collectionCheckTextBottom":
-      return ["Pobierz nową wersję?","Download new version?","Descargar nueva coleccion?"]
+      return ["Pobrać nową wersję?","Download new version?","Descargar nueva coleccion?"]
     case "collectionCheckButton":
-      return ["POBIERANIE","DOWNLOAD","DESCARGAR"]
+      return ["POBIERZ","DOWNLOAD","DESCARGAR"]
     case "infoLabel":
       return ["*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.","*Due to statistical purposes, we would appreciate to know where our customers are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.","*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias."]
     case "warningTitle":

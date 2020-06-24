@@ -17,14 +17,18 @@ class CollectionCheckViewController: UIViewController {
   @IBOutlet weak var textBottom: UILabel!
   @IBOutlet weak var downloadButton: UIButton!
   @IBOutlet weak var collectionCheckView: UIView!
+  @IBOutlet weak var downloadView: UIView!
+  @IBOutlet weak var loadingView: UIView!
   
   var languageIndex: Int!
+  var collection: Collection!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionCheckLabel.text = LocalData.getLocalizationLabels(forElement: "collectionCheckLabel")[languageIndex]
     cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
     textTop.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextTop")[languageIndex]
+    collectionLabel.text = collection.name
     textBottom.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextBottom")[languageIndex]
     downloadButton.setTitle(LocalData.getLocalizationLabels(forElement: "collectionCheckButton")[languageIndex], for: .normal)
     
@@ -45,6 +49,8 @@ class CollectionCheckViewController: UIViewController {
     maskLayerLabel.path = maskPathLabel.cgPath
     collectionCheckLabel.layer.mask = maskLayerLabel
     
+    print(collection!)
+
     self.showAnimated()
   }
   
