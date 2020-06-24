@@ -1,6 +1,6 @@
 import Foundation
 
-class Validator {
+class CostumerDataValidator {
   
   static func validate(name: String, surname: String, region: String, weddingDate: String) -> Bool {
     return validateCustomerName(name: name)

@@ -42,7 +42,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBOutlet weak var catalogButton: UIButton!
   
   @IBAction func createProfile(sender: UIButton) {
-    if (Validator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
+    if (CostumerDataValidator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
       self.setCurrentCustomerData()
     } else {
       self.showDataInvalidWarningMessage()

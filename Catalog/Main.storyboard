@@ -61,7 +61,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="removeAnimateWithSender:" destination="ByW-Xa-I0U" eventType="touchUpInside" id="2JL-4N-zwJ"/>
+                                            <action selector="buttonClickedWithSender:" destination="ByW-Xa-I0U" eventType="touchUpInside" id="QXN-mn-9OG"/>
                                             <action selector="removeAnimateWithSender:" destination="MK1-iQ-OfC" eventType="touchUpInside" id="mEV-ei-9od"/>
                                         </connections>
                                     </button>
@@ -90,7 +90,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="removeAnimateWithSender:" destination="ByW-Xa-I0U" eventType="touchUpInside" id="Iip-xb-DC7"/>
+                                            <action selector="buttonClickedWithSender:" destination="ByW-Xa-I0U" eventType="touchUpInside" id="wK5-7U-rb6"/>
                                             <action selector="removeAnimateWithSender:" destination="MK1-iQ-OfC" eventType="touchUpInside" id="pzP-wh-a5f"/>
                                         </connections>
                                     </button>
@@ -1396,13 +1396,6 @@ UFJaRUpEGsW5IERBTEVKA
                                             <action selector="removeAnimateWithSender:" destination="IUL-gr-DEq" eventType="touchUpInside" id="7X0-FI-QQn"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Collection 2020" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBO-5w-Kwn">
-                                        <rect key="frame" x="0.0" y="124" width="400" height="51"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpw-zU-wZV">
                                         <rect key="frame" x="0.0" y="250" width="400" height="50"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1418,42 +1411,80 @@ UFJaRUpEGsW5IERBTEVKA
                                             <action selector="removeAnimateWithSender:" destination="MK1-iQ-OfC" eventType="touchUpInside" id="TrW-tB-WUG"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is a new Collection available:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAO-LP-oa6">
-                                        <rect key="frame" x="0.0" y="66" width="400" height="66"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Skg-GX-Za9">
+                                        <rect key="frame" x="0.0" y="46" width="400" height="204"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4hd-Fq-LEw">
+                                                <rect key="frame" x="190" y="92" width="20" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="color" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEE-ux-0wD">
+                                        <rect key="frame" x="0.0" y="47" width="400" height="202"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download new version?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma1-bL-MF5">
+                                                <rect key="frame" x="8" y="131" width="384" height="63"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="63" id="jnX-7L-8w9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection 2020" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBO-5w-Kwn">
+                                                <rect key="frame" x="0.0" y="76" width="400" height="51"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is a new Collection available:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAO-LP-oa6">
+                                                <rect key="frame" x="14.5" y="8" width="371" height="66"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="66" id="bWB-wg-xFQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="66" id="bWB-wg-xFQ"/>
+                                            <constraint firstItem="Ma1-bL-MF5" firstAttribute="top" secondItem="xBO-5w-Kwn" secondAttribute="bottom" constant="4" id="1wO-T4-Xlx"/>
+                                            <constraint firstItem="tAO-LP-oa6" firstAttribute="centerX" secondItem="xBO-5w-Kwn" secondAttribute="centerX" id="Ecz-xH-QZC"/>
+                                            <constraint firstItem="tAO-LP-oa6" firstAttribute="centerX" secondItem="yEE-ux-0wD" secondAttribute="centerX" id="Gdc-Zy-14s"/>
+                                            <constraint firstItem="Ma1-bL-MF5" firstAttribute="leading" secondItem="yEE-ux-0wD" secondAttribute="leading" constant="8" id="I84-Hi-vyB"/>
+                                            <constraint firstItem="tAO-LP-oa6" firstAttribute="top" secondItem="yEE-ux-0wD" secondAttribute="topMargin" id="O5x-ey-BQD"/>
+                                            <constraint firstItem="xBO-5w-Kwn" firstAttribute="top" secondItem="tAO-LP-oa6" secondAttribute="bottom" constant="2" id="RSW-GB-Xzb"/>
+                                            <constraint firstItem="Ma1-bL-MF5" firstAttribute="centerX" secondItem="yEE-ux-0wD" secondAttribute="centerX" id="aW9-G3-kwp"/>
+                                            <constraint firstAttribute="trailing" secondItem="xBO-5w-Kwn" secondAttribute="trailing" id="eoA-Sg-4AG"/>
+                                            <constraint firstItem="Ma1-bL-MF5" firstAttribute="bottom" secondItem="yEE-ux-0wD" secondAttribute="bottomMargin" id="qy8-sf-VTM"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download new version?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma1-bL-MF5">
-                                        <rect key="frame" x="0.0" y="171" width="400" height="63"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="63" id="jnX-7L-8w9"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="25"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="tAO-LP-oa6" firstAttribute="trailing" secondItem="Ma1-bL-MF5" secondAttribute="trailing" id="4Kt-QK-gsx"/>
                                     <constraint firstItem="qpw-zU-wZV" firstAttribute="centerX" secondItem="29t-1i-nW1" secondAttribute="centerX" id="6DQ-OL-wfV"/>
+                                    <constraint firstItem="qpw-zU-wZV" firstAttribute="top" secondItem="yEE-ux-0wD" secondAttribute="bottom" constant="1" id="73L-WI-mD3"/>
                                     <constraint firstItem="brp-Mg-CQC" firstAttribute="top" secondItem="29t-1i-nW1" secondAttribute="top" id="7xU-af-pcC"/>
                                     <constraint firstItem="brp-Mg-CQC" firstAttribute="leading" secondItem="29t-1i-nW1" secondAttribute="leading" id="Diy-G1-S1J"/>
-                                    <constraint firstItem="tAO-LP-oa6" firstAttribute="trailing" secondItem="qpw-zU-wZV" secondAttribute="trailing" id="ISu-rh-qY2"/>
-                                    <constraint firstItem="tAO-LP-oa6" firstAttribute="top" secondItem="brp-Mg-CQC" secondAttribute="bottom" constant="16" id="K82-i6-n1m"/>
-                                    <constraint firstItem="tAO-LP-oa6" firstAttribute="leading" secondItem="Ma1-bL-MF5" secondAttribute="leading" id="O10-mO-vtA"/>
+                                    <constraint firstAttribute="trailing" secondItem="yEE-ux-0wD" secondAttribute="trailing" id="Ofi-bZ-7fF"/>
+                                    <constraint firstItem="yEE-ux-0wD" firstAttribute="top" secondItem="jzT-XR-Mna" secondAttribute="bottom" constant="9" id="PcH-op-szT"/>
+                                    <constraint firstAttribute="trailing" secondItem="Skg-GX-Za9" secondAttribute="trailing" id="Pma-Ht-2po"/>
                                     <constraint firstItem="qpw-zU-wZV" firstAttribute="leading" secondItem="29t-1i-nW1" secondAttribute="leading" id="YO1-Nb-yWi"/>
+                                    <constraint firstItem="yEE-ux-0wD" firstAttribute="trailing" secondItem="brp-Mg-CQC" secondAttribute="trailing" id="ZSi-kG-773"/>
+                                    <constraint firstItem="Skg-GX-Za9" firstAttribute="leading" secondItem="29t-1i-nW1" secondAttribute="leading" id="aDv-Vj-OtH"/>
                                     <constraint firstAttribute="bottom" secondItem="qpw-zU-wZV" secondAttribute="bottom" id="bu1-lD-1Ju"/>
+                                    <constraint firstItem="qpw-zU-wZV" firstAttribute="top" secondItem="Skg-GX-Za9" secondAttribute="bottom" id="eTU-KN-QKO"/>
                                     <constraint firstAttribute="trailing" secondItem="brp-Mg-CQC" secondAttribute="trailing" id="fXn-oA-eEX"/>
+                                    <constraint firstItem="yEE-ux-0wD" firstAttribute="leading" secondItem="brp-Mg-CQC" secondAttribute="leading" id="fhd-Sw-cIA"/>
                                     <constraint firstAttribute="height" constant="300" id="g6a-El-uTN"/>
+                                    <constraint firstItem="Skg-GX-Za9" firstAttribute="top" secondItem="jzT-XR-Mna" secondAttribute="bottom" constant="8" id="ioo-6g-Shk"/>
                                     <constraint firstItem="jzT-XR-Mna" firstAttribute="top" secondItem="29t-1i-nW1" secondAttribute="top" constant="8" id="j9d-rI-vGy"/>
-                                    <constraint firstItem="qpw-zU-wZV" firstAttribute="top" secondItem="Ma1-bL-MF5" secondAttribute="bottom" constant="16" id="jtv-W9-FTE"/>
                                     <constraint firstAttribute="trailing" secondItem="jzT-XR-Mna" secondAttribute="trailing" constant="8" id="lad-yo-GSK"/>
-                                    <constraint firstItem="tAO-LP-oa6" firstAttribute="leading" secondItem="qpw-zU-wZV" secondAttribute="leading" id="sMD-Ih-s3N"/>
+                                    <constraint firstItem="yEE-ux-0wD" firstAttribute="leading" secondItem="29t-1i-nW1" secondAttribute="leading" id="put-MY-D66"/>
                                     <constraint firstAttribute="width" constant="400" id="sk9-Sz-hOa"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1475,6 +1506,8 @@ UFJaRUpEGsW5IERBTEVKA
                         <outlet property="collectionCheckView" destination="29t-1i-nW1" id="my1-d1-nJp"/>
                         <outlet property="collectionLabel" destination="xBO-5w-Kwn" id="fwg-Cq-hGu"/>
                         <outlet property="downloadButton" destination="qpw-zU-wZV" id="TKe-aN-eee"/>
+                        <outlet property="downloadView" destination="yEE-ux-0wD" id="9TN-rt-uH2"/>
+                        <outlet property="loadingView" destination="Skg-GX-Za9" id="5IA-eO-q6q"/>
                         <outlet property="textBottom" destination="Ma1-bL-MF5" id="fqx-UI-NKw"/>
                         <outlet property="textTop" destination="tAO-LP-oa6" id="mh2-Yx-sJz"/>
                     </connections>

@@ -6,9 +6,9 @@ public class CostumerService {
     
     var urlComponents = URLComponents()
     
-    urlComponents.scheme = "https"
-    urlComponents.host = "8e08w9h4m5.execute-api.eu-west-1.amazonaws.com"
-    urlComponents.path = "/production/customers"
+    urlComponents.scheme = API.SCHEME.rawValue
+    urlComponents.host = API.HOST.rawValue
+    urlComponents.path = API.CUSTOMER_PATH.rawValue
     guard let url = urlComponents.url else {
       fatalError("Could not create URL from components")
     }
