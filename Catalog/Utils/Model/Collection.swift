@@ -1,9 +1,9 @@
 import Foundation
 
-public struct Collection {
+public struct Collection: Codable {
   public let id: Int
   public let name: String
-  public let dresses: [CollectionDresses]
+  public var dresses: [CollectionDresses]
   
   init(id: Int, name: String, dresses: [CollectionDresses]) {
     self.id = id
@@ -12,14 +12,16 @@ public struct Collection {
   }
 }
 
-public struct CollectionDresses {
+public struct CollectionDresses: Codable {
   public let name: String
   public let imageUrl: String
+  public var imageData: Data?
   public var isSelected: Bool = false
   
-  init(name: String, imageUrl: String, isSelected: Bool) {
+  init(name: String, imageUrl: String, imageData: Data?, isSelected: Bool) {
     self.name = name
     self.imageUrl = imageUrl
+    self.imageData = imageData
     self.isSelected = isSelected
   }
 }

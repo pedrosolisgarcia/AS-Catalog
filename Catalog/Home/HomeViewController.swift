@@ -41,14 +41,34 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBOutlet weak var lowSeparator: UIView!
   @IBOutlet weak var catalogButton: UIButton!
   
+  var collection: Collection!
+  
   @IBAction func createProfile(sender: UIButton) {
-    if (CostumerDataValidator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
-      self.setCurrentCustomerData()
-    } else {
-      self.showDataInvalidWarningMessage()
+    if sender == self.createProfileButton {
+      if (CostumerDataValidator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
+        self.setCurrentCustomerData()
+      } else {
+        self.showDataInvalidWarningMessage()
+      }
+      view.endEditing(true)
     }
-    view.endEditing(true)
-    self.performSegue(withIdentifier: "showCatalog", sender: self)
+    do {
+      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
+      print(fullPath)
+      
+      guard  let data = try? Data(contentsOf: fullPath, options: []) else {
+        self.showDataInvalidWarningMessage()
+        return
+      }
+
+      let loadedUserData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! Data
+      self.collection = try JSONDecoder().decode(Collection.self, from: loadedUserData)
+      print(self.collection!)
+      self.performSegue(withIdentifier: "showCatalog", sender: self)
+    } catch {
+      self.showDataInvalidWarningMessage()
+      print("Couldn't read file.")
+    }
   }
   
   @IBAction func pressToShowShopIdView(sender: UIButton) {
@@ -246,6 +266,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       }
       let destinationController = segue.destination as! CatalogViewController
       destinationController.languageIndex = languageIndex
+      destinationController.collection = collection
       destinationController.currentCustomer = currentCustomer
       destinationController.region = countrySelected ? country.name : regionSelected
     }
@@ -364,5 +385,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   
   override var prefersStatusBarHidden: Bool {
     return true
+  }
+  
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
   }
 }

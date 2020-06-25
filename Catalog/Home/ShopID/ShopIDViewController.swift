@@ -15,6 +15,8 @@ class ShopIDViewController: UIViewController {
   @IBOutlet weak var shopIdField: UITextField!
   @IBOutlet weak var confirmButton: UIButton!
   @IBOutlet weak var shopIdView: UIView!
+  @IBOutlet weak var idFieldView: UIView!
+  @IBOutlet weak var loadingView: UIView!
   
   var languageIndex: Int!
 
@@ -69,6 +71,8 @@ class ShopIDViewController: UIViewController {
     if (sender == self.confirmButton) {
       if self.tryToSaveShopId() {
         if self.shouldDisplayCollectionCheckView() {
+          self.idFieldView.isHidden = true
+          self.loadingView.isHidden = false
           CollectionServiceAPI.shared.fetchLatestCollection() { (result) in
             switch result {
               case .success(let response):
@@ -76,8 +80,13 @@ class ShopIDViewController: UIViewController {
                   self.showCollectionCheckView(
                     CollectionMapper.mapResponseToCollection(response[0])
                   )
+                  self.idFieldView.isHidden = false
+                  self.loadingView.isHidden = true
                 }
               case .failure(let error):
+                DispatchQueue.main.async {
+                  self.displayWrongIdAlert()
+                }
                 print(error.localizedDescription)
             }
           }

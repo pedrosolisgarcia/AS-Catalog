@@ -22,6 +22,7 @@ class CollectionCheckViewController: UIViewController {
   
   var languageIndex: Int!
   var collection: Collection!
+  var dressesImages: [Data]!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -57,13 +58,7 @@ class CollectionCheckViewController: UIViewController {
   @IBAction func removeAnimate(sender: UIButton) {
     
     if (sender == self.downloadButton) {
-      let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage_ID")[languageIndex], preferredStyle: .alert)
-      let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default) {
-        (alert: UIAlertAction!) -> Void in
-          self.removeAnimated()
-      }
-      alertController.addAction(alertAction)
-      present(alertController, animated: true, completion: nil)
+      downloadImage()
     }
     if (sender == self.cancelButton) {
       self.removeAnimated()
@@ -71,6 +66,53 @@ class CollectionCheckViewController: UIViewController {
 
   }
   
+  func downloadImage() {
+    let dispatchGroup = DispatchGroup()
+    self.downloadView.isHidden = true
+    self.loadingView.isHidden = false
+    for (index, dress) in collection.dresses.enumerated() {
+      dispatchGroup.enter()
+
+      let url = URL(string: dress.imageUrl)!
+      CollectionServiceAPI.shared.getImageData(from: url) { (result) in
+        switch result {
+          case .success(let response):
+            self.collection.dresses[index].imageData = response
+            print("Dress \(dress.name): ", self.collection.dresses[index])
+            dispatchGroup.leave()
+          case .failure(let error):
+            print(error.localizedDescription)
+        }
+      }
+    }
+    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
+      print(fullPath)
+
+      do {
+        let jsonData = try JSONEncoder().encode(self.collection!)
+        let encodedCollection = try NSKeyedArchiver.archivedData(withRootObject: jsonData, requiringSecureCoding: false)
+        try encodedCollection.write(to: fullPath)
+        print("Here the encoded object", encodedCollection as Any)
+
+        let alertController = UIAlertController(title: "Success", message: "Collection succesfully downloaded", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+          (alert: UIAlertAction!) -> Void in
+            self.removeAnimated()
+        }
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
+      } catch {
+          print("Couldn't write file")
+      }
+    })
+  }
+  
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+  }
+
   override var prefersStatusBarHidden: Bool {
     return true
   }

@@ -8,7 +8,11 @@ public class CollectionServiceAPI {
   private let urlSession = URLSession.shared
   
   public func fetchLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) {
-    fetchResources(path: API.COLLECTION_PATH.rawValue, completion: result)
+    fetchJSONResources(path: API.COLLECTION_PATH.rawValue, completion: result)
+  }
+  
+  public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) {
+    fetchRawResources(from: url, completion: result)
   }
   
   private let jsonDecoder: JSONDecoder = {
@@ -17,7 +21,7 @@ public class CollectionServiceAPI {
    return jsonDecoder
   }()
   
-  private func fetchResources<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+  private func fetchJSONResources<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
     var urlComponents = URLComponents()
 
     urlComponents.scheme = API.SCHEME.rawValue
@@ -47,5 +51,21 @@ public class CollectionServiceAPI {
           completion(.failure(.apiError))
         }
      }.resume()
+  }
+  
+  private func fetchRawResources(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) {
+    urlSession.dataTask(with: url) { (result) in
+      switch result {
+        case .success(let (response, data)):
+          guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
+            completion(.failure(.invalidResponse))
+            return
+          }
+          completion(.success(data))
+        case .failure(let error):
+          print(error.localizedDescription)
+          completion(.failure(.apiError))
+      }
+    }.resume()
   }
 }

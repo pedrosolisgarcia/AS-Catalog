@@ -18,6 +18,7 @@ class CollectionMapper {
       CollectionDresses(
         name: $0.name,
         imageUrl: $0.featuredPictureUrl!,
+        imageData: nil,
         isSelected: false
       )
     }

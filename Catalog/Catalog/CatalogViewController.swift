@@ -12,6 +12,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
   var currentCustomer: Customer!
   var region = [String]()
   var languageIndex: Int!
+  var collection: Collection!
   
   let catalogSize = CGSize(width: 246, height: 416)
   let carouselSize = CGSize(width: 515, height: 850)
