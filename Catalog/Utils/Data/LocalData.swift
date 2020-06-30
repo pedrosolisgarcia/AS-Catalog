@@ -2,51 +2,6 @@ import Foundation
 
 public class LocalData {
   
-  static func getDresses() -> [Dress] {
-    let dresses = [
-      Dress(name: ["Gardenia"], imgName: "Gardenia", isSelected: false),
-      Dress(name: ["Gardenia z Trenem","Gardenia with Train","Gardenia con Tren"],
-        imgName: "Gardenia Z Trenem", isSelected: false),
-      Dress(name: ["Cristina"], imgName: "Cristina", isSelected: false),
-      Dress(name: ["Penelope"], imgName: "Penelope", isSelected: false),
-      Dress(name: ["Blanca"], imgName: "Blanca", isSelected: false),
-      Dress(name: ["Blanca z Trenem","Blanca with Train","Blanca con Tren"],
-        imgName: "Blanca Z Trenem", isSelected: false),
-      Dress(name: ["Carmen"], imgName: "Carmen", isSelected: false),
-      Dress(name: ["Miranda"], imgName: "Miranda", isSelected: false),
-      Dress(name: ["Amy"], imgName: "Amy", isSelected: false),
-      Dress(name: ["Mia"], imgName: "Mia", isSelected: false),
-      Dress(name: ["Donatella"], imgName: "Donatella", isSelected: false),
-      Dress(name: ["Donatella z Trenem","Donatella with Train","Donatella con Tren"],
-        imgName: "Donatella Z Trenem", isSelected: false),
-      Dress(name: ["Lolita"], imgName: "Lolita", isSelected: false),
-      Dress(name: ["Ruby"], imgName: "Ruby", isSelected: false),
-      Dress(name: ["Scarlett"], imgName: "Scarlett", isSelected: false),
-      Dress(name: ["Sharon"], imgName: "Sharon", isSelected: false),
-      Dress(name: ["Serena"], imgName: "Serena", isSelected: false),
-      Dress(name: ["Hortensia"], imgName: "Hortensia", isSelected: false),
-      Dress(name: ["Zoe"], imgName: "Zoe", isSelected: false),
-      Dress(name: ["Zafira"], imgName: "Zafira", isSelected: false),
-      Dress(name: ["Tiffany"], imgName: "Tiffany", isSelected: false),
-      Dress(name: ["Tiffany z Trenem","Tiffany with Train","Tiffany con Tren"],
-        imgName: "Tiffany Z Trenem", isSelected: false),
-      Dress(name: ["Lilou"], imgName: "Lilou", isSelected: false),
-      Dress(name: ["Lucy"], imgName: "Lucy", isSelected: false),
-      Dress(name: ["Milagros"], imgName: "Milagros", isSelected: false),
-      Dress(name: ["Cindy"], imgName: "Cindy", isSelected: false),
-      Dress(name: ["Cindy z Peleryną","Cindy with Cape","Cindy con Capa"],
-        imgName: "Cindy Z Peleryna", isSelected: false),
-      Dress(name: ["Maxime"], imgName: "Maxime", isSelected: false),
-      Dress(name: ["Maxime z Trenem","Maxime with Train","Maxime con Tren"],
-        imgName: "Maxime Z Trenem", isSelected: false),
-      Dress(name: ["Esmeralda"], imgName: "Esmeralda", isSelected: false),
-      Dress(name: ["Emma"], imgName: "Emma", isSelected: false),
-      Dress(name: ["Arlette"], imgName: "Arlette", isSelected: false),
-      Dress(name: ["Natella"], imgName: "Natella", isSelected: false)
-    ]
-    return dresses
-  }
-  
   static func getCountries() -> [Country] {
     let countries = [
       Country(name: ["Albania","Albania","Albania"], imgName: "albania"),
