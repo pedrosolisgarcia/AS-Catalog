@@ -8,10 +8,10 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
   @IBOutlet weak var carouselView: UIBarButtonItem!
   @IBOutlet weak var selectButton: UIButton!
   
-  var dresses = LocalData.getDresses()
   var currentCustomer: Customer!
   var region = [String]()
   var languageIndex: Int!
+  var collection: Collection!
   
   let catalogSize = CGSize(width: 246, height: 416)
   let carouselSize = CGSize(width: 515, height: 850)
@@ -39,7 +39,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return dresses.count
+    return collection.dresses.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -47,12 +47,12 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
     cell.cellDelegate = self
     
-    let dress = dresses[indexPath.row]
+    let dress = collection.dresses[indexPath.row]
     
     // Configure the cell
     cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
-    cell.dressLabel.text = dress.name.count > 1 ? dress.name[languageIndex] : dress.name[0]
-    cell.dressImageView.image = UIImage(named: dress.imgName)
+    cell.dressLabel.text = dress.name
+    cell.dressImageView.image = UIImage(data: dress.imageData!)
     
     return cell
   }
@@ -61,7 +61,7 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     if let indexPath = getCurrentCellIndexPath(sender) {
       
       let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-      zoomImageView.dress = dresses[indexPath.row].imgName + "_full"
+      zoomImageView.dress = collection.dresses[indexPath.row].imageData
       self.addChild(zoomImageView)
       zoomImageView.view.frame = self.view.frame
       self.view.addSubview(zoomImageView.view)
@@ -78,13 +78,13 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    dresses[indexPath.row].isSelected = true
+    collection.dresses[indexPath.row].isSelected = true
     selectButton.isEnabled = true
     selectButton.alpha = 1
   }
   
   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    dresses[indexPath.row].isSelected = false
+    collection.dresses[indexPath.row].isSelected = false
     if let indexPath = collectionView.indexPathsForSelectedItems {
       if indexPath.count <= 0 {
         selectButton.isEnabled = false
@@ -132,8 +132,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
         var dressesNames = [String]()
         
         for index in indexPath {
-          destinationController.selectedDresses.append(dresses[index.row])
-          dressesNames.append(dresses[index.row].name[0])
+          destinationController.selectedDresses.append(collection.dresses[index.row])
+          dressesNames.append(collection.dresses[index.row].name)
         }
         currentCustomer.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
         destinationController.currentCustomer = currentCustomer

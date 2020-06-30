@@ -13,10 +13,11 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   @IBOutlet weak var backHomeScreen: UIBarButtonItem!
   @IBOutlet weak var stackSelection: UIStackView!
   
-  var selectedDresses = [Dress]()
+  var selectedDresses = [CollectionDresses]()
   var currentCustomer: Customer!
   var languageIndex: Int!
   var region = [String]()
+  var collectionId: Int!
   
   @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
     
@@ -78,15 +79,15 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     let dress = selectedDresses[indexPath.row]
     
     cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
-    cell.dressLabel.text = dress.name.count > 1 ? dress.name[languageIndex] : dress.name[0]
-    cell.dressImageView.image = UIImage(named: dress.imgName)
+    cell.dressLabel.text = dress.name
+    cell.dressImageView.image = UIImage(data: dress.imageData!)
     
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-    popImageView.dressImage = selectedDresses[indexPath.row].imgName
+    popImageView.dressImage = selectedDresses[indexPath.row].imageData
     self.addChild(popImageView)
     popImageView.view.frame = self.view.frame
     self.view.addSubview(popImageView.view)
@@ -103,7 +104,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     saveButton.setTitle(LocalData.getLocalizationLabels(forElement: "saveButton")[languageIndex], for: .normal)
     navigationItem.title = LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex]
     dressesLabel.setTitle(LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex], for: .normal)
-    backHomeScreen.title = LocalData.getLocalizationLabels(forElement: "backHomeScreen")[languageIndex]
   }
   
   private func clearAllVariables() {

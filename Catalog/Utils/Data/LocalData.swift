@@ -2,51 +2,6 @@ import Foundation
 
 public class LocalData {
   
-  static func getDresses() -> [Dress] {
-    let dresses = [
-      Dress(name: ["Gardenia"], imgName: "Gardenia", isSelected: false),
-      Dress(name: ["Gardenia z Trenem","Gardenia with Train","Gardenia con Tren"],
-        imgName: "Gardenia Z Trenem", isSelected: false),
-      Dress(name: ["Cristina"], imgName: "Cristina", isSelected: false),
-      Dress(name: ["Penelope"], imgName: "Penelope", isSelected: false),
-      Dress(name: ["Blanca"], imgName: "Blanca", isSelected: false),
-      Dress(name: ["Blanca z Trenem","Blanca with Train","Blanca con Tren"],
-        imgName: "Blanca Z Trenem", isSelected: false),
-      Dress(name: ["Carmen"], imgName: "Carmen", isSelected: false),
-      Dress(name: ["Miranda"], imgName: "Miranda", isSelected: false),
-      Dress(name: ["Amy"], imgName: "Amy", isSelected: false),
-      Dress(name: ["Mia"], imgName: "Mia", isSelected: false),
-      Dress(name: ["Donatella"], imgName: "Donatella", isSelected: false),
-      Dress(name: ["Donatella z Trenem","Donatella with Train","Donatella con Tren"],
-        imgName: "Donatella Z Trenem", isSelected: false),
-      Dress(name: ["Lolita"], imgName: "Lolita", isSelected: false),
-      Dress(name: ["Ruby"], imgName: "Ruby", isSelected: false),
-      Dress(name: ["Scarlett"], imgName: "Scarlett", isSelected: false),
-      Dress(name: ["Sharon"], imgName: "Sharon", isSelected: false),
-      Dress(name: ["Serena"], imgName: "Serena", isSelected: false),
-      Dress(name: ["Hortensia"], imgName: "Hortensia", isSelected: false),
-      Dress(name: ["Zoe"], imgName: "Zoe", isSelected: false),
-      Dress(name: ["Zafira"], imgName: "Zafira", isSelected: false),
-      Dress(name: ["Tiffany"], imgName: "Tiffany", isSelected: false),
-      Dress(name: ["Tiffany z Trenem","Tiffany with Train","Tiffany con Tren"],
-        imgName: "Tiffany Z Trenem", isSelected: false),
-      Dress(name: ["Lilou"], imgName: "Lilou", isSelected: false),
-      Dress(name: ["Lucy"], imgName: "Lucy", isSelected: false),
-      Dress(name: ["Milagros"], imgName: "Milagros", isSelected: false),
-      Dress(name: ["Cindy"], imgName: "Cindy", isSelected: false),
-      Dress(name: ["Cindy z Peleryną","Cindy with Cape","Cindy con Capa"],
-        imgName: "Cindy Z Peleryna", isSelected: false),
-      Dress(name: ["Maxime"], imgName: "Maxime", isSelected: false),
-      Dress(name: ["Maxime z Trenem","Maxime with Train","Maxime con Tren"],
-        imgName: "Maxime Z Trenem", isSelected: false),
-      Dress(name: ["Esmeralda"], imgName: "Esmeralda", isSelected: false),
-      Dress(name: ["Emma"], imgName: "Emma", isSelected: false),
-      Dress(name: ["Arlette"], imgName: "Arlette", isSelected: false),
-      Dress(name: ["Natella"], imgName: "Natella", isSelected: false)
-    ]
-    return dresses
-  }
-  
   static func getCountries() -> [Country] {
     let countries = [
       Country(name: ["Albania","Albania","Albania"], imgName: "albania"),
@@ -166,12 +121,16 @@ public class LocalData {
       return ["*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.","*Due to statistical purposes, we would appreciate to know where our customers are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.","*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias."]
     case "warningTitle":
       return ["Błąd","Error","Error"]
+    case "noInternetTitle":
+      return ["Brak Internetu","No Internet","Sin Internet"]
     case "warningMessage":
       return ["Aby utworzyć profil, wypełnij pola dotyczące województwa oraz daty ślubu.","Region and Wedding Date fields must be filled to create a profile.","La región y la fecha de boda han de ser rellenados para poder crear un perfil."]
     case "warningMessage_ID":
       return ["Wprowadzony kod nie jest poprawny. Proszę, spróbuj ponownie.","The code introduced is not correct. Please, try again.","El código introducido no es correcto. Por favor, inténtelo de nuevo."]
+    case "noInternetMessage":
+      return ["Brak możliwości podłączenia do serwera. Proszę sprawdź połączenie internetowe lub spróbuj póżniej.","Unable to connect to the server. Please, check your Internet connection or try again later.","El código introducido no es correcto. Por favor, inténtelo de nuevo."]
     case "warningButton":
-      return ["Dobra","Ok","Vale"]
+      return ["Ok","Ok","Vale"]
     case "doneButton":
       return ["Gotowy","Done","Hecho"]
     case "cancelButton":

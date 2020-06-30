@@ -22,11 +22,11 @@ class CollectionCheckViewController: UIViewController {
   
   var languageIndex: Int!
   var collection: Collection!
+  var dressesImages: [Data]!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionCheckLabel.text = LocalData.getLocalizationLabels(forElement: "collectionCheckLabel")[languageIndex]
-    cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
     textTop.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextTop")[languageIndex]
     collectionLabel.text = collection.name
     textBottom.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextBottom")[languageIndex]
@@ -57,13 +57,7 @@ class CollectionCheckViewController: UIViewController {
   @IBAction func removeAnimate(sender: UIButton) {
     
     if (sender == self.downloadButton) {
-      let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage_ID")[languageIndex], preferredStyle: .alert)
-      let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default) {
-        (alert: UIAlertAction!) -> Void in
-          self.removeAnimated()
-      }
-      alertController.addAction(alertAction)
-      present(alertController, animated: true, completion: nil)
+      downloadImage()
     }
     if (sender == self.cancelButton) {
       self.removeAnimated()
@@ -71,6 +65,70 @@ class CollectionCheckViewController: UIViewController {
 
   }
   
+  func downloadImage() {
+    let dispatchGroup = DispatchGroup()
+    self.downloadView.isHidden = true
+    self.loadingView.isHidden = false
+    for (index, dress) in collection.dresses.enumerated() {
+      dispatchGroup.enter()
+
+      let url = URL(string: dress.imageUrl)!
+      CollectionServiceAPI.shared.getImageData(from: url) { (result) in
+        switch result {
+          case .success(let response):
+            self.collection.dresses[index].imageData = response
+            print("Dress \(dress.name): ", self.collection.dresses[index])
+            dispatchGroup.leave()
+          case .failure(let error):
+            print(error.localizedDescription)
+            DispatchQueue.main.async {
+              self.showErrorAlert()
+            }
+        }
+      }
+  }
+    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
+      print(fullPath)
+
+      do {
+        let jsonData = try JSONEncoder().encode(self.collection!)
+        let encodedCollection = try NSKeyedArchiver.archivedData(withRootObject: jsonData, requiringSecureCoding: false)
+        try encodedCollection.write(to: fullPath)
+        print("Here the encoded object", encodedCollection as Any)
+        self.showSuccessAlert()
+      } catch {
+          print("Couldn't write file")
+          self.showErrorAlert()
+      }
+    })
+  }
+  
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+  }
+  
+  func showSuccessAlert() {
+    let alertController = UIAlertController(title: "Success", message: "Collection succesfully downloaded", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
+  func showErrorAlert() {
+    let alertController = UIAlertController(title: "Error", message: "An error has ocurred. Please try again later", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+
   override var prefersStatusBarHidden: Bool {
     return true
   }

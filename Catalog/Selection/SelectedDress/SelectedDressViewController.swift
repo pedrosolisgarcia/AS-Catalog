@@ -6,7 +6,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
   @IBOutlet weak var closeView: UIButton!
   @IBOutlet weak var popImageView: UIView!
   
-  var dressImage = ""
+  var dressImage: Data!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -18,7 +18,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
     
     self.view.removeFromSuperview()
     self.showAnimated()
-    ImageView.image = UIImage(named: dressImage)
+    ImageView.image = UIImage(data: dressImage)
   }
   
   override func didReceiveMemoryWarning() {

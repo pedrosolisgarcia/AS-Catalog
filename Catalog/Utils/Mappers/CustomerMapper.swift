@@ -11,7 +11,8 @@ class CustomerMapper {
       surname: customerMO.surname!,
       region: customerMO.region!,
       dateOfWedding: customerMO.dateOfWedding!,
-      dressesNames: customerMO.dressesNames!
+      dressesNames: customerMO.dressesNames!,
+      collectionId: Int(customerMO.collectionId)
     )
   }
 }

@@ -15,6 +15,8 @@ class ShopIDViewController: UIViewController {
   @IBOutlet weak var shopIdField: UITextField!
   @IBOutlet weak var confirmButton: UIButton!
   @IBOutlet weak var shopIdView: UIView!
+  @IBOutlet weak var idFieldView: UIView!
+  @IBOutlet weak var loadingView: UIView!
   
   var languageIndex: Int!
 
@@ -23,8 +25,7 @@ class ShopIDViewController: UIViewController {
     headerLabel.text = ShopIdManager.isThereAnyShopIdRegisteredAlready() ?
       LocalData.getLocalizationLabels(forElement: "headerLabel_ID_Identified")[languageIndex] + ShopIdManager.retrieveIPadShopId()! :
       LocalData.getLocalizationLabels(forElement: "headerLabel_ID")[languageIndex]
-    cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
-    confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
+                            confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
     
     self.shopIdView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
     self.shopIdView.layer.shadowColor = UIColor.gray.cgColor
@@ -47,15 +48,15 @@ class ShopIDViewController: UIViewController {
     maskLayerLabel.path = maskPathLabel.cgPath
     headerLabel.layer.mask = maskLayerLabel
     
-    addBlurView()
+    addBlurView(below: shopIdView)
     self.showAnimated()
   }
   
-  func addBlurView() -> Void {
+  func addBlurView(below subView: UIView) -> Void {
     let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
     let blurEffectView = UIVisualEffectView(effect: blurEffect)
     blurEffectView.frame = view.bounds
-    self.view.insertSubview(blurEffectView, belowSubview: shopIdView)
+    self.view.insertSubview(blurEffectView, belowSubview: subView)
   }
   
 
@@ -68,22 +69,8 @@ class ShopIDViewController: UIViewController {
     
     if (sender == self.confirmButton) {
       if self.tryToSaveShopId() {
-        if self.shouldDisplayCollectionCheckView() {
-          CollectionServiceAPI.shared.fetchLatestCollection() { (result) in
-            switch result {
-              case .success(let response):
-                DispatchQueue.main.async {
-                  self.showCollectionCheckView(
-                    CollectionMapper.mapResponseToCollection(response[0])
-                  )
-                }
-              case .failure(let error):
-                print(error.localizedDescription)
-            }
-          }
-        } else {
-          self.removeAnimated()
-        }
+        self.setLoadingState(to: true)
+        self.connectToCollectionView()
       } else {
         self.displayWrongIdAlert()
       }
@@ -91,7 +78,34 @@ class ShopIDViewController: UIViewController {
     if (sender == self.cancelButton) {
       self.removeAnimated()
     }
-
+  }
+  
+  private func setLoadingState(to enabled: Bool) -> Void {
+    self.idFieldView.isHidden = enabled
+    self.loadingView.isHidden = !enabled
+  }
+  
+  private func connectToCollectionView() -> Void {
+    CollectionServiceAPI.shared.fetchLatestCollection() { (result) in
+      switch result {
+        case .success(let response):
+          DispatchQueue.main.async {
+            if response.isEmpty {
+              self.showErrorAlert()
+              return
+            }
+            self.showCollectionCheckView(
+              CollectionMapper.mapResponseToCollection(response[0])
+            )
+            self.setLoadingState(to: false)
+          }
+        case .failure(let error):
+          DispatchQueue.main.async {
+            self.displayNoInternetAlert()
+          }
+          print(error.localizedDescription)
+      }
+    }
   }
   
   private func tryToSaveShopId() -> Bool {
@@ -117,6 +131,27 @@ class ShopIDViewController: UIViewController {
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion:nil)
     self.shopIdField.text = ""
+  }
+  
+  private func displayNoInternetAlert() -> Void {
+    let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "noInternetTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "noInternetMessage")[languageIndex], preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    present(alertController, animated: true, completion:nil)
+    self.shopIdField.text = ""
+  }
+  
+  func showErrorAlert() {
+    let alertController = UIAlertController(title: "Error", message: "An error has ocurred. Please try again later", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
   }
   
   private func shouldDisplayCollectionCheckView() -> Bool {
