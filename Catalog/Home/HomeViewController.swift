@@ -3,7 +3,7 @@ import CoreData
 
 class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, NSFetchedResultsControllerDelegate {
   
-  let appVersion = "2.01"
+  let appVersion = "4.00"
   
   var pickerId = "regionPicker"
   var regionPicker = UIPickerView()
@@ -173,8 +173,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   }
   
   func showRegionPicker(){
-    
-    self.regionPicker.backgroundColor = UIColor.white
+
     regionPicker.selectRow(0, inComponent: 0, animated: false)
     regionField.inputView = self.regionPicker
     regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)][languageIndex]
@@ -264,6 +263,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       if currentCustomer == nil {
         self.setCurrentCustomerData()
       }
+      self.currentCustomer.collectionId = self.collection.id
+
       let destinationController = segue.destination as! CatalogViewController
       destinationController.languageIndex = languageIndex
       destinationController.collection = collection
@@ -353,7 +354,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       surname: (surnameField.text?.capitalized)!,
       region: regionField.text!,
       dateOfWedding: dateOfWeddingField.text!,
-      dressesNames: "")
+      dressesNames: "",
+      collectionId: 0
+    )
   }
   
   private func showDataInvalidWarningMessage() {

@@ -27,7 +27,6 @@ class CollectionCheckViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionCheckLabel.text = LocalData.getLocalizationLabels(forElement: "collectionCheckLabel")[languageIndex]
-    cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
     textTop.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextTop")[languageIndex]
     collectionLabel.text = collection.name
     textBottom.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextBottom")[languageIndex]
@@ -82,9 +81,12 @@ class CollectionCheckViewController: UIViewController {
             dispatchGroup.leave()
           case .failure(let error):
             print(error.localizedDescription)
+            DispatchQueue.main.async {
+              self.showErrorAlert()
+            }
         }
       }
-    }
+  }
     dispatchGroup.notify(queue: DispatchQueue.main, execute: {
       let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
       print(fullPath)
@@ -94,16 +96,10 @@ class CollectionCheckViewController: UIViewController {
         let encodedCollection = try NSKeyedArchiver.archivedData(withRootObject: jsonData, requiringSecureCoding: false)
         try encodedCollection.write(to: fullPath)
         print("Here the encoded object", encodedCollection as Any)
-
-        let alertController = UIAlertController(title: "Success", message: "Collection succesfully downloaded", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
-          (alert: UIAlertAction!) -> Void in
-            self.removeAnimated()
-        }
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true, completion: nil)
+        self.showSuccessAlert()
       } catch {
           print("Couldn't write file")
+          self.showErrorAlert()
       }
     })
   }
@@ -111,6 +107,26 @@ class CollectionCheckViewController: UIViewController {
   func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
+  }
+  
+  func showSuccessAlert() {
+    let alertController = UIAlertController(title: "Success", message: "Collection succesfully downloaded", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
+  }
+  
+  func showErrorAlert() {
+    let alertController = UIAlertController(title: "Error", message: "An error has ocurred. Please try again later", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.removeAnimated()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
   }
 
   override var prefersStatusBarHidden: Bool {

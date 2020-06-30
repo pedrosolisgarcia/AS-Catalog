@@ -9,8 +9,9 @@ struct Customer: Codable {
   var region: String
   let dateOfWedding: String
   var dressesNames: String
+  var collectionId: Int
   
-  init(appVersion: String, dateOfVisit: String, shopId: String, name: String, surname: String, region: String, dateOfWedding: String, dressesNames: String){
+  init(appVersion: String, dateOfVisit: String, shopId: String, name: String, surname: String, region: String, dateOfWedding: String, dressesNames: String, collectionId: Int) {
     self.appVersion = appVersion
     self.dateOfVisit = dateOfVisit
     self.shopId = shopId
@@ -19,5 +20,6 @@ struct Customer: Codable {
     self.region = region
     self.dateOfWedding = dateOfWedding
     self.dressesNames = dressesNames
+    self.collectionId = collectionId
   }
 }

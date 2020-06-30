@@ -32,6 +32,7 @@ public class CoreDataManager {
     customerObject.setValue(customer.region, forKey: "region")
     customerObject.setValue(customer.dateOfWedding, forKey: "dateOfWedding")
     customerObject.setValue(customer.dressesNames, forKey: "dressesNames")
+    customerObject.setValue(customer.collectionId, forKey: "collectionId")
     
     do {
       try viewContext.save()
