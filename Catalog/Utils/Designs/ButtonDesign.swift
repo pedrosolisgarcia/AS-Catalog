@@ -73,8 +73,8 @@ import UIKit
   
   @IBInspectable var enableGradientBackground: Bool = false
   
-  @IBInspectable var gradientColor1: UIColor = UIColor.black
-  @IBInspectable var gradientColor2: UIColor = UIColor.white
+  @IBInspectable var gradientColor1: UIColor = .black
+  @IBInspectable var gradientColor2: UIColor = .white
     
     override func layoutSubviews() {
       super.layoutSubviews()

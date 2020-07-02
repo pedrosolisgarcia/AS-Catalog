@@ -54,7 +54,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     super.viewDidLoad()
     
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-    backHomeScreen.tintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0)
+    backHomeScreen.tintColor = .clear
     applyLanguage()
     formatSelectedDressesSection()
   }
