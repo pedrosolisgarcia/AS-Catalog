@@ -138,4 +138,4 @@ The following are some things that will make the build compile fail.
 ### Who do I talk to? ###
 
 * iOS Developer: Pedro Solis Garcia (solisgpedro@gmail.com)
-* Back End Developer: José Antonio Jiménez Hernández (josetalito@gmail.com)
+* Backend Developer: José Antonio Jiménez Hernández (josetalito@gmail.com)
