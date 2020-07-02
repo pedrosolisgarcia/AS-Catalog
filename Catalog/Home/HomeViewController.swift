@@ -112,7 +112,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     super.viewDidLoad()
     languageIndex = 0
     
-    if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
+    if !ShopIdServiceAPI.shared.hasRegisteredShopId() {
       showShopIdView()
     }
     
@@ -314,7 +314,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   private func sendPendingCostumersToAPIIfConnected() {
     
     if Reachability.isConnectedToNetwork() {
-      var customersMO = CoreDataManager.fetchCustomersFromCoreData(delegate: self)
+      var customersMO = CoreDataManager.getCustomersFromCoreData(delegate: self)
       for customerMO in customersMO.enumerated() {
         
         let customer = CustomerMapper.mapCustomerMOToCustomer(customerMO: customerMO.element )
@@ -349,7 +349,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     currentCustomer = Customer(
       appVersion: self.appVersion,
       dateOfVisit: formatDate(date: Date()),
-      shopId: ShopIdManager.retrieveIPadShopId()!,
+      shopId: ShopIdServiceAPI.shared.getShopId()!,
       name: (nameField.text?.capitalized)!,
       surname: (surnameField.text?.capitalized)!,
       region: regionField.text!,

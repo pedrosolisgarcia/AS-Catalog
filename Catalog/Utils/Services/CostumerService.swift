@@ -8,7 +8,7 @@ public class CostumerService {
     
     urlComponents.scheme = API.SCHEME.rawValue
     urlComponents.host = API.HOST.rawValue
-    urlComponents.path = API.CUSTOMER_PATH.rawValue
+    urlComponents.path = API.PATH_CUSTOMER.rawValue
     guard let url = urlComponents.url else {
       fatalError("Could not create URL from components")
     }

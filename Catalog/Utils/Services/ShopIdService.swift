@@ -1,24 +1,20 @@
 import Foundation
 
-public class CollectionServiceAPI {
+public class ShopIdServiceAPI {
   
-  public static let shared = CollectionServiceAPI()
+  public static let shared = ShopIdServiceAPI()
   
   private init() {}
   private let urlSession = URLSession.shared
   
-  public func getLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) {
-    getJSONResources(path: API.PATH_COLLECTION.rawValue, completion: result)
-  }
-  
-  public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) {
-    getRawResources(from: url, completion: result)
+  public func getShopIds(result: @escaping (Result<ShopId, APIServiceError>) -> Void) {
+    getJSONResources(path: API.PATH_SHOPID.rawValue, completion: result)
   }
   
   private let jsonDecoder: JSONDecoder = {
-   let jsonDecoder = JSONDecoder()
-   jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-   return jsonDecoder
+    let jsonDecoder = JSONDecoder()
+    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+    return jsonDecoder
   }()
   
   private func getJSONResources<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
@@ -53,19 +49,18 @@ public class CollectionServiceAPI {
      }.resume()
   }
   
-  private func getRawResources(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) {
-    urlSession.dataTask(with: url) { (result) in
-      switch result {
-        case .success(let (response, data)):
-          guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= statusCode else {
-            completion(.failure(.invalidResponse))
-            return
-          }
-          completion(.success(data))
-        case .failure(let error):
-          print(error.localizedDescription)
-          completion(.failure(.apiError))
-      }
-    }.resume()
+  public func getShopId() -> String? {
+    print("Current Shop ID: " + UserDefaults.standard.string(forKey: "SHOP-ID")!)
+    return UserDefaults.standard.string(forKey: "SHOP-ID")
+  }
+  
+  public func hasRegisteredShopId() -> Bool {
+    return self.getShopId() != nil
+  }
+  
+  public func saveShopId(shopId: String) -> String? {
+    UserDefaults.standard.setValue(shopId, forKey: "SHOP-ID")
+    print("Value changed to " + self.getShopId()!)
+    return self.getShopId()
   }
 }

@@ -19,11 +19,12 @@ class ShopIDViewController: UIViewController {
   @IBOutlet weak var loadingView: UIView!
   
   var languageIndex: Int!
+  var shopIds: [String]!
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
-    headerLabel.text = ShopIdManager.isThereAnyShopIdRegisteredAlready() ?
-      LocalData.getLocalizationLabels(forElement: "headerLabel_ID_Identified")[languageIndex] + ShopIdManager.retrieveIPadShopId()! :
+    headerLabel.text = ShopIdServiceAPI.shared.hasRegisteredShopId() ?
+      LocalData.getLocalizationLabels(forElement: "headerLabel_ID_Identified")[languageIndex] + ShopIdServiceAPI.shared.getShopId()! :
       LocalData.getLocalizationLabels(forElement: "headerLabel_ID")[languageIndex]
                             confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
     
@@ -31,7 +32,12 @@ class ShopIDViewController: UIViewController {
     self.shopIdView.layer.shadowColor = UIColor.gray.cgColor
     self.shopIdView.layer.shadowOpacity = 0.75
     
-    if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
+    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
+    self.cancelButton.layer.shadowRadius = 0
+    self.cancelButton.layer.shadowOpacity = 1
+
+    if !ShopIdServiceAPI.shared.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
@@ -48,17 +54,10 @@ class ShopIDViewController: UIViewController {
     maskLayerLabel.path = maskPathLabel.cgPath
     headerLabel.layer.mask = maskLayerLabel
     
-    addBlurView(below: shopIdView)
+    self.getShopIds()
+    self.addBlurView(below: shopIdView)
     self.showAnimated()
   }
-  
-  func addBlurView(below subView: UIView) -> Void {
-    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
-    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-    blurEffectView.frame = view.bounds
-    self.view.insertSubview(blurEffectView, belowSubview: subView)
-  }
-  
 
   override func didReceiveMemoryWarning() -> Void {
     super.didReceiveMemoryWarning()
@@ -85,8 +84,31 @@ class ShopIDViewController: UIViewController {
     self.loadingView.isHidden = !enabled
   }
   
+  private func getShopIds() -> Void {
+    ShopIdServiceAPI.shared.getShopIds() { (result) in
+      switch result {
+        case .success(let response):
+          DispatchQueue.main.async {
+            if response.ids.isEmpty {
+              self.showErrorAlert()
+              return
+            }
+            self.confirmButton.isEnabled = true
+            print(response)
+            self.shopIds = response.ids
+            self.shopIds.append("TEST-ID")
+          }
+        case .failure(let error):
+          DispatchQueue.main.async {
+            self.displayNoInternetAlert()
+          }
+          print(error.localizedDescription)
+      }
+    }
+  }
+  
   private func connectToCollectionView() -> Void {
-    CollectionServiceAPI.shared.fetchLatestCollection() { (result) in
+    CollectionServiceAPI.shared.getLatestCollection() { (result) in
       switch result {
         case .success(let response):
           DispatchQueue.main.async {
@@ -109,8 +131,8 @@ class ShopIDViewController: UIViewController {
   }
   
   private func tryToSaveShopId() -> Bool {
-    if (ShopIdManager.validShopIds().contains(self.shopIdField.text!.uppercased())) {
-      return (nil != ShopIdManager.saveShopIdInIPad(shopId: self.shopIdField.text!.uppercased()))
+    if (self.shopIds.contains(self.shopIdField.text!.uppercased())) {
+      return (nil != ShopIdServiceAPI.shared.saveShopId(shopId: self.shopIdField.text!.uppercased()))
     }
     return false;
   }
@@ -155,6 +177,6 @@ class ShopIDViewController: UIViewController {
   }
   
   private func shouldDisplayCollectionCheckView() -> Bool {
-    return ShopIdManager.collectionIds().contains(self.shopIdField.text!.uppercased())
+    return self.shopIds.contains(self.shopIdField.text!.uppercased())
   }
 }
