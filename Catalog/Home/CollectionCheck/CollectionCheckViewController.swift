@@ -32,7 +32,12 @@ class CollectionCheckViewController: UIViewController {
     textBottom.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextBottom")[languageIndex]
     downloadButton.setTitle(LocalData.getLocalizationLabels(forElement: "collectionCheckButton")[languageIndex], for: .normal)
     
-    if !ShopIdManager.isThereAnyShopIdRegisteredAlready() {
+    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
+    self.cancelButton.layer.shadowRadius = 0
+    self.cancelButton.layer.shadowOpacity = 1
+    
+    if ShopIdServiceAPI.shared.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }

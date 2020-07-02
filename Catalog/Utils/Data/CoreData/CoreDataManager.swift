@@ -4,15 +4,15 @@ import CoreData
 
 public class CoreDataManager {
   
-  class func fetchCustomersFromCoreData(delegate: NSFetchedResultsControllerDelegate) -> [CustomerMO] {
+  class func getCustomersFromCoreData(delegate: NSFetchedResultsControllerDelegate) -> [CustomerMO] {
     var customers = [Any]()
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       let context = appDelegate.persistentContainer.viewContext
-      let fetchCustomersRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CustomerMO")
-      fetchCustomersRequest.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
+      let getCustomersRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CustomerMO")
+      getCustomersRequest.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
       do {
-        let fetchedData = try context.fetch(fetchCustomersRequest)
-        customers = fetchedData
+        let getedData = try context.fetch(getCustomersRequest)
+        customers = getedData
 
       } catch let error as NSError {
         print(error)

@@ -12,11 +12,14 @@
 		51361574249D23A8007E2364 /* UIViewController+DisplayAnimated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */; };
 		51361576249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */; };
 		51361579249E5ABB007E2364 /* CollectionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */; };
+		5145231E24ADD80E0045D039 /* UIViewController+AddBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5145231D24ADD80E0045D039 /* UIViewController+AddBlurView.swift */; };
 		514BDD1920F1583600F8F28E /* CountrySelectorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1820F1583600F8F28E /* CountrySelectorViewCell.swift */; };
 		514BDD1D20F159D800F8F28E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1C20F159D800F8F28E /* Country.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
 		514D47C420277E5500DD59EA /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* LocalData.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
+		5190E83C24ACAEE100A44168 /* ShopIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190E83B24ACAEE100A44168 /* ShopIdService.swift */; };
+		5190E83E24ACCC1A00A44168 /* ShopId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190E83D24ACCC1A00A44168 /* ShopId.swift */; };
 		51985E1120E2B2120019FBE1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1020E2B2120019FBE1 /* Reachability.swift */; };
 		51985E1320E2B3DC0019FBE1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */; };
 		51985E1520E2B8450019FBE1 /* CostumerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51985E1420E2B8450019FBE1 /* CostumerService.swift */; };
@@ -60,7 +63,6 @@
 		51BE2FDE1F9353430093C897 /* SelectedDressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */; };
 		51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */; };
 		51DA8047233683C1002236E1 /* Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 51DA8045233683C0002236E1 /* Catalog.xcdatamodeld */; };
-		51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73602118ADEB00A22F21 /* ShopIdManager.swift */; };
 		51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DD73622118B2A200A22F21 /* ShopIDViewController.swift */; };
 		A3044524D3B780A937EA2949 /* Pods_Catalog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02E639736786045FB22B222 /* Pods_Catalog.framework */; };
 		E66B910480EE2271901A4591 /* Pods_CatalogTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0AAE193FA3F68DD2D314EAA /* Pods_CatalogTests.framework */; };
@@ -87,11 +89,14 @@
 		51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+DisplayAnimated.swift"; sourceTree = "<group>"; };
 		51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+DismissKeyboard.swift"; sourceTree = "<group>"; };
 		51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCheckViewController.swift; sourceTree = "<group>"; };
+		5145231D24ADD80E0045D039 /* UIViewController+AddBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+AddBlurView.swift"; sourceTree = "<group>"; };
 		514BDD1820F1583600F8F28E /* CountrySelectorViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectorViewCell.swift; sourceTree = "<group>"; };
 		514BDD1C20F159D800F8F28E /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		514D47C320277E5500DD59EA /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
+		5190E83B24ACAEE100A44168 /* ShopIdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIdService.swift; sourceTree = "<group>"; };
+		5190E83D24ACCC1A00A44168 /* ShopId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopId.swift; sourceTree = "<group>"; };
 		51985E1020E2B2120019FBE1 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		51985E1220E2B3DC0019FBE1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		51985E1420E2B8450019FBE1 /* CostumerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumerService.swift; sourceTree = "<group>"; };
@@ -137,7 +142,6 @@
 		51BE2FDD1F9353430093C897 /* SelectedDressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedDressViewController.swift; sourceTree = "<group>"; };
 		51CC9AB620E2CB7400B56B52 /* CustomerMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerMapper.swift; sourceTree = "<group>"; };
 		51DA8046233683C0002236E1 /* Catalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Catalog.xcdatamodel; sourceTree = "<group>"; };
-		51DD73602118ADEB00A22F21 /* ShopIdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIdManager.swift; sourceTree = "<group>"; };
 		51DD73622118B2A200A22F21 /* ShopIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIDViewController.swift; sourceTree = "<group>"; };
 		6F9EC149DBC97831112B7CDA /* Pods-Catalog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Catalog.release.xcconfig"; path = "Pods/Target Support Files/Pods-Catalog/Pods-Catalog.release.xcconfig"; sourceTree = "<group>"; };
 		75032F1A97BBA25CADC199E1 /* Pods-CatalogTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatalogTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CatalogTests/Pods-CatalogTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				51BE2FC41F8C047A0093C897 /* Dress.swift */,
 				51BE2FD91F923C1C0093C897 /* Customer.swift */,
 				51A6D693249FAADB00EB2A5B /* Collection.swift */,
+				5190E83D24ACCC1A00A44168 /* ShopId.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */,
 				51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */,
 				51A6D691249F8F8900EB2A5B /* URLSession+Result.swift */,
+				5145231D24ADD80E0045D039 /* UIViewController+AddBlurView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -307,6 +313,7 @@
 				51985E1420E2B8450019FBE1 /* CostumerService.swift */,
 				51A6D68F249F854400EB2A5B /* CollectionService.swift */,
 				51A6D69D24A0197300EB2A5B /* Constants.swift */,
+				5190E83B24ACAEE100A44168 /* ShopIdService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -324,7 +331,6 @@
 			children = (
 				51A6D69A24A016DE00EB2A5B /* CoreData */,
 				514D47C320277E5500DD59EA /* LocalData.swift */,
-				51DD73602118ADEB00A22F21 /* ShopIdManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -736,7 +742,6 @@
 				51361579249E5ABB007E2364 /* CollectionCheckViewController.swift in Sources */,
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* CountrySelectorViewController.swift in Sources */,
-				51DD73612118ADEB00A22F21 /* ShopIdManager.swift in Sources */,
 				51985E1520E2B8450019FBE1 /* CostumerService.swift in Sources */,
 				51A6D69724A00E6000EB2A5B /* APIServiceError.swift in Sources */,
 				51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */,
@@ -746,10 +751,13 @@
 				51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */,
 				5114A81720DD79D400224D05 /* CostumerDataValidator.swift in Sources */,
 				51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */,
+				5190E83C24ACAEE100A44168 /* ShopIdService.swift in Sources */,
 				51A6D694249FAADB00EB2A5B /* Collection.swift in Sources */,
 				51985E1120E2B2120019FBE1 /* Reachability.swift in Sources */,
 				51BE2FA51F8C03860093C897 /* SelectionViewController.swift in Sources */,
+				5190E83E24ACCC1A00A44168 /* ShopId.swift in Sources */,
 				514BDD1D20F159D800F8F28E /* Country.swift in Sources */,
+				5145231E24ADD80E0045D039 /* UIViewController+AddBlurView.swift in Sources */,
 				51BE2FDC1F92C9120093C897 /* SelectionTableViewCell.swift in Sources */,
 				51BE2FC51F8C047A0093C897 /* Dress.swift in Sources */,
 				514BDD1920F1583600F8F28E /* CountrySelectorViewCell.swift in Sources */,
