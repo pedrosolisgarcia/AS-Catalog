@@ -17,6 +17,9 @@
 		514BDD1D20F159D800F8F28E /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514BDD1C20F159D800F8F28E /* Country.swift */; };
 		514D47C220270E0600DD59EA /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C120270E0600DD59EA /* CompleteViewController.swift */; };
 		514D47C420277E5500DD59EA /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 514D47C320277E5500DD59EA /* LocalData.swift */; };
+		5177C94824AE976F0028538F /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C94724AE976F0028538F /* UIColor+Hex.swift */; };
+		5177C94A24AE97B90028538F /* UIColor+CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C94924AE97B90028538F /* UIColor+CustomColors.swift */; };
+		5177C94C24AE98D70028538F /* UIColor+Opacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C94B24AE98D70028538F /* UIColor+Opacity.swift */; };
 		5187CA241FC6048200C215AF /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5187CA231FC6048200C215AF /* ButtonDesign.swift */; };
 		5190E83C24ACAEE100A44168 /* ShopIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190E83B24ACAEE100A44168 /* ShopIdService.swift */; };
 		5190E83E24ACCC1A00A44168 /* ShopId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5190E83D24ACCC1A00A44168 /* ShopId.swift */; };
@@ -94,6 +97,9 @@
 		514BDD1C20F159D800F8F28E /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		514D47C120270E0600DD59EA /* CompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteViewController.swift; sourceTree = "<group>"; };
 		514D47C320277E5500DD59EA /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
+		5177C94724AE976F0028538F /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		5177C94924AE97B90028538F /* UIColor+CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColors.swift"; sourceTree = "<group>"; };
+		5177C94B24AE98D70028538F /* UIColor+Opacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Opacity.swift"; sourceTree = "<group>"; };
 		5187CA231FC6048200C215AF /* ButtonDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		5190E83B24ACAEE100A44168 /* ShopIdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopIdService.swift; sourceTree = "<group>"; };
 		5190E83D24ACCC1A00A44168 /* ShopId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopId.swift; sourceTree = "<group>"; };
@@ -295,6 +301,9 @@
 				51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */,
 				51A6D691249F8F8900EB2A5B /* URLSession+Result.swift */,
 				5145231D24ADD80E0045D039 /* UIViewController+AddBlurView.swift */,
+				5177C94724AE976F0028538F /* UIColor+Hex.swift */,
+				5177C94924AE97B90028538F /* UIColor+CustomColors.swift */,
+				5177C94B24AE98D70028538F /* UIColor+Opacity.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,12 +752,15 @@
 				51BE2FA41F8C03860093C897 /* ImageViewController.swift in Sources */,
 				510E2B412020F06D0083E69E /* CountrySelectorViewController.swift in Sources */,
 				51985E1520E2B8450019FBE1 /* CostumerService.swift in Sources */,
+				5177C94C24AE98D70028538F /* UIColor+Opacity.swift in Sources */,
 				51A6D69724A00E6000EB2A5B /* APIServiceError.swift in Sources */,
 				51DD73632118B2A200A22F21 /* ShopIDViewController.swift in Sources */,
 				51BE2FC31F8C046B0093C897 /* AppDelegate.swift in Sources */,
 				51A6D692249F8F8900EB2A5B /* URLSession+Result.swift in Sources */,
 				51BE2FDA1F923C1C0093C897 /* Customer.swift in Sources */,
+				5177C94A24AE97B90028538F /* UIColor+CustomColors.swift in Sources */,
 				51CC9AB720E2CB7400B56B52 /* CustomerMapper.swift in Sources */,
+				5177C94824AE976F0028538F /* UIColor+Hex.swift in Sources */,
 				5114A81720DD79D400224D05 /* CostumerDataValidator.swift in Sources */,
 				51BE2FA11F8C03860093C897 /* HomeViewController.swift in Sources */,
 				5190E83C24ACAEE100A44168 /* ShopIdService.swift in Sources */,

@@ -18,7 +18,7 @@ class CompleteViewController: UIViewController {
     self.popImageView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
     self.popImageView.layer.shadowColor = UIColor.gray.cgColor
     self.popImageView.layer.shadowOpacity = 0.75
-    self.popImageView.layer.borderColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1).cgColor
+    self.popImageView.layer.borderColor = UIColor.golden.cgColor
     
     let maskPathSave = UIBezierPath(roundedRect: doneButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 20.0, height: 20.0))
     

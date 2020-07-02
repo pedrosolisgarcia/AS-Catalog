@@ -216,7 +216,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     toolBar.barStyle = .default
     toolBar.isOpaque = true
-    toolBar.barTintColor = UIColor(red: 197/255, green: 176/255, blue: 120/255, alpha: 1)
+    toolBar.barTintColor = .golden
     toolBar.tintColor = .white
     toolBar.sizeToFit()
     
