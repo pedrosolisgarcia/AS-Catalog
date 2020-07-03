@@ -11,79 +11,77 @@ import XCTest
 
 class ValidatorTests: XCTestCase {
   
-  override func setUp() {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  override func setUpWithError() throws {
+      // Put setup code here. This method is called before the invocation of each test method in the class.
+  }
+
+  override func tearDownWithError() throws {
+      // Put teardown code here. This method is called after the invocation of each test method in the class.
   }
   
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
-  
-  func testSingleShortWordNameShouldValidate() {
+  func testSingleShortWordNameShouldValidate() throws {
     let customerName = "agnieszka"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertTrue(result)
   }
   
-  func testManyWordsNameShouldValidate() {
+  func testManyWordsNameShouldValidate() throws {
     let customerName = "agnieszka swiatly"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertTrue(result)
   }
   
-  func testBlankNameShouldNotValidate() {
+  func testBlankNameShouldNotValidate() throws {
     let customerName = ""
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertTrue(result)
   }
   
-  func testTooLongNameShouldNotValidate() {
+  func testTooLongNameShouldNotValidate() throws {
     let customerName = "agnieszkaagnieszkaagnieszkaagnieszkaagnieszkaagnieszka"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertFalse(result)
   }
   
-  func testNameWithSpecialCharactersShouldNotValidate() {
+  func testNameWithSpecialCharactersShouldNotValidate() throws {
     let customerName = "agnieszka!"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertFalse(result)
   }
   
-  func testNameWithPhpInjectionShouldNotValidate() {
+  func testNameWithPhpInjectionShouldNotValidate() throws {
     let customerName = "<?php echo 'hello world'; ?>"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertFalse(result)
   }
   
-  func testNameWithPolishCharactersShouldValidate() {
+  func testNameWithPolishCharactersShouldValidate() throws {
     let customerName = "łóśżźęąńć"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertTrue(result)
   }
   
-  func testNameWithPolishCharactersOnUpperCaseShouldValidate() {
+  func testNameWithPolishCharactersOnUpperCaseShouldValidate() throws {
     let customerName = "łóśżźęąńć"
-    let result = Validator.validateCustomerName(name: customerName.uppercased())
+    let result = CostumerDataValidator.validateCustomerName(name: customerName.uppercased())
     XCTAssertTrue(result)
   }
   
-  func testNameWithNumbersShouldValidate() {
+  func testNameWithNumbersShouldValidate() throws {
     let customerName = "agnieszka2"
-    let result = Validator.validateCustomerName(name: customerName)
+    let result = CostumerDataValidator.validateCustomerName(name: customerName)
     XCTAssertTrue(result)
   }
   
-  func testWithEmptyFieldShouldNotValidate() {
+  func testWithEmptyFieldShouldNotValidate() throws {
     let field = ""
-    let result = Validator.validateField(field: field)
+    let result = CostumerDataValidator.validateField(field: field)
     XCTAssertFalse(result)
   }
   
-  func testWithFieldShouldValidate() {
+  func testWithFieldShouldValidate() throws {
     let field = "wroclawID"
-    let result = Validator.validateField(field: field)
+    let result = CostumerDataValidator.validateField(field: field)
     XCTAssertTrue(result)
   }
 }
