@@ -88,7 +88,6 @@
 		5114A81020DD796A00224D05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5114A81620DD79D400224D05 /* CostumerDataValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostumerDataValidator.swift; sourceTree = "<group>"; };
 		5114A81820DD7C4300224D05 /* ValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
-		5114A81E20DD81B800224D05 /* tusmuertos.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tusmuertos.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51361573249D23A8007E2364 /* UIViewController+DisplayAnimated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+DisplayAnimated.swift"; sourceTree = "<group>"; };
 		51361575249D2B6B007E2364 /* UIViewController+DismissKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+DismissKeyboard.swift"; sourceTree = "<group>"; };
 		51361578249E5ABB007E2364 /* CollectionCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCheckViewController.swift; sourceTree = "<group>"; };
@@ -162,13 +161,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E66B910480EE2271901A4591 /* Pods_CatalogTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5114A81B20DD81B800224D05 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +377,6 @@
 			children = (
 				51BE2F841F8C02EC0093C897 /* Catalog.app */,
 				5114A80C20DD796A00224D05 /* CatalogTests.xctest */,
-				5114A81E20DD81B800224D05 /* tusmuertos.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -486,23 +477,6 @@
 			productReference = 5114A80C20DD796A00224D05 /* CatalogTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5114A81D20DD81B800224D05 /* tusmuertos */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5114A82320DD81B800224D05 /* Build configuration list for PBXNativeTarget "tusmuertos" */;
-			buildPhases = (
-				5114A81A20DD81B800224D05 /* Sources */,
-				5114A81B20DD81B800224D05 /* Frameworks */,
-				5114A81C20DD81B800224D05 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = tusmuertos;
-			productName = tusmuertos;
-			productReference = 5114A81E20DD81B800224D05 /* tusmuertos.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		51BE2F831F8C02EC0093C897 /* Catalog */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51BE2F991F8C02F10093C897 /* Build configuration list for PBXNativeTarget "Catalog" */;
@@ -539,11 +513,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 51BE2F831F8C02EC0093C897;
 					};
-					5114A81D20DD81B800224D05 = {
-						CreatedOnToolsVersion = 9.3.1;
-						DevelopmentTeam = YMP4M2YLRU;
-						ProvisioningStyle = Automatic;
-					};
 					51BE2F831F8C02EC0093C897 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = YMP4M2YLRU;
@@ -568,20 +537,12 @@
 			targets = (
 				51BE2F831F8C02EC0093C897 /* Catalog */,
 				5114A80B20DD796A00224D05 /* CatalogTests */,
-				5114A81D20DD81B800224D05 /* tusmuertos */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5114A80A20DD796A00224D05 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5114A81C20DD81B800224D05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -726,13 +687,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5114A81A20DD81B800224D05 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		51BE2F801F8C02EC0093C897 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -834,50 +788,6 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Catalog.app/Catalog";
-			};
-			name = Release;
-		};
-		5114A82420DD81B800224D05 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = YMP4M2YLRU;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tusmuertos/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pedrosolisg.tusmuertos;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		5114A82520DD81B800224D05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = YMP4M2YLRU;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = tusmuertos/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pedrosolisg.tusmuertos;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1001,7 +911,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YMP4M2YLRU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1023,7 +933,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = YMP4M2YLRU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1047,15 +957,6 @@
 			buildConfigurations = (
 				5114A81320DD796A00224D05 /* Debug */,
 				5114A81420DD796A00224D05 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5114A82320DD81B800224D05 /* Build configuration list for PBXNativeTarget "tusmuertos" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5114A82420DD81B800224D05 /* Debug */,
-				5114A82520DD81B800224D05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

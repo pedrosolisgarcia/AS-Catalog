@@ -57,7 +57,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       print(fullPath)
       
       guard  let data = try? Data(contentsOf: fullPath, options: []) else {
-        self.showDataInvalidWarningMessage()
+        self.showNoCatalogAlert()
         return
       }
 
@@ -66,7 +66,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       print(self.collection!)
       self.performSegue(withIdentifier: "showCatalog", sender: self)
     } catch {
-      self.showDataInvalidWarningMessage()
+      self.showNoCatalogAlert()
       print("Couldn't read file.")
     }
   }
@@ -364,6 +364,16 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion:nil)
+  }
+  
+  func showNoCatalogAlert() {
+    let alertController = UIAlertController(title: "Error", message: "There is no catalog downloaded. Head on to the Shop ID window and introduce your ID to download the latest collection", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "Go to Shop ID", style: .default) {
+      (alert: UIAlertAction!) -> Void in
+        self.showShopIdView()
+    }
+    alertController.addAction(alertAction)
+    self.present(alertController, animated: true, completion: nil)
   }
   
   private func showCountryView() {

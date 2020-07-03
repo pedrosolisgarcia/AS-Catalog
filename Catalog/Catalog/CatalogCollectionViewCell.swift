@@ -18,7 +18,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   override var isSelected: Bool {
     didSet {
       self.selectedFlag.image = isSelected ? UIImage(named: "tick") : nil
-      self.dressLabel.backgroundColor = isSelected ? UIColor.golden.barelyTranslucent() : UIColor.golden.veryTranslucent()
+      self.dressLabel.backgroundColor = isSelected ? UIColor.golden.barelyTranslucent() : UIColor.black.veryTranslucent()
     }
   }
 }
