@@ -12,6 +12,6 @@
         <attribute name="surname" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CustomerMO" positionX="-54" positionY="-9" width="128" height="178"/>
+        <element name="CustomerMO" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>
