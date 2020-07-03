@@ -83,7 +83,7 @@ As mentioned, Xcode provides a lot of facilities and transparency when it comes 
 * [Atom](https://atom.io/) with [Swift plugin](https://atom.io/packages/language-swift)
 
 
-## CocoaPods
+## CocoaPods (Currently disabled)
 This app supports [CocoaPods](https://cocoapods.org), so third parties from this dependency manager can be added.
 
 ### Install
