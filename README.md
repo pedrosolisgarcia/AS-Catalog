@@ -84,7 +84,7 @@ As mentioned, Xcode provides a lot of facilities and transparency when it comes 
 
 
 ## CocoaPods (Currently disabled)
-~~This app supports [CocoaPods](https://cocoapods.org), so third parties from this dependency manager can be added.
+~~This app supports [CocoaPods](https://cocoapods.org), so third parties from this dependency manager can be added.~~
 
 ### Install
 Simply run the command below to install CocoaPods, using `sudo` if required:
@@ -130,7 +130,7 @@ For more information about Cocoa Pods, check [the full guide](https://guides.coc
 # Build Don'ts
 The following are some things that will make the build compile fail.
 
-- ~~Don't use `Catalog.xcworkspace` as file to open the project.
+- ~~Don't use `Catalog.xcworkspace` as file to open the project.~~
 - Don't install dependencies being used.
 - Don't import properly dependencies and being in use
 - Use deprecated syntax from elder versions of Swift. Refer to [Swift Documentation](https://developer.apple.com/documentation/xcode_release_notes/xcode_10_2_release_notes/swift_5_release_notes_for_xcode_10_2) for more info.
