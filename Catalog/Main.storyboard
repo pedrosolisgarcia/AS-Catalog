@@ -1307,29 +1307,29 @@ UFJaRUpEGsW5IERBTEVKA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8J0-75-9BX">
-                                <rect key="frame" x="84" y="185.5" width="600" height="553.5"/>
+                                <rect key="frame" x="84" y="189.5" width="600" height="545"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="That's all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzY-8f-fs7">
-                                        <rect key="frame" x="60" y="60" width="480" height="60"/>
+                                        <rect key="frame" x="60" y="60" width="480" height="70"/>
                                         <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="60"/>
                                         <color key="textColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-TC-NDP" userLabel="titleSeparator">
-                                        <rect key="frame" x="35" y="130" width="530" height="2"/>
+                                        <rect key="frame" x="35" y="140" width="530" height="2"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="buM-s1-4FH"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you, please give back the device to the person who attended you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SG-jg-Mfo">
-                                        <rect key="frame" x="30" y="195" width="540" height="158.5"/>
+                                        <rect key="frame" x="30" y="205" width="540" height="140"/>
                                         <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="40"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH8-sA-DrI">
-                                        <rect key="frame" x="0.0" y="453.5" width="600" height="100"/>
+                                        <rect key="frame" x="0.0" y="445" width="600" height="100"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="0u1-7g-4xh"/>
@@ -1476,7 +1476,7 @@ UFJaRUpEGsW5IERBTEVKA
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Ma1-bL-MF5" firstAttribute="top" secondItem="xBO-5w-Kwn" secondAttribute="bottom" constant="4" id="1wO-T4-Xlx"/>
                                             <constraint firstItem="tAO-LP-oa6" firstAttribute="centerX" secondItem="xBO-5w-Kwn" secondAttribute="centerX" id="Ecz-xH-QZC"/>
@@ -1499,7 +1499,7 @@ UFJaRUpEGsW5IERBTEVKA
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pobieranie..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgq-ly-uXR">
                                                 <rect key="frame" x="146.5" y="116.5" width="107.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="20"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
