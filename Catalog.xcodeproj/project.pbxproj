@@ -240,7 +240,6 @@
 				5177C95C24AF57050028538F /* AppDelegate.swift */,
 				5177C95E24AF57050028538F /* SceneDelegate.swift */,
 				5177CA1D24AF5D6B0028538F /* Main.storyboard */,
-				5177C96824AF570B0028538F /* Assets.xcassets */,
 				5177C96D24AF570B0028538F /* Info.plist */,
 				5177CA1F24AF5DD30028538F /* LaunchScreen.storyboard */,
 			);
@@ -314,6 +313,7 @@
 		5177C9A524AF5AA50028538F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5177C96824AF570B0028538F /* Assets.xcassets */,
 				510F00BA24AF722900464BB3 /* Locale */,
 				5177C9A624AF5AA50028538F /* Designs */,
 				5177C9A824AF5AA50028538F /* Network */,
