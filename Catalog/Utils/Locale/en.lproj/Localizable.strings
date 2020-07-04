@@ -56,22 +56,22 @@
 
 // REGIONS
 
-"region-picker.dolnoslaskie" = "Lower Silesia";
-"region-picker.kujawsko-pomorskie" = "Kuyavian-Pomeranian";
-"region-picker.lubelskie" = "Lublin";
-"region-picker.lubuskie" = "Lubusz";
-"region-picker.lodzkie" = "Lodz";
-"region-picker.malopolskie" = "Lesser Poland";
-"region-picker.mazowieckie" = "Mazowieckie";
-"region-picker.opolskie" = "Opole";
-"region-picker.podkarpackie" = "Subcarpathian";
-"region-picker.podlaskie" = "Podlasie";
-"region-picker.pomorskie" = "Pomeranian";
-"region-picker.slaskie" = "Silesia";
-"region-picker.swietokrzyskie" = "Swietokrzyskie";
-"region-picker.warminsko-mazurskie" = "Warmia-Masurian";
-"region-picker.wielkopolskie" = "Greater Poland";
-"region-picker.zachodniopomorskie" = "West Pomeranian";
+"region-picker.dolnoslaskie" = "dolnośląskie";
+"region-picker.kujawsko-pomorskie" = "kujawsko-pomorskie";
+"region-picker.lubelskie" = "lubelskie";
+"region-picker.lubuskie" = "lubuskie";
+"region-picker.lodzkie" = "łódzkie";
+"region-picker.malopolskie" = "małopolskie";
+"region-picker.mazowieckie" = "mazowieckie";
+"region-picker.opolskie" = "opolskie";
+"region-picker.podkarpackie" = "podkarpackie";
+"region-picker.podlaskie" = "podlaskie";
+"region-picker.pomorskie" = "pomorskie";
+"region-picker.slaskie" = "śląskie";
+"region-picker.swietokrzyskie" = "świętokrzyskie";
+"region-picker.warminsko-mazurskie" = "warmińsko-mazurskie";
+"region-picker.wielkopolskie" = "wielkopolskie";
+"region-picker.zachodniopomorskie" = "zachodniopomorskie";
 
 "region-picker.other-region" = "I am not from Poland...";
 
