@@ -4,35 +4,35 @@ import CoreData
 
 public class CoreDataManager {
   
-  class func getCustomersFromCoreData(delegate: NSFetchedResultsControllerDelegate) -> [CustomerMO] {
-    var customers = [Any]()
+  class func getClientsFromCoreData(delegate: NSFetchedResultsControllerDelegate) -> [ClientMO] {
+    var clients = [Any]()
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       let context = appDelegate.persistentContainer.viewContext
-      let getCustomersRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CustomerMO")
-      getCustomersRequest.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
+      let getClientsRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ClientMO")
+      getClientsRequest.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
       do {
-        let getedData = try context.fetch(getCustomersRequest)
-        customers = getedData
+        let getedData = try context.fetch(getClientsRequest)
+        clients = getedData
 
       } catch let error as NSError {
         print(error)
       }
     }
-    return customers as! [CustomerMO]
+    return clients as! [ClientMO]
   }
   
-  class func saveCustomerInCoreData(customer: Customer, viewContext: NSManagedObjectContext) {
-    let customerEntity = NSEntityDescription.entity(forEntityName: "CustomerMO", in: viewContext)
-    let customerObject = NSManagedObject(entity: customerEntity!, insertInto: viewContext)
-    customerObject.setValue(customer.appVersion, forKey: "appVersion")
-    customerObject.setValue(customer.dateOfVisit, forKey: "dateOfVisit")
-    customerObject.setValue(customer.shopId, forKey: "shopId")
-    customerObject.setValue(customer.name, forKey: "name")
-    customerObject.setValue(customer.surname, forKey: "surname")
-    customerObject.setValue(customer.region, forKey: "region")
-    customerObject.setValue(customer.dateOfWedding, forKey: "dateOfWedding")
-    customerObject.setValue(customer.dressesNames, forKey: "dressesNames")
-    customerObject.setValue(customer.collectionId, forKey: "collectionId")
+  class func saveClientInCoreData(client: Client, viewContext: NSManagedObjectContext) {
+    let clientEntity = NSEntityDescription.entity(forEntityName: "ClientMO", in: viewContext)
+    let clientObject = NSManagedObject(entity: clientEntity!, insertInto: viewContext)
+    clientObject.setValue(client.appVersion, forKey: "appVersion")
+    clientObject.setValue(client.dateOfVisit, forKey: "dateOfVisit")
+    clientObject.setValue(client.shopId, forKey: "shopId")
+    clientObject.setValue(client.name, forKey: "name")
+    clientObject.setValue(client.surname, forKey: "surname")
+    clientObject.setValue(client.region, forKey: "region")
+    clientObject.setValue(client.dateOfWedding, forKey: "dateOfWedding")
+    clientObject.setValue(client.dressesNames, forKey: "dressesNames")
+    clientObject.setValue(client.collectionId, forKey: "collectionId")
     
     do {
       try viewContext.save()

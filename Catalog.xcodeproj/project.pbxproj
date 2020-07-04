@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		510F00BD24AF727800464BB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 510F00BF24AF727800464BB3 /* Localizable.strings */; };
 		5177C95D24AF57050028538F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95C24AF57050028538F /* AppDelegate.swift */; };
 		5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95E24AF57050028538F /* SceneDelegate.swift */; };
 		5177C96924AF570B0028538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5177C96824AF570B0028538F /* Assets.xcassets */; };
@@ -16,7 +17,7 @@
 		5177C9A024AF5A800028538F /* CountrySelectorViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99824AF5A800028538F /* CountrySelectorViewCell.swift */; };
 		5177C9A124AF5A800028538F /* CountrySelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99924AF5A800028538F /* CountrySelectorViewController.swift */; };
 		5177C9A224AF5A800028538F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99A24AF5A800028538F /* HomeViewController.swift */; };
-		5177C9A324AF5A800028538F /* CostumerDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99C24AF5A800028538F /* CostumerDataValidator.swift */; };
+		5177C9A324AF5A800028538F /* ClientDataValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99C24AF5A800028538F /* ClientDataValidator.swift */; };
 		5177C9A424AF5A800028538F /* CollectionCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C99E24AF5A800028538F /* CollectionCheckViewController.swift */; };
 		5177C9DD24AF5AA50028538F /* ButtonDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9A724AF5AA50028538F /* ButtonDesign.swift */; };
 		5177C9DE24AF5AA50028538F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9A924AF5AA50028538F /* Reachability.swift */; };
@@ -31,10 +32,10 @@
 		5177C9E724AF5AA50028538F /* UIViewController+AddBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */; };
 		5177C9E824AF5AA50028538F /* Dress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B624AF5AA50028538F /* Dress.swift */; };
 		5177C9E924AF5AA50028538F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B724AF5AA50028538F /* Collection.swift */; };
-		5177C9EA24AF5AA50028538F /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B824AF5AA50028538F /* Customer.swift */; };
+		5177C9EA24AF5AA50028538F /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B824AF5AA50028538F /* Client.swift */; };
 		5177C9EB24AF5AA50028538F /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9B924AF5AA50028538F /* Country.swift */; };
 		5177C9EC24AF5AA50028538F /* ShopId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9BA24AF5AA50028538F /* ShopId.swift */; };
-		5177C9ED24AF5AA50028538F /* CustomerMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9BC24AF5AA50028538F /* CustomerMapper.swift */; };
+		5177C9ED24AF5AA50028538F /* ClientMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9BC24AF5AA50028538F /* ClientMapper.swift */; };
 		5177C9EE24AF5AA50028538F /* CollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9BD24AF5AA50028538F /* CollectionMapper.swift */; };
 		5177C9EF24AF5AA50028538F /* Trajan Pro Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5177C9BF24AF5AA50028538F /* Trajan Pro Regular.ttf */; };
 		5177C9F024AF5AA50028538F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5177C9C024AF5AA50028538F /* Roboto-Medium.ttf */; };
@@ -60,7 +61,7 @@
 		5177CA0524AF5AA50028538F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9D924AF5AA50028538F /* Constants.swift */; };
 		5177CA0624AF5AA50028538F /* ShopIdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DA24AF5AA50028538F /* ShopIdService.swift */; };
 		5177CA0724AF5AA50028538F /* CollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DB24AF5AA50028538F /* CollectionService.swift */; };
-		5177CA0824AF5AA50028538F /* CostumerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DC24AF5AA50028538F /* CostumerService.swift */; };
+		5177CA0824AF5AA50028538F /* ClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DC24AF5AA50028538F /* ClientService.swift */; };
 		5177CA0D24AF5AC00028538F /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177CA0A24AF5AC00028538F /* ImageViewController.swift */; };
 		5177CA0E24AF5AC00028538F /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177CA0B24AF5AC00028538F /* CatalogCollectionViewCell.swift */; };
 		5177CA0F24AF5AC00028538F /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177CA0C24AF5AC00028538F /* CatalogViewController.swift */; };
@@ -92,6 +93,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		510F00BE24AF727800464BB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		510F00C024AF728100464BB3 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		510F00C124AF728500464BB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5177C95924AF57050028538F /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5177C95C24AF57050028538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5177C95E24AF57050028538F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,7 +111,7 @@
 		5177C99824AF5A800028538F /* CountrySelectorViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectorViewCell.swift; sourceTree = "<group>"; };
 		5177C99924AF5A800028538F /* CountrySelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountrySelectorViewController.swift; sourceTree = "<group>"; };
 		5177C99A24AF5A800028538F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		5177C99C24AF5A800028538F /* CostumerDataValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostumerDataValidator.swift; sourceTree = "<group>"; };
+		5177C99C24AF5A800028538F /* ClientDataValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDataValidator.swift; sourceTree = "<group>"; };
 		5177C99E24AF5A800028538F /* CollectionCheckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCheckViewController.swift; sourceTree = "<group>"; };
 		5177C9A724AF5AA50028538F /* ButtonDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDesign.swift; sourceTree = "<group>"; };
 		5177C9A924AF5AA50028538F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -122,10 +126,10 @@
 		5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AddBlurView.swift"; sourceTree = "<group>"; };
 		5177C9B624AF5AA50028538F /* Dress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dress.swift; sourceTree = "<group>"; };
 		5177C9B724AF5AA50028538F /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		5177C9B824AF5AA50028538F /* Customer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		5177C9B824AF5AA50028538F /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		5177C9B924AF5AA50028538F /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		5177C9BA24AF5AA50028538F /* ShopId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopId.swift; sourceTree = "<group>"; };
-		5177C9BC24AF5AA50028538F /* CustomerMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerMapper.swift; sourceTree = "<group>"; };
+		5177C9BC24AF5AA50028538F /* ClientMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientMapper.swift; sourceTree = "<group>"; };
 		5177C9BD24AF5AA50028538F /* CollectionMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionMapper.swift; sourceTree = "<group>"; };
 		5177C9BF24AF5AA50028538F /* Trajan Pro Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Trajan Pro Regular.ttf"; sourceTree = "<group>"; };
 		5177C9C024AF5AA50028538F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -151,7 +155,7 @@
 		5177C9D924AF5AA50028538F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5177C9DA24AF5AA50028538F /* ShopIdService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopIdService.swift; sourceTree = "<group>"; };
 		5177C9DB24AF5AA50028538F /* CollectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionService.swift; sourceTree = "<group>"; };
-		5177C9DC24AF5AA50028538F /* CostumerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostumerService.swift; sourceTree = "<group>"; };
+		5177C9DC24AF5AA50028538F /* ClientService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientService.swift; sourceTree = "<group>"; };
 		5177CA0A24AF5AC00028538F /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		5177CA0B24AF5AC00028538F /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
 		5177CA0C24AF5AC00028538F /* CatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +194,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		510F00BA24AF722900464BB3 /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				510F00BF24AF727800464BB3 /* Localizable.strings */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
 		5177C95024AF57050028538F = {
 			isa = PBXGroup;
 			children = (
@@ -278,7 +290,7 @@
 		5177C99B24AF5A800028538F /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				5177C99C24AF5A800028538F /* CostumerDataValidator.swift */,
+				5177C99C24AF5A800028538F /* ClientDataValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -294,6 +306,7 @@
 		5177C9A524AF5AA50028538F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				510F00BA24AF722900464BB3 /* Locale */,
 				5177C9A624AF5AA50028538F /* Designs */,
 				5177C9A824AF5AA50028538F /* Network */,
 				5177C9AA24AF5AA50028538F /* Enums */,
@@ -351,7 +364,7 @@
 			children = (
 				5177C9B624AF5AA50028538F /* Dress.swift */,
 				5177C9B724AF5AA50028538F /* Collection.swift */,
-				5177C9B824AF5AA50028538F /* Customer.swift */,
+				5177C9B824AF5AA50028538F /* Client.swift */,
 				5177C9B924AF5AA50028538F /* Country.swift */,
 				5177C9BA24AF5AA50028538F /* ShopId.swift */,
 			);
@@ -361,7 +374,7 @@
 		5177C9BB24AF5AA50028538F /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
-				5177C9BC24AF5AA50028538F /* CustomerMapper.swift */,
+				5177C9BC24AF5AA50028538F /* ClientMapper.swift */,
 				5177C9BD24AF5AA50028538F /* CollectionMapper.swift */,
 			);
 			path = Mappers;
@@ -417,7 +430,7 @@
 				5177C9D924AF5AA50028538F /* Constants.swift */,
 				5177C9DA24AF5AA50028538F /* ShopIdService.swift */,
 				5177C9DB24AF5AA50028538F /* CollectionService.swift */,
-				5177C9DC24AF5AA50028538F /* CostumerService.swift */,
+				5177C9DC24AF5AA50028538F /* ClientService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -545,6 +558,8 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				pl,
 			);
 			mainGroup = 5177C95024AF57050028538F;
 			productRefGroup = 5177C95A24AF57050028538F /* Products */;
@@ -565,6 +580,7 @@
 			files = (
 				5177C9F024AF5AA50028538F /* Roboto-Medium.ttf in Resources */,
 				5177C9FD24AF5AA50028538F /* Roboto-Italic.ttf in Resources */,
+				510F00BD24AF727800464BB3 /* Localizable.strings in Resources */,
 				5177C9FF24AF5AA50028538F /* Roboto-Bold.ttf in Resources */,
 				5177C9F724AF5AA50028538F /* RobotoCondensed-BoldItalic.ttf in Resources */,
 				5177CA1E24AF5D6B0028538F /* Main.storyboard in Resources */,
@@ -612,10 +628,10 @@
 				5177C9A024AF5A800028538F /* CountrySelectorViewCell.swift in Sources */,
 				5177C9E824AF5AA50028538F /* Dress.swift in Sources */,
 				5177C9E424AF5AA50028538F /* URLSession+Result.swift in Sources */,
-				5177C9EA24AF5AA50028538F /* Customer.swift in Sources */,
+				5177C9EA24AF5AA50028538F /* Client.swift in Sources */,
 				5177CA1824AF5AD60028538F /* SelectionViewController.swift in Sources */,
 				5177C9EC24AF5AA50028538F /* ShopId.swift in Sources */,
-				5177C9A324AF5A800028538F /* CostumerDataValidator.swift in Sources */,
+				5177C9A324AF5A800028538F /* ClientDataValidator.swift in Sources */,
 				5177CA0524AF5AA50028538F /* Constants.swift in Sources */,
 				5177C9DE24AF5AA50028538F /* Reachability.swift in Sources */,
 				5177CA0E24AF5AC00028538F /* CatalogCollectionViewCell.swift in Sources */,
@@ -639,12 +655,12 @@
 				5177CA0224AF5AA50028538F /* LocalData.swift in Sources */,
 				5177C9E124AF5AA50028538F /* String+Localizable.swift in Sources */,
 				5177CA1A24AF5AD60028538F /* SelectedDressViewController.swift in Sources */,
-				5177C9ED24AF5AA50028538F /* CustomerMapper.swift in Sources */,
+				5177C9ED24AF5AA50028538F /* ClientMapper.swift in Sources */,
 				5177CA1924AF5AD60028538F /* SelectionTableViewCell.swift in Sources */,
 				5177C9A424AF5A800028538F /* CollectionCheckViewController.swift in Sources */,
 				5177C9E524AF5AA50028538F /* UIViewController+DisplayAnimated.swift in Sources */,
 				5177C9E924AF5AA50028538F /* Collection.swift in Sources */,
-				5177CA0824AF5AA50028538F /* CostumerService.swift in Sources */,
+				5177CA0824AF5AA50028538F /* ClientService.swift in Sources */,
 				5177C9E724AF5AA50028538F /* UIViewController+AddBlurView.swift in Sources */,
 				5177C9E024AF5AA50028538F /* UIViewController+DismissKeyboard.swift in Sources */,
 				5177C9DD24AF5AA50028538F /* ButtonDesign.swift in Sources */,
@@ -683,6 +699,19 @@
 			targetProxy = 5177C97E24AF570C0028538F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		510F00BF24AF727800464BB3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				510F00BE24AF727800464BB3 /* en */,
+				510F00C024AF728100464BB3 /* pl */,
+				510F00C124AF728500464BB3 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5177C98424AF570C0028538F /* Debug */ = {

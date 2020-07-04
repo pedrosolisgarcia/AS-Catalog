@@ -1,10 +1,10 @@
 import Foundation
 
-class CostumerDataValidator {
+class ClientDataValidator {
   
   static func validate(name: String, surname: String, region: String, weddingDate: String) -> Bool {
-    return validateCustomerName(name: name)
-      && validateCustomerName(name: surname)
+    return validateClientName(name: name)
+      && validateClientName(name: surname)
       && validateField(field: region)
       && validateField(field: weddingDate)
   }
@@ -13,7 +13,7 @@ class CostumerDataValidator {
     return field != ""
   }
   
-  static func validateCustomerName(name: String) -> Bool {
+  static func validateClientName(name: String) -> Bool {
     let RegEx: String = "\\A\\w{0,25}(\\s+\\w{0,25})?"
     let Test = NSPredicate(format: "SELF MATCHES %@", RegEx)
     return Test.evaluate(with:name)

@@ -8,9 +8,8 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
   @IBOutlet weak var carouselView: UIBarButtonItem!
   @IBOutlet weak var selectButton: UIButton!
   
-  var currentCustomer: Customer!
-  var region = [String]()
-  var languageIndex: Int!
+  var currentClient: Client!
+  var region = String()
   var collection: Collection!
   
   let catalogSize = CGSize(width: 246, height: 416)
@@ -20,11 +19,9 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     super.viewDidLoad()
     
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-    if languageIndex != 0 {
-      selectButton.setTitle(LocalData.getLocalizationLabels(forElement: "selectButton")[languageIndex], for: .normal)
-    }
+    selectButton.setTitle("catalog.button".localized().uppercased(), for: .normal)
     
-    navigationItem.title = LocalData.getLocalizationLabels(forElement: "catalogTitle")[languageIndex]
+    navigationItem.title = "catalog.title".localized().uppercased()
     collectionView?.allowsMultipleSelection = true
     selectButton.isEnabled = false
     selectButton.alpha = 0.25
@@ -127,16 +124,15 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
       
       if let indexPath = collectionView.indexPathsForSelectedItems {
         let destinationController = segue.destination as! SelectionViewController
-        
-        destinationController.languageIndex = languageIndex
+
         var dressesNames = [String]()
         
         for index in indexPath {
           destinationController.selectedDresses.append(collection.dresses[index.row])
           dressesNames.append(collection.dresses[index.row].name)
         }
-        currentCustomer.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
-        destinationController.currentCustomer = currentCustomer
+        currentClient.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
+        destinationController.currentClient = currentClient
         destinationController.region = region
       }
     }

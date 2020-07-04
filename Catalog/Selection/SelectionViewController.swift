@@ -14,9 +14,8 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   @IBOutlet weak var stackSelection: UIStackView!
   
   var selectedDresses = [CollectionDresses]()
-  var currentCustomer: Customer!
-  var languageIndex: Int!
-  var region = [String]()
+  var currentClient: Client!
+  var region = String()
   var collectionId: Int!
   
   @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
@@ -31,17 +30,17 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       
       if Reachability.isConnectedToNetwork() {
-        CostumerService.sendCostumerToAPI(customer: self.getFinalCustomer()) { (data, resp, error) in
+        ClientService.sendClientToAPI(client: self.getFinalClient()) { (data, resp, error) in
           if let error = error {
             print(error.localizedDescription)
             print("error in BackEnd - Saving in Core Data")
-            CoreDataManager.saveCustomerInCoreData(customer: self.getFinalCustomer(), viewContext: appDelegate.persistentContainer.viewContext)
+            CoreDataManager.saveClientInCoreData(client: self.getFinalClient(), viewContext: appDelegate.persistentContainer.viewContext)
             appDelegate.saveContext()
           }
         }
       } else {
         print("NO INTERNET - Saving in Core Data")
-        CoreDataManager.saveCustomerInCoreData(customer: getFinalCustomer(), viewContext: appDelegate.persistentContainer.viewContext)
+        CoreDataManager.saveClientInCoreData(client: getFinalClient(), viewContext: appDelegate.persistentContainer.viewContext)
         appDelegate.saveContext()
       }
       
@@ -97,17 +96,17 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   }
   
   private func applyLanguage() {
-    nameLabel.text = LocalData.getLocalizationLabels(forElement: "nameLabel")[languageIndex] + " " + currentCustomer.name
-    surnameLabel.text = LocalData.getLocalizationLabels(forElement: "surnameLabel")[languageIndex] + " " + currentCustomer.surname
-    regionLabel.text = LocalData.getLocalizationLabels(forElement: "regionLabel")[languageIndex] + " " + (!region.isEmpty ? region[languageIndex] : "")
-    dateOfWeddingLabel.text = LocalData.getLocalizationLabels(forElement: "dateOfWeddingLabel")[languageIndex] + " " + currentCustomer.dateOfWedding
-    saveButton.setTitle(LocalData.getLocalizationLabels(forElement: "saveButton")[languageIndex], for: .normal)
-    navigationItem.title = LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex]
-    dressesLabel.setTitle(LocalData.getLocalizationLabels(forElement: "selectionTitle")[languageIndex], for: .normal)
+    nameLabel.text = "home.client-info.name".localized() + " " + currentClient.name
+    surnameLabel.text = "home.client-info.lastname".localized() + " " + currentClient.surname
+    regionLabel.text = "home.client-info.region".localized() + " " + region.localized()
+    dateOfWeddingLabel.text = "home.client-info.wedding-date".localized() + " " + currentClient.dateOfWedding
+    saveButton.setTitle("selection.confirm-button".localized().uppercased(), for: .normal)
+    navigationItem.title = "selection.data.title".localized().uppercased()
+    dressesLabel.setTitle("selection.dresses.title".localized().uppercased(), for: .normal)
   }
   
   private func clearAllVariables() {
-    currentCustomer = nil
+    currentClient = nil
     selectedDresses.removeAll()
     tableView = nil
   }
@@ -126,11 +125,10 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     dressesLabel.layer.mask = maskLayerLabel
   }
   
-  private func getFinalCustomer() -> Customer {
-    if !self.region.isEmpty {
-      currentCustomer.region = self.region[1]
-    }
-    return currentCustomer
+  private func getFinalClient() -> Client {
+    currentClient.region = self.region != "" ?
+      self.region : self.region// SET POLISH LOCALIZATION HERE
+    return currentClient
   }
   
   private func setViewAsCompleted() {
@@ -143,7 +141,6 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   
   private func showCompleteView() {
     let popCompleteView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CompleteView") as! CompleteViewController
-    popCompleteView.languageIndex = self.languageIndex
     self.addChild(popCompleteView)
     popCompleteView.view.frame = self.view.frame
     self.view.addSubview(popCompleteView.view)

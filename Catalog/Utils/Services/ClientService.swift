@@ -1,8 +1,8 @@
 import Foundation
 
-public class CostumerService {
+public class ClientService {
   
-  class func sendCostumerToAPI(customer: Customer, completion:((Data?, URLResponse?, Error?) -> Void)?) {
+  class func sendClientToAPI(client: Client, completion:((Data?, URLResponse?, Error?) -> Void)?) {
     
     var urlComponents = URLComponents()
     
@@ -25,7 +25,7 @@ public class CostumerService {
     // Now let's encode out Post struct into JSON data...
     let encoder = JSONEncoder()
     do {
-      let jsonData = try encoder.encode(customer)
+      let jsonData = try encoder.encode(client)
       // ... and set our request's HTTP body
       request.httpBody = jsonData
       print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")

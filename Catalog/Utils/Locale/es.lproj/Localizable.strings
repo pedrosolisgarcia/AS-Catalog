@@ -1,0 +1,152 @@
+
+// COUNTRIES
+
+"albania" = "Albania";
+"andorra" = "Andorra";
+"armenia" = "Armenia";
+"austria" = "Austria";
+"azerbaijan" = "Azerbaijan";
+"belarus" = "Bielorusia";
+"belgium" = "Bélgica";
+"bosnia_and_herzegovina" = "Bosnia y Herzegovina";
+"bulgaria" = "Bulgaria";
+"croatia" = "Croacia";
+"cyprus" = "Chipre";
+"czech_republic" = "República Checa";
+"denmark" = "Dinamarca";
+"estonia" = "Estonia";
+"finland" = "Finlandia";
+"france" = "Francia";
+"georgia" = "Georgia";
+"germany" = "Alemania";
+"greece" = "Grecia";
+"hungary" = "Hungría";
+"iceland" = "Islandia";
+"ireland" = "Irlanda";
+"italy" = "Italia";
+"kazakhstan" = "Kazakhstan";
+"kosovo" = "Kosovo";
+"latvia" = "Letonia";
+"liechtenstein" = "Liechtenstein";
+"lithuania" = "Lituania";
+"luxembourg" = "Luxemburgo";
+"macedonia" = "Macedonia";
+"malta" = "Malta";
+"moldova" = "Moldavia";
+"monaco" = "Monaco";
+"montenegro" = "Montenegro";
+"netherlands" = "Paises Bajos";
+"norway" = "Noruega";
+"poland" = "Polonia";
+"portugal" = "Portugal";
+"romania" = "Rumanía";
+"russia" = "Rusia";
+"san_marino" = "San Marino";
+"scotland" = "Escocia";
+"serbia" = "Serbia";
+"slovakia" = "Eslovaquia";
+"slovenia" = "Eslovenia";
+"spain" = "España";
+"sweden" = "Suecia";
+"switzerland" = "Suiza";
+"turkey" = "Turquía";
+"ukraine" = "Ucrania";
+"united_kingdom" = "Reino Unido";
+
+
+// REGIONS
+
+"region-picker.dolnoslaskie" = "Baja Silesia";
+"region-picker.kujawsko-pomorskie" = "Kuyavian-Pomeranian";
+"region-picker.lubelskie" = "Lublin";
+"region-picker.lubuskie" = "Lubusz";
+"region-picker.lodzkie" = "Lodz";
+"region-picker.malopolskie" = "Polonia Menor";
+"region-picker.mazowieckie" = "Mazowieckie";
+"region-picker.opolskie" = "Opole";
+"region-picker.podkarpackie" = "Subcarpática";
+"region-picker.podlaskie" = "Podlasie";
+"region-picker.pomorskie" = "Pomeranio";
+"region-picker.slaskie" = "Silesia";
+"region-picker.swietokrzyskie" = "Swietokrzyskie";
+"region-picker.warminsko-mazurskie" = "Warmia-Masuria";
+"region-picker.wielkopolskie" = "Polonia Mayor";
+"region-picker.zachodniopomorskie" = "Pomerania occidental";
+
+"region-picker.other-region" = "No soy de Polonia...";
+
+
+// ALERTS
+
+"alert.ok-button" = "Vale";
+"alert.done-button" = "Hecho";
+"alert.cancel-button" = "Cancelar";
+"alert.confirm-button" = "Hecho";
+"alert.error.title" = "Error";
+"alert.error.message" = "Ha ocurrido un error. Inténtalo de nuevo más tarde.";
+
+"alert.wrong-id.message" = "El código introducido no es correcto. Por favor, inténtelo de nuevo.";
+
+"alert.no-internet.title" = "Sin Internet";
+"alert.no-internet.message" = "No ha sido posible conectarse al servidor. Por favor, revise la conexión a Internet o inténtelo de nuevo.";
+
+"alert.create-profile-error.message" = "La región y la fecha de boda han de ser rellenados para poder crear un perfil.";
+
+"alert.collection-downloaded.title" = "Éxito";
+"alert.collection-downloaded.message" = "La colección se ha descargado con éxito.";
+
+"alert.no-catalog-error.message" = "No hay ningún catálogo descargado. Dirígase a la ventana de selección de ID e introdúzcalo para poder descargar la conexión más reciente.";
+
+"alert.no-catalog-error.button" = "Ir a la tienda ID";
+
+
+// SHOP ID WINDOW
+
+"shop-id.label.no-identified" = "Introduzca el código";
+"shop-id.label.identified" = "Perfil: ";
+
+
+// COLLECTION CHECK WINDOW
+
+"collection-check.title" = "Nueva Colección";
+"collection-check.text-top" = "Hay una nueva colección disponible:";
+"collection-check.text-bottom" = "Descargar nueva colección?";
+"collection-check.button" = "Descargar";
+
+
+// HOME
+
+"home.client-info.label" = "Información del cliente*:";
+"home.client-info.name" = "Nombre:";
+"home.client-info.lastname" = "Apellidos:";
+"home.client-info.region" = "Región:";
+"home.client-info.country" = "País:";
+"home.client-info.wedding-date" = "Fecha Boda:";
+"home.client-info.more-info" = "*Por motivos estadísticos, agradecemos saber de dónde son nuestros clientes. La única información que guardamos de manera anónima es la región de origen y la fecha de boda. Gracias.";
+"home.client-info.button" = "Crear perfil y ver el catálogo";
+"home.catalog-button" = "Puedes ver el catálogo";
+
+
+// COUNTRY SELECTOR
+
+"country-selector.title" = "Selección de País";
+
+
+// CATALOG
+
+"catalog.title" = "Catálogo";
+"catalog.button" = "Continuar con la selección";
+
+
+// SELECTION
+
+"selection.data.title" = "Datos del Cliente";
+"selection.dresses.title" = "Modelos Seleccionados";
+"selection.confirm-button" = "Confirmar Selección";
+
+
+// COMPLETE
+
+"complete.title" = "Listo";
+"complete.message" = "Gracias, devuelva el dispositivo a la persona que lo atendió.";
+"complete.button" = "Vale";

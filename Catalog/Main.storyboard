@@ -15,9 +15,6 @@
         <array key="Roboto-Thin.ttf">
             <string>Roboto-Thin</string>
         </array>
-        <array key="RobotoCondensed-Regular.ttf">
-            <string>RobotoCondensed-Regular</string>
-        </array>
         <array key="Trajan Pro Regular.ttf">
             <string>TrajanPro-Regular</string>
         </array>
@@ -607,14 +604,19 @@
                                         <color key="shadowColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSh-WR-1Gf">
-                                        <rect key="frame" x="683" y="8" width="47" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gSh-WR-1Gf">
+                                        <rect key="frame" x="701" y="8" width="25" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="U8a-or-mVp"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="RobotoCondensed-Regular" family="Roboto Condensed" pointSize="18"/>
-                                        <state key="normal" title="Cancel">
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="xmark.circle" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="regular">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                            </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
                                             <action selector="removeAnimateWithSender:" destination="MK1-iQ-OfC" eventType="touchUpInside" id="0CS-3W-qgj"/>
@@ -689,7 +691,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.85882352939999995" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gSh-WR-1Gf" secondAttribute="trailing" constant="8" id="15a-ff-0vE"/>
+                                    <constraint firstAttribute="trailing" secondItem="gSh-WR-1Gf" secondAttribute="trailing" constant="12" id="15a-ff-0vE"/>
                                     <constraint firstItem="0BF-a1-8Of" firstAttribute="top" secondItem="BbR-MX-4U6" secondAttribute="bottom" constant="20" id="8EV-L9-xAF"/>
                                     <constraint firstItem="BbR-MX-4U6" firstAttribute="top" secondItem="e5w-bv-IPk" secondAttribute="top" id="AAg-sp-Sup"/>
                                     <constraint firstAttribute="bottom" secondItem="n6m-Ip-yqP" secondAttribute="bottom" id="Eib-wu-5qK"/>
@@ -721,6 +723,7 @@
                         <outlet property="cancelButton" destination="gSh-WR-1Gf" id="gWi-A9-LcP"/>
                         <outlet property="collectionView" destination="0BF-a1-8Of" id="h3q-W4-Q7i"/>
                         <outlet property="confirmButton" destination="n6m-Ip-yqP" id="9az-Yf-U0b"/>
+                        <outlet property="countrySelectorView" destination="e5w-bv-IPk" id="XND-Yf-1WZ"/>
                         <outlet property="headerLabel" destination="BbR-MX-4U6" id="mS1-6P-1CW"/>
                     </connections>
                 </viewController>
@@ -1307,29 +1310,29 @@ UFJaRUpEGsW5IERBTEVKA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8J0-75-9BX">
-                                <rect key="frame" x="84" y="189.5" width="600" height="545"/>
+                                <rect key="frame" x="84" y="185.5" width="600" height="553.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="That's all" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzY-8f-fs7">
-                                        <rect key="frame" x="60" y="60" width="480" height="70"/>
+                                        <rect key="frame" x="60" y="60" width="480" height="60"/>
                                         <fontDescription key="fontDescription" name="TrajanPro-Regular" family="Trajan Pro" pointSize="60"/>
                                         <color key="textColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-TC-NDP" userLabel="titleSeparator">
-                                        <rect key="frame" x="35" y="140" width="530" height="2"/>
+                                        <rect key="frame" x="35" y="130" width="530" height="2"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="buM-s1-4FH"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you, please give back the device to the person who attended you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0SG-jg-Mfo">
-                                        <rect key="frame" x="30" y="205" width="540" height="140"/>
+                                        <rect key="frame" x="30" y="195" width="540" height="158.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Thin" family="Roboto" pointSize="40"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH8-sA-DrI">
-                                        <rect key="frame" x="0.0" y="445" width="600" height="100"/>
+                                        <rect key="frame" x="0.0" y="453.5" width="600" height="100"/>
                                         <color key="backgroundColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="0u1-7g-4xh"/>

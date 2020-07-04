@@ -1,0 +1,152 @@
+
+// COUNTRIES
+
+"albania" = "Albania";
+"andorra" = "Andorra";
+"armenia" = "Armenia";
+"austria" = "Austria";
+"azerbaijan" = "Azerbaijan";
+"belarus" = "Belarus";
+"belgium" = "Belgium";
+"bosnia_and_herzegovina" = "Bosnia and Herzegovina";
+"bulgaria" = "Bulgaria";
+"croatia" = "Croatia";
+"cyprus" = "Cyprus";
+"czech_republic" = "Czech Republic";
+"denmark" = "Denmark";
+"estonia" = "Estonia";
+"finland" = "Finland";
+"france" = "France";
+"georgia" = "Georgia";
+"germany" = "Germany";
+"greece" = "Greece";
+"hungary" = "Hungary";
+"iceland" = "Iceland";
+"ireland" = "Ireland";
+"italy" = "Italy";
+"kazakhstan" = "Kazakhstan";
+"kosovo" = "Kosovo";
+"latvia" = "Latvia";
+"liechtenstein" = "Liechtenstein";
+"lithuania" = "Lithuania";
+"luxembourg" = "Luxembourg";
+"macedonia" = "Macedonia";
+"malta" = "Malta";
+"moldova" = "Moldova";
+"monaco" = "Monaco";
+"montenegro" = "Montenegro";
+"netherlands" = "Netherlands";
+"norway" = "Norway";
+"poland" = "Poland";
+"portugal" = "Portugal";
+"romania" = "Romania";
+"russia" = "Russia";
+"san_marino" = "San Marino";
+"scotland" = "Scotland";
+"serbia" = "Serbia";
+"slovakia" = "Slovakia";
+"slovenia" = "Slovenia";
+"spain" = "Spain";
+"sweden" = "Sweden";
+"switzerland" = "Switzerland";
+"turkey" = "Turkey";
+"ukraine" = "Ukraine";
+"united_kingdom" = "United Kingdom";
+
+
+// REGIONS
+
+"region-picker.dolnoslaskie" = "Lower Silesia";
+"region-picker.kujawsko-pomorskie" = "Kuyavian-Pomeranian";
+"region-picker.lubelskie" = "Lublin";
+"region-picker.lubuskie" = "Lubusz";
+"region-picker.lodzkie" = "Lodz";
+"region-picker.malopolskie" = "Lesser Poland";
+"region-picker.mazowieckie" = "Mazowieckie";
+"region-picker.opolskie" = "Opole";
+"region-picker.podkarpackie" = "Subcarpathian";
+"region-picker.podlaskie" = "Podlasie";
+"region-picker.pomorskie" = "Pomeranian";
+"region-picker.slaskie" = "Silesia";
+"region-picker.swietokrzyskie" = "Swietokrzyskie";
+"region-picker.warminsko-mazurskie" = "Warmia-Masurian";
+"region-picker.wielkopolskie" = "Greater Poland";
+"region-picker.zachodniopomorskie" = "West Pomeranian";
+
+"region-picker.other-region" = "I am not from Poland...";
+
+
+// ALERTS
+
+"alert.ok-button" = "Ok";
+"alert.done-button" = "Done";
+"alert.cancel-button" = "Cancel";
+"alert.confirm-button" = "Confirm";
+"alert.error.title" = "Error";
+"alert.error.message" = "An error has ocurred. Please try again later";
+
+"alert.wrong-id.message" = "The code introduced is not correct. Please, try again.";
+
+"alert.no-internet.title" = "No Internet";
+"alert.no-internet.message" = "Unable to connect to the server. Please, check your Internet connection or try again later.";
+
+"alert.create-profile-error.message" = "Region and Wedding Date fields must be filled to create a profile.";
+
+"alert.collection-downloaded.title" = "Success";
+"alert.collection-downloaded.message" = "Collection succesfully downloaded";
+
+"alert.no-catalog-error.message" = "There is no catalog downloaded. Head on to the Shop ID window and introduce your ID to download the latest collection.";
+
+"alert.no-catalog-error.button" = "Go to Shop ID";
+
+
+// SHOP ID WINDOW
+
+"shop-id.label.no-identified" = "Type the code";
+"shop-id.label.identified" = "Profile: ";
+
+
+// COLLECTION CHECK WINDOW
+
+"collection-check.title" = "New Collection";
+"collection-check.text-top" = "There is a new collection available:";
+"collection-check.text-bottom" = "Download new version?";
+"collection-check.button" = "Download";
+
+
+// HOME
+
+"home.client-info.label" = "Client information*:";
+"home.client-info.name" = "Name:";
+"home.client-info.lastname" = "Lastname:";
+"home.client-info.region" = "Region:";
+"home.client-info.country" = "Country:";
+"home.client-info.wedding-date" = "Wedd. Date:";
+"home.client-info.more-info" = "*Due to statistical purposes, we would appreciate to know where our clients are from. The only information we save anonimized are the region of origin and the wedding date. Thank you very much for your support.";
+"home.client-info.button" = "Create profile and visit the catalog";
+"home.catalog-button" = "You can consult the catalog";
+
+
+// COUNTRY SELECTOR
+
+"country-selector.title" = "Country Selection";
+
+
+// CATALOG
+
+"catalog.title" = "Catalog";
+"catalog.button" = "Continue with Selection";
+
+
+// SELECTION
+
+"selection.data.title" = "Client Data";
+"selection.dresses.title" = "Selected Models";
+"selection.confirm-button" = "Confirm Selection";
+
+
+// COMPLETE
+
+"complete.title" = "Ready";
+"complete.message" = "Thank you, please give back the device to the person who attended you.";
+"complete.button" = "Ok";

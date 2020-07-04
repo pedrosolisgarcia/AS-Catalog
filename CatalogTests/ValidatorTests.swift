@@ -20,68 +20,68 @@ class ValidatorTests: XCTestCase {
   }
   
   func testSingleShortWordNameShouldValidate() throws {
-    let customerName = "agnieszka"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "agnieszka"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertTrue(result)
   }
   
   func testManyWordsNameShouldValidate() throws {
-    let customerName = "agnieszka swiatly"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "agnieszka swiatly"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertTrue(result)
   }
   
   func testBlankNameShouldNotValidate() throws {
-    let customerName = ""
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = ""
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertTrue(result)
   }
   
   func testTooLongNameShouldNotValidate() throws {
-    let customerName = "agnieszkaagnieszkaagnieszkaagnieszkaagnieszkaagnieszka"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "agnieszkaagnieszkaagnieszkaagnieszkaagnieszkaagnieszka"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertFalse(result)
   }
   
   func testNameWithSpecialCharactersShouldNotValidate() throws {
-    let customerName = "agnieszka!"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "agnieszka!"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertFalse(result)
   }
   
   func testNameWithPhpInjectionShouldNotValidate() throws {
-    let customerName = "<?php echo 'hello world'; ?>"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "<?php echo 'hello world'; ?>"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertFalse(result)
   }
   
   func testNameWithPolishCharactersShouldValidate() throws {
-    let customerName = "łóśżźęąńć"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "łóśżźęąńć"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertTrue(result)
   }
   
   func testNameWithPolishCharactersOnUpperCaseShouldValidate() throws {
-    let customerName = "łóśżźęąńć"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName.uppercased())
+    let clientName = "łóśżźęąńć"
+    let result = ClientDataValidator.validateClientName(name: clientName.uppercased())
     XCTAssertTrue(result)
   }
   
   func testNameWithNumbersShouldValidate() throws {
-    let customerName = "agnieszka2"
-    let result = CostumerDataValidator.validateCustomerName(name: customerName)
+    let clientName = "agnieszka2"
+    let result = ClientDataValidator.validateClientName(name: clientName)
     XCTAssertTrue(result)
   }
   
   func testWithEmptyFieldShouldNotValidate() throws {
     let field = ""
-    let result = CostumerDataValidator.validateField(field: field)
+    let result = ClientDataValidator.validateField(field: field)
     XCTAssertFalse(result)
   }
   
   func testWithFieldShouldValidate() throws {
     let field = "wroclawID"
-    let result = CostumerDataValidator.validateField(field: field)
+    let result = ClientDataValidator.validateField(field: field)
     XCTAssertTrue(result)
   }
 }
