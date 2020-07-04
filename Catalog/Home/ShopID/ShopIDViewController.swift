@@ -175,7 +175,9 @@ class ShopIDViewController: UIViewController {
       style: .default
     ) {
       (alert: UIAlertAction!) -> Void in
+      if self.shopIdService.hasRegisteredShopId() {
         self.removeAnimated()
+      }
     }
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion:nil)

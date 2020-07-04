@@ -50,7 +50,6 @@ public class ShopIdServiceAPI {
   }
   
   public func getShopId() -> String? {
-    print("Current Shop ID: " + UserDefaults.standard.string(forKey: "SHOP-ID")!)
     return UserDefaults.standard.string(forKey: "SHOP-ID")
   }
   
