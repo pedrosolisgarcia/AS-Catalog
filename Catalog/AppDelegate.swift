@@ -3,11 +3,13 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+  
+  let langService: LanguageService = LanguageService.shared
+  let defaultLocale = "pl"
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    langService.setLanguage(to: defaultLocale)
+    Bundle.enableSwitchLanguageListener()
     return true
   }
 
@@ -69,6 +71,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
   }
-
 }
-

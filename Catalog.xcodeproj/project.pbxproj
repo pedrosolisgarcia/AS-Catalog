@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		510F00BD24AF727800464BB3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 510F00BF24AF727800464BB3 /* Localizable.strings */; };
+		510F00C324B0AA0200464BB3 /* LanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510F00C224B0AA0200464BB3 /* LanguageService.swift */; };
+		510F00C524B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510F00C424B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift */; };
 		5177C95D24AF57050028538F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95C24AF57050028538F /* AppDelegate.swift */; };
 		5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95E24AF57050028538F /* SceneDelegate.swift */; };
 		5177C96924AF570B0028538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5177C96824AF570B0028538F /* Assets.xcassets */; };
@@ -96,6 +98,8 @@
 		510F00BE24AF727800464BB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		510F00C024AF728100464BB3 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		510F00C124AF728500464BB3 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		510F00C224B0AA0200464BB3 /* LanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageService.swift; sourceTree = "<group>"; };
+		510F00C424B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+SwitchLanguageListener.swift"; sourceTree = "<group>"; };
 		5177C95924AF57050028538F /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5177C95C24AF57050028538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5177C95E24AF57050028538F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -355,6 +359,7 @@
 				5177C9B224AF5AA50028538F /* UIViewController+DisplayAnimated.swift */,
 				5177C9B324AF5AA50028538F /* UIColor+Opacity.swift */,
 				5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */,
+				510F00C424B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				5177C9DA24AF5AA50028538F /* ShopIdService.swift */,
 				5177C9DB24AF5AA50028538F /* CollectionService.swift */,
 				5177C9DC24AF5AA50028538F /* ClientService.swift */,
+				510F00C224B0AA0200464BB3 /* LanguageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 				5177C9A024AF5A800028538F /* CountrySelectorViewCell.swift in Sources */,
 				5177C9E824AF5AA50028538F /* Dress.swift in Sources */,
 				5177C9E424AF5AA50028538F /* URLSession+Result.swift in Sources */,
+				510F00C524B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift in Sources */,
 				5177C9EA24AF5AA50028538F /* Client.swift in Sources */,
 				5177CA1824AF5AD60028538F /* SelectionViewController.swift in Sources */,
 				5177C9EC24AF5AA50028538F /* ShopId.swift in Sources */,
@@ -660,6 +667,7 @@
 				5177C9A424AF5A800028538F /* CollectionCheckViewController.swift in Sources */,
 				5177C9E524AF5AA50028538F /* UIViewController+DisplayAnimated.swift in Sources */,
 				5177C9E924AF5AA50028538F /* Collection.swift in Sources */,
+				510F00C324B0AA0200464BB3 /* LanguageService.swift in Sources */,
 				5177CA0824AF5AA50028538F /* ClientService.swift in Sources */,
 				5177C9E724AF5AA50028538F /* UIViewController+AddBlurView.swift in Sources */,
 				5177C9E024AF5AA50028538F /* UIViewController+DismissKeyboard.swift in Sources */,

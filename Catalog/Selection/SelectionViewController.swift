@@ -3,6 +3,8 @@ import CoreData
 
 class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
   
+  let langService: LanguageService = LanguageService.shared
+  
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var surnameLabel: UILabel!
   @IBOutlet weak var regionLabel: UILabel!
@@ -21,6 +23,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
     
     clearAllVariables()
+    langService.setLanguage(to: "pl")
     self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
     self.dismiss(animated: false)
   }
@@ -98,7 +101,7 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   private func applyLanguage() {
     nameLabel.text = "home.client-info.name".localized() + " " + currentClient.name
     surnameLabel.text = "home.client-info.lastname".localized() + " " + currentClient.surname
-    regionLabel.text = "home.client-info.region".localized() + " " + region.localized()
+    regionLabel.text = "home.client-info.region".localized() + " " + region
     dateOfWeddingLabel.text = "home.client-info.wedding-date".localized() + " " + currentClient.dateOfWedding
     saveButton.setTitle("selection.confirm-button".localized().uppercased(), for: .normal)
     navigationItem.title = "selection.data.title".localized().uppercased()

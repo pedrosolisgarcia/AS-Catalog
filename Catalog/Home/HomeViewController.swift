@@ -14,7 +14,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   var regionSelected = String()
   
   var regionNames = LocalData.getRegions()
-  var languageIndex: Int!
   static var selectedCountry = ""
   
   var currentClient: Client!
@@ -22,6 +21,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   var year: String!
   var month = [String]()
   var fullMonth: String!
+  
+  let langService: LanguageService = LanguageService.shared
   
   @IBOutlet weak var polishButton: UIButton!
   @IBOutlet weak var englishButton: UIButton!
@@ -42,10 +43,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBOutlet weak var catalogButton: UIButton!
   
   var collection: Collection!
-  
-  let locale = NSLocale.current.languageCode
-  
-  let appLocale = Locale.preferredLanguages[0]
   
   @IBAction func createProfile(sender: UIButton) {
     if sender == self.createProfileButton {
@@ -82,19 +79,19 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBAction func selectLanguage(sender: UIButton) {
     
     if sender == polishButton  {
-      languageIndex = 0
+      langService.setLanguage(to: "pl")
       polishButton.alpha = 1
       englishButton.alpha = 0.5
       spanishButton.alpha = 0.5
     }
     if sender == englishButton {
-      languageIndex = 1
+      langService.setLanguage(to: "en")
       polishButton.alpha = 0.5
       englishButton.alpha = 1
       spanishButton.alpha = 0.5
     }
     if sender == spanishButton {
-      languageIndex = 2
+      langService.setLanguage(to: "es")
       polishButton.alpha = 0.5
       englishButton.alpha = 0.5
       spanishButton.alpha = 1
@@ -114,9 +111,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    languageIndex = 0
-    
-    print(locale, appLocale)
     
     if !ShopIdServiceAPI.shared.hasRegisteredShopId() {
       showShopIdView()
@@ -183,7 +177,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     regionPicker.selectRow(0, inComponent: 0, animated: false)
     regionField.inputView = self.regionPicker
     regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)].localized()
-    regionSelected = regionNames[regionPicker.selectedRow(inComponent: 0)]
+    regionSelected = regionNames[regionPicker.selectedRow(inComponent: 0)].localized()
     regionPicker.target(forAction: #selector(self.regionPickerChanged), withSender: self)
     
     formatToolBar()
@@ -203,7 +197,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   func showDateOfWeddingPicker() {
     
     dateOfWeddingPicker.datePickerMode = .date
-//    dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
+    dateOfWeddingPicker.locale = Locale(identifier: langService.getCurrentLanguage() ?? "pl")
     dateOfWeddingPicker.minimumDate = Date()
     
     dateOfWeddingField.inputView = dateOfWeddingPicker
@@ -296,7 +290,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     regionPicker.selectRow(0, inComponent: 0, animated: false)
     formatToolBar()
     dateOfWeddingLabel.text = "home.client-info.wedding-date".localized()
-//    dateOfWeddingPicker.locale = Locale(identifier: LocalData.getLocalizationLabels(forElement: "dateLocal")[languageIndex])
+    dateOfWeddingPicker.locale = Locale(identifier: langService.getCurrentLanguage() ?? "pl")
     infoLabel.text = "home.client-info.more-info".localized()
     createProfileButton.setTitle("home.client-info.button".localized().uppercased(), for: .normal)
     catalogButton.setTitle("home.catalog-button".localized().uppercased(), for: .normal)
@@ -309,7 +303,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   }
   
   private func resetHomeFields() {
-    languageIndex = 0
     applyLanguage()
     currentClient = nil
     nameField.text = nil
