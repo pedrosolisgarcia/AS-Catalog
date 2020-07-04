@@ -18,15 +18,14 @@ class ShopIDViewController: UIViewController {
   @IBOutlet weak var idFieldView: UIView!
   @IBOutlet weak var loadingView: UIView!
   
-  var languageIndex: Int!
   var shopIds: [String]!
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
     headerLabel.text = ShopIdServiceAPI.shared.hasRegisteredShopId() ?
-      LocalData.getLocalizationLabels(forElement: "headerLabel_ID_Identified")[languageIndex] + ShopIdServiceAPI.shared.getShopId()! :
-      LocalData.getLocalizationLabels(forElement: "headerLabel_ID")[languageIndex]
-                            confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
+      "shop-id.label.identified".localized().uppercased() + ShopIdServiceAPI.shared.getShopId()! :
+      "shop-id.label.no-identified".localized().uppercased()
+    self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
     
     self.shopIdView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
     self.shopIdView.layer.shadowColor = UIColor.gray.cgColor
@@ -139,7 +138,6 @@ class ShopIDViewController: UIViewController {
   
   private func showCollectionCheckView(_ collection: Collection) -> Void {
     let collectionCheckView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "collectionCheck") as! CollectionCheckViewController
-    collectionCheckView.languageIndex = self.languageIndex
     collectionCheckView.collection = collection
     self.addChild(collectionCheckView)
     collectionCheckView.view.frame = self.view.frame
@@ -148,16 +146,31 @@ class ShopIDViewController: UIViewController {
   }
   
   private func displayWrongIdAlert() -> Void {
-    let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "warningTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "warningMessage_ID")[languageIndex], preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[languageIndex], style: .default, handler: nil)
+    let alertController = UIAlertController(
+      title: "alert.error.title".localized(),
+      message: "alert.wrong-id.message".localized(),
+      preferredStyle: .alert
+    )
+    let alertAction = UIAlertAction(
+      title: "alert.ok-button".localized(),
+      style: .default,
+      handler: nil
+    )
     alertController.addAction(alertAction)
     present(alertController, animated: true, completion:nil)
     self.shopIdField.text = ""
   }
   
   private func displayNoInternetAlert() -> Void {
-    let alertController = UIAlertController(title: LocalData.getLocalizationLabels(forElement: "noInternetTitle")[languageIndex], message: LocalData.getLocalizationLabels(forElement: "noInternetMessage")[languageIndex], preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+    let alertController = UIAlertController(
+      title: "alert.no-internet.title".localized(),
+      message: "alert.no-internet.message".localized(),
+      preferredStyle: .alert
+    )
+    let alertAction = UIAlertAction(
+      title: "alert.ok-button".localized(),
+      style: .default
+    ) {
       (alert: UIAlertAction!) -> Void in
         self.removeAnimated()
     }
@@ -167,11 +180,18 @@ class ShopIDViewController: UIViewController {
   }
   
   func showErrorAlert() {
-    let alertController = UIAlertController(title: "Error", message: "An error has ocurred. Please try again later", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+    let alertController = UIAlertController(
+      title: "alert.error.title".localized(),
+      message: "alert.error.message".localized(),
+      preferredStyle: .alert
+    )
+    let alertAction = UIAlertAction(
+      title: "alert.ok-button".localized(),
+      style: .default
+    ) {
       (alert: UIAlertAction!) -> Void in
         self.removeAnimated()
-    }
+      }
     alertController.addAction(alertAction)
     self.present(alertController, animated: true, completion: nil)
   }

@@ -1,0 +1,152 @@
+
+// COUNTRIES
+
+"albania" = "Albania";
+"andorra" = "Andora";
+"armenia" = "Armenia";
+"austria" = "Austria";
+"azerbaijan" = "Azerbejdżan";
+"belarus" = "Białoruś";
+"belgium" = "Belgia";
+"bosnia_and_herzegovina" = "Bośnia i Hercegowina";
+"bulgaria" = "Bułgaria";
+"croatia" = "Chorwacja";
+"cyprus" = "Cypr";
+"czech_republic" = "Czechy";
+"denmark" = "Dania";
+"estonia" = "Estonia";
+"finland" = "Finlandia";
+"france" = "Francja";
+"georgia" = "Gruzja";
+"germany" = "Niemcy";
+"greece" = "Grecja";
+"hungary" = "Węgry";
+"iceland" = "Islandia";
+"ireland" = "Irlandia";
+"italy" = "Włochy";
+"kazakhstan" = "Kazachstan";
+"kosovo" = "Kosowo";
+"latvia" = "Łotwa";
+"liechtenstein" = "Liechtenstein";
+"lithuania" = "Litwa";
+"luxembourg" = "Luksemburg";
+"macedonia" = "Macedonia";
+"malta" = "Malta";
+"moldova" = "Moldavia";
+"monaco" = "Monaco";
+"montenegro" = "Czarnogóra";
+"netherlands" = "Holandia";
+"norway" = "Norwegia";
+"poland" = "Polska";
+"portugal" = "Portugalia";
+"romania" = "Rumunia";
+"russia" = "Rosja";
+"san_marino" = "San Marino";
+"scotland" = "Szkocja";
+"serbia" = "Serbia";
+"slovakia" = "Słowacja";
+"slovenia" = "Słowenia";
+"spain" = "Hiszpania";
+"sweden" = "Szwecja";
+"switzerland" = "Szwajcaria";
+"turkey" = "Turcja";
+"ukraine" = "Ukraina";
+"united_kingdom" = "Zjednoczone Królestwo";
+
+
+// REGIONS
+
+"region-picker.dolnoslaskie" = "dolnośląskie";
+"region-picker.kujawsko-pomorskie" = "kujawsko-pomorskie";
+"region-picker.lubelskie" = "lubelskie";
+"region-picker.lubuskie" = "lubuskie";
+"region-picker.lodzkie" = "łódzkie";
+"region-picker.malopolskie" = "małopolskie";
+"region-picker.mazowieckie" = "mazowieckie";
+"region-picker.opolskie" = "opolskie";
+"region-picker.podkarpackie" = "podkarpackie";
+"region-picker.podlaskie" = "podlaskie";
+"region-picker.pomorskie" = "pomorskie";
+"region-picker.slaskie" = "śląskie";
+"region-picker.swietokrzyskie" = "świętokrzyskie";
+"region-picker.warminsko-mazurskie" = "warmińsko-mazurskie";
+"region-picker.wielkopolskie" = "wielkopolskie";
+"region-picker.zachodniopomorskie" = "zachodniopomorskie";
+
+"region-picker.other-region" = "Nie jestem z Polski...";
+
+
+// ALERTS
+
+"alert.ok-button" = "Ok";
+"alert.done-button" = "Gotowe";
+"alert.cancel-button" = "Anuluj";
+"alert.confirm-button" = "Zrobione";
+"alert.error.title" = "Błąd";
+"alert.error.message" = "Wystąpił błąd. Spróbuj ponownie później";
+
+"alert.wrong-id.message" = "Wprowadzony kod nie jest poprawny. Proszę, spróbuj ponownie.";
+
+"alert.no-internet.title" = "Brak Internetu";
+"alert.no-internet.message" = "Brak możliwości podłączenia do serwera. Proszę sprawdź połączenie internetowe lub spróbuj póżniej.";
+
+"alert.create-profile-error.message" = "Aby utworzyć profil, wypełnij pola dotyczące województwa oraz daty ślubu.";
+
+"alert.collection-downloaded.title" = "Sukces";
+"alert.collection-downloaded.message" = "Kolekcja została pomyślnie pobrana";
+
+"alert.no-catalog-error.message" = "Nie pobrano katalogu. Przejdź do okna Identyfikator sklepu i wprowadź swój identyfikator, aby pobrać najnowszą kolekcję.";
+
+"alert.no-catalog-error.button" = "Przejdź do id sklepu";
+
+
+// SHOP ID WINDOW
+
+"shop-id.label.no-identified" = "Podaj kod";
+"shop-id.label.identified" = "Profil: ";
+
+
+// COLLECTION CHECK WINDOW
+
+"collection-check.title" = "Nowa kolekcja";
+"collection-check.text-top" = "Nowa kolekcja jest dostępna:";
+"collection-check.text-bottom" = "Pobrać nową wersję?";
+"collection-check.button" = "Pobierz";
+
+
+// HOME
+
+"home.client-info.label" = "Informacja o kliencie*:";
+"home.client-info.name" = "Imię:";
+"home.client-info.lastname" = "Nazwisko:";
+"home.client-info.region" = "Województwo:";
+"home.client-info.country" = "Kraj:";
+"home.client-info.wedding-date" = "Data Ślubu:";
+"home.client-info.more-info" = "*Będziemy wdzięczni jeśli powiesz nam skąd pochodzisz. Informacje, które nam udostępniasz zbieramy wyłącznie w celach statystycznych i zachowujemy wyłącznie te dotyczące Twojego pochodzenia oraz daty ślubu.";
+"home.client-info.button" = "Utwórz profil i obejrzyj katalog";
+"home.catalog-button" = "Możesz zobaczyć katalog";
+
+
+// COUNTRY SELECTOR
+
+"country-selector.title" = "Kraj pochodzenia";
+
+
+// CATALOG
+
+"catalog.title" = "Katalog";
+"catalog.button" = "Przejdź dalej";
+
+
+// SELECTION
+
+"selection.data.title" = "Informacja o kliencie";
+"selection.dresses.title" = "Wybrane modele";
+"selection.confirm-button" = "Potwierdź wybór";
+
+
+// COMPLETE
+
+"complete.title" = "To wszystko";
+"complete.message" = "Dziękuję, proszę przekazać urządzenie pracownikowi salonu.";
+"complete.button" = "Gotowe";

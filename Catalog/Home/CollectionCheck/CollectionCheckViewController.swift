@@ -19,18 +19,17 @@ class CollectionCheckViewController: UIViewController {
   @IBOutlet weak var collectionCheckView: UIView!
   @IBOutlet weak var downloadView: UIView!
   @IBOutlet weak var loadingView: UIView!
-  
-  var languageIndex: Int!
+
   var collection: Collection!
   var dressesImages: [Data]!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionCheckLabel.text = LocalData.getLocalizationLabels(forElement: "collectionCheckLabel")[languageIndex]
-    textTop.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextTop")[languageIndex]
+    collectionCheckLabel.text = "collection-check.title".localized().uppercased()
+    textTop.text = "collection-check.text-top".localized()
     collectionLabel.text = collection.name
-    textBottom.text = LocalData.getLocalizationLabels(forElement: "collectionCheckTextBottom")[languageIndex]
-    downloadButton.setTitle(LocalData.getLocalizationLabels(forElement: "collectionCheckButton")[languageIndex], for: .normal)
+    textBottom.text = "collection-check.text-bottom".localized()
+    downloadButton.setTitle("collection-check.button".localized(), for: .normal)
     
     self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
     self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
@@ -115,8 +114,15 @@ class CollectionCheckViewController: UIViewController {
   }
   
   func showSuccessAlert() {
-    let alertController = UIAlertController(title: "Success", message: "Collection succesfully downloaded", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+    let alertController = UIAlertController(
+      title: "alert.collection-downloaded.title".localized(),
+      message: "alert.collection-downloaded.message".localized(),
+      preferredStyle: .alert
+    )
+    let alertAction = UIAlertAction(
+      title: "alert.ok-button".localized(),
+      style: .default
+    ) {
       (alert: UIAlertAction!) -> Void in
         self.removeAnimated()
     }
@@ -125,8 +131,15 @@ class CollectionCheckViewController: UIViewController {
   }
   
   func showErrorAlert() {
-    let alertController = UIAlertController(title: "Error", message: "An error has ocurred. Please try again later", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: LocalData.getLocalizationLabels(forElement: "warningButton")[self.languageIndex], style: .default) {
+    let alertController = UIAlertController(
+      title: "alert.error.title".localized(),
+      message: "alert.error.message".localized(),
+      preferredStyle: .alert
+    )
+    let alertAction = UIAlertAction(
+      title: "alert.ok-button".localized(),
+      style: .default
+    ) {
       (alert: UIAlertAction!) -> Void in
         self.removeAnimated()
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Customer: Codable {
+struct Client: Codable {
   let appVersion: String
   let dateOfVisit: String
   let shopId: String

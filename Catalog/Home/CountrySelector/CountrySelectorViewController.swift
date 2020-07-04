@@ -6,8 +6,7 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var confirmButton: UIButton!
-  
-  var languageIndex: Int!
+  @IBOutlet weak var countrySelectorView: UIView!
   
   var selectedCountry: Country!
   var countries = [Country]()
@@ -21,11 +20,19 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     collectionView.allowsSelection = true
     collectionView.allowsMultipleSelection = false
     self.showAnimated()
-    headerLabel.text = LocalData.getLocalizationLabels(forElement: "headerLabel")[languageIndex]
-    cancelButton.setTitle(LocalData.getLocalizationLabels(forElement: "cancelButton")[languageIndex], for: .normal)
-    confirmButton.setTitle(LocalData.getLocalizationLabels(forElement: "confirmButton")[languageIndex], for: .normal)
+    headerLabel.text = "country-selector.title".localized().uppercased()
+    confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
     confirmButton.isEnabled = false
     confirmButton.alpha = 0.5
+    
+    self.countrySelectorView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
+    self.countrySelectorView.layer.shadowColor = UIColor.gray.cgColor
+    self.countrySelectorView.layer.shadowOpacity = 0.75
+    
+    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
+    self.cancelButton.layer.shadowRadius = 0
+    self.cancelButton.layer.shadowOpacity = 1
     
     let maskPathSave = UIBezierPath(roundedRect: confirmButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
     
@@ -56,7 +63,7 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     
     let country = countries[indexPath.row]
     
-    cell.countryLabel.text = country.name[languageIndex]
+    cell.countryLabel.text = country.name.localized()
     cell.countryFlag.image = UIImage(named: country.imgName)
     
     return cell
@@ -76,11 +83,11 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     }, completion:{(finished : Bool)  in
       if (finished) {
         if sender == self.confirmButton {
-          self.delegate.regionLabel.text = LocalData.getLocalizationLabels(forElement: "countryLabel")[self.languageIndex]
+          self.delegate.regionLabel.text = "home.client-info.country".localized()
           self.delegate.setCountryField(country: self.selectedCountry)
         }
         if sender == self.cancelButton {
-          self.delegate.setCountryField(country: Country(name:["","",""],imgName:""))
+          self.delegate.setCountryField(country: Country(name:"",imgName:""))
         }
         if (self.delegate.view.gestureRecognizers?.isEmpty)! {
           self.view.addDismissKeyboardListener()

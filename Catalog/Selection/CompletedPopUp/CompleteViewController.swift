@@ -6,9 +6,6 @@ class CompleteViewController: UIViewController {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var messageLabel: UILabel!
   @IBOutlet weak var doneButton: UIButton!
-  var languageIndex: Int!
-  
-  var confirmationMessageLang: [[String]] = [["To wszystko","Dziękuję, proszę przekazać urządzenie pracownikowi salonu.","GOTOWE"],["Ready","Thank you, please give back the device to the person who attended you.","OK"],["LISTO","Gracias, devuelva el dispositivo a la persona que lo atendió.","Vale"]]
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,9 +23,9 @@ class CompleteViewController: UIViewController {
     maskLayerSave.path = maskPathSave.cgPath
     doneButton.layer.mask = maskLayerSave
     
-    self.titleLabel.text = confirmationMessageLang[languageIndex][0]
-    self.messageLabel.text = confirmationMessageLang[languageIndex][1]
-    self.doneButton.setTitle(confirmationMessageLang[languageIndex][2], for: .normal)
+    self.titleLabel.text = "complete.title".localized().uppercased()
+    self.messageLabel.text = "complete.message".localized()
+    self.doneButton.setTitle("complete.button".localized().uppercased(), for: .normal)
     self.showAnimated()
   }
 
