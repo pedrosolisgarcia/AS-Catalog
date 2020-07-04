@@ -19,11 +19,14 @@ class ShopIDViewController: UIViewController {
   @IBOutlet weak var loadingView: UIView!
   
   var shopIds: [String]!
+  
+  private let collectionService: CollectionServiceAPI = CollectionServiceAPI.shared
+  private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
-    headerLabel.text = ShopIdServiceAPI.shared.hasRegisteredShopId() ?
-      "shop-id.label.identified".localized().uppercased() + ShopIdServiceAPI.shared.getShopId()! :
+    headerLabel.text = self.shopIdService.hasRegisteredShopId() ?
+      "shop-id.label.identified".localized().uppercased() + self.shopIdService.getShopId()! :
       "shop-id.label.no-identified".localized().uppercased()
     self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
     
@@ -36,7 +39,7 @@ class ShopIDViewController: UIViewController {
     self.cancelButton.layer.shadowRadius = 0
     self.cancelButton.layer.shadowOpacity = 1
 
-    if !ShopIdServiceAPI.shared.hasRegisteredShopId() {
+    if !self.shopIdService.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
@@ -84,7 +87,7 @@ class ShopIDViewController: UIViewController {
   }
   
   private func getShopIds() -> Void {
-    ShopIdServiceAPI.shared.getShopIds() { (result) in
+    self.shopIdService.getShopIds() { (result) in
       switch result {
         case .success(let response):
           DispatchQueue.main.async {
@@ -107,7 +110,7 @@ class ShopIDViewController: UIViewController {
   }
   
   private func connectToCollectionView() -> Void {
-    CollectionServiceAPI.shared.getLatestCollection() { (result) in
+    self.collectionService.getLatestCollection() { (result) in
       switch result {
         case .success(let response):
           DispatchQueue.main.async {
@@ -131,7 +134,7 @@ class ShopIDViewController: UIViewController {
   
   private func tryToSaveShopId() -> Bool {
     if (self.shopIds.contains(self.shopIdField.text!.uppercased())) {
-      return (nil != ShopIdServiceAPI.shared.saveShopId(shopId: self.shopIdField.text!.uppercased()))
+      return (nil != self.shopIdService.saveShopId(shopId: self.shopIdField.text!.uppercased()))
     }
     return false;
   }

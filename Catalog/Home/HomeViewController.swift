@@ -13,7 +13,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   var country: Country!
   var regionSelected = String()
   
-  var regionNames = LocalData.getRegions()
+  var regions: [String] = LocalDataService.shared.getRegions()!
   static var selectedCountry = ""
   
   var currentClient: Client!
@@ -21,8 +21,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   var year: String!
   var month = [String]()
   var fullMonth: String!
-  
-  let langService: LanguageService = LanguageService.shared
   
   @IBOutlet weak var polishButton: UIButton!
   @IBOutlet weak var englishButton: UIButton!
@@ -43,6 +41,9 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBOutlet weak var catalogButton: UIButton!
   
   var collection: Collection!
+
+  private let langService: LanguageService = LanguageService.shared
+  private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
   
   @IBAction func createProfile(sender: UIButton) {
     if sender == self.createProfileButton {
@@ -112,7 +113,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if !ShopIdServiceAPI.shared.hasRegisteredShopId() {
+    if !self.shopIdService.hasRegisteredShopId() {
       showShopIdView()
     }
     
@@ -149,24 +150,24 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   }
   
   func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return regionNames.count + 1
+    return regions.count + 1
   }
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    if row == regionNames.count {
+    if row == regions.count {
       return "region-picker.other-region".localized()
     } else {
-      return regionNames[row].localized()
+      return regions[row].localized()
     }
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     if pickerView == regionPicker {
-      if row == regionNames.count {
+      if row == regions.count {
         regionField.text = "region-picker.other-region".localized()
       } else {
-        regionField.text = regionNames[row].localized()
-        regionSelected = regionNames[row].localized()
+        regionField.text = regions[row].localized()
+        regionSelected = regions[row].localized()
         countrySelected = false
       }
     }
@@ -176,8 +177,8 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
 
     regionPicker.selectRow(0, inComponent: 0, animated: false)
     regionField.inputView = self.regionPicker
-    regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)].localized()
-    regionSelected = regionNames[regionPicker.selectedRow(inComponent: 0)].localized()
+    regionField.text = regions[regionPicker.selectedRow(inComponent: 0)].localized()
+    regionSelected = regions[regionPicker.selectedRow(inComponent: 0)].localized()
     regionPicker.target(forAction: #selector(self.regionPickerChanged), withSender: self)
     
     formatToolBar()
@@ -185,7 +186,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   }
   
   @objc func regionPickerChanged() {
-    regionField.text = regionNames[regionPicker.selectedRow(inComponent: 0)]
+    regionField.text = regions[regionPicker.selectedRow(inComponent: 0)]
   }
   
   func setCountryField(country: Country) {
@@ -356,7 +357,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     currentClient = Client(
       appVersion: self.appVersion,
       dateOfVisit: formatDate(date: Date()),
-      shopId: ShopIdServiceAPI.shared.getShopId()!,
+      shopId: self.shopIdService.getShopId()!,
       name: (nameField.text?.capitalized)!,
       surname: (surnameField.text?.capitalized)!,
       region: regionField.text!,

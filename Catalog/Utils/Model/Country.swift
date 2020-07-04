@@ -1,6 +1,6 @@
 import Foundation
 
-struct Country {
+public struct Country: Codable {
   var name: String = ""
   var imgName: String = ""
   

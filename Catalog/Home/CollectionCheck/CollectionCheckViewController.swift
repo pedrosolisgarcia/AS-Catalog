@@ -22,6 +22,9 @@ class CollectionCheckViewController: UIViewController {
 
   var collection: Collection!
   var dressesImages: [Data]!
+  
+  private let collectionService: CollectionServiceAPI = CollectionServiceAPI.shared
+  private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,7 +39,7 @@ class CollectionCheckViewController: UIViewController {
     self.cancelButton.layer.shadowRadius = 0
     self.cancelButton.layer.shadowOpacity = 1
     
-    if ShopIdServiceAPI.shared.hasRegisteredShopId() {
+    if self.shopIdService.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
@@ -77,7 +80,7 @@ class CollectionCheckViewController: UIViewController {
       dispatchGroup.enter()
 
       let url = URL(string: dress.imageUrl)!
-      CollectionServiceAPI.shared.getImageData(from: url) { (result) in
+      collectionService.getImageData(from: url) { (result) in
         switch result {
           case .success(let response):
             self.collection.dresses[index].imageData = response
