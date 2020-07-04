@@ -9,7 +9,7 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
   @IBOutlet weak var countrySelectorView: UIView!
   
   var selectedCountry: Country!
-  var countries = [Country]()
+  var countries: [Country] = LocalDataService.shared.getCountries()!
   weak var delegate: HomeViewController!
   
 
@@ -45,8 +45,6 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     let maskLayerLabel = CAShapeLayer()
     maskLayerLabel.path = maskPathLabel.cgPath
     headerLabel.layer.mask = maskLayerLabel
-    
-    countries = LocalData.getCountries()
   }
 
   override func didReceiveMemoryWarning() {
