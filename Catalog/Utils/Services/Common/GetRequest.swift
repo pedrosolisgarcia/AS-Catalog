@@ -1,27 +1,15 @@
 import Foundation
 
-public class CollectionServiceAPI {
-  
-  public static let shared = CollectionServiceAPI()
-  
-  private init() {}
+public class GetRequest: APIRequest {
   private let urlSession = URLSession.shared
   
-  public func getLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) {
-    getJSONResources(path: API.PATH_COLLECTION.rawValue, completion: result)
-  }
-  
-  public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) {
-    getRawResources(from: url, completion: result)
-  }
-  
   private let jsonDecoder: JSONDecoder = {
-   let jsonDecoder = JSONDecoder()
-   jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-   return jsonDecoder
+    let jsonDecoder = JSONDecoder()
+    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+    return jsonDecoder
   }()
-  
-  private func getJSONResources<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+
+  public func getDecodedJSON<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
     var urlComponents = URLComponents()
 
     urlComponents.scheme = API.SCHEME.rawValue
@@ -53,7 +41,7 @@ public class CollectionServiceAPI {
      }.resume()
   }
   
-  private func getRawResources(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) {
+  public func getData(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) {
     urlSession.dataTask(with: url) { (result) in
       switch result {
         case .success(let (response, data)):
