@@ -62,7 +62,48 @@ class SelectionViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = false
   }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension SelectionViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return selectedDresses.count
+  }
   
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    let cellIdentifier = "Cell"
+    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+      as! SelectionTableViewCell
+    let dress = selectedDresses[indexPath.row]
+    
+    cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
+    cell.dressLabel.text = dress.name
+    cell.dressImageView.image = UIImage(data: dress.imageData!)
+    
+    return cell
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension SelectionViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> Void {
+    let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
+    popImageView.dressImage = selectedDresses[indexPath.row].imageData
+    self.addChild(popImageView)
+    popImageView.view.frame = self.view.frame
+    self.view.addSubview(popImageView.view)
+    self.navigationController?.view.addSubview(popImageView.view)
+    popImageView.didMove(toParent: self)
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension SelectionViewController {
   private func translateTextKeys() -> Void {
     nameLabel.text = "home.client-info.name".localized() + " " + clientData.name
     surnameLabel.text = "home.client-info.lastname".localized() + " " + clientData.surname
@@ -104,42 +145,5 @@ class SelectionViewController: UIViewController {
     self.view.addSubview(popCompleteView.view)
     self.navigationController?.view.addSubview(popCompleteView.view)
     popCompleteView.didMove(toParent: self)
-  }
-}
-
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
-
-extension SelectionViewController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return selectedDresses.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    let cellIdentifier = "Cell"
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-      as! SelectionTableViewCell
-    let dress = selectedDresses[indexPath.row]
-    
-    cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
-    cell.dressLabel.text = dress.name
-    cell.dressImageView.image = UIImage(data: dress.imageData!)
-    
-    return cell
-  }
-}
-
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
-
-extension SelectionViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> Void {
-    let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-    popImageView.dressImage = selectedDresses[indexPath.row].imageData
-    self.addChild(popImageView)
-    popImageView.view.frame = self.view.frame
-    self.view.addSubview(popImageView.view)
-    self.navigationController?.view.addSubview(popImageView.view)
-    popImageView.didMove(toParent: self)
-    tableView.deselectRow(at: indexPath, animated: true)
   }
 }

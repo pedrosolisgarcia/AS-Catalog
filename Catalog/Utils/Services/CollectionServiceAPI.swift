@@ -9,11 +9,11 @@ public class CollectionServiceAPI {
     self.request = service
   }
   
-  public func getLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) {
+  public func getLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) -> Void {
     self.request.getDecodedJSON(path: API.PATH_COLLECTION.rawValue, completion: result)
   }
   
-  public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) {
+  public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) -> Void {
     self.request.getData(from: url, completion: result)
   }
 }

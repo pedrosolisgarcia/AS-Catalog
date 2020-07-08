@@ -1,11 +1,3 @@
-//
-//  UIView+DisplayAnimated.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 19/06/2020.
-//  Copyright © 2020 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 extension UIViewController {

@@ -2,7 +2,7 @@ import Foundation
 
 public class ClientService {
   
-  class func sendClientToAPI(client: Client, completion:((Data?, URLResponse?, Error?) -> Void)?) {
+  class func sendClientToAPI(client: Client, completion:((Data?, URLResponse?, Error?) -> Void)?) -> Void {
     
     var urlComponents = URLComponents()
     

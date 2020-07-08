@@ -28,7 +28,7 @@ class CollectionCheckViewController: UIViewController {
   private let collectionService: CollectionServiceAPI = CollectionServiceAPI.shared
   private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
 
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
 
     
@@ -47,7 +47,7 @@ class CollectionCheckViewController: UIViewController {
     print(collection!)
   }
   
-  @IBAction func removeAnimate(sender: UIButton) {
+  @IBAction func removeAnimate(sender: UIButton) -> Void {
     
     if (sender == self.downloadButton) {
       downloadImage()
@@ -56,10 +56,14 @@ class CollectionCheckViewController: UIViewController {
       self.delegate.removeAnimated()
       self.removeAnimated()
     }
-
   }
   
-  func downloadImage() {
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+  }
+  
+  private func downloadImage() -> Void {
     let dispatchGroup = DispatchGroup()
     self.downloadView.isHidden = true
     self.loadingView.isHidden = false
@@ -98,11 +102,6 @@ class CollectionCheckViewController: UIViewController {
     })
   }
   
-  func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-  }
-  
   private func translateTextKeys() -> Void {
     collectionCheckLabel.text = "collection-check.title".localized().uppercased()
     textTop.text = "collection-check.text-top".localized()
@@ -111,7 +110,7 @@ class CollectionCheckViewController: UIViewController {
     downloadButton.setTitle("collection-check.button".localized(), for: .normal)
   }
   
-  private func showSuccessAlert() {
+  private func showSuccessAlert() -> Void {
     self.displaySingleActionAlert(
       title: "alert.collection-downloaded.title",
       message: "alert.collection-downloaded.message",
@@ -124,7 +123,7 @@ class CollectionCheckViewController: UIViewController {
     )
   }
   
-  private func showErrorAlert() {
+  private func showErrorAlert() -> Void {
     self.displaySingleActionAlert(
       title: "alert.error.title",
       message: "alert.error.message",

@@ -11,7 +11,7 @@ class CatalogViewController: UIViewController {
   var region = String()
   var collection: Collection!
   
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
     
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
@@ -24,11 +24,11 @@ class CatalogViewController: UIViewController {
     collectionView?.allowsMultipleSelection = true
   }
   
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = false
   }
   
-  func didPressZoomButton(_ sender: UIButton) {
+  func didPressZoomButton(_ sender: UIButton) -> Void {
     if let indexPath = getCurrentCellIndexPath(sender) {
       
       let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
@@ -48,7 +48,7 @@ class CatalogViewController: UIViewController {
     return nil
   }
   
-  @IBAction func viewButtonPressed(_ sender: UIBarButtonItem) {
+  @IBAction func viewButtonPressed(_ sender: UIBarButtonItem) -> Void {
     
     let catalogSize = CGSize(width: 246, height: 416)
     let carouselSize = CGSize(width: 515, height: 850)
@@ -68,7 +68,7 @@ class CatalogViewController: UIViewController {
     carouselView.image = UIImage(named: sender == catalogView ? "carousel" : "carousel_sel")
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) -> Void {
     
     if segue.identifier == "selectDresses"{
       
@@ -110,13 +110,13 @@ extension CatalogViewController: UICollectionViewDataSource, UICollectionViewDel
     return cell
   }
   
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
     collection.dresses[indexPath.row].isSelected = true
     selectButton.isEnabled = true
     selectButton.alpha = 1
   }
   
-  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) -> Void {
     collection.dresses[indexPath.row].isSelected = false
     if let indexPath = collectionView.indexPathsForSelectedItems {
       if indexPath.count <= 0 {

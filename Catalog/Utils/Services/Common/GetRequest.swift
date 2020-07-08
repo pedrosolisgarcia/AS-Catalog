@@ -9,7 +9,7 @@ public class GetRequest: APIRequest {
     return jsonDecoder
   }()
 
-  public func getDecodedJSON<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) {
+  public func getDecodedJSON<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) -> Void {
     var urlComponents = URLComponents()
 
     urlComponents.scheme = API.SCHEME.rawValue
@@ -41,7 +41,7 @@ public class GetRequest: APIRequest {
      }.resume()
   }
   
-  public func getData(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) {
+  public func getData(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) -> Void {
     urlSession.dataTask(with: url) { (result) in
       switch result {
         case .success(let (response, data)):

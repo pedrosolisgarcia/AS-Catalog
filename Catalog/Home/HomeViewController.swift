@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
   private let langService: LanguageService = LanguageService.shared
   private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
   
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
     
     if !self.shopIdService.hasRegisteredShopId() {
@@ -67,11 +67,11 @@ class HomeViewController: UIViewController {
     self.getLocalCollection()
   }
   
-  @IBAction func pressToShowShopIdView(sender: UIButton) {
+  @IBAction func pressToShowShopIdView(sender: UIButton) -> Void {
     self.showShopIdView()
   }
   
-  @IBAction func selectLanguage(sender: UIButton) {
+  @IBAction func selectLanguage(sender: UIButton) -> Void {
     
     if sender == polishButton  {
       langService.setLanguage(to: "pl")
@@ -94,7 +94,7 @@ class HomeViewController: UIViewController {
     translateTextKeys()
   }
   
-  @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
+  @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) -> Void {
     if segue.identifier == "unwindToHomeScreen" {
       sendPendingClientsToAPIIfConnected()
       resetHomeFields()
@@ -104,11 +104,11 @@ class HomeViewController: UIViewController {
     }
   }
   
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = true
   }
   
-  func setCountryField(country: Country) {
+  func setCountryField(country: Country) -> Void {
     regionField.text = country.name.localized()
     hasCountrySelected = true
     self.country = country
@@ -130,7 +130,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITextFieldDelegate {
 
-  func textFieldDidBeginEditing(_ textField: UITextField) {
+  func textFieldDidBeginEditing(_ textField: UITextField) -> Void {
     if textField == regionField {
       pickerId = "regionPicker"
       self.showRegionPicker()
@@ -141,7 +141,7 @@ extension HomeViewController: UITextFieldDelegate {
     }
   }
   
-  func textFieldDidEndEditing(_ textField: UITextField) {
+  func textFieldDidEndEditing(_ textField: UITextField) -> Void {
     if textField == regionField {
       if textField.text == "region-picker.other-region".localized() {
         showCountryView()
@@ -179,7 +179,7 @@ extension HomeViewController: UIPickerViewDelegate {
     regionPicker.delegate = self
   }
   
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) -> Void {
     if pickerView == regionPicker {
       if row == regions.count {
         regionField.text = "region-picker.other-region".localized()
@@ -191,25 +191,25 @@ extension HomeViewController: UIPickerViewDelegate {
     }
   }
   
-  @objc func regionPickerChanged() {
+  @objc func regionPickerChanged() -> Void {
     regionField.text = regions[regionPicker.selectedRow(inComponent: 0)]
   }
   
-  @objc func dateOfWeddingPickerChanged(sender: UIDatePicker) {
+  @objc func dateOfWeddingPickerChanged(sender: UIDatePicker) -> Void {
     dateOfWeddingField.text = formatDate(date: sender.date)
   }
   
-  @objc func doneRegion() {
+  @objc func doneRegion() -> Void {
     regionField.resignFirstResponder()
   }
-  @objc func cancelRegion() {
+  @objc func cancelRegion() -> Void {
     regionField.text = ""
     regionField.resignFirstResponder()
   }
-  @objc func doneDate() {
+  @objc func doneDate() -> Void {
     dateOfWeddingField.resignFirstResponder()
   }
-  @objc func cancelDate() {
+  @objc func cancelDate() -> Void {
     dateOfWeddingField.text = ""
     dateOfWeddingField.resignFirstResponder()
   }
@@ -219,7 +219,7 @@ extension HomeViewController: UIPickerViewDelegate {
 
 extension HomeViewController: NSFetchedResultsControllerDelegate {
 
-  private func sendPendingClientsToAPIIfConnected() {
+  private func sendPendingClientsToAPIIfConnected() -> Void {
     
     if Reachability.isConnectedToNetwork() {
       var clientsMO = CoreDataManager.getClientsFromCoreData(delegate: self)

@@ -21,7 +21,7 @@ class CompleteViewController: UIViewController {
     self.showAnimated()
   }
   
-  @IBAction func closeWindow(sender: UIButton) {
+  @IBAction func closeWindow(sender: UIButton) -> Void {
     self.removeAnimated()
   }
   

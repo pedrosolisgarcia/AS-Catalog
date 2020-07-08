@@ -1,6 +1,6 @@
 import UIKit
 
-class CountrySelectorViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class CountrySelectorViewController: UIViewController {
   
   @IBOutlet weak var headerLabel: UILabel!
   @IBOutlet weak var cancelButton: UIButton!
@@ -36,28 +36,6 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
   }
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return countries.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CountrySelectorViewCell
-    
-    let country = countries[indexPath.row]
-    
-    cell.countryLabel.text = country.name.localized()
-    cell.countryFlag.image = UIImage(named: country.imgName)
-    
-    return cell
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
-    selectedCountry = countries[indexPath.row]
-    confirmButton.isEnabled = true
-    confirmButton.alpha = 1
-  }
-  
   @IBAction func removeAnimate(sender: UIButton) -> Void {
     
     UIView.animate(withDuration: 0.25, animations: {
@@ -79,5 +57,35 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
         self.dismiss(animated: false)
       }
     });
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension CountrySelectorViewController: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return countries.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CountrySelectorViewCell
+    
+    let country = countries[indexPath.row]
+    
+    cell.countryLabel.text = country.name.localized()
+    cell.countryFlag.image = UIImage(named: country.imgName)
+    
+    return cell
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension CountrySelectorViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
+    selectedCountry = countries[indexPath.row]
+    confirmButton.isEnabled = true
+    confirmButton.alpha = 1
   }
 }

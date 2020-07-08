@@ -157,7 +157,7 @@ class ShopIDViewController: UIViewController {
     self.shopIdField.text = ""
   }
   
-  func showErrorAlert() -> Void {
+  private func showErrorAlert() -> Void {
     self.displaySingleActionAlert(
       title: "alert.error.title",
       message: "alert.error.message",

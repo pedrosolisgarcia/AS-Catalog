@@ -20,7 +20,7 @@ public class CoreDataManager {
     return clients as! [ClientMO]
   }
   
-  class func saveClientInCoreData(client: Client, viewContext: NSManagedObjectContext) {
+  class func saveClientInCoreData(client: Client, viewContext: NSManagedObjectContext) -> Void {
     let clientEntity = NSEntityDescription.entity(forEntityName: "ClientMO", in: viewContext)
     let clientObject = NSManagedObject(entity: clientEntity!, insertInto: viewContext)
     clientObject.setValue(client.appVersion, forKey: "appVersion")
