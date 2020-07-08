@@ -20,59 +20,50 @@ class CollectionCheckViewController: UIViewController {
   @IBOutlet weak var downloadView: UIView!
   @IBOutlet weak var loadingView: UIView!
 
+  weak var delegate: ShopIDViewController!
+
   var collection: Collection!
   var dressesImages: [Data]!
   
   private let collectionService: CollectionServiceAPI = CollectionServiceAPI.shared
   private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
 
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
-    collectionCheckLabel.text = "collection-check.title".localized().uppercased()
-    textTop.text = "collection-check.text-top".localized()
-    collectionLabel.text = collection.name
-    textBottom.text = "collection-check.text-bottom".localized()
-    downloadButton.setTitle("collection-check.button".localized(), for: .normal)
+
     
-    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
-    self.cancelButton.layer.shadowRadius = 0
-    self.cancelButton.layer.shadowOpacity = 1
-    
-    if self.shopIdService.hasRegisteredShopId() {
+    if !self.shopIdService.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
     
-    let maskPathSave = UIBezierPath(roundedRect: downloadButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerSave = CAShapeLayer()
-    maskLayerSave.path = maskPathSave.cgPath
-    downloadButton.layer.mask = maskLayerSave
-    
-    let maskPathLabel = UIBezierPath(roundedRect: collectionCheckLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerLabel = CAShapeLayer()
-    maskLayerLabel.path = maskPathLabel.cgPath
-    collectionCheckLabel.layer.mask = maskLayerLabel
+    self.translateTextKeys()
+    self.collectionCheckView.addViewShadow()
+    self.cancelButton.addButtonShadow()
+    self.downloadButton.roundCorners(from: .bottom, radius: 10)
+    self.collectionCheckLabel.roundCorners(from: .top, radius: 10)
+    self.showAnimated()
     
     print(collection!)
-
-    self.showAnimated()
   }
   
-  @IBAction func removeAnimate(sender: UIButton) {
+  @IBAction func removeAnimate(sender: UIButton) -> Void {
     
     if (sender == self.downloadButton) {
       downloadImage()
     }
     if (sender == self.cancelButton) {
+      self.delegate.removeAnimated()
       self.removeAnimated()
     }
-
   }
   
-  func downloadImage() {
+  func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+  }
+  
+  private func downloadImage() -> Void {
     let dispatchGroup = DispatchGroup()
     self.downloadView.isHidden = true
     self.loadingView.isHidden = false
@@ -93,7 +84,7 @@ class CollectionCheckViewController: UIViewController {
             }
         }
       }
-  }
+    }
     dispatchGroup.notify(queue: DispatchQueue.main, execute: {
       let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
       print(fullPath)
@@ -111,46 +102,36 @@ class CollectionCheckViewController: UIViewController {
     })
   }
   
-  func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
+  private func translateTextKeys() -> Void {
+    collectionCheckLabel.text = "collection-check.title".localized().uppercased()
+    textTop.text = "collection-check.text-top".localized()
+    collectionLabel.text = collection.name
+    textBottom.text = "collection-check.text-bottom".localized()
+    downloadButton.setTitle("collection-check.button".localized(), for: .normal)
   }
   
-  func showSuccessAlert() {
-    let alertController = UIAlertController(
-      title: "alert.collection-downloaded.title".localized(),
-      message: "alert.collection-downloaded.message".localized(),
-      preferredStyle: .alert
+  private func showSuccessAlert() -> Void {
+    self.displaySingleActionAlert(
+      title: "alert.collection-downloaded.title",
+      message: "alert.collection-downloaded.message",
+      actionTitle: "alert.ok-button",
+      action: {
+        (alert: UIAlertAction!) -> Void in
+          self.delegate.removeAnimated()
+          self.removeAnimated()
+      }
     )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default
-    ) {
-      (alert: UIAlertAction!) -> Void in
-        self.removeAnimated()
-    }
-    alertController.addAction(alertAction)
-    self.present(alertController, animated: true, completion: nil)
   }
   
-  func showErrorAlert() {
-    let alertController = UIAlertController(
-      title: "alert.error.title".localized(),
-      message: "alert.error.message".localized(),
-      preferredStyle: .alert
+  private func showErrorAlert() -> Void {
+    self.displaySingleActionAlert(
+      title: "alert.error.title",
+      message: "alert.error.message",
+      actionTitle: "alert.ok-button",
+      action: {
+        (alert: UIAlertAction!) -> Void in
+          self.removeAnimated()
+      }
     )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default
-    ) {
-      (alert: UIAlertAction!) -> Void in
-        self.removeAnimated()
-    }
-    alertController.addAction(alertAction)
-    self.present(alertController, animated: true, completion: nil)
-  }
-
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }

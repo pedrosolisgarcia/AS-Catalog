@@ -1,11 +1,3 @@
-//
-//  ValidatorTests.swift
-//  CatalogTests
-//
-//  Created by Pedro Solís García on 22/06/2018.
-//  Copyright © 2018 AppCoda. All rights reserved.
-//
-
 import XCTest
 @testable import Catalog
 

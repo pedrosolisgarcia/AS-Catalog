@@ -11,7 +11,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var selectedFlag: UIImageView!
   weak var cellDelegate: CatalogCollectionViewCellDelegate?
   
-  @IBAction func buttonPressed(_ sender: UIButton) {
+  @IBAction func buttonPressed(_ sender: UIButton) -> Void {
     cellDelegate?.didPressZoomButton(sender)
   }
   

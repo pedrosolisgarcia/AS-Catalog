@@ -1,15 +1,7 @@
-//
-//  UIView+DisplayAnimated.swift
-//  Catalog
-//
-//  Created by Pedro Solís García on 19/06/2020.
-//  Copyright © 2020 AppCoda. All rights reserved.
-//
-
 import UIKit
 
 extension UIViewController {
-  func showAnimated() {
+  func showAnimated() -> Void {
     view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
     view.alpha = 0.0;
     UIView.animate(withDuration: 0.25, animations: {
@@ -18,7 +10,7 @@ extension UIViewController {
     });
   }
   
-  func removeAnimated() {
+  func removeAnimated() -> Void {
     UIView.animate(withDuration: 0.25, animations: {
       self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
       self.view.alpha = 0.0;

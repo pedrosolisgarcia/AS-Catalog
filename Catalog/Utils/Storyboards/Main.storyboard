@@ -561,7 +561,6 @@
                         <outlet property="dateOfWeddingLabel" destination="RP3-Zw-ip5" id="nv6-rB-M89"/>
                         <outlet property="englishButton" destination="onI-ra-QdJ" id="ODi-S4-LBv"/>
                         <outlet property="infoLabel" destination="kST-9w-BRt" id="hjp-M4-UBr"/>
-                        <outlet property="lowSeparator" destination="65J-uW-C7v" id="SL2-Dj-FSm"/>
                         <outlet property="nameField" destination="11M-v8-VP7" id="tVN-Y4-36o"/>
                         <outlet property="nameLabel" destination="ngN-RU-2L0" id="ZbI-4f-DAw"/>
                         <outlet property="polishButton" destination="C16-ND-DFC" id="A0x-eR-dIO"/>

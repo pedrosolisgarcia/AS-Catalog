@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, NSFetchedResultsControllerDelegate {
+class HomeViewController: UIViewController {
   
   let appVersion = "4.00"
   
@@ -9,18 +9,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   var regionPicker = UIPickerView()
   var dateOfWeddingPicker = UIDatePicker()
   let toolBar = UIToolbar()
-  var countrySelected = false
+  var hasCountrySelected = false
   var country: Country!
   var regionSelected = String()
   
   var regions: [String] = LocalDataService.shared.getRegions()!
-  static var selectedCountry = ""
-  
-  var currentClient: Client!
-  var monthCal: String!
-  var year: String!
-  var month = [String]()
-  var fullMonth: String!
   
   @IBOutlet weak var polishButton: UIButton!
   @IBOutlet weak var englishButton: UIButton!
@@ -36,8 +29,6 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   @IBOutlet weak var dateOfWeddingField: UITextField!
   @IBOutlet weak var infoLabel: UILabel!
   @IBOutlet weak var createProfileButton: UIButton!
-  
-  @IBOutlet weak var lowSeparator: UIView!
   @IBOutlet weak var catalogButton: UIButton!
   
   var collection: Collection!
@@ -45,39 +36,42 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
   private let langService: LanguageService = LanguageService.shared
   private let shopIdService: ShopIdServiceAPI = ShopIdServiceAPI.shared
   
-  @IBAction func createProfile(sender: UIButton) {
-    if sender == self.createProfileButton {
-      if (ClientDataValidator.validate(name: nameField.text!, surname: surnameField.text!, region: regionField.text!, weddingDate: dateOfWeddingField.text!)) {
-        self.setCurrentClientData()
-      } else {
-        self.showDataInvalidWarningMessage()
-      }
-      view.endEditing(true)
+  override func viewDidLoad() -> Void {
+    super.viewDidLoad()
+    
+    if !self.shopIdService.hasRegisteredShopId() {
+      showShopIdView()
     }
-    do {
-      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
-      print(fullPath)
-      
-      guard  let data = try? Data(contentsOf: fullPath, options: []) else {
-        self.showNoCatalogAlert()
-        return
-      }
-
-      let loadedUserData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! Data
-      self.collection = try JSONDecoder().decode(Collection.self, from: loadedUserData)
-      print(self.collection!)
-      self.performSegue(withIdentifier: "showCatalog", sender: self)
-    } catch {
-      self.showNoCatalogAlert()
-      print("Couldn't read file.")
-    }
+    self.delegateRegionPicker()
+    
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
+    
+    selectLanguage(sender: polishButton)
+    translateTextKeys()
+    sendPendingClientsToAPIIfConnected()
+    self.view.addDismissKeyboardListener()
   }
   
-  @IBAction func pressToShowShopIdView(sender: UIButton) {
+  @IBAction func createProfile(sender: UIButton) {
+    if sender == self.createProfileButton {
+      if !ClientDataValidator.validate(
+        name: nameField.text!,
+        surname: surnameField.text!,
+        region: regionField.text!,
+        weddingDate: dateOfWeddingField.text!
+      ) {
+        self.showInvalidDataAlert()
+        return
+      }
+    }
+    self.getLocalCollection()
+  }
+  
+  @IBAction func pressToShowShopIdView(sender: UIButton) -> Void {
     self.showShopIdView()
   }
   
-  @IBAction func selectLanguage(sender: UIButton) {
+  @IBAction func selectLanguage(sender: UIButton) -> Void {
     
     if sender == polishButton  {
       langService.setLanguage(to: "pl")
@@ -97,10 +91,10 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       englishButton.alpha = 0.5
       spanishButton.alpha = 1
     }
-    applyLanguage()
+    translateTextKeys()
   }
   
-  @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
+  @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue) -> Void {
     if segue.identifier == "unwindToHomeScreen" {
       sendPendingClientsToAPIIfConnected()
       resetHomeFields()
@@ -110,31 +104,33 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    if !self.shopIdService.hasRegisteredShopId() {
-      showShopIdView()
-    }
-    
-    regionPicker.delegate = self
-    
-    navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-    
-    selectLanguage(sender: polishButton)
-    sendPendingClientsToAPIIfConnected()
-    self.view.addDismissKeyboardListener()
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = true
   }
   
-  func textFieldDidBeginEditing(_ textField: UITextField) {
+  func setCountryField(country: Country) -> Void {
+    regionField.text = country.name.localized()
+    hasCountrySelected = true
+    self.country = country
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) -> Void {
+    
+    if segue.identifier == "showCatalog" {
+
+      let destinationController = segue.destination as! CatalogViewController
+      destinationController.collection = collection
+      destinationController.clientData = self.getClientData()
+      destinationController.region = hasCountrySelected ? country.name : regionSelected
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension HomeViewController: UITextFieldDelegate {
+
+  func textFieldDidBeginEditing(_ textField: UITextField) -> Void {
     if textField == regionField {
       pickerId = "regionPicker"
       self.showRegionPicker()
@@ -145,6 +141,19 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
   }
   
+  func textFieldDidEndEditing(_ textField: UITextField) -> Void {
+    if textField == regionField {
+      if textField.text == "region-picker.other-region".localized() {
+        showCountryView()
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension HomeViewController: UIPickerViewDataSource {
+
   func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -160,21 +169,109 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       return regions[row].localized()
     }
   }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension HomeViewController: UIPickerViewDelegate {
+
+  private func delegateRegionPicker() -> Void {
+    regionPicker.delegate = self
+  }
   
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) -> Void {
     if pickerView == regionPicker {
       if row == regions.count {
         regionField.text = "region-picker.other-region".localized()
       } else {
         regionField.text = regions[row].localized()
         regionSelected = regions[row].localized()
-        countrySelected = false
+        hasCountrySelected = false
       }
     }
   }
   
-  func showRegionPicker(){
+  @objc func regionPickerChanged() -> Void {
+    regionField.text = regions[regionPicker.selectedRow(inComponent: 0)]
+  }
+  
+  @objc func dateOfWeddingPickerChanged(sender: UIDatePicker) -> Void {
+    dateOfWeddingField.text = formatDate(date: sender.date)
+  }
+  
+  @objc func doneRegion() -> Void {
+    regionField.resignFirstResponder()
+  }
+  @objc func cancelRegion() -> Void {
+    regionField.text = ""
+    regionField.resignFirstResponder()
+  }
+  @objc func doneDate() -> Void {
+    dateOfWeddingField.resignFirstResponder()
+  }
+  @objc func cancelDate() -> Void {
+    dateOfWeddingField.text = ""
+    dateOfWeddingField.resignFirstResponder()
+  }
+}
 
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension HomeViewController: NSFetchedResultsControllerDelegate {
+
+  private func sendPendingClientsToAPIIfConnected() -> Void {
+    
+    if Reachability.isConnectedToNetwork() {
+      var clientsMO = CoreDataManager.getClientsFromCoreData(delegate: self)
+      for clientMO in clientsMO.enumerated() {
+        
+        let client = ClientMapper.mapClientMOToClient(clientMO: clientMO.element )
+        ClientService.sendClientToAPI(client: client) {
+          (data, resp, error) in
+          if let error = error {
+            print(error.localizedDescription)
+            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+              CoreDataManager.saveClientInCoreData(client: client, viewContext: appDelegate.persistentContainer.viewContext)
+            }
+          }
+        }
+        
+        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
+          let context = appDelegate.persistentContainer.viewContext
+          context.delete(clientMO.element as NSManagedObject)
+
+          do {
+            try context.save()
+            
+          } catch let error as NSError {
+            print(error)
+          }
+        }
+        clientsMO.removeFirst()
+      }
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension HomeViewController {
+  
+  private func translateTextKeys() -> Void {
+    beforeLabel.text = "home.client-info.label".localized()
+    nameLabel.text = "home.client-info.name".localized()
+    surnameLabel.text = "home.client-info.lastname".localized()
+    regionLabel.text = "home.client-info.region".localized()
+    regionPicker.selectRow(0, inComponent: 0, animated: false)
+    formatToolBar()
+    dateOfWeddingLabel.text = "home.client-info.wedding-date".localized()
+    dateOfWeddingPicker.locale = Locale(identifier: langService.getCurrentLanguage() ?? "pl")
+    infoLabel.text = "home.client-info.more-info".localized()
+    createProfileButton.setTitle("home.client-info.button".localized().uppercased(), for: .normal)
+    catalogButton.setTitle("home.catalog-button".localized().uppercased(), for: .normal)
+  }
+  
+  private func showRegionPicker() -> Void {
     regionPicker.selectRow(0, inComponent: 0, animated: false)
     regionField.inputView = self.regionPicker
     regionField.text = regions[regionPicker.selectedRow(inComponent: 0)].localized()
@@ -185,18 +282,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     regionField.inputAccessoryView = toolBar
   }
   
-  @objc func regionPickerChanged() {
-    regionField.text = regions[regionPicker.selectedRow(inComponent: 0)]
-  }
-  
-  func setCountryField(country: Country) {
-    regionField.text = country.name.localized()
-    countrySelected = true
-    self.country = country
-  }
-  
-  func showDateOfWeddingPicker() {
-    
+  private func showDateOfWeddingPicker() -> Void {
     dateOfWeddingPicker.datePickerMode = .date
     dateOfWeddingPicker.locale = Locale(identifier: langService.getCurrentLanguage() ?? "pl")
     dateOfWeddingPicker.minimumDate = Date()
@@ -208,12 +294,7 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     dateOfWeddingField.inputAccessoryView = toolBar
   }
   
-  @objc func dateOfWeddingPickerChanged(sender: UIDatePicker) {
-    dateOfWeddingField.text = formatDate(date: sender.date)
-  }
-  
-  func formatToolBar() {
-    
+  private func formatToolBar() -> Void {
     toolBar.barStyle = .default
     toolBar.isOpaque = true
     toolBar.barTintColor = .golden
@@ -244,117 +325,28 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     toolBar.isUserInteractionEnabled = true
   }
   
-  @objc func doneRegion() {
-    regionField.resignFirstResponder()
-  }
-  @objc func cancelRegion() {
-    regionField.text = ""
-    regionField.resignFirstResponder()
-  }
-  @objc func doneDate() {
-    dateOfWeddingField.resignFirstResponder()
-  }
-  @objc func cancelDate() {
-    dateOfWeddingField.text = ""
-    dateOfWeddingField.resignFirstResponder()
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField) {
-    if textField == regionField {
-      if textField.text == "region-picker.other-region".localized() {
-        showCountryView()
-      }
-    }
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-    if segue.identifier == "showCatalog"{
-      if currentClient == nil {
-        self.setCurrentClientData()
-      }
-      self.currentClient.collectionId = self.collection.id
-
-      let destinationController = segue.destination as! CatalogViewController
-      destinationController.collection = collection
-      destinationController.currentClient = currentClient
-      destinationController.region = countrySelected ? country.name : regionSelected
-    }
-  }
-  
-  private func applyLanguage() {
-    
-    beforeLabel.text = "home.client-info.label".localized()
-    nameLabel.text = "home.client-info.name".localized()
-    surnameLabel.text = "home.client-info.lastname".localized()
-    regionLabel.text = "home.client-info.region".localized()
-    regionPicker.selectRow(0, inComponent: 0, animated: false)
-    formatToolBar()
-    dateOfWeddingLabel.text = "home.client-info.wedding-date".localized()
-    dateOfWeddingPicker.locale = Locale(identifier: langService.getCurrentLanguage() ?? "pl")
-    infoLabel.text = "home.client-info.more-info".localized()
-    createProfileButton.setTitle("home.client-info.button".localized().uppercased(), for: .normal)
-    catalogButton.setTitle("home.catalog-button".localized().uppercased(), for: .normal)
-  }
-  
   private func formatDate(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
     return dateFormatter.string(from: date)
   }
   
-  private func resetHomeFields() {
-    applyLanguage()
-    currentClient = nil
+  private func resetHomeFields() -> Void {
+    translateTextKeys()
     nameField.text = nil
     surnameField.text = nil
     regionField.text = nil
     regionPicker.reloadAllComponents()
     dateOfWeddingPicker.setDate(Date(), animated: false)
     dateOfWeddingField.text = nil
-    month.removeAll()
     regionSelected.removeAll()
     polishButton.alpha = 1
     englishButton.alpha = 0.5
     spanishButton.alpha = 0.5
   }
   
-  private func sendPendingClientsToAPIIfConnected() {
-    
-    if Reachability.isConnectedToNetwork() {
-      var clientsMO = CoreDataManager.getClientsFromCoreData(delegate: self)
-      for clientMO in clientsMO.enumerated() {
-        
-        let client = ClientMapper.mapClientMOToClient(clientMO: clientMO.element )
-        ClientService.sendClientToAPI(client: client) {
-          (data, resp, error) in
-          if let error = error {
-            print(error.localizedDescription)
-            print("error en SELECTION VIEW CONTROLLER")
-            if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-              CoreDataManager.saveClientInCoreData(client: client, viewContext: appDelegate.persistentContainer.viewContext)
-            }
-          }
-        }
-        
-        if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
-          let context = appDelegate.persistentContainer.viewContext
-          context.delete(clientMO.element as NSManagedObject)
-
-          do {
-            try context.save()
-            
-          } catch let error as NSError {
-            print(error)
-          }
-        }
-        clientsMO.removeFirst()
-      }
-    }
-  }
-  
-  private func setCurrentClientData() {
-    currentClient = Client(
+  private func getClientData() -> Client {
+    return Client(
       appVersion: self.appVersion,
       dateOfVisit: formatDate(date: Date()),
       shopId: self.shopIdService.getShopId()!,
@@ -363,44 +355,11 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
       region: regionField.text!,
       dateOfWedding: dateOfWeddingField.text!,
       dressesNames: "",
-      collectionId: 0
+      collectionId: self.collection.id
     )
   }
   
-  private func showDataInvalidWarningMessage() {
-    let alertController = UIAlertController(
-      title: "alert.error.title".localized(),
-      message: "alert.create-profile-error.message".localized(),
-      preferredStyle: .alert
-    )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default,
-      handler: nil
-    )
-    alertController.addAction(alertAction)
-    present(alertController, animated: true, completion:nil)
-  }
-  
-  func showNoCatalogAlert() {
-    let alertController = UIAlertController(
-      title: "alert.error.title".localized(),
-      message: "alert.no-catalog-error.message".localized(),
-      preferredStyle: .alert
-    )
-    let alertAction = UIAlertAction(
-      title: "alert.no-catalog-error.button".localized(),
-      style: .default
-    ) {
-      (alert: UIAlertAction!) -> Void in
-        self.showShopIdView()
-    }
-    alertController.addAction(alertAction)
-    self.present(alertController, animated: true, completion: nil)
-  }
-  
-  private func showCountryView() {
-    self.isEditing = false
+  private func showCountryView() -> Void {
     let popCountryView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CountrySelectorView") as! CountrySelectorViewController
     self.addChild(popCountryView)
     popCountryView.view.frame = self.view.frame
@@ -409,20 +368,55 @@ class HomeViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     popCountryView.didMove(toParent: self)
   }
   
-  private func showShopIdView() {
-    let popShopIdView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "shopIdView") as! ShopIDViewController
+  private func showShopIdView() -> Void {
+    let popShopIdView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "shopIdView")
     self.addChild(popShopIdView)
     popShopIdView.view.frame = self.view.frame
     self.view.addSubview(popShopIdView.view)
     popShopIdView.didMove(toParent: self)
   }
   
-  override var prefersStatusBarHidden: Bool {
-    return true
-  }
-  
   func getDocumentsDirectory() -> URL {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0]
+  }
+
+  private func getLocalCollection() -> Void {
+    do {
+      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
+      
+      guard  let data = try? Data(contentsOf: fullPath, options: []) else {
+        self.showNoCatalogAlert()
+        return
+      }
+
+      let loadedUserData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! Data
+      self.collection = try JSONDecoder().decode(Collection.self, from: loadedUserData)
+      self.performSegue(withIdentifier: "showCatalog", sender: self)
+    } catch {
+      self.showNoCatalogAlert()
+      print("Couldn't read file.")
+    }
+  }
+  
+  private func showInvalidDataAlert() -> Void {
+    self.displaySingleActionAlert(
+      title: "alert.error.title",
+      message: "alert.create-profile-error.message",
+      actionTitle: "alert.ok-button",
+      action: nil
+    )
+  }
+  
+  private func showNoCatalogAlert() -> Void {
+    self.displaySingleActionAlert(
+      title: "alert.error.title",
+      message: "alert.no-catalog-error.message",
+      actionTitle: "alert.no-catalog-error.button",
+      action: {
+        (alert: UIAlertAction!) -> Void in
+          self.showShopIdView()
+      }
+    )
   }
 }

@@ -25,45 +25,21 @@ class ShopIDViewController: UIViewController {
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
-    headerLabel.text = self.shopIdService.hasRegisteredShopId() ?
-      "shop-id.label.identified".localized().uppercased() + self.shopIdService.getShopId()! :
-      "shop-id.label.no-identified".localized().uppercased()
-    self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
-    
-    self.shopIdView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-    self.shopIdView.layer.shadowColor = UIColor.gray.cgColor
-    self.shopIdView.layer.shadowOpacity = 0.75
-    
-    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
-    self.cancelButton.layer.shadowRadius = 0
-    self.cancelButton.layer.shadowOpacity = 1
 
     if !self.shopIdService.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
-    
-    let maskPathSave = UIBezierPath(roundedRect: confirmButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerSave = CAShapeLayer()
-    maskLayerSave.path = maskPathSave.cgPath
-    confirmButton.layer.mask = maskLayerSave
-    
-    let maskPathLabel = UIBezierPath(roundedRect: headerLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerLabel = CAShapeLayer()
-    maskLayerLabel.path = maskPathLabel.cgPath
-    headerLabel.layer.mask = maskLayerLabel
+
+    self.translateTextKeys()
+    self.addBlurView(below: shopIdView)
+    self.shopIdView.addViewShadow()
+    self.cancelButton.addButtonShadow()
+    self.confirmButton.roundCorners(from: .bottom, radius: 10)
+    self.headerLabel.roundCorners(from: .top, radius: 10)
+    self.showAnimated()
     
     self.getShopIds()
-    self.addBlurView(below: shopIdView)
-    self.showAnimated()
-  }
-
-  override func didReceiveMemoryWarning() -> Void {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
   }
   
   @IBAction func buttonClicked(sender: UIButton) -> Void {
@@ -142,63 +118,52 @@ class ShopIDViewController: UIViewController {
   private func showCollectionCheckView(_ collection: Collection) -> Void {
     let collectionCheckView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "collectionCheck") as! CollectionCheckViewController
     collectionCheckView.collection = collection
+    collectionCheckView.delegate = self
     self.addChild(collectionCheckView)
     collectionCheckView.view.frame = self.view.frame
     self.view.addSubview(collectionCheckView.view)
     collectionCheckView.didMove(toParent: self)
   }
   
+  private func translateTextKeys() -> Void {
+    self.headerLabel.text = self.shopIdService.hasRegisteredShopId() ?
+      "shop-id.label.identified".localized().uppercased() + self.shopIdService.getShopId()! :
+      "shop-id.label.no-identified".localized().uppercased()
+    self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
+  }
+  
   private func displayWrongIdAlert() -> Void {
-    let alertController = UIAlertController(
-      title: "alert.error.title".localized(),
-      message: "alert.wrong-id.message".localized(),
-      preferredStyle: .alert
+    self.displaySingleActionAlert(
+      title: "alert.error.title",
+      message: "alert.wrong-id.message",
+      actionTitle: "alert.ok-button",
+      action: nil
     )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default,
-      handler: nil
-    )
-    alertController.addAction(alertAction)
-    present(alertController, animated: true, completion:nil)
     self.shopIdField.text = ""
   }
   
   private func displayNoInternetAlert() -> Void {
-    let alertController = UIAlertController(
-      title: "alert.no-internet.title".localized(),
-      message: "alert.no-internet.message".localized(),
-      preferredStyle: .alert
-    )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default
-    ) {
-      (alert: UIAlertAction!) -> Void in
-      if self.shopIdService.hasRegisteredShopId() {
-        self.removeAnimated()
+    self.displaySingleActionAlert(
+      title: "alert.no-internet.title",
+      message: "alert.no-internet.message",
+      actionTitle: "alert.ok-button",
+      action: {
+        (alert: UIAlertAction!) -> Void in
+        if self.shopIdService.hasRegisteredShopId() {
+          self.removeAnimated()
+        }
       }
-    }
-    alertController.addAction(alertAction)
-    present(alertController, animated: true, completion:nil)
+    )
     self.shopIdField.text = ""
   }
   
-  func showErrorAlert() {
-    let alertController = UIAlertController(
-      title: "alert.error.title".localized(),
-      message: "alert.error.message".localized(),
-      preferredStyle: .alert
+  private func showErrorAlert() -> Void {
+    self.displaySingleActionAlert(
+      title: "alert.error.title",
+      message: "alert.error.message",
+      actionTitle: "alert.ok-button",
+      action: nil
     )
-    let alertAction = UIAlertAction(
-      title: "alert.ok-button".localized(),
-      style: .default
-    ) {
-      (alert: UIAlertAction!) -> Void in
-        self.removeAnimated()
-      }
-    alertController.addAction(alertAction)
-    self.present(alertController, animated: true, completion: nil)
   }
   
   private func shouldDisplayCollectionCheckView() -> Bool {

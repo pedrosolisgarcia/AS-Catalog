@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIView {
-  func addDismissKeyboardListener() {
+  func addDismissKeyboardListener() -> Void {
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing))
     
     tap.cancelsTouchesInView = false

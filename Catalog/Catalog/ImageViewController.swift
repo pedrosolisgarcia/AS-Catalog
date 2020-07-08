@@ -7,7 +7,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
   @IBOutlet weak var zoomOutButton: UIButton!
   var dress: Data!
 
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
 
     self.view.removeFromSuperview()
@@ -19,11 +19,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     setupGestureRecognizer()
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) -> Void {
     super.viewWillAppear(animated);
     self.navigationController?.isNavigationBarHidden = true
   }
@@ -32,7 +28,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     return dressImageView
   }
   
-  func scrollViewDidZoom(_ scrollView: UIScrollView) {
+  func scrollViewDidZoom(_ scrollView: UIScrollView) -> Void {
     if zoomInView.zoomScale == zoomInView.minimumZoomScale {
       zoomOutButton.isEnabled = true
       zoomOutButton.alpha = 0.75
@@ -42,13 +38,13 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     }
   }
   
-  func setupGestureRecognizer() {
+  private func setupGestureRecognizer() -> Void {
     let doubleTap = UITapGestureRecognizer(target: self, action: #selector (handleDoubleTap))
     doubleTap.numberOfTapsRequired = 2
     zoomInView.addGestureRecognizer(doubleTap)
   }
   
-  @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) {
+  @objc func handleDoubleTap(recognizer: UITapGestureRecognizer) -> Void {
     
     if zoomInView.zoomScale > zoomInView.minimumZoomScale {
       zoomInView.setZoomScale(zoomInView.minimumZoomScale, animated: true)
@@ -65,12 +61,8 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     }
   }
   
-  @IBAction func zoomOut(sender: UIButton) {
+  @IBAction func zoomOut(sender: UIButton) -> Void {
     self.removeAnimated()
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }

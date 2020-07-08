@@ -8,7 +8,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
   
   var dressImage: Data!
   
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
     
     let gestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(removeAnimate))
@@ -21,23 +21,15 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
     ImageView.image = UIImage(data: dressImage)
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-    return (touch.view === self.view)
+    return touch.view === self.view
   }
   
-  @IBAction func closeWindow(sender: UIButton) {
+  @IBAction func closeWindow(sender: UIButton) -> Void {
     self.removeAnimated()
   }
   
-  @objc func removeAnimate() {
+  @objc func removeAnimate() -> Void {
     self.removeAnimated()
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }
