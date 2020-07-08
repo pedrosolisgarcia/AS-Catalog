@@ -1,7 +1,6 @@
 import UIKit
-import CoreData
 
-class SelectionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class SelectionViewController: UIViewController {
   
   let langService: LanguageService = LanguageService.shared
   
@@ -16,19 +15,18 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
   @IBOutlet weak var stackSelection: UIStackView!
   
   var selectedDresses = [CollectionDresses]()
-  var currentClient: Client!
+  var clientData: Client!
   var region = String()
   var collectionId: Int!
   
-  @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) {
-    
-    clearAllVariables()
-    langService.setLanguage(to: "pl")
+  @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) -> Void {
+    self.clearAllVariables()
+    self.langService.setLanguage(to: "pl")
     self.performSegue(withIdentifier: "unwindToHomeScreen", sender: self)
     self.dismiss(animated: false)
   }
   
-  @IBAction func saveSelectionToCart(_ sender: UIButton) {
+  @IBAction func saveSelectionToCart(_ sender: UIButton) -> Void {
     
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       
@@ -52,23 +50,66 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     }
   }
   
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
     
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
     backHomeScreen.tintColor = .clear
-    applyLanguage()
+    translateTextKeys()
     formatSelectedDressesSection()
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = false
   }
   
+  private func translateTextKeys() -> Void {
+    nameLabel.text = "home.client-info.name".localized() + " " + clientData.name
+    surnameLabel.text = "home.client-info.lastname".localized() + " " + clientData.surname
+    regionLabel.text = "home.client-info.region".localized() + " " + region
+    dateOfWeddingLabel.text = "home.client-info.wedding-date".localized() + " " + clientData.dateOfWedding
+    saveButton.setTitle("selection.confirm-button".localized().uppercased(), for: .normal)
+    navigationItem.title = "selection.data.title".localized().uppercased()
+    dressesLabel.setTitle("selection.dresses.title".localized().uppercased(), for: .normal)
+  }
+  
+  private func clearAllVariables() -> Void {
+    clientData = nil
+    selectedDresses.removeAll()
+    tableView = nil
+  }
+  
+  private func formatSelectedDressesSection() -> Void {
+    self.saveButton.roundCorners(from: .bottom, radius: 10)
+    self.dressesLabel.roundCorners(from: .top, radius: 10)
+  }
+  
+  private func getFinalClient() -> Client {
+    clientData.region = self.region.localized() // SET POLISH LOCALIZATION HERE
+    return clientData
+  }
+  
+  private func setViewAsCompleted() -> Void {
+    saveButton.isEnabled = false
+    saveButton.alpha = 0.25
+    self.navigationItem.hidesBackButton = true
+    backHomeScreen.tintColor = .white
+    backHomeScreen.isEnabled = true
+  }
+  
+  private func showCompleteView() -> Void {
+    let popCompleteView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CompleteView") as! CompleteViewController
+    self.addChild(popCompleteView)
+    popCompleteView.view.frame = self.view.frame
+    self.view.addSubview(popCompleteView.view)
+    self.navigationController?.view.addSubview(popCompleteView.view)
+    popCompleteView.didMove(toParent: self)
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension SelectionViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return selectedDresses.count
   }
@@ -86,8 +127,12 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     
     return cell
   }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension SelectionViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> Void {
     let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
     popImageView.dressImage = selectedDresses[indexPath.row].imageData
     self.addChild(popImageView)
@@ -96,62 +141,5 @@ class SelectionViewController: UIViewController, UITableViewDataSource, UITableV
     self.navigationController?.view.addSubview(popImageView.view)
     popImageView.didMove(toParent: self)
     tableView.deselectRow(at: indexPath, animated: true)
-  }
-  
-  private func applyLanguage() {
-    nameLabel.text = "home.client-info.name".localized() + " " + currentClient.name
-    surnameLabel.text = "home.client-info.lastname".localized() + " " + currentClient.surname
-    regionLabel.text = "home.client-info.region".localized() + " " + region
-    dateOfWeddingLabel.text = "home.client-info.wedding-date".localized() + " " + currentClient.dateOfWedding
-    saveButton.setTitle("selection.confirm-button".localized().uppercased(), for: .normal)
-    navigationItem.title = "selection.data.title".localized().uppercased()
-    dressesLabel.setTitle("selection.dresses.title".localized().uppercased(), for: .normal)
-  }
-  
-  private func clearAllVariables() {
-    currentClient = nil
-    selectedDresses.removeAll()
-    tableView = nil
-  }
-  
-  private func formatSelectedDressesSection() {
-    let maskPathSave = UIBezierPath(roundedRect: saveButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerSave = CAShapeLayer()
-    maskLayerSave.path = maskPathSave.cgPath
-    saveButton.layer.mask = maskLayerSave
-    
-    let maskPathLabel = UIBezierPath(roundedRect: dressesLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerLabel = CAShapeLayer()
-    maskLayerLabel.path = maskPathLabel.cgPath
-    dressesLabel.layer.mask = maskLayerLabel
-  }
-  
-  private func getFinalClient() -> Client {
-    currentClient.region = self.region != "" ?
-      self.region : self.region// SET POLISH LOCALIZATION HERE
-    return currentClient
-  }
-  
-  private func setViewAsCompleted() {
-    saveButton.isEnabled = false
-    saveButton.alpha = 0.25
-    self.navigationItem.hidesBackButton = true
-    backHomeScreen.tintColor = .white
-    backHomeScreen.isEnabled = true
-  }
-  
-  private func showCompleteView() {
-    let popCompleteView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CompleteView") as! CompleteViewController
-    self.addChild(popCompleteView)
-    popCompleteView.view.frame = self.view.frame
-    self.view.addSubview(popCompleteView.view)
-    self.navigationController?.view.addSubview(popCompleteView.view)
-    popCompleteView.didMove(toParent: self)
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }

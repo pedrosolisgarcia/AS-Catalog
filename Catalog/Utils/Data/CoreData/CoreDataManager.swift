@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 import CoreData
 
@@ -36,6 +35,7 @@ public class CoreDataManager {
     
     do {
       try viewContext.save()
+      print("Saved Successfully in CoreData")
 
     } catch let error as NSError {
       print(error)

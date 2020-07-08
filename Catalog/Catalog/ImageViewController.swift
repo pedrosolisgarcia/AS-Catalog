@@ -19,10 +19,6 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     setupGestureRecognizer()
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated);
     self.navigationController?.isNavigationBarHidden = true
@@ -68,9 +64,5 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
   @IBAction func zoomOut(sender: UIButton) {
     self.removeAnimated()
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }

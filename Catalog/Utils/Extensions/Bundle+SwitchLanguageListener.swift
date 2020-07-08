@@ -1,7 +1,7 @@
 import UIKit
 
 extension Bundle {
-  static func enableSwitchLanguageListener() {
+  static func enableSwitchLanguageListener() -> Void {
     let orginalSelector = #selector(localizedString(forKey:value:table:))
     guard let orginalMethod = class_getInstanceMethod(self, orginalSelector) else { return }
 

@@ -15,6 +15,10 @@
 		510F00CD24B0C57600464BB3 /* LocalDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510F00CC24B0C57600464BB3 /* LocalDataService.swift */; };
 		510F00D524B1460800464BB3 /* GetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510F00D424B1460800464BB3 /* GetRequest.swift */; };
 		51393B0B24B50517001C12B4 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B0A24B50517001C12B4 /* APIRequest.swift */; };
+		51393B1124B54461001C12B4 /* UIViewController+DisplayAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1024B54461001C12B4 /* UIViewController+DisplayAlerts.swift */; };
+		51393B1524B5D65B001C12B4 /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */; };
+		51393B1724B5DFD6001C12B4 /* UIView+RoundCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */; };
+		51393B1924B5E17D001C12B4 /* UIRectCorner+Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */; };
 		5177C95D24AF57050028538F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95C24AF57050028538F /* AppDelegate.swift */; };
 		5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95E24AF57050028538F /* SceneDelegate.swift */; };
 		5177C96924AF570B0028538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5177C96824AF570B0028538F /* Assets.xcassets */; };
@@ -109,6 +113,10 @@
 		510F00CC24B0C57600464BB3 /* LocalDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataService.swift; sourceTree = "<group>"; };
 		510F00D424B1460800464BB3 /* GetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRequest.swift; sourceTree = "<group>"; };
 		51393B0A24B50517001C12B4 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		51393B1024B54461001C12B4 /* UIViewController+DisplayAlerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+DisplayAlerts.swift"; sourceTree = "<group>"; };
+		51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
+		51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundCorners.swift"; sourceTree = "<group>"; };
+		51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRectCorner+Side.swift"; sourceTree = "<group>"; };
 		5177C95924AF57050028538F /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5177C95C24AF57050028538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5177C95E24AF57050028538F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -394,6 +402,10 @@
 				5177C9B324AF5AA50028538F /* UIColor+Opacity.swift */,
 				5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */,
 				510F00C424B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift */,
+				51393B1024B54461001C12B4 /* UIViewController+DisplayAlerts.swift */,
+				51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */,
+				51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */,
+				51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -691,6 +703,7 @@
 				5177C9A224AF5A800028538F /* HomeViewController.swift in Sources */,
 				5177C95D24AF57050028538F /* AppDelegate.swift in Sources */,
 				510F00CD24B0C57600464BB3 /* LocalDataService.swift in Sources */,
+				51393B1724B5DFD6001C12B4 /* UIView+RoundCorners.swift in Sources */,
 				5177CA2324AF5E6B0028538F /* Catalog.xcdatamodeld in Sources */,
 				510F00D524B1460800464BB3 /* GetRequest.swift in Sources */,
 				5177C9DF24AF5AA50028538F /* APIServiceError.swift in Sources */,
@@ -706,9 +719,12 @@
 				5177CA1924AF5AD60028538F /* SelectionTableViewCell.swift in Sources */,
 				5177C9A424AF5A800028538F /* CollectionCheckViewController.swift in Sources */,
 				5177C9E524AF5AA50028538F /* UIViewController+DisplayAnimated.swift in Sources */,
+				51393B1124B54461001C12B4 /* UIViewController+DisplayAlerts.swift in Sources */,
+				51393B1924B5E17D001C12B4 /* UIRectCorner+Side.swift in Sources */,
 				5177C9E924AF5AA50028538F /* Collection.swift in Sources */,
 				510F00C324B0AA0200464BB3 /* LanguageService.swift in Sources */,
 				5177CA0824AF5AA50028538F /* ClientServiceAPI.swift in Sources */,
+				51393B1524B5D65B001C12B4 /* UIView+AddShadow.swift in Sources */,
 				5177C9E724AF5AA50028538F /* UIViewController+AddBlurView.swift in Sources */,
 				5177C9E024AF5AA50028538F /* UIViewController+DismissKeyboard.swift in Sources */,
 				5177C9DD24AF5AA50028538F /* ButtonDesign.swift in Sources */,

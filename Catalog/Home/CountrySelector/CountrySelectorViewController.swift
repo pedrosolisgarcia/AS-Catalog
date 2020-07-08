@@ -13,42 +13,27 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
   weak var delegate: HomeViewController!
   
 
-  override func viewDidLoad() {
+  override func viewDidLoad() -> Void {
     super.viewDidLoad()
     
     self.isEditing = false
     collectionView.allowsSelection = true
     collectionView.allowsMultipleSelection = false
-    self.showAnimated()
-    headerLabel.text = "country-selector.title".localized().uppercased()
-    confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
+
     confirmButton.isEnabled = false
     confirmButton.alpha = 0.5
-    
-    self.countrySelectorView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-    self.countrySelectorView.layer.shadowColor = UIColor.gray.cgColor
-    self.countrySelectorView.layer.shadowOpacity = 0.75
-    
-    self.cancelButton.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-    self.cancelButton.layer.shadowColor = UIColor.gray.cgColor
-    self.cancelButton.layer.shadowRadius = 0
-    self.cancelButton.layer.shadowOpacity = 1
-    
-    let maskPathSave = UIBezierPath(roundedRect: confirmButton.bounds, byRoundingCorners: [.bottomRight, .bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerSave = CAShapeLayer()
-    maskLayerSave.path = maskPathSave.cgPath
-    confirmButton.layer.mask = maskLayerSave
-    
-    let maskPathLabel = UIBezierPath(roundedRect: headerLabel.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-    
-    let maskLayerLabel = CAShapeLayer()
-    maskLayerLabel.path = maskPathLabel.cgPath
-    headerLabel.layer.mask = maskLayerLabel
-  }
 
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
+    self.translateTextKeys()
+    self.countrySelectorView.addViewShadow()
+    self.cancelButton.addButtonShadow()
+    self.confirmButton.roundCorners(from: .bottom, radius: 10)
+    self.headerLabel.roundCorners(from: .top, radius: 10)
+    self.showAnimated()
+  }
+  
+  private func translateTextKeys() -> Void {
+    self.headerLabel.text = "country-selector.title".localized().uppercased()
+    self.confirmButton.setTitle("alert.confirm-button".localized(), for: .normal)
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,13 +52,13 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
     return cell
   }
   
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
     selectedCountry = countries[indexPath.row]
     confirmButton.isEnabled = true
     confirmButton.alpha = 1
   }
   
-  @IBAction func removeAnimate(sender: UIButton) {
+  @IBAction func removeAnimate(sender: UIButton) -> Void {
     
     UIView.animate(withDuration: 0.25, animations: {
       self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -94,9 +79,5 @@ class CountrySelectorViewController: UIViewController, UICollectionViewDataSourc
         self.dismiss(animated: false)
       }
     });
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    return true
   }
 }

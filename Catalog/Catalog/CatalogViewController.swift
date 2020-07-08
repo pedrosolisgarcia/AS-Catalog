@@ -1,57 +1,31 @@
 import UIKit
-import CoreData
 
-class CatalogViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate, NSFetchedResultsControllerDelegate {
+class CatalogViewController: UIViewController {
   
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var catalogView: UIBarButtonItem!
   @IBOutlet weak var carouselView: UIBarButtonItem!
   @IBOutlet weak var selectButton: UIButton!
   
-  var currentClient: Client!
+  var clientData: Client!
   var region = String()
   var collection: Collection!
-  
-  let catalogSize = CGSize(width: 246, height: 416)
-  let carouselSize = CGSize(width: 515, height: 850)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
-    selectButton.setTitle("catalog.button".localized().uppercased(), for: .normal)
-    
     navigationItem.title = "catalog.title".localized().uppercased()
-    collectionView?.allowsMultipleSelection = true
+
+    selectButton.setTitle("catalog.button".localized().uppercased(), for: .normal)
     selectButton.isEnabled = false
     selectButton.alpha = 0.25
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
+
+    collectionView?.allowsMultipleSelection = true
   }
   
   override func viewWillAppear(_ animated: Bool) {
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return collection.dresses.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
-    cell.cellDelegate = self
-    
-    let dress = collection.dresses[indexPath.row]
-    
-    // Configure the cell
-    cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
-    cell.dressLabel.text = dress.name
-    cell.dressImageView.image = UIImage(data: dress.imageData!)
-    
-    return cell
   }
   
   func didPressZoomButton(_ sender: UIButton) {
@@ -74,48 +48,24 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
     return nil
   }
   
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    collection.dresses[indexPath.row].isSelected = true
-    selectButton.isEnabled = true
-    selectButton.alpha = 1
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-    collection.dresses[indexPath.row].isSelected = false
-    if let indexPath = collectionView.indexPathsForSelectedItems {
-      if indexPath.count <= 0 {
-        selectButton.isEnabled = false
-        selectButton.alpha = 0.25
-      }
-    }
-  }
-  
   @IBAction func viewButtonPressed(_ sender: UIBarButtonItem) {
     
-    if sender == catalogView {
-      
-      let layout = UICollectionViewFlowLayout()
-      layout.scrollDirection = .horizontal
-      layout.itemSize = catalogSize
-      layout.sectionInset = UIEdgeInsets(top: 10, left: 7, bottom: 10, right: 7)
-      layout.minimumLineSpacing = 8.0
-      layout.minimumInteritemSpacing = 8.0
-      collectionView.setCollectionViewLayout(layout, animated: true)
-      catalogView.image = UIImage(named: "mosaic_sel")
-      carouselView.image = UIImage(named: "carousel")
-    }
-    if sender == carouselView {
-      
-      let layout = UICollectionViewFlowLayout()
-      layout.scrollDirection = .horizontal
-      layout.itemSize = carouselSize
-      layout.sectionInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 40)
-      layout.minimumLineSpacing = 40.0
-      layout.minimumInteritemSpacing = 30.0
-      collectionView.setCollectionViewLayout(layout, animated: true)
-      catalogView.image = UIImage(named: "mosaic")
-      carouselView.image = UIImage(named: "carousel_sel")
-    }
+    let catalogSize = CGSize(width: 246, height: 416)
+    let carouselSize = CGSize(width: 515, height: 850)
+    let catalogInset = UIEdgeInsets(top: 10, left: 7, bottom: 10, right: 7)
+    let carouselInset = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 40)
+    
+    let layout = UICollectionViewFlowLayout()
+
+    layout.scrollDirection = .horizontal
+    layout.itemSize = sender == catalogView ? catalogSize : carouselSize
+    layout.sectionInset = sender == catalogView ? catalogInset : carouselInset
+    layout.minimumLineSpacing = sender == catalogView ? 8.0 : 40.0
+    layout.minimumInteritemSpacing = sender == catalogView ? 8.0 : 30.0
+    
+    collectionView.setCollectionViewLayout(layout, animated: true)
+    catalogView.image = UIImage(named: sender == catalogView ? "mosaic_sel" : "mosaic")
+    carouselView.image = UIImage(named: sender == catalogView ? "carousel" : "carousel_sel")
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -131,14 +81,48 @@ class CatalogViewController: UIViewController, UICollectionViewDataSource, UICol
           destinationController.selectedDresses.append(collection.dresses[index.row])
           dressesNames.append(collection.dresses[index.row].name)
         }
-        currentClient.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
-        destinationController.currentClient = currentClient
+        clientData.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
+        destinationController.clientData = clientData
         destinationController.region = region
       }
     }
   }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension CatalogViewController: UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return collection.dresses.count
+  }
   
-  override var prefersStatusBarHidden: Bool {
-    return true
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
+    cell.cellDelegate = self
+    
+    let dress = collection.dresses[indexPath.row]
+
+    cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
+    cell.dressLabel.text = dress.name
+    cell.dressImageView.image = UIImage(data: dress.imageData!)
+    
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collection.dresses[indexPath.row].isSelected = true
+    selectButton.isEnabled = true
+    selectButton.alpha = 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    collection.dresses[indexPath.row].isSelected = false
+    if let indexPath = collectionView.indexPathsForSelectedItems {
+      if indexPath.count <= 0 {
+        selectButton.isEnabled = false
+        selectButton.alpha = 0.25
+      }
+    }
   }
 }
