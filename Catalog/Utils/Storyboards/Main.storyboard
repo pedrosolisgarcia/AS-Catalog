@@ -1504,12 +1504,24 @@ UFJaRUpEGsW5IERBTEVKA
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MGj-Yp-kP2">
+                                                <rect key="frame" x="75" y="168" width="250" height="8"/>
+                                                <color key="tintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="FHD-gY-b37"/>
+                                                    <constraint firstAttribute="height" constant="8" id="by9-sa-jn9"/>
+                                                </constraints>
+                                                <color key="progressTintColor" red="0.7725490196" green="0.69019607839999997" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="trackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </progressView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="cgq-ly-uXR" firstAttribute="top" secondItem="tAA-xV-Xt1" secondAttribute="bottom" constant="16" id="5EF-KO-6eJ"/>
+                                            <constraint firstItem="MGj-Yp-kP2" firstAttribute="centerX" secondItem="xft-Xg-TAu" secondAttribute="centerX" id="8cX-F7-GtO"/>
                                             <constraint firstAttribute="bottom" secondItem="cgq-ly-uXR" secondAttribute="bottom" constant="61" id="DtU-mE-I9U"/>
                                             <constraint firstItem="cgq-ly-uXR" firstAttribute="centerX" secondItem="tAA-xV-Xt1" secondAttribute="centerX" id="Dur-3m-0pr"/>
+                                            <constraint firstAttribute="bottom" secondItem="MGj-Yp-kP2" secondAttribute="bottom" constant="28" id="ebz-48-YGI"/>
                                             <constraint firstItem="cgq-ly-uXR" firstAttribute="centerX" secondItem="xft-Xg-TAu" secondAttribute="centerX" id="lSM-bo-YlL"/>
                                         </constraints>
                                     </view>
@@ -1558,6 +1570,7 @@ UFJaRUpEGsW5IERBTEVKA
                         <outlet property="downloadButton" destination="qpw-zU-wZV" id="TKe-aN-eee"/>
                         <outlet property="downloadView" destination="yEE-ux-0wD" id="9TN-rt-uH2"/>
                         <outlet property="loadingView" destination="xft-Xg-TAu" id="Cv9-Zk-kcj"/>
+                        <outlet property="progressBar" destination="MGj-Yp-kP2" id="Hvo-vP-yPV"/>
                         <outlet property="textBottom" destination="Ma1-bL-MF5" id="fqx-UI-NKw"/>
                         <outlet property="textTop" destination="tAO-LP-oa6" id="mh2-Yx-sJz"/>
                     </connections>

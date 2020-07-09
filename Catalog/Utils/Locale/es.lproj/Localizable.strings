@@ -92,7 +92,6 @@
 
 "alert.create-profile-error.message" = "La región y la fecha de boda han de ser rellenados para poder crear un perfil.";
 
-"alert.collection-downloaded.title" = "Éxito";
 "alert.collection-downloaded.message" = "La colección se ha descargado con éxito.";
 
 "alert.no-catalog-error.message" = "No hay ningún catálogo descargado. Dirígase a la ventana de selección de ID e introdúzcalo para poder descargar la conexión más reciente.";

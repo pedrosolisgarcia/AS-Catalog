@@ -92,7 +92,6 @@
 
 "alert.create-profile-error.message" = "Aby utworzyć profil, wypełnij pola dotyczące województwa oraz daty ślubu.";
 
-"alert.collection-downloaded.title" = "Sukces";
 "alert.collection-downloaded.message" = "Kolekcja została pomyślnie pobrana";
 
 "alert.no-catalog-error.message" = "Nie pobrano katalogu. Przejdź do okna Identyfikator sklepu i wprowadź swój identyfikator, aby pobrać najnowszą kolekcję.";

@@ -92,7 +92,6 @@
 
 "alert.create-profile-error.message" = "Region and Wedding Date fields must be filled to create a profile.";
 
-"alert.collection-downloaded.title" = "Success";
 "alert.collection-downloaded.message" = "Collection succesfully downloaded";
 
 "alert.no-catalog-error.message" = "There is no catalog downloaded. Head on to the Shop ID window and introduce your ID to download the latest collection.";
