@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         return
       }
     }
-    self.getLocalCollection()
+    self.checkCollectionAvailability()
   }
   
   @IBAction func pressToShowShopIdView(sender: UIButton) -> Void {
@@ -119,9 +119,7 @@ class HomeViewController: UIViewController {
     if segue.identifier == "showCatalog" {
 
       let destinationController = segue.destination as! CatalogViewController
-      destinationController.collection = collection
       destinationController.clientData = self.getClientData()
-      destinationController.region = hasCountrySelected ? country.name : regionSelected
     }
   }
 }
@@ -297,7 +295,7 @@ extension HomeViewController {
   private func formatToolBar() -> Void {
     toolBar.barStyle = .default
     toolBar.isOpaque = true
-    toolBar.barTintColor = .golden
+    toolBar.barTintColor = .catalogGolden
     toolBar.tintColor = .white
     toolBar.sizeToFit()
     
@@ -355,7 +353,7 @@ extension HomeViewController {
       region: regionField.text!,
       dateOfWedding: dateOfWeddingField.text!,
       dressesNames: "",
-      collectionId: self.collection.id
+      collectionId: 0
     )
   }
   
@@ -381,22 +379,15 @@ extension HomeViewController {
     return paths[0]
   }
 
-  private func getLocalCollection() -> Void {
-    do {
-      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
-      
-      guard  let data = try? Data(contentsOf: fullPath, options: []) else {
-        self.showNoCatalogAlert()
-        return
-      }
-
-      let loadedUserData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! Data
-      self.collection = try JSONDecoder().decode(Collection.self, from: loadedUserData)
-      self.performSegue(withIdentifier: "showCatalog", sender: self)
-    } catch {
+  private func checkCollectionAvailability() -> Void {
+    let fullPath = FileManager.getBasePath(FileManager.default)()
+    
+    guard  let _ = try? Data(contentsOf: fullPath, options: []) else {
       self.showNoCatalogAlert()
-      print("Couldn't read file.")
+      return
     }
+
+    self.performSegue(withIdentifier: "showCatalog", sender: self)
   }
   
   private func showInvalidDataAlert() -> Void {

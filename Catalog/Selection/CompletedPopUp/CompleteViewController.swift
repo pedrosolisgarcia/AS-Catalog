@@ -13,7 +13,7 @@ class CompleteViewController: UIViewController {
     self.popImageView.layer.cornerRadius = 20
     self.popImageView.layer.borderWidth = 5
     self.popImageView.addViewShadow()
-    self.popImageView.layer.borderColor = UIColor.golden.cgColor
+    self.popImageView.layer.borderColor = UIColor.catalogGolden.cgColor
 
     self.doneButton.roundCorners(from: .bottom, radius: 20)
     
