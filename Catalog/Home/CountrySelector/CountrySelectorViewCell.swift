@@ -8,7 +8,7 @@ class CountrySelectorViewCell: UICollectionViewCell {
   override var isSelected: Bool {
     didSet {
       if isSelected {
-        self.contentView.backgroundColor = UIColor.golden.barelyTranslucent()
+        self.contentView.backgroundColor = UIColor.catalogGolden.barelyTranslucent()
         self.countryLabel.textColor = .white
         self.countryFlag.alpha = 0.5
       }

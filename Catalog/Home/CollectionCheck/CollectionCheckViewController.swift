@@ -58,11 +58,6 @@ class CollectionCheckViewController: UIViewController {
     }
   }
   
-  func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    return paths[0]
-  }
-  
   private func downloadImage() -> Void {
     let dispatchGroup = DispatchGroup()
     self.downloadView.isHidden = true
@@ -86,8 +81,7 @@ class CollectionCheckViewController: UIViewController {
       }
     }
     dispatchGroup.notify(queue: DispatchQueue.main, execute: {
-      let fullPath = self.getDocumentsDirectory().appendingPathComponent("DRESS_COLLECTION")
-      print(fullPath)
+      let fullPath = FileManager.getBasePath(FileManager.default)()
 
       do {
         let jsonData = try JSONEncoder().encode(self.collection!)

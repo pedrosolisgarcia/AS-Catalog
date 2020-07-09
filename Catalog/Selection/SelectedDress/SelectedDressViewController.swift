@@ -6,7 +6,7 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
   @IBOutlet weak var closeView: UIButton!
   @IBOutlet weak var popImageView: UIView!
   
-  var dressImage: Data!
+  var dressImage: UIImage!
   
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
@@ -17,8 +17,9 @@ class SelectedDressViewController: UIViewController, UIGestureRecognizerDelegate
     view.addGestureRecognizer(gestureRecognizer)
     
     self.view.removeFromSuperview()
+    self.popImageView.addViewShadow()
     self.showAnimated()
-    ImageView.image = UIImage(data: dressImage)
+    ImageView.image = dressImage
   }
   
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

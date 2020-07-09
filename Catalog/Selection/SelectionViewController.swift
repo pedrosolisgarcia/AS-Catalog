@@ -14,10 +14,8 @@ class SelectionViewController: UIViewController {
   @IBOutlet weak var backHomeScreen: UIBarButtonItem!
   @IBOutlet weak var stackSelection: UIStackView!
   
-  var selectedDresses = [CollectionDresses]()
+  var selectedDresses: [DressViewModel] = []
   var clientData: Client!
-  var region = String()
-  var collectionId: Int!
   
   @IBAction func backToHomeScreen(_ sender: UIBarButtonItem) -> Void {
     self.clearAllVariables()
@@ -31,17 +29,17 @@ class SelectionViewController: UIViewController {
     if let appDelegate = (UIApplication.shared.delegate as? AppDelegate) {
       
       if Reachability.isConnectedToNetwork() {
-        ClientService.sendClientToAPI(client: self.getFinalClient()) { (data, resp, error) in
+        ClientService.sendClientToAPI(client: self.clientData) { (data, resp, error) in
           if let error = error {
             print(error.localizedDescription)
             print("error in BackEnd - Saving in Core Data")
-            CoreDataManager.saveClientInCoreData(client: self.getFinalClient(), viewContext: appDelegate.persistentContainer.viewContext)
+            CoreDataManager.saveClientInCoreData(client: self.clientData, viewContext: appDelegate.persistentContainer.viewContext)
             appDelegate.saveContext()
           }
         }
       } else {
         print("NO INTERNET - Saving in Core Data")
-        CoreDataManager.saveClientInCoreData(client: getFinalClient(), viewContext: appDelegate.persistentContainer.viewContext)
+        CoreDataManager.saveClientInCoreData(client: self.clientData, viewContext: appDelegate.persistentContainer.viewContext)
         appDelegate.saveContext()
       }
       
@@ -80,7 +78,7 @@ extension SelectionViewController: UITableViewDataSource {
     
     cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 32)
     cell.dressLabel.text = dress.name
-    cell.dressImageView.image = UIImage(data: dress.imageData!)
+    cell.dressImageView.image = dress.image
     
     return cell
   }
@@ -91,7 +89,7 @@ extension SelectionViewController: UITableViewDataSource {
 extension SelectionViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) -> Void {
     let popImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectedDressView") as! SelectedDressViewController
-    popImageView.dressImage = selectedDresses[indexPath.row].imageData
+    popImageView.dressImage = selectedDresses[indexPath.row].image
     self.addChild(popImageView)
     popImageView.view.frame = self.view.frame
     self.view.addSubview(popImageView.view)
@@ -107,7 +105,7 @@ extension SelectionViewController {
   private func translateTextKeys() -> Void {
     nameLabel.text = "home.client-info.name".localized() + " " + clientData.name
     surnameLabel.text = "home.client-info.lastname".localized() + " " + clientData.surname
-    regionLabel.text = "home.client-info.region".localized() + " " + region
+    regionLabel.text = "home.client-info.region".localized() + " " + clientData.region
     dateOfWeddingLabel.text = "home.client-info.wedding-date".localized() + " " + clientData.dateOfWedding
     saveButton.setTitle("selection.confirm-button".localized().uppercased(), for: .normal)
     navigationItem.title = "selection.data.title".localized().uppercased()
@@ -123,11 +121,6 @@ extension SelectionViewController {
   private func formatSelectedDressesSection() -> Void {
     self.saveButton.roundCorners(from: .bottom, radius: 10)
     self.dressesLabel.roundCorners(from: .top, radius: 10)
-  }
-  
-  private func getFinalClient() -> Client {
-    clientData.region = self.region.localized() // SET POLISH LOCALIZATION HERE
-    return clientData
   }
   
   private func setViewAsCompleted() -> Void {

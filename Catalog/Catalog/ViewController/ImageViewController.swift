@@ -5,7 +5,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
   @IBOutlet weak var zoomInView : UIScrollView!
   @IBOutlet weak var dressImageView: UIImageView!
   @IBOutlet weak var zoomOutButton: UIButton!
-  var dress: Data!
+  var dress: UIImage!
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
@@ -13,7 +13,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
     self.view.removeFromSuperview()
     self.showAnimated()
     zoomInView.delegate = self
-    dressImageView.image = UIImage(data: dress)
+    dressImageView.image = dress
     zoomOutButton.isEnabled = true
     zoomOutButton.alpha = 0.75
     setupGestureRecognizer()

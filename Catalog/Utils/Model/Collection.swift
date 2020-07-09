@@ -16,13 +16,11 @@ public struct CollectionDresses: Codable {
   public let name: String
   public let imageUrl: String
   public var imageData: Data?
-  public var isSelected: Bool = false
   
-  init(name: String, imageUrl: String, imageData: Data?, isSelected: Bool) {
+  init(name: String, imageUrl: String, imageData: Data?) {
     self.name = name
     self.imageUrl = imageUrl
     self.imageData = imageData
-    self.isSelected = isSelected
   }
 }
 

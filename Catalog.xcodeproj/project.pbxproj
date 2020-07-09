@@ -19,6 +19,10 @@
 		51393B1524B5D65B001C12B4 /* UIView+AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */; };
 		51393B1724B5DFD6001C12B4 /* UIView+RoundCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */; };
 		51393B1924B5E17D001C12B4 /* UIRectCorner+Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */; };
+		51393B1B24B6F140001C12B4 /* DressesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1A24B6F140001C12B4 /* DressesMapper.swift */; };
+		51393B1D24B71DAA001C12B4 /* DressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1C24B71DAA001C12B4 /* DressViewModel.swift */; };
+		51393B1F24B724B6001C12B4 /* DressViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1E24B724B6001C12B4 /* DressViewModelController.swift */; };
+		51393B2624B73F46001C12B4 /* FileManager+Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B2524B73F46001C12B4 /* FileManager+Directory.swift */; };
 		5177C95D24AF57050028538F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95C24AF57050028538F /* AppDelegate.swift */; };
 		5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95E24AF57050028538F /* SceneDelegate.swift */; };
 		5177C96924AF570B0028538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5177C96824AF570B0028538F /* Assets.xcassets */; };
@@ -117,6 +121,10 @@
 		51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+AddShadow.swift"; sourceTree = "<group>"; };
 		51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+RoundCorners.swift"; sourceTree = "<group>"; };
 		51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRectCorner+Side.swift"; sourceTree = "<group>"; };
+		51393B1A24B6F140001C12B4 /* DressesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressesMapper.swift; sourceTree = "<group>"; };
+		51393B1C24B71DAA001C12B4 /* DressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressViewModel.swift; sourceTree = "<group>"; };
+		51393B1E24B724B6001C12B4 /* DressViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressViewModelController.swift; sourceTree = "<group>"; };
+		51393B2524B73F46001C12B4 /* FileManager+Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Directory.swift"; sourceTree = "<group>"; };
 		5177C95924AF57050028538F /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5177C95C24AF57050028538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5177C95E24AF57050028538F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +256,70 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		51393B2024B73D0B001C12B4 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				5177C9AF24AF5AA50028538F /* UIColor+CustomColors.swift */,
+				5177C9B024AF5AA50028538F /* UIColor+Hex.swift */,
+				5177C9B324AF5AA50028538F /* UIColor+Opacity.swift */,
+			);
+			path = UIColor;
+			sourceTree = "<group>";
+		};
+		51393B2124B73D37001C12B4 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5177C9AD24AF5AA50028538F /* UIViewController+DismissKeyboard.swift */,
+				5177C9B224AF5AA50028538F /* UIViewController+DisplayAnimated.swift */,
+				5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */,
+				51393B1024B54461001C12B4 /* UIViewController+DisplayAlerts.swift */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		51393B2224B73D52001C12B4 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */,
+				51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		51393B2724B74256001C12B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5177C9B624AF5AA50028538F /* Dress.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		51393B2824B74265001C12B4 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				51393B1C24B71DAA001C12B4 /* DressViewModel.swift */,
+				51393B1E24B724B6001C12B4 /* DressViewModelController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		51393B2924B74331001C12B4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5177CA0A24AF5AC00028538F /* ImageViewController.swift */,
+				5177CA0C24AF5AC00028538F /* CatalogViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		51393B2A24B7434E001C12B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5177CA0B24AF5AC00028538F /* CatalogCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5177C95024AF57050028538F = {
 			isa = PBXGroup;
 			children = (
@@ -359,7 +431,7 @@
 				5177C9AC24AF5AA50028538F /* Extensions */,
 				5177C9B524AF5AA50028538F /* Model */,
 				5177C9BB24AF5AA50028538F /* Mappers */,
-				5177C9BE24AF5AA50028538F /* fonts */,
+				5177C9BE24AF5AA50028538F /* Fonts */,
 				5177C9D224AF5AA50028538F /* Data */,
 				5177C9D824AF5AA50028538F /* Services */,
 			);
@@ -393,19 +465,14 @@
 		5177C9AC24AF5AA50028538F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5177C9AD24AF5AA50028538F /* UIViewController+DismissKeyboard.swift */,
-				5177C9AE24AF5AA50028538F /* String+Localizable.swift */,
-				5177C9AF24AF5AA50028538F /* UIColor+CustomColors.swift */,
-				5177C9B024AF5AA50028538F /* UIColor+Hex.swift */,
-				5177C9B124AF5AA50028538F /* URLSession+Result.swift */,
-				5177C9B224AF5AA50028538F /* UIViewController+DisplayAnimated.swift */,
-				5177C9B324AF5AA50028538F /* UIColor+Opacity.swift */,
-				5177C9B424AF5AA50028538F /* UIViewController+AddBlurView.swift */,
+				51393B2224B73D52001C12B4 /* UIView */,
+				51393B2124B73D37001C12B4 /* UIViewController */,
+				51393B2024B73D0B001C12B4 /* UIColor */,
 				510F00C424B0AD2B00464BB3 /* Bundle+SwitchLanguageListener.swift */,
-				51393B1024B54461001C12B4 /* UIViewController+DisplayAlerts.swift */,
-				51393B1424B5D65B001C12B4 /* UIView+AddShadow.swift */,
-				51393B1624B5DFD6001C12B4 /* UIView+RoundCorners.swift */,
+				51393B2524B73F46001C12B4 /* FileManager+Directory.swift */,
+				5177C9AE24AF5AA50028538F /* String+Localizable.swift */,
 				51393B1824B5E17D001C12B4 /* UIRectCorner+Side.swift */,
+				5177C9B124AF5AA50028538F /* URLSession+Result.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -413,9 +480,8 @@
 		5177C9B524AF5AA50028538F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5177C9B624AF5AA50028538F /* Dress.swift */,
-				5177C9B724AF5AA50028538F /* Collection.swift */,
 				5177C9B824AF5AA50028538F /* Client.swift */,
+				5177C9B724AF5AA50028538F /* Collection.swift */,
 				5177C9B924AF5AA50028538F /* Country.swift */,
 				5177C9BA24AF5AA50028538F /* ShopId.swift */,
 			);
@@ -427,11 +493,12 @@
 			children = (
 				5177C9BC24AF5AA50028538F /* ClientMapper.swift */,
 				5177C9BD24AF5AA50028538F /* CollectionMapper.swift */,
+				51393B1A24B6F140001C12B4 /* DressesMapper.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
 		};
-		5177C9BE24AF5AA50028538F /* fonts */ = {
+		5177C9BE24AF5AA50028538F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				5177C9BF24AF5AA50028538F /* Trajan Pro Regular.ttf */,
@@ -454,7 +521,7 @@
 				5177C9D024AF5AA50028538F /* Roboto-Thin.ttf */,
 				5177C9D124AF5AA50028538F /* Roboto-Black.ttf */,
 			);
-			path = fonts;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		5177C9D224AF5AA50028538F /* Data */ = {
@@ -492,9 +559,10 @@
 		5177CA0924AF5AC00028538F /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				5177CA0A24AF5AC00028538F /* ImageViewController.swift */,
-				5177CA0B24AF5AC00028538F /* CatalogCollectionViewCell.swift */,
-				5177CA0C24AF5AC00028538F /* CatalogViewController.swift */,
+				51393B2A24B7434E001C12B4 /* View */,
+				51393B2924B74331001C12B4 /* ViewController */,
+				51393B2824B74265001C12B4 /* ViewModel */,
+				51393B2724B74256001C12B4 /* Model */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -699,10 +767,12 @@
 				5177CA0624AF5AA50028538F /* ShopIdServiceAPI.swift in Sources */,
 				5177C9EB24AF5AA50028538F /* Country.swift in Sources */,
 				5177CA0724AF5AA50028538F /* CollectionServiceAPI.swift in Sources */,
+				51393B1D24B71DAA001C12B4 /* DressViewModel.swift in Sources */,
 				5177C9E324AF5AA50028538F /* UIColor+Hex.swift in Sources */,
 				5177C9A224AF5A800028538F /* HomeViewController.swift in Sources */,
 				5177C95D24AF57050028538F /* AppDelegate.swift in Sources */,
 				510F00CD24B0C57600464BB3 /* LocalDataService.swift in Sources */,
+				51393B1B24B6F140001C12B4 /* DressesMapper.swift in Sources */,
 				51393B1724B5DFD6001C12B4 /* UIView+RoundCorners.swift in Sources */,
 				5177CA2324AF5E6B0028538F /* Catalog.xcdatamodeld in Sources */,
 				510F00D524B1460800464BB3 /* GetRequest.swift in Sources */,
@@ -712,6 +782,7 @@
 				5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */,
 				5177C9E224AF5AA50028538F /* UIColor+CustomColors.swift in Sources */,
 				5177CA0324AF5AA50028538F /* CoreDataManager.swift in Sources */,
+				51393B2624B73F46001C12B4 /* FileManager+Directory.swift in Sources */,
 				5177C9EE24AF5AA50028538F /* CollectionMapper.swift in Sources */,
 				5177C9E124AF5AA50028538F /* String+Localizable.swift in Sources */,
 				5177CA1A24AF5AD60028538F /* SelectedDressViewController.swift in Sources */,
@@ -725,6 +796,7 @@
 				510F00C324B0AA0200464BB3 /* LanguageService.swift in Sources */,
 				5177CA0824AF5AA50028538F /* ClientServiceAPI.swift in Sources */,
 				51393B1524B5D65B001C12B4 /* UIView+AddShadow.swift in Sources */,
+				51393B1F24B724B6001C12B4 /* DressViewModelController.swift in Sources */,
 				5177C9E724AF5AA50028538F /* UIViewController+AddBlurView.swift in Sources */,
 				5177C9E024AF5AA50028538F /* UIViewController+DismissKeyboard.swift in Sources */,
 				5177C9DD24AF5AA50028538F /* ButtonDesign.swift in Sources */,

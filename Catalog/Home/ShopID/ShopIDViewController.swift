@@ -95,7 +95,7 @@ class ShopIDViewController: UIViewController {
               return
             }
             self.showCollectionCheckView(
-              CollectionMapper.mapResponseToCollection(response[0])
+              CollectionMapper.shared.mapResponseToCollection(response[0])
             )
             self.setLoadingState(to: false)
           }

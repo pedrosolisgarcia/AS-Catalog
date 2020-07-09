@@ -8,12 +8,12 @@ class CatalogViewController: UIViewController {
   @IBOutlet weak var selectButton: UIButton!
   
   var clientData: Client!
-  var region = String()
-  var collection: Collection!
+  
+  fileprivate let dressViewModelController = DressViewModelController()
   
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
-    
+
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "" ,style: .plain, target: nil, action: nil)
     navigationItem.title = "catalog.title".localized().uppercased()
 
@@ -22,30 +22,14 @@ class CatalogViewController: UIViewController {
     selectButton.alpha = 0.25
 
     collectionView?.allowsMultipleSelection = true
+
+    dressViewModelController.getDresses()
+    self.clientData.collectionId = dressViewModelController.getCollectionId()
+    self.collectionView.reloadData()
   }
   
   override func viewWillAppear(_ animated: Bool) -> Void {
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  func didPressZoomButton(_ sender: UIButton) -> Void {
-    if let indexPath = getCurrentCellIndexPath(sender) {
-      
-      let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
-      zoomImageView.dress = collection.dresses[indexPath.row].imageData
-      self.addChild(zoomImageView)
-      zoomImageView.view.frame = self.view.frame
-      self.view.addSubview(zoomImageView.view)
-      zoomImageView.didMove(toParent: self)
-    }
-  }
-  
-  func getCurrentCellIndexPath(_ sender: UIButton) -> IndexPath? {
-    let buttonPosition = sender.convert(CGPoint.zero, to: collectionView)
-    if let indexPath: IndexPath = collectionView.indexPathForItem(at: buttonPosition) {
-      return indexPath
-    }
-    return nil
   }
   
   @IBAction func viewButtonPressed(_ sender: UIBarButtonItem) -> Void {
@@ -78,12 +62,13 @@ class CatalogViewController: UIViewController {
         var dressesNames = [String]()
         
         for index in indexPath {
-          destinationController.selectedDresses.append(collection.dresses[index.row])
-          dressesNames.append(collection.dresses[index.row].name)
+          if let viewModel = dressViewModelController.viewModel(at: (index as NSIndexPath).row) {
+            destinationController.selectedDresses.append(viewModel)
+            dressesNames.append(viewModel.name)
+          }
         }
         clientData.dressesNames = (dressesNames as NSArray).componentsJoined(by: ",")
         destinationController.clientData = clientData
-        destinationController.region = region
       }
     }
   }
@@ -91,33 +76,54 @@ class CatalogViewController: UIViewController {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-extension CatalogViewController: UICollectionViewDataSource, UICollectionViewDelegate, CatalogCollectionViewCellDelegate {
+extension CatalogViewController: UICollectionViewDataSource, CatalogCollectionViewCellZoomable {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return collection.dresses.count
+    return self.dressViewModelController.viewModelsCount
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! CatalogCollectionViewCell
-    cell.cellDelegate = self
     
-    let dress = collection.dresses[indexPath.row]
-
-    cell.dressLabel.font = UIFont(name: "TrajanPro-Regular", size: 22)
-    cell.dressLabel.text = dress.name
-    cell.dressImageView.image = UIImage(data: dress.imageData!)
+    if let viewModel = dressViewModelController.viewModel(at: (indexPath as NSIndexPath).row) {
+      cell.cellDelegate = self
+      cell.configure(viewModel)
+    }
     
     return cell
   }
   
+  func zoomCell(_ sender: UIButton) -> Void {
+    if let indexPath = getCurrentCellIndexPath(sender) {
+      
+      let zoomImageView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ZoomImageView") as! ImageViewController
+      if let viewModel = dressViewModelController.viewModel(at: (indexPath as NSIndexPath).row) {
+        zoomImageView.dress = viewModel.image
+        self.addChild(zoomImageView)
+        zoomImageView.view.frame = self.view.frame
+        self.view.addSubview(zoomImageView.view)
+        zoomImageView.didMove(toParent: self)
+      }
+    }
+  }
+  
+  private func getCurrentCellIndexPath(_ sender: UIButton) -> IndexPath? {
+    let buttonPosition = sender.convert(CGPoint.zero, to: collectionView)
+    if let indexPath: IndexPath = collectionView.indexPathForItem(at: buttonPosition) {
+      return indexPath
+    }
+    return nil
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+extension CatalogViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
-    collection.dresses[indexPath.row].isSelected = true
     selectButton.isEnabled = true
     selectButton.alpha = 1
   }
   
   func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) -> Void {
-    collection.dresses[indexPath.row].isSelected = false
     if let indexPath = collectionView.indexPathsForSelectedItems {
       if indexPath.count <= 0 {
         selectButton.isEnabled = false
