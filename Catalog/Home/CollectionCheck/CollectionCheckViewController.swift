@@ -19,8 +19,10 @@ class CollectionCheckViewController: UIViewController {
   @IBOutlet weak var collectionCheckView: UIView!
   @IBOutlet weak var downloadView: UIView!
   @IBOutlet weak var loadingView: UIView!
+  @IBOutlet weak var progressBar: UIProgressView!
 
   weak var delegate: ShopIDViewController!
+  private var progressUnit: Float!
 
   var collection: Collection!
   var dressesImages: [Data]!
@@ -30,21 +32,13 @@ class CollectionCheckViewController: UIViewController {
 
   override func viewDidLoad() -> Void {
     super.viewDidLoad()
-
     
     if !self.shopIdService.hasRegisteredShopId() {
       cancelButton.isEnabled = false
       cancelButton.isHidden = true
     }
     
-    self.translateTextKeys()
-    self.collectionCheckView.addViewShadow()
-    self.cancelButton.addButtonShadow()
-    self.downloadButton.roundCorners(from: .bottom, radius: 10)
-    self.collectionCheckLabel.roundCorners(from: .top, radius: 10)
-    self.showAnimated()
-    
-    print(collection!)
+    self.setView()
   }
   
   @IBAction func removeAnimate(sender: UIButton) -> Void {
@@ -61,6 +55,8 @@ class CollectionCheckViewController: UIViewController {
   private func downloadImage() -> Void {
     let dispatchGroup = DispatchGroup()
     self.downloadView.isHidden = true
+    self.cancelButton.isEnabled = false
+    self.cancelButton.isHidden = true
     self.loadingView.isHidden = false
     for (index, dress) in collection.dresses.enumerated() {
       dispatchGroup.enter()
@@ -69,6 +65,10 @@ class CollectionCheckViewController: UIViewController {
       collectionService.getImageData(from: url) { (result) in
         switch result {
           case .success(let response):
+            DispatchQueue.main.async {
+              self.progressBar.progress += self.progressUnit
+              self.progressBar.setProgress(self.progressBar.progress, animated: true)
+            }
             self.collection.dresses[index].imageData = response
             print("Dress \(dress.name): ", self.collection.dresses[index])
             dispatchGroup.leave()
@@ -96,6 +96,27 @@ class CollectionCheckViewController: UIViewController {
     })
   }
   
+  private func setProgressBar() -> Void {
+    self.progressUnit = 1.0/Float(collection.dresses.count)
+    
+    self.progressBar.progress = 0.0
+    self.progressBar.progressViewStyle = .bar
+    self.progressBar.progressTintColor = .catalogGolden
+    self.progressBar.trackTintColor = UIColor.catalogPink.midTranslucent()
+    self.progressBar.layer.cornerRadius = 5
+    self.progressBar.clipsToBounds = true
+  }
+  
+  private func setView() -> Void {
+    self.setProgressBar()
+    self.translateTextKeys()
+    self.collectionCheckView.addViewShadow()
+    self.cancelButton.addButtonShadow()
+    self.downloadButton.roundCorners(from: .bottom, radius: 10)
+    self.collectionCheckLabel.roundCorners(from: .top, radius: 10)
+    self.showAnimated()
+  }
+  
   private func translateTextKeys() -> Void {
     collectionCheckLabel.text = "collection-check.title".localized().uppercased()
     textTop.text = "collection-check.text-top".localized()
@@ -106,7 +127,7 @@ class CollectionCheckViewController: UIViewController {
   
   private func showSuccessAlert() -> Void {
     self.displaySingleActionAlert(
-      title: "alert.collection-downloaded.title",
+      title: "alert.done-button",
       message: "alert.collection-downloaded.message",
       actionTitle: "alert.ok-button",
       action: {
