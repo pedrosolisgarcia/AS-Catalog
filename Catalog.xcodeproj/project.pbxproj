@@ -23,6 +23,8 @@
 		51393B1D24B71DAA001C12B4 /* DressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1C24B71DAA001C12B4 /* DressViewModel.swift */; };
 		51393B1F24B724B6001C12B4 /* DressViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B1E24B724B6001C12B4 /* DressViewModelController.swift */; };
 		51393B2624B73F46001C12B4 /* FileManager+Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51393B2524B73F46001C12B4 /* FileManager+Directory.swift */; };
+		5146F2EC2AB6F57C001128AE /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146F2EB2AB6F57B001128AE /* Endpoints.swift */; };
+		5146F2EE2AB704C1001128AE /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5146F2ED2AB704C1001128AE /* APIConfig.swift */; };
 		5177C95D24AF57050028538F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95C24AF57050028538F /* AppDelegate.swift */; };
 		5177C95F24AF57050028538F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C95E24AF57050028538F /* SceneDelegate.swift */; };
 		5177C96924AF570B0028538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5177C96824AF570B0028538F /* Assets.xcassets */; };
@@ -72,7 +74,6 @@
 		5177CA0024AF5AA50028538F /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5177C9D024AF5AA50028538F /* Roboto-Thin.ttf */; };
 		5177CA0124AF5AA50028538F /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5177C9D124AF5AA50028538F /* Roboto-Black.ttf */; };
 		5177CA0324AF5AA50028538F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9D524AF5AA50028538F /* CoreDataManager.swift */; };
-		5177CA0524AF5AA50028538F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9D924AF5AA50028538F /* Constants.swift */; };
 		5177CA0624AF5AA50028538F /* ShopIdServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DA24AF5AA50028538F /* ShopIdServiceAPI.swift */; };
 		5177CA0724AF5AA50028538F /* CollectionServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DB24AF5AA50028538F /* CollectionServiceAPI.swift */; };
 		5177CA0824AF5AA50028538F /* ClientServiceAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5177C9DC24AF5AA50028538F /* ClientServiceAPI.swift */; };
@@ -125,6 +126,8 @@
 		51393B1C24B71DAA001C12B4 /* DressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressViewModel.swift; sourceTree = "<group>"; };
 		51393B1E24B724B6001C12B4 /* DressViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressViewModelController.swift; sourceTree = "<group>"; };
 		51393B2524B73F46001C12B4 /* FileManager+Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Directory.swift"; sourceTree = "<group>"; };
+		5146F2EB2AB6F57B001128AE /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		5146F2ED2AB704C1001128AE /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		5177C95924AF57050028538F /* Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5177C95C24AF57050028538F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5177C95E24AF57050028538F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -180,7 +183,6 @@
 		5177C9D024AF5AA50028538F /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		5177C9D124AF5AA50028538F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		5177C9D524AF5AA50028538F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		5177C9D924AF5AA50028538F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../Constants.swift; sourceTree = "<group>"; };
 		5177C9DA24AF5AA50028538F /* ShopIdServiceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopIdServiceAPI.swift; sourceTree = "<group>"; };
 		5177C9DB24AF5AA50028538F /* CollectionServiceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionServiceAPI.swift; sourceTree = "<group>"; };
 		5177C9DC24AF5AA50028538F /* ClientServiceAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientServiceAPI.swift; sourceTree = "<group>"; };
@@ -233,7 +235,6 @@
 		510F00D324B145D500464BB3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5177C9D924AF5AA50028538F /* Constants.swift */,
 				510F00D424B1460800464BB3 /* GetRequest.swift */,
 			);
 			path = Common;
@@ -552,6 +553,8 @@
 				5177C9DC24AF5AA50028538F /* ClientServiceAPI.swift */,
 				510F00C224B0AA0200464BB3 /* LanguageService.swift */,
 				510F00CC24B0C57600464BB3 /* LocalDataService.swift */,
+				5146F2EB2AB6F57B001128AE /* Endpoints.swift */,
+				5146F2ED2AB704C1001128AE /* APIConfig.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -757,7 +760,6 @@
 				5177CA1824AF5AD60028538F /* SelectionViewController.swift in Sources */,
 				5177C9EC24AF5AA50028538F /* ShopId.swift in Sources */,
 				5177C9A324AF5A800028538F /* ClientDataValidator.swift in Sources */,
-				5177CA0524AF5AA50028538F /* Constants.swift in Sources */,
 				51393B0B24B50517001C12B4 /* APIRequest.swift in Sources */,
 				5177C9DE24AF5AA50028538F /* Reachability.swift in Sources */,
 				5177CA0E24AF5AC00028538F /* CatalogCollectionViewCell.swift in Sources */,
@@ -765,6 +767,7 @@
 				5177CA0D24AF5AC00028538F /* ImageViewController.swift in Sources */,
 				5177C9E624AF5AA50028538F /* UIColor+Opacity.swift in Sources */,
 				5177CA0624AF5AA50028538F /* ShopIdServiceAPI.swift in Sources */,
+				5146F2EC2AB6F57C001128AE /* Endpoints.swift in Sources */,
 				5177C9EB24AF5AA50028538F /* Country.swift in Sources */,
 				5177CA0724AF5AA50028538F /* CollectionServiceAPI.swift in Sources */,
 				51393B1D24B71DAA001C12B4 /* DressViewModel.swift in Sources */,
@@ -772,6 +775,7 @@
 				5177C9A224AF5A800028538F /* HomeViewController.swift in Sources */,
 				5177C95D24AF57050028538F /* AppDelegate.swift in Sources */,
 				510F00CD24B0C57600464BB3 /* LocalDataService.swift in Sources */,
+				5146F2EE2AB704C1001128AE /* APIConfig.swift in Sources */,
 				51393B1B24B6F140001C12B4 /* DressesMapper.swift in Sources */,
 				51393B1724B5DFD6001C12B4 /* UIView+RoundCorners.swift in Sources */,
 				5177CA2324AF5E6B0028538F /* Catalog.xcdatamodeld in Sources */,

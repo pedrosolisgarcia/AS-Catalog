@@ -1,6 +1,6 @@
 import Foundation
 
-public class GetRequest: APIRequest {
+class GetRequest: APIRequest {
   private let urlSession = URLSession.shared
   
   private let jsonDecoder: JSONDecoder = {
@@ -9,16 +9,13 @@ public class GetRequest: APIRequest {
     return jsonDecoder
   }()
 
-  public func getDecodedJSON<T: Decodable>(path: String, completion: @escaping (Result<T, APIServiceError>) -> Void) -> Void {
-    var urlComponents = URLComponents()
+  func getDecodedJSON<T: Decodable>(endpoint: ServiceEndpoints, completion: @escaping (Result<T, APIServiceError>) -> Void) -> Void {
+      var urlComponents = URLComponents(string: endpoint.getURL())
 
-    urlComponents.scheme = API.SCHEME.rawValue
-    urlComponents.host = API.HOST.rawValue
-    urlComponents.path = path
-    guard let url = urlComponents.url else {
-      completion(.failure(.invalidEndpoint))
-      return
-    }
+      guard let url = urlComponents?.url else {
+          completion(.failure(.invalidEndpoint))
+          return
+      }
    
     urlSession.dataTask(with: url) { (result) in
       switch result {
@@ -41,7 +38,7 @@ public class GetRequest: APIRequest {
      }.resume()
   }
   
-  public func getData(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) -> Void {
+  func getData(from url: URL, completion: @escaping (Result<Data, APIServiceError>) -> Void) -> Void {
     urlSession.dataTask(with: url) { (result) in
       switch result {
         case .success(let (response, data)):
