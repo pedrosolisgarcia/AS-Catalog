@@ -1,3 +1,11 @@
+//
+//  CatalogUITests.swift
+//  CatalogUITests
+//
+//  Created by Pedro Solís García on 03/07/20.
+//  Copyright © 2020 Pedro Solís García. All rights reserved.
+//
+
 import XCTest
 
 class CatalogUITests: XCTestCase {
