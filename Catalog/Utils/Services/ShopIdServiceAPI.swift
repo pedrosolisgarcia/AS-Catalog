@@ -10,7 +10,7 @@ public class ShopIdServiceAPI {
   }
   
   public func getShopIds(result: @escaping (Result<ShopId, APIServiceError>) -> Void) -> Void {
-    self.request.getDecodedJSON(path: API.PATH_SHOPID.rawValue, completion: result)
+    self.request.getDecodedJSON(endpoint: .getShopIds, completion: result)
   }
   
   public func getShopId() -> String? {

@@ -10,7 +10,7 @@ public class CollectionServiceAPI {
   }
   
   public func getLatestCollection(result: @escaping (Result<[CollectionResponse], APIServiceError>) -> Void) -> Void {
-    self.request.getDecodedJSON(path: API.PATH_COLLECTION.rawValue, completion: result)
+      self.request.getDecodedJSON(endpoint: .getLatestCollection, completion: result)
   }
   
   public func getImageData(from url: URL, result: @escaping (Result<Data, APIServiceError>) -> Void) -> Void {

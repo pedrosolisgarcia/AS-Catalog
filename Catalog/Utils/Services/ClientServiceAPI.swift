@@ -3,13 +3,9 @@ import Foundation
 public class ClientService {
   
   class func sendClientToAPI(client: Client, completion:((Data?, URLResponse?, Error?) -> Void)?) -> Void {
-    
-    var urlComponents = URLComponents()
-    
-    urlComponents.scheme = API.SCHEME.rawValue
-    urlComponents.host = API.HOST.rawValue
-    urlComponents.path = API.PATH_CUSTOMER.rawValue
-    guard let url = urlComponents.url else {
+    var urlComponents = URLComponents(string: ServiceEndpoints.sendClientToAPI(request: client).getURL())
+
+    guard let url = urlComponents?.url else {
       fatalError("Could not create URL from components")
     }
     
