@@ -1,3 +1,11 @@
+//
+//  CatalogTests.swift
+//  CatalogTests
+//
+//  Created by Pedro Solís García on 03/07/20.
+//  Copyright © 2020 Pedro Solís García. All rights reserved.
+//
+
 import XCTest
 @testable import Catalog
 

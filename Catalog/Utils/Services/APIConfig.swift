@@ -2,8 +2,8 @@
 //  APIConfig.swift
 //  Catalog
 //
-//  Created by Pedro Solís García on 17/9/23.
-//  Copyright © 2023 Pedro Solís García. All rights reserved.
+//  Created by Pedro Solís García on 24/06/20.
+//  Copyright © 2020 VILHON Technologies. All rights reserved.
 //
 
 internal enum API {
